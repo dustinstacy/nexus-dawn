@@ -47,7 +47,7 @@ app.get('/', (req, res) => {
 
 mongoose.set('strictQuery', true)
 mongoose
-    .connect(process.env.MONGO_URI)
+    .connect(process.env.MONGO_DEV_URI)
     .then(() => {
         console.log('*****Connected to database*****')
 
