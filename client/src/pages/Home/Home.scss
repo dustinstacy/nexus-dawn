@@ -223,7 +223,12 @@
         background-size: cover;
     }
 
-    .contact-sub,
+    .contact-sub {
+        background: url('../../assets/page-images/contact.jpg');
+        background-position: center;
+        background-size: contain;
+    }
+
     .news-sub {
         pointer-events: none;
     }

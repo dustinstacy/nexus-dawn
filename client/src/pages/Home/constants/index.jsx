@@ -43,17 +43,6 @@ export const subPanels = (user) => {
                 </>
             ),
         },
-        {
-            className: 'contact',
-            type: 'sub',
-            to: '/',
-            jsx: (
-                <>
-                    <p>Coming Soon!</p>
-                    <h2>ContAct</h2>
-                </>
-            ),
-        },
     ]
 }
 

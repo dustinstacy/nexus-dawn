@@ -49,6 +49,12 @@ const Home = () => {
                                 {panel.jsx}
                             </NavLink>
                         ))}
+                        <a
+                            className={linkClasses('contact', 'sub')}
+                            href='https://discord.gg/TTn4pCHxXT'
+                        >
+                            <h2>Contact</h2>
+                        </a>
                     </div>
                 </div>
             </div>
