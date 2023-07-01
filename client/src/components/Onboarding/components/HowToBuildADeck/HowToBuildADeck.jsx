@@ -6,7 +6,7 @@ import { useGlobalContext } from '@context'
 import { useToggle } from '@hooks'
 
 import { onboardingStages } from '../../constants'
-import { checkbox, fillDeck } from '../../images'
+import { checkbox, optimizeDeck } from '../../images'
 
 import './HowToBuildADeck.scss'
 
@@ -57,8 +57,8 @@ const HowToBuildADeck = ({ nextStage }) => {
                             <div className='body box step-2 center-column'>
                                 <p>{onboardingStages[3].body[1]}</p>
                                 <img
-                                    className='fill-deck-image'
-                                    src={fillDeck}
+                                    className='optimize-deck-image'
+                                    src={optimizeDeck}
                                     alt='market menu'
                                 />
                                 <Button
