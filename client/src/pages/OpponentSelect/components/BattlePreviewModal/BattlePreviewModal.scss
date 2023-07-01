@@ -1,0 +1,65 @@
+.battle-preview {
+    position: relative;
+    min-height: 600px;
+    width: 600px;
+    margin-top: 48px;
+    border: 1px solid var(--primary2-color);
+    border-radius: 8px;
+
+    @media screen and (min-height: 768px) {
+        margin: 0;
+        min-height: 700px;
+        width: 700px;
+    }
+
+    @media screen and (min-height: 900px) {
+        min-height: 800px;
+        width: 800px;
+    }
+
+    @media screen and (max-width: 800px) {
+        width: 100vw;
+    }
+
+    @media screen and (max-width: 568px) {
+        background-color: rgb(3, 48, 59);
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background-color: var(--primary-color);
+        border-radius: 50%;
+        color: var(--background2-color);
+        font-size: 36px;
+        z-index: 100;
+        cursor: pointer;
+
+        @media screen and (max-width: 600px) {
+            font-size: 32px;
+        }
+    }
+
+    .button {
+        position: absolute;
+        bottom: -30px;
+        font-size: 24px;
+
+        @media screen and (min-height: 768px) {
+            font-size: 30px;
+        }
+
+        @media screen and (min-height: 900px) {
+            font-size: 36px;
+        }
+
+        @media screen and (max-width: 568px) {
+            bottom: -48px;
+        }
+
+        @media screen and (max-width: 400px) {
+            bottom: -64px;
+        }
+    }
+}

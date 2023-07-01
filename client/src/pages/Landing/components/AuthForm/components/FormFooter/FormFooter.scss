@@ -1,0 +1,15 @@
+.form-footer {
+    margin: 24px 0 36px 0;
+    font-size: 14px;
+    font-weight: 400;
+
+    a {
+        margin-left: 6px;
+        color: var(--primary-color);
+        font-weight: 700;
+
+        &:hover {
+            color: var(--secondary-color);
+        }
+    }
+}

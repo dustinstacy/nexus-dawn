@@ -1,0 +1,129 @@
+.battle-intro {
+    padding: 36px;
+    background: url('@assets/page-images/battleIntro.jpg');
+    background-position: center;
+    background-size: cover;
+    overflow-x: hidden;
+
+    @media screen and (max-width: 912px) {
+        padding: 12px;
+    }
+
+    @media screen and (max-width: 568px) {
+        justify-content: center !important;
+        padding: 0;
+    }
+
+    .p1-intro,
+    .p2-intro {
+        width: 100%;
+        gap: 5vw;
+        padding: 24px;
+        perspective: 1000px;
+        overflow: hidden;
+
+        @media screen and (max-width: 912px) {
+            padding: 12px;
+        }
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column-reverse;
+        }
+
+        img {
+            height: 250px;
+            width: 250px;
+            border: 2px solid var(--secondary2-color);
+            border-radius: 12px;
+
+            @media screen and (max-width: 912px) {
+                height: 175px;
+                width: 175px;
+            }
+        }
+    }
+
+    .p1-intro > * {
+        transform: translateX(-1000%);
+        animation: slam-down 0.5s linear 2s forwards;
+    }
+
+    .p2-intro > * {
+        transform: translateX(1000%);
+        animation: slam-down 0.5s linear 0.25s forwards;
+    }
+
+    .versus {
+        height: 300px;
+        width: 400px;
+        position: relative;
+        scale: 0;
+        animation: grow 0.25s linear 1.5s forwards;
+        z-index: 100;
+
+        @media screen and (max-width: 568px) {
+            height: auto;
+        }
+    }
+
+    h1 {
+        color: var(--primary-color);
+        text-shadow: 2px 2px 2px var(--black-color),
+            4px 4px 4px var(--primary2-color), 6px 6px 6px var(--black-color);
+        -webkit-text-stroke: 3px black;
+        font-size: 30vh;
+
+        @media screen and (max-width: 912px) {
+            font-size: 20vh;
+        }
+
+        @media screen and (max-width: 568px) {
+            font-size: 10vh;
+        }
+    }
+
+    h2 {
+        font-size: 84px;
+        text-align: center;
+        text-shadow: 6px 6px 6px var(--black-color);
+        -webkit-text-stroke: 1px black;
+
+        @media screen and (max-width: 912px) {
+            font-size: 54px;
+        }
+
+        @media screen and (max-width: 600px) {
+            font-size: 36px;
+        }
+    }
+}
+
+@keyframes slam-down {
+    0% {
+        transform: translateZ(1000px);
+    }
+
+    50% {
+        transform: translateZ(25px);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateZ(0px);
+        opacity: 1;
+    }
+}
+
+@keyframes grow {
+    0% {
+        scale: 0;
+    }
+
+    40% {
+        scale: 0.9;
+    }
+
+    100% {
+        scale: 1;
+    }
+}

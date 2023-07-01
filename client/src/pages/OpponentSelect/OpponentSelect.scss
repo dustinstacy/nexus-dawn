@@ -1,0 +1,36 @@
+.opponent-select {
+    position: relative;
+    padding-top: var(--navbar-height);
+
+    & .background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: url('../../assets/page-images/battleSetup2.jpg');
+        background-size: cover;
+        background-position: center;
+        z-index: 0;
+    }
+
+    .header {
+        width: 80vw;
+        margin: 48px;
+        text-align: center;
+        z-index: 1;
+    }
+
+    .opponent-list {
+        width: 90vw;
+        flex-wrap: wrap;
+        // display: grid;
+        // grid-template-columns: repeat(auto-fit, 200px);
+        // justify-content: center;
+        gap: 28px;
+        padding-bottom: 64px;
+        z-index: 1;
+
+        @media screen and (min-width: 1440px) {
+            grid-template-columns: repeat(auto-fit, 250px);
+        }
+    }
+}

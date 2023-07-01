@@ -1,0 +1,20 @@
+.open-pack {
+    .body {
+        @media screen and (max-width: 968px) {
+            flex-direction: column !important;
+            font-size: 2vh;
+        }
+
+        img {
+            height: 50vh;
+
+            @media screen and (max-width: 1068px) {
+                height: 40vh;
+            }
+
+            @media screen and (max-width: 468px) {
+                height: 30vh;
+            }
+        }
+    }
+}

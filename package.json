@@ -1,0 +1,32 @@
+{
+    "name": "server",
+    "version": "1.0.0",
+    "description": "",
+    "type": "module",
+    "scripts": {
+        "server": "cd server && npm run server",
+        "client": "cd client && npm start",
+        "dev": "concurrently \"npm run server\" \"npm run client\"",
+        "start": "npm start --prefix server",
+        "install-client": "cd client && npm install && npm run build && cd ..",
+        "install-server": "cd server && npm install && cd .. ",
+        "heroku-postbuild": "npm run install-client && npm run install-server",
+        "lint:md": "markdownlint \"**/*.md\" \".github/**/*.md\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "bcryptjs": "^2.4.3",
+        "concurrently": "^7.6.0",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.0",
+        "mongoose": "^6.8.4",
+        "nodemon": "^2.0.20",
+        "react-spinners": "^0.13.8",
+        "validator": "^13.9.0"
+    }
+}

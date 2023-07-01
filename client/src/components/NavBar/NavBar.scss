@@ -1,0 +1,33 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: var(--navbar-height);
+    padding: 6px 18px;
+    z-index: 9997;
+
+    &__logo {
+        height: 64px;
+        padding-right: 2vw;
+        cursor: pointer;
+
+        &.disabled {
+            pointer-events: none;
+        }
+    }
+
+    &__login {
+        padding: 4px 12px;
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+
+    .gold-border {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}

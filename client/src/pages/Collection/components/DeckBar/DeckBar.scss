@@ -1,0 +1,50 @@
+.deck {
+    position: relative;
+    min-height: 150px;
+    width: 100%;
+    gap: 24px;
+    padding: 24px 0;
+    font-size: 22px;
+    border-bottom: 2px solid;
+    border-image: var(--gold-gradient45) 1;
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .deck-stats {
+        gap: 5vw;
+
+        @media screen and (max-width: 768px) {
+            gap: 36px;
+        }
+    }
+
+    .section {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        gap: 48px;
+
+        @media screen and (max-width: 600px) {
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        .button {
+            height: 40px;
+            width: 200px;
+            align-self: flex-end;
+            font-size: 18px;
+
+            @media screen and (max-width: 912px) {
+                height: 32px;
+                width: 160px;
+            }
+        }
+    }
+}

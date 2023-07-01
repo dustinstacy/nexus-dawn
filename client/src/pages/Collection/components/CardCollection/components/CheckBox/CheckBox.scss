@@ -1,0 +1,26 @@
+.checkbox {
+    position: absolute;
+    top: 5%;
+    right: 8%;
+    z-index: 100;
+
+    font-size: 32px;
+
+    .check {
+        color: var(--primary-color);
+    }
+
+    .uncheck {
+        color: var(--primary2-color);
+    }
+
+    svg {
+        border-radius: 7px;
+        cursor: pointer;
+    }
+
+    svg.check {
+        border: 3px solid var(--background-color);
+        font-size: 34px;
+    }
+}

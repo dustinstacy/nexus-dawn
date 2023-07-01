@@ -1,0 +1,39 @@
+.alert {
+    min-height: 300px;
+    width: 700px;
+    font-family: 'Jost';
+    text-align: center;
+
+    @media screen and (max-width: 768px) {
+        height: 400px;
+        width: 400px;
+    }
+
+    @media screen and (max-width: 400px) {
+        height: 100%;
+        width: 100%;
+    }
+
+    h2 {
+        text-transform: uppercase;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 32px;
+        margin: 36px 0 18px 0;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        .button {
+            padding: 8px 24px;
+            font-size: 28px;
+        }
+    }
+}

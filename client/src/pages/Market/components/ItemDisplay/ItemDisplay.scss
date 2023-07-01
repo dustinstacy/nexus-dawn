@@ -1,0 +1,64 @@
+.item-display {
+    width: 70vw;
+    gap: 24px;
+    padding: 24px 48px;
+    background-image: url('@assets/page-images/market3.jpg');
+    background-position: center;
+    background-size: cover;
+    overflow-y: auto;
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 600px) {
+        padding: 12px;
+    }
+
+    .inventory-bar {
+        position: relative;
+        width: 100%;
+        padding: 8px 24px;
+        font-size: 22px;
+
+        @media screen and (min-width: 1200px) {
+            font-size: 24px;
+            padding: 12px 24px;
+        }
+
+        img {
+            height: 24px;
+
+            @media screen and (min-width: 1200px) {
+                height: 28px;
+            }
+        }
+    }
+
+    .coin-deduction {
+        position: absolute;
+        right: 56px;
+        color: var(--error-color);
+        animation: drop 1.5s linear forwards;
+
+        @media screen and (min-width: 1200px) {
+            right: 62px;
+        }
+    }
+}
+
+@keyframes drop {
+    0% {
+        top: 12px;
+    }
+
+    50% {
+        top: 28px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 42px;
+        opacity: 0.5;
+    }
+}

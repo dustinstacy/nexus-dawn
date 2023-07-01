@@ -1,0 +1,18 @@
+.account {
+    position: relative;
+    gap: 48px;
+    padding: 128px 0 64px 0;
+    background: url('../../assets/page-images/account.jpg');
+    background-size: cover;
+    background-position: bottom;
+
+    .box {
+        min-height: 200px;
+        width: 60vw;
+        padding: 48px;
+
+        @media screen and (max-width: 1080px) {
+            width: 90vw;
+        }
+    }
+}

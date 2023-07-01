@@ -1,0 +1,47 @@
+.items {
+    width: 30vw;
+    min-width: 300px;
+    padding-bottom: 50px;
+    background-image: url('../../../../assets/page-images/market2.jpg');
+    background-position: bottom;
+    background-size: cover;
+    border-right: 1px solid var(--primary-color);
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    @media screen and (max-width: 768px) {
+        height: 500px;
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid var(--primary-color);
+        font-size: 20px;
+    }
+
+    @media screen and (max-width: 400px) {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        row-gap: 12px;
+        padding: 8px;
+    }
+
+    .locked-item {
+        height: 100px;
+        background-color: rgba(30, 21, 2, 0.7);
+        border-bottom: 1px solid var(--white-color);
+        color: var(--white-color);
+        filter: grayscale(0.8) blur(0.25px);
+        pointer-events: none;
+
+        @media screen and (max-width: 400px) {
+            width: 100px;
+            text-align: center;
+            border: 1px solid var(--secondary2-color);
+
+            span {
+                width: 0;
+                visibility: hidden;
+            }
+        }
+    }
+}
