@@ -5,7 +5,7 @@ export const onboardingStages = [
         thrilled to have you join us on this exciting journey. Be
         warned, everything you are about to experience will most
         likely change or update at some point as we continually work
-        towards building and awesome game and community. Let us guide
+        towards building an awesome game and community. Let us guide
         you through the steps of getting set up!`,
         label: `Let's Begin`,
     },

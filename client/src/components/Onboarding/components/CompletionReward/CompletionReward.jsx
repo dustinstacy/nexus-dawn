@@ -11,7 +11,7 @@ import './CompletionReward.scss'
 const CompletionReward = ({ nextStage }) => {
     const { allItems } = useGlobalContext()
     const [step, setStep] = useState(1)
-    const rareCard = allItems.find((item) => item.name === 'Rare Card')
+    const rarePack = allItems.find((item) => item.name === 'Rare Pack')
 
     const incrementStep = () => {
         setStep((step) => step + 1)
@@ -43,10 +43,10 @@ const CompletionReward = ({ nextStage }) => {
                 )}
                 {step === 2 && (
                     <div className='body center-column'>
-                        <p>{rareCard.name}</p>
+                        <p>{rarePack.name}</p>
                         <img
                             className='rare-card-image'
-                            src={rareCard.image}
+                            src={rarePack.image}
                             alt='rare card'
                         />
                         <Button
