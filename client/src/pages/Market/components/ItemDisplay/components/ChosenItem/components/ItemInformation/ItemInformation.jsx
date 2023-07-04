@@ -27,17 +27,18 @@ const ItemInformation = ({ chosenItem }) => {
                     <hr />
                     <p className='item-desc'>{info}</p>
                 </div>
-                <div className='item-odds'>
-                    <h4>Odds:</h4>
-                    {contents?.odds &&
-                        Object.entries(contents?.odds).map(([key, value]) => (
+                {contents?.odds && (
+                    <div className='item-odds'>
+                        <h4>Odds:</h4>
+                        {Object.entries(contents?.odds).map(([key, value]) => (
                             <div key={key}>
                                 <p>
                                     {key}: &nbsp;{value} %
                                 </p>
                             </div>
                         ))}
-                </div>
+                    </div>
+                )}
             </div>
         </div>
     )
