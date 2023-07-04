@@ -2,6 +2,7 @@
 import { evaluate, evaluateSameAndPlus } from './evaluations'
 
 // TMP config rules here
+// Remove once battleProcessor accepts rules as an arg
 let RULES = {
     standard: true,
     low: false,
@@ -9,9 +10,14 @@ let RULES = {
     plus: true
 }
 
-// Process integer evaluations between opposing cards that are touching
-// to determine outcome
-const processStandardBattles = (index, card, battleState) => {
+/**
+ * Process integer evaluations between opposing cards that are touching
+ * to determine outcome
+ * @param {*} index
+ * @param {*} card
+ * @param {*} battleState
+ */
+const battleProcessor = (index, card, battleState) => {
     const { board } = battleState
     const { color, values } = card
     const up = board[index - 3]
@@ -27,10 +33,10 @@ const processStandardBattles = (index, card, battleState) => {
     const CARD_DOWN = down?._id
     const CARD_LEFT = !leftColumn.includes(index) && left?._id
 
-    //
-    // "Same" and "Plus" evaluations
-    // These take precedence over single evals
-    //
+    /**
+     * "Same" and "Plus" evaluations
+     * These take precedence over single evals
+     */
 
     if (RULES.same || RULES.plus) {
         if (CARD_UP && CARD_RIGHT) {
@@ -76,4 +82,4 @@ const processStandardBattles = (index, card, battleState) => {
     }
 }
 
-export default processStandardBattles
+export default battleProcessor
