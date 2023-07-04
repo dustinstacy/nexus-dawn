@@ -50,31 +50,31 @@
         }
     }
 
-    .card-list {
-        width: 100%;
-        max-width: 1400px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, 225px);
-        justify-content: space-evenly;
-        justify-items: center;
-        align-content: space-evenly;
-        align-items: center;
-        gap: 24px;
-        row-gap: 48px;
-        padding: 48px;
-
-        @media screen and (max-width: 912px) {
-            grid-template-columns: repeat(auto-fit, 150px);
-        }
-
-        @media screen and (max-width: 768px) {
-            grid-template-columns: repeat(auto-fit, 125px);
-            row-gap: 24px;
-            padding: 24px;
-        }
-    }
-
     .card-container {
         position: relative;
+    }
+}
+
+.card-list {
+    width: 100%;
+    max-width: 1400px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 225px);
+    justify-content: space-evenly;
+    justify-items: center;
+    align-content: space-evenly;
+    align-items: center;
+    gap: 24px;
+    row-gap: 48px;
+    padding: 48px;
+
+    @media screen and (max-width: 912px) {
+        grid-template-columns: repeat(auto-fit, 150px);
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: repeat(auto-fit, 125px);
+        row-gap: 24px;
+        padding: 24px;
     }
 }
