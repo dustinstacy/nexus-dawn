@@ -1,20 +1,20 @@
 /**
  * Evaluates single (1-1) card values between active card and target card
- * @param {object} dir - adjacent card to the active card. "dir" (direction) is relative to the active card
+ * @param {object} target - adjacent card that the active card's value will be evaluated against
  * @param {string} color - color of the active player (red or blue)
  * @param {dict} ruleset - (TMP) dictionary with information regarding current game rules
- * @param {number} v1 - active player's card value adjacent to target card's value
- * @param {number} v2 - target card's value adjacent to active player card's value
+ * @param {number} aVal - active player's card value adjacent to target card's value
+ * @param {number} tVal - target card's value adjacent to active player card's value
  */
-export const evaluate = (dir, color, ruleset, v1, v2) => {
-    const isLt = v1 < v2
-    const isGt = v1 > v2
+export const evaluate = (target, color, ruleset, aVal, tVal) => {
+    const isLt = aVal < tVal
+    const isGt = aVal > tVal
 
-    if (isOpponent(dir, color)) {
+    if (isOpponent(target, color)) {
         if (ruleset.standard) {
-            captureIfTrue(isLt, dir, color)
+            captureIfTrue(isLt, target, color)
         } else if (ruleset.low) {
-            captureIfTrue(isGt, dir, color)
+            captureIfTrue(isGt, target, color)
         }
     }
 }
@@ -27,25 +27,24 @@ export const evaluate = (dir, color, ruleset, v1, v2) => {
  * "Plus" occurs when the sum of one of its values with the value it's facing equals
  * the sum of another direction's values with the value it's facing.
  * TODO: add visuals to help explain all rules in MD files
- * @param {object} dir1 - adjacent card to the active card. "dir" (direction) is relative to the active card
- * @param {object} dir2 - a second adjacent card to the active card meaning the active card is touching
- *                        at least two cards
+ * @param {object} target1 - adjacent card that the active card's value will be evaluated against
+ * @param {object} target2 - the second adjacent card that the active card's value will be evaluated against
  * @param {string} color - color of the active player (red or blue)
  * @param {dict} ruleset - (TMP) dictionary with information regarding current game rules
- * @param {Array} p1 - Two-element array of the indexed card values to evaluate against the opponent
- * @param {Array} p2 - Two-element array of the indexed card values of which the active player's
- *                     cards will be evaluated against
+ * @param {Array} aVals - Two-element array of the indexed card values belonging to the active player
+ * @param {Array} tVals - Two-element array of the indexed card values belonging to the target player
+ *                        of which the active player's cards will be evaluated against
  */
-export const evaluateSameAndPlus = (dir1, dir2, color, ruleset, p1, p2) => {
-    const isSame = p1.toString() == p2.toString()
-    const isPlus = [p1[0] + p2[0]].toString() == [p1[1] + p2[1]].toString()
+export const evaluateSameAndPlus = (target1, target2, color, ruleset, aVals, tVals) => {
+    const isSame = aVals.toString() == tVals.toString()
+    const isPlus = [aVals[0] + tVals[0]].toString() == [aVals[1] + tVals[1]].toString()
 
     if (ruleset.plus) {
-        captureOpponentCardsIfTrue(isPlus, [dir1, dir2], color)
+        captureOpponentCardsIfTrue(isPlus, [target1, target2], color)
     }
 
     if (ruleset.same) {
-        captureOpponentCardsIfTrue(isSame, [dir1, dir2], color)
+        captureOpponentCardsIfTrue(isSame, [target1, target2], color)
     }
 }
 
@@ -53,37 +52,37 @@ export const evaluateSameAndPlus = (dir1, dir2, color, ruleset, p1, p2) => {
 // Helper functions
 //
 
-// Returns true if the relative direction (dir) is facing another color
-// Expects dir.color and color to either be red or blue
-const isOpponent = (dir, color) => {
-    return dir.color !== color
+// Returns true if the target.color != color
+// Expects target.color and color to either be red or blue
+const isOpponent = (target, color) => {
+    return target.color !== color
 }
 
 // Changes the color of the target
-const capture = (dir, color) => {
-    dir.color = color
-    dir.captured = !dir.captured
+const capture = (target, color) => {
+    target.color = color
+    target.captured = !target.captured
 }
 
-// Captures if 'res' is true
-const captureIfTrue = (res, dir, color) => {
-    if (res) {
-        capture(dir, color)
+// Captures if evaluation is true
+const captureIfTrue = (evaluation, target, color) => {
+    if (evaluation) {
+        capture(target, color)
     }
 }
 
 // Captures if and only if the target is not the same color as the active player
-const captureIfOpponent = (dir, color) => {
-    if (isOpponent(dir, color)) {
-        capture(dir, color)
+const captureIfOpponent = (target, color) => {
+    if (isOpponent(target, color)) {
+        capture(target, color)
     }
 }
 
 // If isTrue condition, passed opponent directions will be captured
-const captureOpponentCardsIfTrue = (isTrue, directions, color) => {
+const captureOpponentCardsIfTrue = (isTrue, targets, color) => {
     if (isTrue) {
-        for (let i = 0; i < directions.length; i++) {
-            captureIfOpponent(directions[i], color)
+        for (let i = 0; i < targets.length; i++) {
+            captureIfOpponent(targets[i], color)
         }
     }
 }
