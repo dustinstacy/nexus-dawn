@@ -8,6 +8,7 @@ import {
     Battle,
     BattleIntro,
     Collection,
+    Forge,
     Home,
     Landing,
     Market,
@@ -42,6 +43,7 @@ function App() {
                 <Route path='/collection' element={<Collection />} />
                 <Route path='/market' element={<Market />} />
                 <Route path='/packs' element={<OpenPacks />} />
+                <Route path='/forge' element={<Forge />} />
                 <Route path='/rules' element={<Rules />} />
                 <Route path='/account' element={<Account />} />
             </Routes>

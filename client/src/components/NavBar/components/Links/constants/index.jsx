@@ -1,6 +1,7 @@
 import {
     GiAbstract062,
     GiAbstract021,
+    GiAbstract005,
     GiAbstract088,
     GiAbstract112,
     GiAbstract120,
@@ -33,6 +34,11 @@ export const navlinks = [
         name: 'OpeN PacKs',
         path: '/packs',
         image: <GiAbstract112 />,
+    },
+    {
+        name: 'ForGe',
+        path: '/forge',
+        image: <GiAbstract005 />,
     },
     {
         name: 'HoW to pLAy',
