@@ -64,7 +64,7 @@ export const mainPanels = [
     {
         className: 'market',
         type: 'main',
-        to: '/packs',
+        to: '/market',
         text: 'Purchase packs',
         header: 'Market',
     },
