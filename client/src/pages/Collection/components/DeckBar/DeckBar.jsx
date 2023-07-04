@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ThreeCircles } from 'react-loader-spinner'
 
 import { addCardToDeck, removeCardFromDeck } from '@api'
@@ -56,9 +56,12 @@ const DeckBar = () => {
     const emptyDeck = async () => {
         setClearDeckLoading(true)
         await removeAllFromDeck(userDeck)
-        await getCurrentUser()
         setClearDeckLoading(false)
     }
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [userDeckPower])
 
     // Determine the label for the fill deck button based on the fillDeckLoading state
     const fillDeckLabel = fillDeckLoading ? (
