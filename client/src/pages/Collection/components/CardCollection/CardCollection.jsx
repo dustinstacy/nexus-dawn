@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 
 import { Card } from '@components'
 import { useGlobalContext } from '@context'
