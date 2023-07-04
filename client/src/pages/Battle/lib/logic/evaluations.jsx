@@ -1,10 +1,10 @@
 /**
- * Evaluates single (1-1) card values between active player and opponent
- * @param {object} dir - direction of active card relative to opponent card
+ * Evaluates single (1-1) card values between active card and target card
+ * @param {object} dir - adjacent card to the active card. "dir" (direction) is relative to the active card
  * @param {string} color - color of the active player (red or blue)
  * @param {dict} ruleset - (TMP) dictionary with information regarding current game rules
- * @param {number} v1 - active player's card value adjacent to opponent's card value
- * @param {number} v2 - opponent's card value adjacent to active player's card value
+ * @param {number} v1 - active player's card value adjacent to target card's value
+ * @param {number} v2 - target card's value adjacent to active player card's value
  */
 export const evaluate = (dir, color, ruleset, v1, v2) => {
     const isLt = v1 < v2
@@ -20,15 +20,16 @@ export const evaluate = (dir, color, ruleset, v1, v2) => {
 }
 
 /**
- * Evaluates dual card values between active player and opponent. Specifically,
+ * Evaluates dual card values between active player and opposing player. Specifically,
  * this checks for instances of "same" and/or "plus".
  * "Same" occurs when two (or more) of the active player's card values exactly matches
  * the values of which they're facing e.g. (2:2, 8:8, 1:1, etc.)
  * "Plus" occurs when the sum of one of its values with the value it's facing equals
  * the sum of another direction's values with the value it's facing.
  * TODO: add visuals to help explain all rules in MD files
- * @param {object} dir1 - direction of active card relative to opponent card
- * @param {object} dir2 - second direction of active card relative to opponent card
+ * @param {object} dir1 - adjacent card to the active card. "dir" (direction) is relative to the active card
+ * @param {object} dir2 - a second adjacent card to the active card meaning the active card is touching
+ *                        at least two cards
  * @param {string} color - color of the active player (red or blue)
  * @param {dict} ruleset - (TMP) dictionary with information regarding current game rules
  * @param {Array} p1 - Two-element array of the indexed card values to evaluate against the opponent
