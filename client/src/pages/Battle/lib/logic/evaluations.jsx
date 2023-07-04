@@ -52,7 +52,7 @@ export const evaluateSameAndPlus = (target1, target2, color, ruleset, aVals, tVa
 // Helper functions
 //
 
-// Returns true if the target.color != color
+// Returns true if the target.color != (active) color
 // Expects target.color and color to either be red or blue
 const isOpponent = (target, color) => {
     return target.color !== color
@@ -71,7 +71,7 @@ const captureIfTrue = (evaluation, target, color) => {
     }
 }
 
-// Captures if and only if the target is not the same color as the active player
+// Captures if and only if target.color != (active) color
 const captureIfOpponent = (target, color) => {
     if (isOpponent(target, color)) {
         capture(target, color)
