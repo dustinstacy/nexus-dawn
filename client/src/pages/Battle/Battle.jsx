@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-import { postBattleLog, updateUserStats } from '@api'
+import { getCurrentBattleNumber, postBattleLog, updateUserStats } from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
 
@@ -55,6 +55,7 @@ const Battle = () => {
     const [alertActive, setAlertActive] = useState(false)
     const [cardDragged, setCardDragged] = useState(null)
     const [cardSelected, setCardSelected] = useState(null)
+    const [currentBattleNumber, setCurrentBattleNumber] = useState(null)
 
     // Destructure Battle State
     const {
@@ -91,6 +92,7 @@ const Battle = () => {
     // Otherwise initialize a new game
     useEffect(() => {
         const savedState = JSON.parse(localStorage.getItem('battleLog'))
+        getAndSetBattleNumber()
         setTimeout(() => {
             if (savedState) {
                 restoreStateFromLocalStorage(savedState)
@@ -99,6 +101,16 @@ const Battle = () => {
             }
         }, 50)
     }, [])
+
+    // Used in the developer environment to retrieve the battle number
+    const getAndSetBattleNumber = async () => {
+        try {
+            const battleNumber = await getCurrentBattleNumber()
+            setCurrentBattleNumber(battleNumber)
+        } catch (error) {
+            console.error('Error fetching battle number:', error)
+        }
+    }
 
     // Set state equal to state retrieve from local storage
     // Returns state to last move before page exit
@@ -400,6 +412,7 @@ const Battle = () => {
                     <p>*Forfeiting will count as a loss</p>
                 </Alert>
             )}
+            <p className='battle-number'>bn.{currentBattleNumber}</p>
             <a
                 className='hidden-button'
                 onClick={() => setAlertActive(true)}

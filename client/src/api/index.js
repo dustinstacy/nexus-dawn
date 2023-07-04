@@ -99,3 +99,10 @@ export const postBattleLog = async (battleLog) => {
         battleLog: battleLog,
     })
 }
+
+// Get current battle number
+export const getCurrentBattleNumber = async () => {
+    const response = await axios.get('/api/battleLogs/battleNumber')
+    const battleNumber = response.data.battleNumber
+    return battleNumber
+}

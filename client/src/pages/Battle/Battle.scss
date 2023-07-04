@@ -88,6 +88,13 @@
     }
 }
 
+.battle-number {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    z-index: 500;
+}
+
 .hidden-button {
     position: absolute;
     top: 0;
