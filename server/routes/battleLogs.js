@@ -23,6 +23,19 @@ router.get('/', async (req, res, next) => {
     }
 })
 
+// @route GET /api/battleLogs/battleNumber
+// @desc Get current Battle Log number
+// @access Public
+router.get('/battleNumber', async (req, res, next) => {
+    try {
+        const battleNumber = await getCurrentBattleNumber()
+
+        return res.json({ battleNumber })
+    } catch (error) {
+        next(error)
+    }
+})
+
 // @route POST /api/battleLogs
 // @route Add Battle Log
 // @access Public
@@ -30,9 +43,8 @@ router.post('/', async (req, res, next) => {
     try {
         const { battleLog } = req.body
 
-        const logCountQuery = BattleLog.countDocuments()
-        const logCount = await logCountQuery.exec()
-        const nextBattleNumber = Number(logCount) + 1
+        // Get current battle number by querying the database
+        const battleNumber = await getCurrentBattleNumber()
 
         // Parse battleLog into an object
         const parsedBattleLog = JSON.parse(battleLog)
@@ -44,7 +56,7 @@ router.post('/', async (req, res, next) => {
         const stringifiedBattleLog = JSON.stringify(parsedBattleLog)
 
         const newBattleLog = new BattleLog({
-            battleNumber: nextBattleNumber,
+            battleNumber: battleNumber,
             battleLog: stringifiedBattleLog,
         })
 
@@ -55,8 +67,16 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+// Helper function to query the database and incremenet the total document count by 1
+const getCurrentBattleNumber = async () => {
+    const logCountQuery = BattleLog.countDocuments()
+    const logCount = await logCountQuery.exec()
+    const battleNumber = Number(logCount) + 1
+    return battleNumber
+}
+
 // Helper function to remove 'image' properties recursively
-function removeImageProperties(obj) {
+const removeImageProperties = (obj) => {
     for (let key in obj) {
         if (key === 'image') {
             delete obj[key]
