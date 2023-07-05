@@ -7,14 +7,14 @@
  * @param {number} tVal - target card's value adjacent to active player card's value
  */
 export const evaluate = (target, color, ruleset, aVal, tVal) => {
-    const isLt = aVal < tVal
     const isGt = aVal > tVal
+    const isLt = aVal < tVal
 
     if (isOpponent(target, color)) {
         if (ruleset.standard) {
-            captureIfTrue(isLt, target, color)
-        } else if (ruleset.low) {
             captureIfTrue(isGt, target, color)
+        } else if (ruleset.low) {
+            captureIfTrue(isLt, target, color)
         }
     }
 }

@@ -45,7 +45,8 @@ const battleProcessor = (index, card, battleState) => {
     const leftColumn = [0, 3, 6]
     const rightColumn = [2, 5, 8]
 
-    // Relative positions of cards
+    // Direction is relative from the active card's context
+    // e.g. CARD_UP means the target is above the active card
     const CARD_UP = up?._id
     const CARD_RIGHT = !rightColumn.includes(index) && right?._id
     const CARD_DOWN = down?._id
@@ -87,16 +88,16 @@ const battleProcessor = (index, card, battleState) => {
     //
 
     if (CARD_UP) {
-        evaluate(up, color, RULES, up.values[2], values[0])
+        evaluate(up, color, RULES, values[0], up.values[2])
     }
     if (CARD_RIGHT) {
-        evaluate(right, color, RULES, right.values[3], values[1])
+        evaluate(right, color, RULES, values[1], right.values[3])
     }
     if (CARD_DOWN) {
-        evaluate(down, color, RULES, down.values[0], values[2])
+        evaluate(down, color, RULES, values[2], down.values[0])
     }
     if (CARD_LEFT) {
-        evaluate(left, color, RULES, left.values[1], values[3])
+        evaluate(left, color, RULES, values[3], left.values[1])
     }
 }
 
