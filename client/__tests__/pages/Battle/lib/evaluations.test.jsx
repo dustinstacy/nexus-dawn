@@ -41,7 +41,6 @@ const checkCapturedAndColors = (targets, isCaptured, activeColor) => {
     for (let i = 0; i < targets.length; i++) {
         // Check captured
         expect(targets[i].captured).toBe(isCaptured[i])
-
         //Check color
         expect(targets[i].color).to.eq(activeColor[i])
     }
@@ -69,10 +68,8 @@ describe('Test evaluation functions', async () => {
 
     describe('capture', () => {
         test.each([
-            // Active card is blue
             [RED_CARD(), BLUE],
             [BLUE_CARD(), BLUE],
-            // Active card is red
             [BLUE_CARD(), RED],
             [RED_CARD(), RED],
         ])('changes target card color if target != active card color', ( target, activeColor ) => {
@@ -81,10 +78,8 @@ describe('Test evaluation functions', async () => {
         })
 
         test.each([
-            // Active card is blue
             [RED_CARD(), BLUE_CARD(), TRUE],
             [BLUE_CARD(), BLUE_CARD(), TRUE],
-            // Active card is red
             [BLUE_CARD(), RED_CARD(), TRUE],
             [RED_CARD(), RED_CARD(), TRUE],
         ])('sets captured prop to true', ( target, active, expected ) => {
@@ -149,7 +144,7 @@ describe('Test evaluation functions', async () => {
             [cardFactory(1, RED_CARD()), BLUE],
             [cardFactory(4, RED_CARD()), BLUE],
         ])('executes capture when all targets are opponent', ( targets, activeColor ) => {
-            exportedForTesting.captureOpponentCardsIfTrue( 1 === 1, targets, activeColor)
+            exportedForTesting.captureOpponentCardsIfTrue(TRUE, targets, activeColor)
 
             // Should capture and change color
             checkCapturedAndColors(targets, Array(5).fill(TRUE), Array(5).fill(activeColor))
