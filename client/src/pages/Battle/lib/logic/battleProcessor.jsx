@@ -13,9 +13,27 @@ let RULES = {
 /**
  * Process integer evaluations between opposing cards that are touching
  * to determine outcome
- * @param {*} index
- * @param {*} card
- * @param {*} battleState
+ * @dev the "same" and "plus" rules currently take precedence over single evaluations.
+ *      This function should be benchmarked with different flows to determine the most
+ *      efficient approach to evaluations.
+ * @dev For single evaluations, the current flow order is:
+ *          1. Check if opponent
+ *          2. Check game mode
+ *          3. Check evaluation
+ *          4. Capture
+ * @dev For "same" and "plus", the current flow order is:
+ *          1. Check if "plus",
+ *          2. Check evaluation
+ *          3. Check if opponent
+ *          4. Capture
+ *          5. Check if "same"
+ *          6. Check evaluation
+ *          7. Check if opponent
+ *          8. Capture
+ * @param {number} index - the location on the board. Starting from top-bottom and left-right:
+ *                         Top: 0, 1, 2 | Middle: 3, 4, 5 | Bottom: 6, 7, 8
+ * @param {object} card - the active card
+ * @param {object} battleState - the current state of the board and battle
  */
 const battleProcessor = (index, card, battleState) => {
     const { board } = battleState

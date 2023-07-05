@@ -49,36 +49,36 @@ export const evaluateSameAndPlus = (target1, target2, color, ruleset, aVals, tVa
 }
 
 //
-// Helper functions
+// Internals
 //
 
-// Returns true if the target.color != (active) color
-// Expects target.color and color to either be red or blue
+// Returns true if the `target`.color != `color`
+// Expects `target`.color and `color` to either be red or blue
 const isOpponent = (target, color) => {
     return target.color !== color
 }
 
-// Changes the color of the target
+// Changes the `color` of the `target` and updates the `target`'s capatured property
 const capture = (target, color) => {
     target.color = color
     target.captured = !target.captured
 }
 
-// Captures if evaluation is true
+// Captures if `evaluation` is true
 const captureIfTrue = (evaluation, target, color) => {
     if (evaluation) {
         capture(target, color)
     }
 }
 
-// Captures if and only if target.color != (active) color
+// Captures if and only if `target`.color != `color`
 const captureIfOpponent = (target, color) => {
     if (isOpponent(target, color)) {
         capture(target, color)
     }
 }
 
-// If isTrue condition, passed opponent directions will be captured
+// If `isTrue`, `targets` not matching `color` will be captured
 const captureOpponentCardsIfTrue = (isTrue, targets, color) => {
     if (isTrue) {
         for (let i = 0; i < targets.length; i++) {
