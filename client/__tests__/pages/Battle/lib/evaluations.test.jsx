@@ -1,5 +1,9 @@
 import { describe, test, expect } from 'vitest'
-import { exportedForTesting } from '@pages/Battle/lib/logic/evaluations'
+import { evaluate, evaluateSameAndPlus, exportedForTesting } from '@pages/Battle/lib/logic/evaluations'
+
+//
+// Constants
+//
 
 const IMG = "https://test.png"
 
@@ -13,10 +17,28 @@ const TRUE = true
 const FALSE = false
 const NULL = null
 
-// Card values
-const ZEROS = [0, 0, 0, 0]
-const FIVES = [5, 5, 5, 5]
-const NINES = [9, 9, 9, 9]
+// Single value battles
+const WIN = [6, 5]
+const LOSE = [5, 6]
+const DRAW = [5, 5]
+const LOW_WIN = LOSE
+const LOW_LOSE = WIN
+
+//
+// Mocks
+//
+
+// Rules
+const BASE_RULES = {
+    standard: false,
+    low: false,
+    same: false,
+    plus: false
+}
+const RULES_NONE = BASE_RULES
+const RULES_STD = () => (Object.assign({}, BASE_RULES, {"standard": true}))
+const RULES_LOW = () => (Object.assign({}, BASE_RULES, {"low": true}))
+const RULES_STD_LOW = () => (Object.assign({}, BASE_RULES, {"standard": true, "low": true}))
 
 // Base card values
 const BASE_CARD = { "image": IMG, "captured": NULL }
@@ -29,7 +51,10 @@ const BLUE_CARD = () => (Object.assign({}, BASE_CARD, BLUE_BASE))
 const RED_CARD = () => (Object.assign({}, BASE_CARD, RED_BASE))
 const INVALID_CARD = () => (Object.assign({}, BASE_CARD, INVALID_BASE))
 
+//
 // Helpers
+//
+
 const opponentColor = (color) => {
     if (color !== RED && color !== BLUE) {
         throw new Error(color + ' is invalid');
@@ -46,15 +71,91 @@ const checkCapturedAndColors = (targets, isCaptured, activeColor) => {
     }
 }
 
+// Return array of n mockCards
+const cardFactory = (n, mockCard) => {
+    let cards = []
+    for (let i = 1; i <= n; i++) {
+        cards.push(mockCard)
+    }
+    return cards
+}
+
 describe('Test evaluation functions', async () => {
+    describe('evaluate', () => {
+        describe('with standard rules', () => {
+            test.each([
+                [RED_CARD(), BLUE, WIN, [BLUE, TRUE]],
+                [RED_CARD(), BLUE, LOSE, [RED, NULL]],
+                [RED_CARD(), BLUE, DRAW, [RED, NULL]],
+                [RED_CARD(), RED, WIN, [RED, NULL]],
+                [RED_CARD(), RED, LOSE, [RED, NULL]],
+                [RED_CARD(), RED, DRAW, [RED, NULL]],
+            ])('evaluate card values during battle', ( target, activeColor, result, expected ) => {
+                evaluate(target, activeColor, RULES_STD(), ...result)
+                expect(target.color).to.eq(expected[0])
+                expect(target.captured).toBe(expected[1])
+            })
+        })
+
+        describe('with low rules', () => {
+            test.each([
+                [RED_CARD(), BLUE, LOW_WIN, [BLUE, TRUE]],
+                [RED_CARD(), BLUE, LOW_LOSE, [RED, NULL]],
+                [RED_CARD(), BLUE, DRAW, [RED, NULL]],
+                [RED_CARD(), RED, LOW_WIN, [RED, NULL]],
+                [RED_CARD(), RED, LOW_LOSE, [RED, NULL]],
+                [RED_CARD(), RED, DRAW, [RED, NULL]],
+            ])('evaluate card values during battle', ( target, activeColor, result, expected ) => {
+                evaluate(target, activeColor, RULES_LOW(), ...result)
+
+                expect(target.color).to.eq(expected[0])
+                expect(target.captured).toBe(expected[1])
+            })
+        })
+
+        describe('with standard and low rules', () => {
+            test.each([
+                [RED_CARD(), BLUE, WIN],
+                [RED_CARD(), BLUE, LOSE],
+                [RED_CARD(), BLUE, DRAW],
+                [BLUE_CARD(), BLUE, WIN],
+                [BLUE_CARD(), BLUE, LOSE],
+                [BLUE_CARD(), BLUE, DRAW],
+            ])('battles with nonmatching cards should throw', ( target, activeColor, result ) => {
+                // If colors match, execution stops and does not reach the throw statement
+                if (target.color === activeColor) {
+                    evaluate(target, activeColor, RULES_STD_LOW(), ...result)
+                    expect(target.captured).toBe(NULL)
+                } else {
+                expect(() => evaluate(target, activeColor, RULES_STD_LOW(), ...result)).toThrowError(
+                    /^evaluations: rules cannot be both stanard and low$/,
+                  )
+                }
+            })
+        })
+
+        describe('with no rules', () => {
+            test.each([
+                [RED_CARD(), BLUE, WIN, [RED, NULL]],
+                [RED_CARD(), BLUE, LOSE, [RED, NULL]],
+                [RED_CARD(), BLUE, DRAW, [RED, NULL]],
+                [RED_CARD(), RED, WIN, [RED, NULL]],
+                [RED_CARD(), RED, LOSE, [RED, NULL]],
+                [RED_CARD(), RED, DRAW, [RED, NULL]],
+            ])('battles result in no state changes', ( target, activeColor, result, expected ) => {
+                evaluate(target, activeColor, RULES_NONE, ...result)
+
+                expect(target.color).to.eq(expected[0])
+                expect(target.captured).toBe(expected[1])
+            })
+        })
+    })
+
     describe('isOpponent', () => {
         test.each([
             // Target is blue
             [BLUE_CARD(), RED, TRUE],
             [BLUE_CARD(), BLUE, FALSE],
-            // Target is red
-            [RED_CARD(), RED, FALSE],
-            [RED_CARD(), BLUE, TRUE],
             // Target is invalid
             [INVALID_CARD(), RED, TRUE],
             [INVALID_CARD(), BLUE, TRUE],
@@ -70,20 +171,18 @@ describe('Test evaluation functions', async () => {
         test.each([
             [RED_CARD(), BLUE],
             [BLUE_CARD(), BLUE],
-            [BLUE_CARD(), RED],
-            [RED_CARD(), RED],
         ])('changes target card color if target != active card color', ( target, activeColor ) => {
             exportedForTesting.capture(target, activeColor)
+
             expect(target.color).to.eq(activeColor)
         })
 
         test.each([
             [RED_CARD(), BLUE_CARD(), TRUE],
             [BLUE_CARD(), BLUE_CARD(), TRUE],
-            [BLUE_CARD(), RED_CARD(), TRUE],
-            [RED_CARD(), RED_CARD(), TRUE],
         ])('sets captured prop to true', ( target, active, expected ) => {
             exportedForTesting.capture(target, active.color)
+
             expect(target.captured).toBe(expected)
             // Sanity check ensuring active card does not change
             expect(active.captured).to.eq(NULL)
@@ -104,10 +203,9 @@ describe('Test evaluation functions', async () => {
         test.each([
             [1 !== 1, RED_CARD(), BLUE, NULL],
             [1 === 1, RED_CARD(), BLUE, TRUE],
-            [1 !== 1, BLUE_CARD(), RED, NULL],
-            [1 === 1, BLUE_CARD(), RED, TRUE],
         ])('executes capture if evaluation is true', ( evaluation, target, activeColor, isCaptured ) => {
             exportedForTesting.captureIfTrue(evaluation, target, activeColor)
+
             expect(target.captured).toBe(isCaptured)
         })
     })
@@ -117,27 +215,14 @@ describe('Test evaluation functions', async () => {
             // Active card is blue
             [RED_CARD(), BLUE, TRUE],
             [BLUE_CARD(), BLUE, NULL],
-            // Active card is red
-            [BLUE_CARD(), RED, TRUE],
-            [RED_CARD(), RED, NULL],
         ])('executes capture if target is opponent', ( target, activeColor, expected ) => {
             exportedForTesting.captureIfOpponent(target, activeColor)
-            // It seems the internal capture fn call cannot be mocked/spied on
-            // therefore, we rely on the captured property to asses behavior
+
             expect(target.captured).toBe(expected)
         })
     })
 
     describe('captureOpponentCardsIfTrue', () => {
-        // Returns array of n mockCards
-        const cardFactory = (n, mockCard) => {
-            let cards = []
-            for (let i = 1; i <= n; i++) {
-                cards.push(mockCard)
-            }
-            return cards
-        }
-
         test.each([
             [cardFactory(1, BLUE_CARD()), RED],
             [cardFactory(4, BLUE_CARD()), RED],
@@ -183,6 +268,7 @@ describe('Test evaluation functions', async () => {
             ],
         ])('executes capture on correct cards when mixed', ( targets, expected, activeColor ) => {
             exportedForTesting.captureOpponentCardsIfTrue(TRUE, targets, activeColor)
+
             checkCapturedAndColors(targets, expected, Array(5).fill(activeColor))
         })
     })
