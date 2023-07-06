@@ -83,4 +83,23 @@
             }
         }
     }
+
+    .box {
+        margin-top: 12px;
+        padding: 12px;
+        text-align: center;
+
+        .filter {
+            margin-bottom: 8px;
+        }
+    }
+
+    .mod-cost {
+        width: 100%;
+        margin-top: 12px;
+        padding: 12px;
+        img {
+            width: 7vh;
+        }
+    }
 }

@@ -5,7 +5,7 @@ import { classSet } from '@utils'
 
 import { Score } from '../../components'
 import { processStandardBattles } from '../../lib/logic'
-import { updateState } from '../../utils'
+import { updateState } from '@utils'
 
 import { Cell } from './components'
 import turnArrow from './images/turnArrow.png'

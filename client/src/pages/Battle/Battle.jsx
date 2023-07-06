@@ -4,9 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { getCurrentBattleNumber, postBattleLog, updateUserStats } from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
+import { updateState } from '@utils'
 
 import { BattleResults, Board, Hand, RoundResult } from './components'
-import { assignColorsAndDealCards, shuffleCards, updateState } from './utils'
+import { assignColorsAndDealCards, shuffleCards } from './utils'
 import { processStandardBattles } from './lib/logic'
 import { cpuMove } from './lib/ai'
 
