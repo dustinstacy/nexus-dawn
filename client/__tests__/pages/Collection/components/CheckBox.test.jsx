@@ -1,3 +1,5 @@
+// FIX ME :(
+
 import React from 'react'
 import { describe, it, vi } from 'vitest'
 //import { render, fireEvent } from '@testing-library/react'
@@ -43,4 +45,3 @@ describe('CheckBox', () => {
 //        expect(container.querySelector('.check')).toBeNull()
 //    })
 //})
-//
