@@ -3,7 +3,7 @@ import { evaluate, evaluateSameAndPlus } from './evaluations'
 
 // TMP config rules here
 // Remove once battleProcessor accepts rules as an arg
-let RULES = {
+let rules = {
     standard: true,
     low: false,
     same: true,
@@ -57,29 +57,29 @@ const battleProcessor = (index, card, battleState) => {
      * These take precedence over single evals
      */
 
-    if (RULES.same || RULES.plus) {
+    if (rules.same || rules.plus) {
         if (cardUP && cardRight) {
-            evaluateSameAndPlus(up, right, color, RULES, [values[0], values[1]], [up.values[2], right.values[3]])
+            evaluateSameAndPlus(up, right, color, rules, [values[0], values[1]], [up.values[2], right.values[3]])
         }
 
         if (cardUP && cardDown) {
-            evaluateSameAndPlus(up, down, color, RULES, [values[0], values[2]], [up.values[2], down.values[0]])
+            evaluateSameAndPlus(up, down, color, rules, [values[0], values[2]], [up.values[2], down.values[0]])
         }
 
         if (cardUP && cardLeft) {
-            evaluateSameAndPlus(up, left, color, RULES, [values[0], values[3]], [up.values[2], left.values[1]])
+            evaluateSameAndPlus(up, left, color, rules, [values[0], values[3]], [up.values[2], left.values[1]])
         }
 
         if (cardRight && cardDown) {
-            evaluateSameAndPlus(right, down, color, RULES, [values[1], values[2]], [right.values[3], down.values[0]])
+            evaluateSameAndPlus(right, down, color, rules, [values[1], values[2]], [right.values[3], down.values[0]])
         }
 
         if (cardRight && cardLeft) {
-            evaluateSameAndPlus(right, left, color, RULES, [values[1], values[3]], [right.values[3], left.values[1]])
+            evaluateSameAndPlus(right, left, color, rules, [values[1], values[3]], [right.values[3], left.values[1]])
         }
 
         if (cardDown && cardLeft) {
-            evaluateSameAndPlus(down, left, color, RULES, [values[2], values[3]], [down.values[0], left.values[1]])
+            evaluateSameAndPlus(down, left, color, rules, [values[2], values[3]], [down.values[0], left.values[1]])
         }
     }
 
@@ -88,16 +88,16 @@ const battleProcessor = (index, card, battleState) => {
     //
 
     if (cardUP) {
-        evaluate(up, color, RULES, values[0], up.values[2])
+        evaluate(up, color, rules, values[0], up.values[2])
     }
     if (cardRight) {
-        evaluate(right, color, RULES, values[1], right.values[3])
+        evaluate(right, color, rules, values[1], right.values[3])
     }
     if (cardDown) {
-        evaluate(down, color, RULES, values[2], down.values[0])
+        evaluate(down, color, rules, values[2], down.values[0])
     }
     if (cardLeft) {
-        evaluate(left, color, RULES, values[3], left.values[1])
+        evaluate(left, color, rules, values[3], left.values[1])
     }
 }
 
