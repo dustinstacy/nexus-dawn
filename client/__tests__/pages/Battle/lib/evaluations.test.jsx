@@ -102,32 +102,29 @@ describe('Test evaluation functions', async () => {
     describe('evaluate', () => {
         describe('with standard rules', () => {
             test.each([
-                [RED_CARD(), BLUE, WIN, [BLUE, TRUE]],
-                [RED_CARD(), BLUE, LOSE, [RED, NULL]],
-                [RED_CARD(), BLUE, DRAW, [RED, NULL]],
-                [RED_CARD(), RED, WIN, [RED, NULL]],
-                [RED_CARD(), RED, LOSE, [RED, NULL]],
-                [RED_CARD(), RED, DRAW, [RED, NULL]],
-            ])('evaluate card values during battle', ( target, activeColor, result, expected ) => {
-                evaluate(target, activeColor, RULES_STD(), ...result)
-                expect(target.color).to.eq(expected[0])
-                expect(target.captured).toBe(expected[1])
+                [RED_CARD(), BLUE, WIN, [TRUE, BLUE]],
+                [RED_CARD(), BLUE, LOSE, [NULL, RED]],
+                [RED_CARD(), BLUE, DRAW, [NULL, RED]],
+                [RED_CARD(), RED, WIN, [NULL, RED]],
+                [RED_CARD(), RED, LOSE, [NULL, RED]],
+                [RED_CARD(), RED, DRAW, [NULL, RED]],
+            ])('evaluate card values during battle', ( target, activeColor, vals, expected ) => {
+                evaluate(target, activeColor, RULES_STD(), vals[0], vals[1])
+                checkCapturedAndColorsSingle(target, expected[0], expected[1])
             })
         })
 
         describe('with low rules', () => {
             test.each([
-                [RED_CARD(), BLUE, LOW_WIN, [BLUE, TRUE]],
-                [RED_CARD(), BLUE, LOW_LOSE, [RED, NULL]],
-                [RED_CARD(), BLUE, DRAW, [RED, NULL]],
-                [RED_CARD(), RED, LOW_WIN, [RED, NULL]],
-                [RED_CARD(), RED, LOW_LOSE, [RED, NULL]],
-                [RED_CARD(), RED, DRAW, [RED, NULL]],
-            ])('evaluate card values during battle', ( target, activeColor, result, expected ) => {
-                evaluate(target, activeColor, RULES_LOW(), ...result)
-
-                expect(target.color).to.eq(expected[0])
-                expect(target.captured).toBe(expected[1])
+                [RED_CARD(), BLUE, LOW_WIN, [TRUE, BLUE]],
+                [RED_CARD(), BLUE, LOW_LOSE, [NULL, RED]],
+                [RED_CARD(), BLUE, DRAW, [NULL, RED]],
+                [RED_CARD(), RED, LOW_WIN, [NULL, RED]],
+                [RED_CARD(), RED, LOW_LOSE, [NULL, RED]],
+                [RED_CARD(), RED, DRAW, [NULL, RED]],
+            ])('evaluate card values during battle', ( target, activeColor, vals, expected ) => {
+                evaluate(target, activeColor, RULES_LOW(), vals[0], vals[1])
+                checkCapturedAndColorsSingle(target, expected[0], expected[1])
             })
         })
 
@@ -139,13 +136,13 @@ describe('Test evaluation functions', async () => {
                 [BLUE_CARD(), BLUE, WIN],
                 [BLUE_CARD(), BLUE, LOSE],
                 [BLUE_CARD(), BLUE, DRAW],
-            ])('battles with nonmatching cards should throw', ( target, activeColor, result ) => {
+            ])('battles with nonmatching cards should throw', ( target, activeColor, vals ) => {
                 // If colors match, execution stops and does not reach the throw statement
                 if (target.color === activeColor) {
-                    evaluate(target, activeColor, RULES_STD_LOW(), ...result)
+                    evaluate(target, activeColor, RULES_STD_LOW(), vals[0], vals[1])
                     expect(target.captured).toBe(NULL)
                 } else {
-                expect(() => evaluate(target, activeColor, RULES_STD_LOW(), ...result)).toThrowError(
+                expect(() => evaluate(target, activeColor, RULES_STD_LOW(), vals[0], vals[1])).toThrowError(
                     /^evaluations: rules cannot be both stanard and low$/,
                   )
                 }
@@ -154,17 +151,15 @@ describe('Test evaluation functions', async () => {
 
         describe('with no rules', () => {
             test.each([
-                [RED_CARD(), BLUE, WIN, [RED, NULL]],
-                [RED_CARD(), BLUE, LOSE, [RED, NULL]],
-                [RED_CARD(), BLUE, DRAW, [RED, NULL]],
-                [RED_CARD(), RED, WIN, [RED, NULL]],
-                [RED_CARD(), RED, LOSE, [RED, NULL]],
-                [RED_CARD(), RED, DRAW, [RED, NULL]],
-            ])('battles result in no state changes', ( target, activeColor, result, expected ) => {
-                evaluate(target, activeColor, RULES_NONE, ...result)
-
-                expect(target.color).to.eq(expected[0])
-                expect(target.captured).toBe(expected[1])
+                [RED_CARD(), BLUE, WIN, [NULL, RED]],
+                [RED_CARD(), BLUE, LOSE, [NULL, RED]],
+                [RED_CARD(), BLUE, DRAW, [NULL, RED]],
+                [RED_CARD(), RED, WIN, [NULL, RED]],
+                [RED_CARD(), RED, LOSE, [NULL, RED]],
+                [RED_CARD(), RED, DRAW, [NULL, RED]],
+            ])('battles result in no state changes', ( target, activeColor, vals, expected ) => {
+                evaluate(target, activeColor, RULES_NONE, vals[0], vals[1])
+                checkCapturedAndColorsSingle(target, expected[0], expected[1])
             })
         })
     })
