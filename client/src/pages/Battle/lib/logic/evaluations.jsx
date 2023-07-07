@@ -1,5 +1,5 @@
 /**
- * Evaluates single (1-1) card values between active card and target card
+ * @notice Evaluates single (1-1) card values between active card and target card
  * @param {object} target - adjacent card that the active card's value will be evaluated against
  * @param {string} color - color of the active player (red or blue)
  * @param {dict} ruleset - (TMP) dictionary with information regarding current game rules
@@ -23,13 +23,13 @@ export const evaluate = (target, color, ruleset, aVal, tVal) => {
 }
 
 /**
- * Evaluates dual card values between active player and opposing player. Specifically,
+ * @notice Evaluates dual card values between active player and opposing player. Specifically,
  * this checks for instances of "same" and/or "plus".
- * "Same" occurs when two (or more) of the active player's card values exactly matches
+ * @notice "Same" occurs when two (or more) of the active player's card values exactly matches
  * the values of which they're facing e.g. (2:2, 8:8, 1:1, etc.)
- * "Plus" occurs when the sum of one of its values with the value it's facing equals
+ * @notice "Plus" occurs when the sum of one of its values with the value it's facing equals
  * the sum of another direction's values with the value it's facing.
- * TODO: add visuals to help explain all rules in MD files
+ * @todo: add visuals to help explain all rules in MD files
  * @param {object} target1 - adjacent card that the active card's value will be evaluated against
  * @param {object} target2 - the second adjacent card that the active card's value will be evaluated against
  * @param {string} color - color of the active player (red or blue)
