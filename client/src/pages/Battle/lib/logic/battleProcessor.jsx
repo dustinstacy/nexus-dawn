@@ -6,8 +6,8 @@ import { evaluate, evaluateSameAndPlus } from './evaluations'
 let rules = {
     standard: true,
     low: false,
-    same: true,
-    plus: true
+    same: false,
+    plus: false
 }
 
 /**
