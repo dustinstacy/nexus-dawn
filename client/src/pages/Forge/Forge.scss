@@ -9,7 +9,7 @@
     .card-select {
         position: relative;
         height: calc(45vh);
-        width: calc(45vh * 0.725);
+        width: calc(45vh);
 
         .unselect-card {
             position: absolute;
@@ -38,17 +38,50 @@
 
         .selected-card {
             .card__values {
-                position: absolute;
-                top: -7.5vh;
-                left: -5vh;
-                right: -5vh;
-                height: 40vh;
-                font-size: 48px;
-
-                > * {
-                    background: none;
-                }
+                visibility: hidden;
             }
+        }
+
+        .value,
+        .value-0,
+        .value-1,
+        .value-2,
+        .value-3 {
+            height: 64px;
+            width: 64px;
+            font-size: 36px;
+
+            &.box {
+                cursor: pointer;
+            }
+
+            &.disabled {
+                pointer-events: none;
+                filter: grayscale(0.9);
+            }
+        }
+
+        .value-0,
+        .value-1,
+        .value-2,
+        .value-3 {
+            position: absolute;
+        }
+
+        .value-0 {
+            top: 8px;
+        }
+
+        .value-1 {
+            right: 24px;
+        }
+
+        .value-2 {
+            bottom: 8px;
+        }
+
+        .value-3 {
+            left: 24px;
         }
     }
 
@@ -85,7 +118,7 @@
     }
 
     .box {
-        margin-top: 12px;
+        margin: 12px 0;
         padding: 12px;
         text-align: center;
 
@@ -101,5 +134,9 @@
         img {
             width: 7vh;
         }
+    }
+
+    .button {
+        margin-top: 12px;
     }
 }
