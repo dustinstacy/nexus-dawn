@@ -144,8 +144,7 @@ describe('Test evaluation functions', async () => {
                 } else {
                 expect(() => evaluate(target, activeColor, RULES_STD_LOW(), vals[0], vals[1])).toThrowError(
                     /^evaluations: rules cannot be both stanard and low$/,
-                  )
-                }
+                )}
             })
         })
 
@@ -169,7 +168,7 @@ describe('Test evaluation functions', async () => {
             describe.each([
                 { rules: RULES_SAME, toString: "standard" },
                 { rules: RULES_LOW_SAME, toString: "low" },
-              ])('with $toString rules', ({ rules }) => {
+            ])('with $toString rules', ({ rules }) => {
                 test.each([
                     [[RED_CARD(), RED_CARD()], rules, [0, 0], [0, 0], [TRUE, TRUE]],
                     [[RED_CARD(), RED_CARD()], rules, [1, 2], [1, 2], [TRUE, TRUE]],
@@ -209,7 +208,7 @@ describe('Test evaluation functions', async () => {
             describe.each([
                 { rules: RULES_PLUS, toString: "standard" },
                 { rules: RULES_LOW_PLUS, toString: "low" },
-              ])('with $toString rules', ({ rules }) => {
+            ])('with $toString rules', ({ rules }) => {
                 test.each([
                     [[RED_CARD(), RED_CARD()], rules, [0, 0], [0, 0], [TRUE, TRUE]],
                     [[RED_CARD(), RED_CARD()], rules, [9, 5], [0, 4], [TRUE, TRUE]],
@@ -249,7 +248,7 @@ describe('Test evaluation functions', async () => {
             describe.each([
                 { rules: RULES_SAME_PLUS, toString: "standard" },
                 { rules: RULES_LOW_SAME_PLUS, toString: "low" },
-              ])('with $toString rules', ({ rules, }) => {
+            ])('with $toString rules', ({ rules, }) => {
                 test.each([
                     // Same and plus
                     [[RED_CARD(), RED_CARD()], rules, [0, 0], [0, 0], [TRUE, TRUE]],
@@ -402,11 +401,10 @@ describe('Test evaluation functions', async () => {
         })
 
         test.each([
-            [
-                [BLUE_CARD(), RED_CARD(), BLUE_CARD(), RED_CARD()],
-                [NULL, TRUE, NULL, TRUE],
-                BLUE
-            ],
+            [[BLUE_CARD(), RED_CARD(), BLUE_CARD(), RED_CARD()],
+            [NULL, TRUE, NULL, TRUE],
+            BLUE
+        ],
             [
                 [BLUE_CARD(), RED_CARD(), BLUE_CARD(), RED_CARD()],
                 [TRUE, NULL, TRUE, NULL],
