@@ -13,7 +13,7 @@ export const evaluate = (target, color, ruleset, aVal, tVal) => {
     if (isOpponent(target, color)) {
         if (ruleset.standard) {
             if (ruleset.low) {
-                throw new Error("evaluations: rules cannot be both stanard and low");
+                throw new Error("Evaluations: rules cannot be both standard and low");
             }
             captureIfTrue(isGT, target, color)
         } else if (ruleset.low) {
