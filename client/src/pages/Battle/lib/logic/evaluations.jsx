@@ -7,17 +7,17 @@
  * @param {number} tVal - target card's value adjacent to active player card's value
  */
 export const evaluate = (target, color, ruleset, aVal, tVal) => {
-    const isGt = aVal > tVal
-    const isLt = aVal < tVal
+    const isGT = aVal > tVal
+    const isLT = aVal < tVal
 
     if (isOpponent(target, color)) {
         if (ruleset.standard) {
             if (ruleset.low) {
                 throw new Error("evaluations: rules cannot be both stanard and low");
             }
-            captureIfTrue(isGt, target, color)
+            captureIfTrue(isGT, target, color)
         } else if (ruleset.low) {
-            captureIfTrue(isLt, target, color)
+            captureIfTrue(isLT, target, color)
         }
     }
 }
