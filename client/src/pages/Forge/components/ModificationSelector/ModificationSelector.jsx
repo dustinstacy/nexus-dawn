@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { Button, Filter } from '@components'
 
@@ -6,10 +6,17 @@ import { modificationOptions } from './constants'
 import './ModificationSelector.scss'
 
 const ModificationSelector = ({
+    selectedCard,
     selectedModification,
     setModificationInProgress,
     setSelectedModification,
 }) => {
+    useEffect(() => {
+        if (selectedCard == null) {
+            setSelectedModification('-')
+        }
+    }, [selectedCard])
+
     return (
         <div>
             <div className='box'>
@@ -25,7 +32,8 @@ const ModificationSelector = ({
                 onClick={() => setModificationInProgress(true)}
                 disabled={
                     selectedModification === null ||
-                    selectedModification === '-'
+                    selectedModification === '-' ||
+                    !selectedCard
                 }
             />
         </div>

@@ -9,18 +9,13 @@ import './CardSelector.scss'
 const CardSelector = ({ selectedCard, setSelectedCard }) => {
     const [cardSelectOpen, setCardSelectOpen] = useState(false)
 
-    const unselectCard = () => {
-        setSelectedCard(null)
-        setSelectedModification(null)
-    }
-
     return (
         <div className='panel card-select center'>
             {selectedCard ? (
                 <div className='selected-card center fill'>
                     <AiOutlineCloseCircle
                         className='unselect-card'
-                        onClick={() => unselectCard()}
+                        onClick={() => setSelectedCard(null)}
                     />
 
                     <Card card={selectedCard} isShowing />

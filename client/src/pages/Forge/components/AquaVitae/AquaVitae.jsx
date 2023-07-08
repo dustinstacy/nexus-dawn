@@ -1,77 +1,122 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Button, Card } from '@components'
+import { useGlobalContext } from '@context'
 
+import { updateCardValues } from '../../api'
 import './AquaVitae.scss'
 
-const AquaVitae = ({ selectedCard }) => {
-    const [selectedCardValues, setSelectedCardValues] = useState([])
-    const [selectedValues, setSelectedValues] = useState([])
+const AquaVitae = ({
+    selectedCard,
+    setModificationInProgress,
+    setModificationComplete,
+}) => {
+    const { getUserCards } = useGlobalContext()
+
+    const [modValues, setModValues] = useState([])
+    const [selectedCardValues, setSelectedCardValues] = useState(
+        selectedCard.values
+    )
     const [chosenValue, setChosenValue] = useState(null)
 
-    const selectValue = (i) => {
-        let updatedValues = selectedCardValues
-        let updatedSelectedValues = selectedValues
-        if (chosenValue) {
-            updatedValues[i] = chosenValue
-            setSelectedCardValues(updatedValues)
-        }
-        if (selectedValues?.length === 0) {
-            updatedSelectedValues.push(selectedCardValues[i])
-            setSelectedValues(() => updatedSelectedValues)
-        } else {
-            updatedSelectedValues.push(selectedCardValues[i])
-            setSelectedValues(() => updatedSelectedValues)
-        }
+    let updatedCardValues = [...selectedCardValues]
+    let updatedModValues = [...modValues]
 
-        updatedValues[i] = ''
-        console.log(updatedValues)
-        setSelectedCardValues(() => updatedValues)
+    const cardValueClick = (value, i) => {
+        if (value !== '') {
+            chooseValue(value)
+            removeValue(i)
+        } else if (chosenValue !== null) {
+            placeValue(chosenValue, i)
+            setChosenValue(null)
+        }
     }
 
-    useEffect(() => {
-        // calculateFluxCost()
-        if (selectedCard) {
-            setSelectedCardValues((prevValues) => [...selectedCard?.values])
+    const chooseValue = (value) => {
+        if (modValues?.length < 2) {
+            updatedModValues.push(value)
+            setModValues(updatedModValues)
         }
-    }, [selectedCard])
+    }
+
+    const removeValue = (i) => {
+        updatedCardValues[i] = ''
+        setSelectedCardValues(updatedCardValues)
+    }
+
+    const placeValue = (value, i) => {
+        updatedCardValues[i] = value
+        setSelectedCardValues(updatedCardValues)
+        removeModValue(value)
+    }
+
+    const modValueClick = (value) => {
+        setChosenValue(value)
+    }
+
+    const removeModValue = (value) => {
+        const modValueIndex = updatedModValues.indexOf(value)
+        if (modValueIndex !== -1) {
+            updatedModValues.splice(modValueIndex, 1)
+            setModValues(updatedModValues)
+        }
+    }
+
+    const completeMod = async () => {
+        await updateCardValues(selectedCard, updatedCardValues)
+        await getUserCards()
+        setModificationInProgress(false)
+        setModificationComplete(true)
+    }
+
+    const reset = () => {
+        setModValues([])
+        setChosenValue(null)
+        setSelectedCardValues(selectedCard.values)
+    }
 
     return (
-        <div>
+        <div className='vitae around'>
             <div className='center-column'>
                 <div className='panel card-select center'>
                     <div className='selected-card center fill'>
                         <Card card={selectedCard} isShowing />
                     </div>
-                    {selectedCardValues?.map((value, i) => (
+                    {updatedCardValues?.map((value, i) => (
                         <div
                             key={value + i * 10}
                             className={`value-${i} box center ${
-                                selectedValues?.length > 1 &&
+                                modValues?.length > 1 &&
                                 value !== '' &&
                                 'disabled'
                             }`}
-                            onClick={() => selectValue(i)}
+                            onClick={() => cardValueClick(value, i)}
                         >
                             {value}
                         </div>
                     ))}
                 </div>
                 <Button
-                    label={modificationInProgress ? 'Cancel' : 'Modify Card'}
-                    onClick={() => handleClick()}
+                    label='Cancel'
+                    onClick={() => setModificationInProgress(false)}
+                />
+                <Button label='Reset' onClick={() => reset()} />
+                <Button
+                    label='Complete Modification'
+                    onClick={() => completeMod()}
                     disabled={
-                        selectedModification === null ||
-                        selectedModification === '-'
+                        selectedCard.values.every(
+                            (value, index) => value === updatedCardValues[index]
+                        ) || modValues.length > 0
                     }
                 />
             </div>
             <div className='panel card-select value-bank center'>
-                {selectedValues?.map((value, i) => (
+                {modValues?.map((value, i) => (
                     <div
                         key={value + i * 10}
                         className='value box center'
-                        onClick={() => setChosenValue(value)}
+                        onClick={() => modValueClick(value)}
                     >
                         {value}
                     </div>
