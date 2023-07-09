@@ -1,6 +1,6 @@
-export { default as AquaVitae } from './AquaVitae/AquaVitae'
 export { default as AquaPanel } from './AquaPanel/AquaPanel'
 export { default as CardSelector } from './CardSelector/CardSelector'
 export { default as FluxPanel } from './FluxPanel/FluxPanel'
 export { default as ModifiedCard } from './ModifiedCard/ModifiedCard'
+export { default as Modifiers } from './Modifiers/Modifiers'
 export { default as ModificationSelector } from './ModificationSelector/ModificationSelector'

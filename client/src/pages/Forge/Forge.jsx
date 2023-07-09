@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
-    AquaVitae,
     CardSelector,
     ModifiedCard,
+    Modifiers,
     ModificationSelector,
 } from './components'
 import './Forge.scss'
@@ -14,10 +14,16 @@ const Forge = () => {
     const [modificationInProgress, setModificationInProgress] = useState(false)
     const [modificationComplete, setModificationComplete] = useState(false)
 
+    useEffect(() => {
+        if (modificationComplete) {
+            setModificationInProgress(false)
+        }
+    }, [modificationComplete])
+
     return (
-        <div className='forge page around'>
+        <div className='forge page center'>
             {!modificationInProgress && !modificationComplete && (
-                <>
+                <div className='start-column'>
                     <CardSelector
                         selectedCard={selectedCard}
                         setSelectedCard={setSelectedCard}
@@ -28,17 +34,16 @@ const Forge = () => {
                         setSelectedModification={setSelectedModification}
                         setModificationInProgress={setModificationInProgress}
                     />
-                </>
+                </div>
             )}
-            {modificationInProgress &&
-                !modificationComplete &&
-                selectedModification === 'Aqua Vitae' && (
-                    <AquaVitae
-                        selectedCard={selectedCard}
-                        setModificationComplete={setModificationComplete}
-                        setModificationInProgress={setModificationInProgress}
-                    />
-                )}
+            {modificationInProgress && !modificationComplete && (
+                <Modifiers
+                    selectedCard={selectedCard}
+                    selectedModification={selectedModification}
+                    setModificationComplete={setModificationComplete}
+                    setModificationInProgress={setModificationInProgress}
+                />
+            )}
             {modificationComplete && (
                 <ModifiedCard
                     selectedCard={selectedCard}

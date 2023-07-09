@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { Button, Card } from '@components'
 import { useGlobalContext } from '@context'
 
-import { updateCardValues } from '../../api'
+import { updateCardValues } from '../../../../api'
 import './AquaVitae.scss'
 
 const AquaVitae = ({
@@ -65,7 +65,6 @@ const AquaVitae = ({
     const completeMod = async () => {
         await updateCardValues(selectedCard, updatedCardValues)
         await getUserCards()
-        setModificationInProgress(false)
         setModificationComplete(true)
     }
 
@@ -76,8 +75,8 @@ const AquaVitae = ({
     }
 
     return (
-        <div className='vitae around'>
-            <div className='center-column'>
+        <div className='vitae center fill'>
+            <div className='start-column'>
                 <div className='panel card-select center'>
                     <div className='selected-card center fill'>
                         <Card card={selectedCard} isShowing />
@@ -96,10 +95,7 @@ const AquaVitae = ({
                         </div>
                     ))}
                 </div>
-                <Button
-                    label='Cancel'
-                    onClick={() => setModificationInProgress(false)}
-                />
+
                 <Button label='Reset' onClick={() => reset()} />
                 <Button
                     label='Complete Modification'

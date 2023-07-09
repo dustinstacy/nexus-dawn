@@ -18,7 +18,7 @@ const ModificationSelector = ({
     }, [selectedCard])
 
     return (
-        <div>
+        <div className='center-column'>
             <div className='box'>
                 <Filter
                     label='Select Desired Modification'
