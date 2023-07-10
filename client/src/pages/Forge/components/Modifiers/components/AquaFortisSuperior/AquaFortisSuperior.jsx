@@ -83,9 +83,11 @@ const AquaFortisSuperior = ({ selectedCard, setModificationComplete }) => {
                 <Button
                     label='Complete Modification'
                     onClick={() => completeMod()}
-                    disabled={selectedCard.values.every(
-                        (value, index) => value === updatedCardValues[index]
-                    )}
+                    disabled={
+                        selectedCard.values.every(
+                            (value, index) => value === updatedCardValues[index]
+                        ) || modValue !== 0
+                    }
                 />
             </div>
             <div className='panel card-select value-bank center'>
