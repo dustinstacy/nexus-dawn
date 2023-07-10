@@ -6,17 +6,13 @@ import { useGlobalContext } from '@context'
 import { updateCardValues } from '../../../../api'
 import './AquaVitae.scss'
 
-const AquaVitae = ({
-    selectedCard,
-    setModificationInProgress,
-    setModificationComplete,
-}) => {
+const AquaVitae = ({ selectedCard, setModificationComplete }) => {
     const { getUserCards } = useGlobalContext()
 
     const [modValues, setModValues] = useState([])
-    const [selectedCardValues, setSelectedCardValues] = useState(
-        selectedCard.values
-    )
+    const [selectedCardValues, setSelectedCardValues] = useState([
+        ...selectedCard.values,
+    ])
     const [chosenValue, setChosenValue] = useState(null)
 
     let updatedCardValues = [...selectedCardValues]

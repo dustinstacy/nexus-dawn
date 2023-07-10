@@ -42,9 +42,6 @@ const Modifiers = ({
                             key={modifier}
                             selectedCard={selectedCard}
                             setModificationComplete={setModificationComplete}
-                            setModificationInProgress={
-                                setModificationInProgress
-                            }
                         />
                     )
                 )
