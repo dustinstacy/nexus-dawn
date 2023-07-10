@@ -1,3 +1,5 @@
+import { maxValues } from '@constants'
+
 // Helper function to generate a random integer within a specified range
 const randomIntFromInterval = (min, max) => {
     // + 1 ensures a returned integer in the inclusive range
@@ -11,19 +13,19 @@ const setValueLimits = (card) => {
 
     if (card.rarity === 'Common') {
         sumOfValues = randomIntFromInterval(6, 10)
-        maxSingleValue = 5
+        maxSingleValue = maxValues.Common
     } else if (card.rarity === 'Uncommon') {
         sumOfValues = randomIntFromInterval(10, 14)
-        maxSingleValue = 6
+        maxSingleValue = maxValues.Uncommon
     } else if (card.rarity === 'Rare') {
         sumOfValues = randomIntFromInterval(14, 18)
-        maxSingleValue = 7
+        maxSingleValue = maxValues.Rare
     } else if (card.rarity === 'Epic') {
         sumOfValues = randomIntFromInterval(18, 24)
-        maxSingleValue = 8
+        maxSingleValue = maxValues.Epic
     } else if (card.rarity === 'Legendary') {
         sumOfValues = randomIntFromInterval(24, 30)
-        maxSingleValue = 9
+        maxSingleValue = maxValues.Legendary
     }
 
     return { sumOfValues, maxSingleValue }
