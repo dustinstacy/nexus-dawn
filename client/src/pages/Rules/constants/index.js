@@ -88,7 +88,7 @@ export const howToPlay = [
                 title: 'Keeping Score -',
                 content: [
                     {
-                        line: `Each player will have a counter to keep track of how cumulative cards they
+                        line: `Each player will have a counter to keep track of how many cumulative cards they
                         have captured throughout the battle.`,
                     },
                     {
