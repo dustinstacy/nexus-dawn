@@ -16,7 +16,7 @@ const NavBar = ({ landing }) => {
     const { user } = useGlobalContext()
     const stage = user?.onboardingStage ?? {}
 
-    const logoClasses = classSet('navbar__logo', stage <= 6 && 'disabled')
+    const logoClasses = classSet('navbar__logo', stage <= 5 && 'disabled')
 
     return (
         <div className='navbar between background-gradient'>

@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useMemo } from 'react'
 
-import { Card } from '@components'
+import { CardList } from '@components'
 import { useGlobalContext } from '@context'
 
-import { CheckBox } from './components'
 import * as Sorters from '../../utils'
 import './CardCollection.scss'
 
@@ -38,14 +37,7 @@ const CardCollection = ({ deckFilter, rarityFilter, valueFilter }) => {
 
     return (
         <div className='card-collection start-column'>
-            <div className='card-list'>
-                {filteredCards?.map((card) => (
-                    <div key={card._id} className='card-container'>
-                        <Card card={card} isShowing />
-                        <CheckBox card={card} />
-                    </div>
-                ))}
-            </div>
+            <CardList cardArray={filteredCards} hasCheckbox />
         </div>
     )
 }

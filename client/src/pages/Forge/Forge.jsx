@@ -1,56 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import {
-    CardSelector,
-    ModifiedCard,
-    Modifiers,
-    ModificationSelector,
-} from './components'
+import { Button } from '@components'
+
+import { CardModification, FluxFusion } from './components'
 import './Forge.scss'
 
 const Forge = () => {
-    const [selectedCard, setSelectedCard] = useState(null)
-    const [selectedModification, setSelectedModification] = useState('-')
-    const [modificationInProgress, setModificationInProgress] = useState(false)
-    const [modificationComplete, setModificationComplete] = useState(false)
-
-    useEffect(() => {
-        if (modificationComplete) {
-            setModificationInProgress(false)
-        }
-    }, [modificationComplete])
+    const [cardModification, setCardModification] = useState(false)
+    const [fluxFusion, setFluxFusion] = useState(false)
 
     return (
-        <div className='forge page center'>
-            {!modificationInProgress && !modificationComplete && (
-                <div className='start-column'>
-                    <CardSelector
-                        selectedCard={selectedCard}
-                        setSelectedCard={setSelectedCard}
+        <div className='forge center'>
+            {!cardModification && !fluxFusion && (
+                <div className='forge__buttons center-column'>
+                    <Button
+                        label='Card Modification'
+                        onClick={() => setCardModification(true)}
                     />
-                    <ModificationSelector
-                        selectedCard={selectedCard}
-                        selectedModification={selectedModification}
-                        setSelectedModification={setSelectedModification}
-                        setModificationInProgress={setModificationInProgress}
+                    <Button
+                        label='Flux Fusion'
+                        onClick={() => setFluxFusion(true)}
                     />
                 </div>
             )}
-            {modificationInProgress && !modificationComplete && (
-                <Modifiers
-                    selectedCard={selectedCard}
-                    selectedModification={selectedModification}
-                    setModificationComplete={setModificationComplete}
-                    setModificationInProgress={setModificationInProgress}
-                />
+            {cardModification && (
+                <CardModification setCardModification={setCardModification} />
             )}
-            {modificationComplete && (
-                <ModifiedCard
-                    selectedCard={selectedCard}
-                    setModificationComplete={setModificationComplete}
-                    setSelectedCard={setSelectedCard}
-                />
-            )}
+            {fluxFusion && <FluxFusion setFluxFusion={setFluxFusion} />}
         </div>
     )
 }

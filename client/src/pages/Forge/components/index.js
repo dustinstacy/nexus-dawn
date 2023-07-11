@@ -1,6 +1,2 @@
-export { default as AquaPanel } from './AquaPanel/AquaPanel'
-export { default as CardSelector } from './CardSelector/CardSelector'
-export { default as FluxPanel } from './FluxPanel/FluxPanel'
-export { default as ModifiedCard } from './ModifiedCard/ModifiedCard'
-export { default as Modifiers } from './Modifiers/Modifiers'
-export { default as ModificationSelector } from './ModificationSelector/ModificationSelector'
+export { default as CardModification } from './CardModification/CardModification'
+export { default as FluxFusion } from './FluxFusion/FluxFusion'
