@@ -1,26 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { VscDebugRestart } from 'react-icons/vsc'
 
-import { Button, Card } from '@components'
-import { useGlobalContext } from '@context'
+import { Card } from '@components'
 import { maxValues } from '@constants'
 
-import { updateCardValues } from '../../../../api'
-import './AquaFortisSuperior.scss'
-
-const AquaFortisSuperior = ({ selectedCard, setModificationComplete }) => {
-    const { getUserCards } = useGlobalContext()
-
+const AquaFortisSuperior = ({
+    selectedCard,
+    selectedCardValues,
+    setSelectedCardValues,
+    setModificationInProgress,
+}) => {
     const [modValue, setModValue] = useState(
         selectedCard.values.reduce((total, current) => total + current)
-    )
-    const [selectedCardValues, setSelectedCardValues] = useState(
-        Array(4).fill(0)
     )
 
     const selectedCardMaxSingleValue = maxValues[selectedCard.rarity]
 
     let updatedCardValues = [...selectedCardValues]
     let updatedModValue = modValue
+
+    useEffect(() => {
+        setSelectedCardValues(Array(4).fill(''))
+    }, [])
 
     const cardValueClick = (value, i) => {
         if (modValue === 0) {
@@ -58,9 +60,20 @@ const AquaFortisSuperior = ({ selectedCard, setModificationComplete }) => {
     }
 
     return (
-        <div className='Fortis center fill'>
+        <div className='fortis center fill'>
             <div className='start-column'>
-                <div className='panel card-select center'>
+                <div className='mod-bar center'>
+                    <div className='value box center'>{modValue}</div>
+                </div>
+                <div className='mod-panel center'>
+                    <AiOutlineCloseCircle
+                        className='cancel'
+                        onClick={() => setModificationInProgress(false)}
+                    />
+                    <VscDebugRestart
+                        className='reset'
+                        onClick={() => reset()}
+                    />
                     <div className='selected-card center fill'>
                         <Card card={selectedCard} isShowing />
                     </div>
@@ -78,20 +91,6 @@ const AquaFortisSuperior = ({ selectedCard, setModificationComplete }) => {
                         </div>
                     ))}
                 </div>
-
-                <Button label='Reset' onClick={() => reset()} />
-                <Button
-                    label='Complete Modification'
-                    onClick={() => completeMod()}
-                    disabled={
-                        selectedCard.values.every(
-                            (value, index) => value === updatedCardValues[index]
-                        ) || modValue !== 0
-                    }
-                />
-            </div>
-            <div className='panel card-select value-bank center'>
-                <div className='value box center'>{modValue}</div>
             </div>
         </div>
     )

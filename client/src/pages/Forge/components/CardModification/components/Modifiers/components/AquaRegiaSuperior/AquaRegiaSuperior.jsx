@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Button, Card } from '@components'
-import { useGlobalContext } from '@context'
 
-import { updateCardValues } from '../../../../api'
-import './AquaRegiaSuperior.scss'
-
-const AquaRegiaSuperior = ({ selectedCard, setModificationComplete }) => {
-    const { getUserCards } = useGlobalContext()
-
-    const [selectedCardValues, setSelectedCardValues] = useState([
-        ...selectedCard.values,
-    ])
-
+const AquaRegiaSuperior = ({
+    selectedCard,
+    selectedCardValues,
+    setSelectedCardValues,
+    setModificationInProgress,
+}) => {
     let updatedCardValues = [...selectedCardValues]
 
     const rotateValues = () => {
@@ -31,10 +28,23 @@ const AquaRegiaSuperior = ({ selectedCard, setModificationComplete }) => {
     }
 
     return (
-        <div className='Regia center fill'>
+        <div className='regia center fill'>
             <div className='start-column'>
-                <Button label='Rotate Values' onClick={() => rotateValues()} />
-                <div className='panel card-select center'>
+                <div className='mod-bar center'>
+                    <Button
+                        label='Rotate Values'
+                        onClick={() => rotateValues()}
+                    />
+                </div>
+                <div className='mod-panel center'>
+                    <AiOutlineCloseCircle
+                        className='cancel'
+                        onClick={() => setModificationInProgress(false)}
+                    />
+                    <VscDebugRestart
+                        className='reset'
+                        onClick={() => reset()}
+                    />
                     <div className='selected-card center fill'>
                         <Card card={selectedCard} isShowing />
                     </div>
@@ -47,15 +57,6 @@ const AquaRegiaSuperior = ({ selectedCard, setModificationComplete }) => {
                         </div>
                     ))}
                 </div>
-
-                <Button label='Reset' onClick={() => reset()} />
-                <Button
-                    label='Complete Modification'
-                    onClick={() => completeMod()}
-                    disabled={selectedCard.values.every(
-                        (value, index) => value === updatedCardValues[index]
-                    )}
-                />
             </div>
         </div>
     )

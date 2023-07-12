@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { VscDebugRestart } from 'react-icons/vsc'
 
-import { Button, Card } from '@components'
-import { useGlobalContext } from '@context'
+import { Card } from '@components'
 
-import { updateCardValues } from '../../../../api'
-import './AquaVitaeSuperior.scss'
-
-const AquaVitaeSuperior = ({ selectedCard, setModificationComplete }) => {
-    const { getUserCards } = useGlobalContext()
-
-    const [modValues, setModValues] = useState([...selectedCard.values])
-    const [selectedCardValues, setSelectedCardValues] = useState(
-        Array(4).fill('')
-    )
+const AquaVitaeSuperior = ({
+    selectedCard,
+    selectedCardValues,
+    setSelectedCardValues,
+    setModificationInProgress,
+}) => {
+    const [modValues, setModValues] = useState([...selectedCardValues])
     const [chosenValue, setChosenValue] = useState(null)
 
     let updatedCardValues = [...selectedCardValues]
     let updatedModValues = [...modValues]
+
+    useEffect(() => {
+        setSelectedCardValues(Array(4).fill(''))
+    }, [])
 
     const cardValueClick = (value, i) => {
         if (value !== '') {
@@ -44,10 +46,17 @@ const AquaVitaeSuperior = ({ selectedCard, setModificationComplete }) => {
         updatedCardValues[i] = value
         setSelectedCardValues(updatedCardValues)
         removeModValue(value)
+        removeSelectedClass()
     }
 
-    const modValueClick = (value) => {
-        setChosenValue(value)
+    const modValueClick = (e, value) => {
+        if (chosenValue === null) {
+            e.target.classList.add('selected')
+            setChosenValue(value)
+        } else {
+            e.target.classList.remove('selected')
+            setChosenValue(null)
+        }
     }
 
     const removeModValue = (value) => {
@@ -58,10 +67,9 @@ const AquaVitaeSuperior = ({ selectedCard, setModificationComplete }) => {
         }
     }
 
-    const completeMod = async () => {
-        await updateCardValues(selectedCard, updatedCardValues)
-        await getUserCards()
-        setModificationComplete(true)
+    const removeSelectedClass = () => {
+        const selectedValue = document.querySelector('.selected')
+        selectedValue.classList.remove('selected')
     }
 
     const reset = () => {
@@ -73,42 +81,41 @@ const AquaVitaeSuperior = ({ selectedCard, setModificationComplete }) => {
     return (
         <div className='vitae center fill'>
             <div className='start-column'>
-                <div className='panel card-select center'>
+                <div className='mod-bar center'>
+                    {modValues?.map((value, i) => (
+                        <div
+                            key={value + i * 10}
+                            className='value box center'
+                            onClick={(e) => modValueClick(e, value)}
+                        >
+                            {value}
+                        </div>
+                    ))}
+                </div>
+                <div className='mod-panel center'>
+                    <AiOutlineCloseCircle
+                        className='cancel'
+                        onClick={() => setModificationInProgress(false)}
+                    />
+                    <VscDebugRestart
+                        className='reset'
+                        onClick={() => reset()}
+                    />
                     <div className='selected-card center fill'>
                         <Card card={selectedCard} isShowing />
                     </div>
                     {updatedCardValues?.map((value, i) => (
                         <div
                             key={value + i * 10}
-                            className={`value-${i} box center`}
+                            className={`value-${i} box center ${
+                                value !== '' && 'disabled'
+                            }`}
                             onClick={() => cardValueClick(value, i)}
                         >
                             {value}
                         </div>
                     ))}
                 </div>
-
-                <Button label='Reset' onClick={() => reset()} />
-                <Button
-                    label='Complete Modification'
-                    onClick={() => completeMod()}
-                    disabled={
-                        selectedCard.values.every(
-                            (value, index) => value === updatedCardValues[index]
-                        ) || modValues.length > 0
-                    }
-                />
-            </div>
-            <div className='panel card-select value-bank center'>
-                {modValues?.map((value, i) => (
-                    <div
-                        key={value + i * 10}
-                        className='value box center'
-                        onClick={() => modValueClick(value)}
-                    >
-                        {value}
-                    </div>
-                ))}
             </div>
         </div>
     )

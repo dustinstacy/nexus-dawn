@@ -4,8 +4,6 @@ import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Card } from '@components'
 
-import './AquaVitae.scss'
-
 const AquaVitae = ({
     selectedCard,
     selectedCardValues,
