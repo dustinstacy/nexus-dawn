@@ -95,14 +95,6 @@
         }
     }
 
-    .cost-bar {
-        height: 15vh;
-
-        .mod-cost {
-            height: 66%;
-        }
-    }
-
     .collection-display {
         height: 720px;
         width: 900px;
@@ -110,28 +102,6 @@
 
         .card {
             cursor: pointer;
-        }
-    }
-
-    .modifiers,
-    .flux {
-        height: 75vh;
-        width: 300px;
-        padding: 24px;
-        gap: 12px;
-
-        img {
-            width: 7vh;
-        }
-
-        .forge-item {
-            height: 10vh;
-            align-items: flex-end;
-            gap: 12px;
-
-            .count {
-                gap: 4px;
-            }
         }
     }
 

@@ -12,9 +12,9 @@ const ModificationSelector = ({
 }) => {
     const { allItems, user } = useGlobalContext()
 
-    const userModifiers = user?.inventory.filter(
-        (item) => item.type === 'modifier'
-    )
+    const userModifiers = user?.inventory
+        .filter((item) => item.type === 'modifier')
+        .sort((a, b) => a.level - b.level)
     const uniqueUserModifiers = uniqueItemsFilter(userModifiers)
     const modificationOptions = [
         '-',
