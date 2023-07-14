@@ -1,3 +1,8 @@
+// Helper function to simplify updating state objects
+export const updateState = (setState, updates) => {
+    setState((state) => ({ ...state, ...updates }))
+}
+
 // Combines multiple class names into a single string
 // and filters out any falsy values.
 export const classSet = (...classes) => {

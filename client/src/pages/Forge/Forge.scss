@@ -1,86 +1,18 @@
 .forge {
-    height: 100%;
+    min-height: 100vh;
     flex-direction: row !important;
     padding-top: var(--navbar-height);
     background: url('../../assets/page-images/forge.jpg');
     background-size: cover;
     background-position: top;
 
-    .card-select {
-        position: relative;
-        height: calc(45vh);
-        width: calc(45vh * 0.725);
+    &__buttons {
+        gap: 24px;
 
-        .unselect-card {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background-color: var(--primary-color);
-            border-radius: 50%;
-            color: var(--background2-color);
-            font-size: 36px;
-            z-index: 100;
-            cursor: pointer;
-
-            @media screen and (max-width: 600px) {
-                font-size: 32px;
-            }
-        }
-
-        .select-card {
-            cursor: pointer;
-
-            h1 {
-                font-size: 96px;
-                color: var(--primary-color);
-            }
-        }
-
-        .selected-card {
-            .card__values {
-                position: absolute;
-                top: -7.5vh;
-                left: -5vh;
-                right: -5vh;
-                height: 40vh;
-                font-size: 48px;
-
-                > * {
-                    background: none;
-                }
-            }
-        }
-    }
-
-    .collection-display {
-        height: 720px;
-        width: 900px;
-        overflow-y: auto;
-
-        .card {
-            cursor: pointer;
-        }
-    }
-
-    .modifiers,
-    .flux {
-        height: 75vh;
-        width: 300px;
-        padding: 24px;
-        gap: 12px;
-
-        img {
-            width: 7vh;
-        }
-
-        .forge-item {
-            height: 10vh;
-            align-items: flex-end;
-            gap: 12px;
-
-            .count {
-                gap: 4px;
-            }
+        .button {
+            width: 400px;
+            padding: 8px 0;
+            font-size: 24px;
         }
     }
 }

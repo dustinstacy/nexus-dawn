@@ -1,8 +1,3 @@
-// Helper function to simplify updating state
-export const updateState = (setState, updates) => {
-    setState((state) => ({ ...state, ...updates }))
-}
-
 export const shuffleCards = (decks) => {
     return decks.map((cards) => {
         let i = cards.length,
