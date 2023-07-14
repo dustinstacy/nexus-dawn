@@ -4,8 +4,13 @@ import { Card } from '@components'
 import { classSet } from '@utils'
 
 import { Score } from '../../components'
+<<<<<<< HEAD
 import { processStandardBattles } from '../../lib/logic'
 import { updateState } from '@utils'
+=======
+import { battleProcessor } from '../../lib/logic'
+import { updateState } from '../../utils'
+>>>>>>> main
 
 import { Cell } from './components'
 import turnArrow from './images/turnArrow.png'
@@ -48,7 +53,7 @@ const Board = ({
                 updatedBoard[index] = card
                 updateState(setPlayerOne, { hand: [...updatedHand] })
                 updateState(setBattleState, { board: [...updatedBoard] })
-                processStandardBattles(index, cardDragged, battleState)
+                battleProcessor(index, cardDragged, battleState)
             }
             updateScores()
         }
@@ -74,7 +79,7 @@ const Board = ({
                 updatedBoard[index] = card
                 updateState(setPlayerOne, { hand: [...updatedHand] })
                 updateState(setBattleState, { board: [...updatedBoard] })
-                processStandardBattles(index, cardSelected, battleState)
+                battleProcessor(index, cardSelected, battleState)
             }
             updateScores()
         }

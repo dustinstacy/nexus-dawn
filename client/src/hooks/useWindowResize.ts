@@ -12,8 +12,13 @@
  **/
 import { useState, useEffect } from 'react'
 
-const useWindowResize = () => {
-    const [dimensions, setDimensions] = useState({
+interface Dimensions {
+    height: number,
+    width: number
+}
+
+const useWindowResize = (): Dimensions => {
+    const [dimensions, setDimensions] = useState<Dimensions>({
         height: window.innerHeight,
         width: window.innerWidth,
     })

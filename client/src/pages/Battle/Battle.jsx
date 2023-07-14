@@ -7,8 +7,8 @@ import { useGlobalContext } from '@context'
 import { updateState } from '@utils'
 
 import { BattleResults, Board, Hand, RoundResult } from './components'
-import { assignColorsAndDealCards, shuffleCards } from './utils'
-import { processStandardBattles } from './lib/logic'
+import { assignColorsAndDealCards, shuffleCards, updateState } from './utils'
+import { battleProcessor } from './lib/logic'
 import { cpuMove } from './lib/ai'
 
 import './Battle.scss'
@@ -224,7 +224,7 @@ const Battle = () => {
             battleState.board,
             emptyCells
         )
-        processStandardBattles(move.cell, move.card, battleState)
+        battleProcessor(move.cell, move.card, battleState)
         updateState(setPlayerTwo, { hand: newHand })
         updateState(setBattleState, { board: newBoard })
         updateScores()

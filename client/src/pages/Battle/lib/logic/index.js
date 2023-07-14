@@ -1,1 +1,1 @@
-export { default as processStandardBattles } from './processStandardBattles'
+export { default as battleProcessor } from './battleProcessor'
