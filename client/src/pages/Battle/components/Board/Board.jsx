@@ -4,13 +4,8 @@ import { Card } from '@components'
 import { classSet } from '@utils'
 
 import { Score } from '../../components'
-<<<<<<< HEAD
-import { processStandardBattles } from '../../lib/logic'
-import { updateState } from '@utils'
-=======
 import { battleProcessor } from '../../lib/logic'
-import { updateState } from '../../utils'
->>>>>>> main
+import { updateState } from '@utils'
 
 import { Cell } from './components'
 import turnArrow from './images/turnArrow.png'
