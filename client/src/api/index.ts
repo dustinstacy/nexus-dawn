@@ -146,8 +146,6 @@ export const addCardToDeck = async (card: DeckCard) => {
 }
 
 export const addItemToInventory = async (user: User, item: Item) => {
-    console.log("1", Role.player)
-    console.log("2", user.role)
     let updatedInventory = [...user.inventory]
 
     if (Array.isArray(item)) {
@@ -162,7 +160,6 @@ export const addItemToInventory = async (user: User, item: Item) => {
 }
 
 export const deductCoin = async (user: User, amount: number) => {
-    console.log("user", user)
     const updatedCoin = user.coin - amount
     await axios.put('/api/profile/info', {
         coin: updatedCoin.toString(), // Explicitly set to string to account for 0
