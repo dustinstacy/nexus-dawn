@@ -181,7 +181,7 @@ describe('Test evaluation functions', async () => {
                     expect(target.captured).toBe(NULL)
                 } else {
                     expect(() => evaluate(target, activeColor, RULES_STD_LOW(), vals[0], vals[1])).toThrowError(
-                        /^evaluations: rules cannot be both stanard and low$/,
+                        /Evaluations: rules cannot be both standard and low/,
                     )
                 }
             })
