@@ -1,6 +1,6 @@
 import express from 'express'
 import { requiresAuth, requiresAdmin } from '../middleware/permissions.js'
-import CPUOpponent from '../models/CPUOpponent.js'
+import CPUOpponent from '../models/CPUOpponent.ts'
 
 const router = express.Router()
 

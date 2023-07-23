@@ -14,7 +14,7 @@ const BattleLogSchema = new Schema(
         },
     },
     {
-        timestamp: true,
+        timestamps: true,
     }
 )
 

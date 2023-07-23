@@ -8,7 +8,7 @@ import {
     checkForExistingEmail,
     checkForExistingUsername,
 } from '../validation/registerValidation.js'
-import User from '../models/User.js'
+import User from '../models/User.ts'
 
 const router = express.Router()
 

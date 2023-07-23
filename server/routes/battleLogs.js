@@ -1,5 +1,5 @@
 import express from 'express'
-import BattleLog from '../models/BattleLog.js'
+import BattleLog from '../models/BattleLog.ts'
 
 const router = express.Router()
 

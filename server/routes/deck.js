@@ -1,7 +1,7 @@
 import express from 'express'
 import { requiresAuth } from '../middleware/permissions.js'
-import Deck from '../models/Deck.js'
-import User from '../models/User.js'
+import Deck from '../models/Deck.ts'
+import User from '../models/User.ts'
 
 const router = express.Router()
 
