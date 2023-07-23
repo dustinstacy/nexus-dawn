@@ -4,8 +4,8 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "server": "nodemon server.js --ignore client",
-        "start": "node server.js"
+        "server": "nodemon server.ts --ignore client",
+        "start": "ts-node server.ts"
     },
     "keywords": [],
     "author": "",
