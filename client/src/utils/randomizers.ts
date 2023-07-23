@@ -144,6 +144,14 @@ export const assignRandomDeckValues = (
     )
 }
 
+interface Odds {
+    Common: number
+    Uncommon: number
+    Rare: number
+    Epic: number
+    Legendary: number
+}
+
 // nCards: Number of cards to return
 // odds: Object containing rarity names as keys and their corresponding
 // probabilities in float value (i.e. 83.1 = 83.1%)
@@ -172,19 +180,8 @@ export const getRandomCards = (
     return randomCardsArray
 }
 
-interface Odds {
-    Common: number
-    Uncommon: number
-    Rare: number
-    Epic: number
-    Legendary: number
-}
-
 // odds: See getRandomCards function
 export const randomRarity = (odds: Odds) => {
-    if (odds === undefined) {
-        throw new Error('Odds object is undefined.')
-    }
     // Generate a random number between 0(inclusive) and 1(exclusive)
     const num = Math.random()
     // Variable to track total odds percentage
