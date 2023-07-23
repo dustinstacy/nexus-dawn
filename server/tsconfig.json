@@ -1,20 +1,21 @@
 {
     "compilerOptions": {
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext",
-        "target": "ES2020",
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "Node",
         "esModuleInterop": true,
-        "rootDir": "./",
         "sourceMap": true,
         "outDir": "dist",
-        "noEmit": true,
         "strict": true,
         "allowJs": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
         "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "forceConsistentCasingInFileNames": true
+        "noEmit": true,
+        "allowSyntheticDefaultImports": true
     },
     "include": ["./**/*"],
+    "exclude": ["node_modules"],
     "ts-node": {
         "esm": true,
         "experimentalSpecifierResolution": "node"
