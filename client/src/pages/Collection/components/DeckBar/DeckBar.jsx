@@ -49,6 +49,7 @@ const DeckBar = () => {
         setFillDeckLoading(true)
         await optimizeDeck()
         setFillDeckLoading(false)
+        getCurrentUser()
     }
 
     // Removes all cards from the user's deck using an API request
@@ -57,11 +58,8 @@ const DeckBar = () => {
         setClearDeckLoading(true)
         await removeAllFromDeck(userDeck)
         setClearDeckLoading(false)
-    }
-
-    useEffect(() => {
         getCurrentUser()
-    }, [userDeckPower])
+    }
 
     // Determine the label for the fill deck button based on the fillDeckLoading state
     const fillDeckLabel = fillDeckLoading ? (
