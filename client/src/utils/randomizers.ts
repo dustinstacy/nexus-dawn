@@ -1,15 +1,33 @@
 import { maxValues } from '@constants'
 
 // Helper function to generate a random integer within a specified range
-const randomIntFromInterval = (min, max) => {
+const randomIntFromInterval = (min: number, max: number) => {
     // + 1 ensures a returned integer in the inclusive range
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+type CardValues = [number, number, number, number]
+
+interface Card {
+    name: string
+    number: number
+    image: string
+    rarity: string
+    empower: string
+    weaken: string
+    values: CardValues
+}
+
+interface ValueLimits {
+    sumOfValues: number
+    maxSingleValue: number
+}
+
 // Helper function to generate random sum of all 4 card values
 // and maximum value of any single value based on the card's rarity
-const setValueLimits = (card) => {
-    let sumOfValues, maxSingleValue
+const setValueLimits = (card: Card): ValueLimits => {
+    let sumOfValues = 0
+    let maxSingleValue = 0
 
     if (card.rarity === 'Common') {
         sumOfValues = randomIntFromInterval(6, 10)
@@ -32,7 +50,7 @@ const setValueLimits = (card) => {
 }
 
 // Generates random values for a card
-export const assignRandomCardValues = (card) => {
+export const assignRandomCardValues = (card: Card): CardValues => {
     // See setValueLimits()
     const { sumOfValues, maxSingleValue } = setValueLimits(card)
 
@@ -63,7 +81,7 @@ export const assignRandomCardValues = (card) => {
         sum - sumOfValues
     )
     // Assign randomly generated values to the card object's 'values' property
-    return (card.values = values)
+    return (card.values = values as CardValues)
 }
 
 // Assigns random values to all cards in a given deck,
@@ -71,7 +89,11 @@ export const assignRandomCardValues = (card) => {
 // deck: Array of card objects representing the deck.
 // minDeckValue: Minimum total sum of all card values allowed.
 // maxDeckValue: Maximum total sum of all card values allowed.
-export const assignRandomDeckValues = (deck, minDeckValue, maxDeckValue) => {
+export const assignRandomDeckValues = (
+    deck: Array<Card>,
+    minDeckValue: number,
+    maxDeckValue: number
+) => {
     // Variable to store the final calculated sum of all card values
     let finalValue = 0
     // Variable to store the scale factor for adjusting values
@@ -100,7 +122,9 @@ export const assignRandomDeckValues = (deck, minDeckValue, maxDeckValue) => {
         // Adjust the values based on the scale to bring total within closer
         // range of the desired outcome
         deck.forEach((card) => {
-            card.values = card.values.map((value) => Math.round(value * scale))
+            card.values = card.values.map((value) =>
+                Math.round(value * scale)
+            ) as CardValues
         })
 
         // Calculate the final sum of all card values in the deck
@@ -124,7 +148,11 @@ export const assignRandomDeckValues = (deck, minDeckValue, maxDeckValue) => {
 // odds: Object containing rarity names as keys and their corresponding
 // probabilities in float value (i.e. 83.1 = 83.1%)
 // cardSet: Array of cards from which random cards will be selected
-export const getRandomCards = (nCards, odds, cardSet) => {
+export const getRandomCards = (
+    nCards: number,
+    odds: Odds,
+    cardSet: Array<Card>
+): Array<Card> => {
     const randomCardsArray = [...new Array(nCards)]
     for (let i = 0; i < randomCardsArray.length; i++) {
         // Get random rarity based on odds
@@ -144,8 +172,19 @@ export const getRandomCards = (nCards, odds, cardSet) => {
     return randomCardsArray
 }
 
+interface Odds {
+    Common: number
+    Uncommon: number
+    Rare: number
+    Epic: number
+    Legendary: number
+}
+
 // odds: See getRandomCards function
-export const randomRarity = (odds) => {
+export const randomRarity = (odds: Odds) => {
+    if (odds === undefined) {
+        throw new Error('Odds object is undefined.')
+    }
     // Generate a random number between 0(inclusive) and 1(exclusive)
     const num = Math.random()
     // Variable to track total odds percentage
@@ -153,7 +192,7 @@ export const randomRarity = (odds) => {
     // Calculate the total odds percentage from the object values
     // Suggested total = 100.0
     for (const rarity in odds) {
-        totalPercentage += odds[rarity]
+        totalPercentage += odds[rarity as keyof Odds]
     }
     // Variable to track the cumulative percentage
     let cumulativePercentage = 0
@@ -161,7 +200,7 @@ export const randomRarity = (odds) => {
     for (const rarity in odds) {
         // Calculate the normalized percentage
         // normalized percentage = number between 0 and 1
-        const percentage = odds[rarity] / totalPercentage
+        const percentage = odds[rarity as keyof Odds] / totalPercentage
         // Accumulate the normalized percentage
         cumulativePercentage += percentage
         // Check if the generated random number falls within the

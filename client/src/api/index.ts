@@ -23,103 +23,103 @@ enum Rarity {
 }
 
 interface PlayerDetails {
-    user: User,
-    name: string,
-    deck: Array<CardLog>,
-    hand: Array<CardLog>,
-    roundScore: number,
+    user: User
+    name: string
+    deck: Array<CardLog>
+    hand: Array<CardLog>
+    roundScore: number
     battleScore: number
 }
 
 interface User {
-    stats: Stats,
-    _id: string,
-    role: Role,
-    username: string,
-    activeBattle: Boolean,
-    coin: number,
-    color: string,
-    createdAt: string,
-    email: string,
-    image: string,
-    inventory: Array<Item>,
-    level: number,
-    onboardingStage: number,
-    xp: number,
+    stats: Stats
+    _id: string
+    role: Role
+    username: string
+    activeBattle: Boolean
+    coin: number
+    color: string
+    createdAt: string
+    email: string
+    image: string
+    inventory: Array<Item>
+    level: number
+    onboardingStage: number
+    xp: number
     __v: string
 }
 
 interface Stats {
-    battles: number,
-    draws: number,
-    losses: number,
+    battles: number
+    draws: number
+    losses: number
     wins: number
 }
 
 interface Item {
-    contents: ItemContents,
-    image: string,
-    info: string,
-    level: number,
-    name: string,
-    price: number,
-    type: string,
+    contents: ItemContents
+    image: string
+    info: string
+    level: number
+    name: string
+    price: number
+    type: string
     _id: string
 }
 
 interface ItemContents {
-    count: number,
+    count: number
     odds: any
 }
 
 interface BaseCard {
-    image: string,
-    values: CardValues,
+    image: string
+    values: CardValues
 }
 
 export interface CardData extends BaseCard {
-    name: string,
-    number: string,
-    rarity: Rarity,
-    empower?: any,
-    weaken?: any,
+    name: string
+    number: string
+    rarity: Rarity
+    empower?: any
+    weaken?: any
 }
 
 export interface CardLog extends BaseCard {
-    _id: string,
-    color: string,
+    _id: string
+    color: string
 }
 
 export interface DeckCard extends CardLog {
-    enemiesConverted: number,
-    level: number,
-    rarity: Rarity,
-    selected: boolean,
-    timesPlayed: number,
-    xp: number,
+    enemiesConverted: number
+    level: number
+    rarity: Rarity
+    selected: boolean
+    timesPlayed: number
+    xp: number
 }
 
 interface RoundResults {
-    round: number,
-    p1Score: number,
+    round: number
+    p1Score: number
     p2Score: number
 }
 
 interface BattleLog {
-    playerOne: PlayerDetails,
-    playerTwo: PlayerDetails,
-    battleState: BattleState,
+    playerOne: PlayerDetails
+    playerTwo: PlayerDetails
+    battleState: BattleState
 }
 
 interface BattleState {
-    board: Array<any>,
-    decksShuffled: boolean,
-    handsDealt: boolean,
-    battleStarted: boolean,
-    round: number,
-    isP1Turn: boolean,
-    roundOver: boolean,
-    roundResults: Array<RoundResults>,
+    board: Array<any>
+    decksShuffled: boolean
+    handsDealt: boolean
+    battleStarted: boolean
+    round: number
+    isP1Turn: boolean
+    roundOver: boolean
+    roundResults: Array<RoundResults>
     battleOver: boolean
 }
 
@@ -173,13 +173,16 @@ export const removeCardFromDeck = async (card: DeckCard) => {
 }
 
 export const removeItemFromInventory = async (user: User, item: Item) => {
-    removeObjectByValue(user.inventory, 'name', item.name)
+    removeObjectByValue(user.inventory, item.name)
     await axios.put('/api/profile/inventory', {
         inventory: user.inventory,
     })
 }
 
-export const updateUserInfo = async <T extends keyof User>(property: T, value: any) => {
+export const updateUserInfo = async <T extends keyof User>(
+    property: T,
+    value: any
+) => {
     try {
         await axios.put('./api/profile/info', {
             [property]: value,
@@ -223,7 +226,9 @@ export const postBattleLog = async (battleLog: BattleLog) => {
 
 // Get current battle number
 export const getCurrentBattleNumber = async (): Promise<number> => {
-    const response: AxiosResponse = await axios.get('/api/battleLogs/battleNumber')
+    const response: AxiosResponse = await axios.get(
+        '/api/battleLogs/battleNumber'
+    )
     const battleNumber = response.data.battleNumber
     return battleNumber
 }
