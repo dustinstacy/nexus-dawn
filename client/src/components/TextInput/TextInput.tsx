@@ -11,7 +11,7 @@ interface TextInputProps {
     value: string
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
     loading: boolean
-    autofocus: boolean
+    autofocus?: boolean
 }
 
 // A reusable component that represents a text input field with optional password visibility toggle.

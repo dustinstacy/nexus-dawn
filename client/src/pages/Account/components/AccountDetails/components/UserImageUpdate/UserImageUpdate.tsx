@@ -14,7 +14,7 @@ const UserImageUpdate = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setError('') // Clear any previous errors
         setNewUserImage(e.target.value)
     }
@@ -24,7 +24,7 @@ const UserImageUpdate = () => {
             await validateURL(newUserImage)
             await updateUserInfo('image', newUserImage)
             await getCurrentUser()
-        } catch (error) {
+        } catch (error: any) {
             setError(error.message) // Set the error message for display
         } finally {
             setLoading(false)

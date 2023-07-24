@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { addCoin, addExperience } from '@api'
 import { Button, TextInput } from '@components'
 import { useGlobalContext } from '@context'
+import { User } from 'src/global.interfaces'
 
 import { checkPromoCode } from './utils'
 import './PromoCode.scss'
@@ -14,19 +15,19 @@ const PromoCode = () => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setError('') // Clear any previous errors
         setPromoCode(e.target.value)
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
         setLoading(true)
         try {
             await checkPromoCode(promoCode)
-            await addCoin(user, 1000000)
-            await addExperience(user, 100000)
+            await addCoin(user as User, 1000000)
+            await addExperience(user as User, 100000)
             await getCurrentUser() // Refresh user data after updating
-        } catch (error) {
+        } catch (error: any) {
             setError(error.message) // Set the error message for display
         } finally {
             setLoading(false)
