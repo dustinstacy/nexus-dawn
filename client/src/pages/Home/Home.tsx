@@ -7,22 +7,23 @@ import { classSet } from '@utils'
 
 import { mainPanels, subPanels } from './constants'
 import './Home.scss'
+import { User } from 'src/global.interfaces'
 
 const Home = () => {
     const { user } = useGlobalContext()
     const stage = user?.onboardingStage ?? {}
 
-    const linkClasses = (className, type) =>
+    const linkClasses = (className: string, type: string) =>
         classSet(
             `${className}-${type}`,
             'panel',
             'start-column',
-            !user && 'disabled'
+            !user ? 'disabled' : ''
         )
 
     return (
         <>
-            {stage <= 5 && <Onboarding />}
+            {(stage as number) <= 5 && <Onboarding />}
 
             <div className='home page start'>
                 <div className='home-wrapper '>
@@ -37,7 +38,7 @@ const Home = () => {
                         </NavLink>
                     ))}
                     <div className='subs start-column'>
-                        {subPanels(user).map((panel) => (
+                        {subPanels(user as User).map((panel) => (
                             <NavLink
                                 key={panel.className}
                                 to={panel.to}
