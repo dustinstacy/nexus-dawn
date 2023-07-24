@@ -1,4 +1,27 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model, Document } from 'mongoose'
+
+export interface IUser extends Document {
+    role: string
+    username: string
+    email: string
+    password: string
+    image: string
+    color: string
+    level: number
+    xp: number
+    stats: {
+        battles: number
+        wins: number
+        losses: number
+        draws: number
+    }
+    activeBattle: boolean
+    coin: number
+    inventory: any[] // Replace 'any' with the specific type of items in the inventory, if known
+    onboardingStage: number
+    createdAt: Date
+    updatedAt: Date
+}
 
 const UserSchema = new Schema(
     {
@@ -74,6 +97,6 @@ const UserSchema = new Schema(
 )
 
 // export the model
-const User = model('User', UserSchema)
+const User = model<IUser>('User', UserSchema)
 
 export default User

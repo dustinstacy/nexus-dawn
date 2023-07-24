@@ -1,14 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
-import User from '../models/User.js'
+import User, { IUser } from '../models/User.js'
 import jwt, { Secret } from 'jsonwebtoken'
-import { UserInterface } from '../global.interface.js'
+import { UserToReturn } from '../global.interface.js'
 
 interface DecodedToken {
     userId: string
-}
-
-interface UserToReturn extends Omit<UserInterface, 'password'> {
-    password?: string
 }
 
 export const requiresAuth = async (
@@ -29,12 +25,12 @@ export const requiresAuth = async (
                 token,
                 process.env.JWT_SECRET as Secret
             ) as DecodedToken
-            const user = (await User.findById(userId)) as UserInterface
+            const user = await User.findById(userId)
 
             if (user) {
-                const userToReturn: UserToReturn = { ...user._doc }
+                const userToReturn = { ...user.toJSON() } as UserToReturn
                 delete userToReturn.password
-                req.user = userToReturn as UserInterface
+                req.user = userToReturn as IUser
                 isAuthed = true
             }
         } catch {
@@ -55,9 +51,9 @@ export const requiresAdmin = async (
     next: NextFunction
 ) => {
     try {
-        const user = req.user as UserInterface
+        const user = req.user as IUser
 
-        if (user.role === 'admin') {
+        if (user?.role === 'admin') {
             return next()
         } else {
             return res.status(403).json({ error: 'Forbidden' }) // User is not authorized as an admin
@@ -65,4 +61,17 @@ export const requiresAdmin = async (
     } catch (error) {
         next(error)
     }
+}
+
+// Type guard function to check if 'req.user' is defined and has IUser type
+function hasUser(req: Request): req is Request & { user: IUser } {
+    return !!req.user && req.user instanceof User
+}
+
+// Custom middleware to check if 'req.user' is defined and has IUser type
+export function checkUser(req: Request, res: Response, next: NextFunction) {
+    if (!hasUser(req)) {
+        return res.status(404).json({ error: 'User not found' })
+    }
+    next()
 }
