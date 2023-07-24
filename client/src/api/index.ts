@@ -4,6 +4,7 @@ import {
     BattleLog,
     CardData,
     DeckCard,
+    ICard,
     Item,
     User,
 } from 'src/global.interfaces'
@@ -31,7 +32,7 @@ export const addCoin = async (user: User, amount: number) => {
 }
 
 // Mark card as selected and add card to user's deck
-export const addCardToDeck = async (card: DeckCard) => {
+export const addCardToDeck = async (card: ICard) => {
     await axios.put(`/api/deck/add`, card)
     await axios.put(`/api/collection/${card._id}/select`)
 }

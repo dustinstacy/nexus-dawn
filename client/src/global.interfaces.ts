@@ -35,7 +35,7 @@ interface BaseCard {
     values: CardValues
 }
 
-enum Rarity {
+export enum Rarity {
     Common = 'Common',
     Uncommon = 'Uncommon',
     Rare = 'Rare',
@@ -52,21 +52,23 @@ export interface CardData extends BaseCard {
 }
 
 export interface CardLog extends BaseCard {
-    _id: string
-    color: string
+    _id?: string
+    color?: string
 }
 
 export interface DeckCard extends CardLog {
-    enemiesConverted: number
-    level: number
+    enemiesConverted?: number
+    level?: number
     rarity: string
-    selected: boolean
-    timesPlayed: number
-    xp: number
+    selected?: boolean
+    timesPlayed?: number
+    xp?: number
+    empower?: any
+    weaken?: any
 }
 
 export interface ICard extends CardData, DeckCard {
-    captured: boolean | null
+    captured?: boolean | null
 }
 
 export interface Item {

@@ -21,9 +21,6 @@ const Collection = () => {
     const [rarityFilter, setRarityFilter] = useState('')
     const [valueFilter, setValueFilter] = useState('Total')
 
-    // Calculate sum of all card values in user's deck
-    const userDeckPower = calculateDeckPower(userDeck)
-
     useEffect(() => {
         getCurrentUser()
     }, [])
@@ -41,21 +38,21 @@ const Collection = () => {
                 <Filter
                     label='Cards Filter'
                     value={deckFilter}
-                    setValue={setDeckFilter}
+                    setValue={() => setDeckFilter}
                     options={deckOptions}
                     id='deck-filter'
                 />
                 <Filter
                     label='Rarity Filter'
                     value={rarityFilter}
-                    setValue={setRarityFilter}
+                    setValue={() => setRarityFilter}
                     options={rarityOptions}
                     id='rarity-filter'
                 />
                 <Filter
                     label='Value Filter'
                     value={valueFilter}
-                    setValue={setValueFilter}
+                    setValue={() => setValueFilter}
                     options={valueOptions}
                     selectedOption='Total'
                     id='value=filter'

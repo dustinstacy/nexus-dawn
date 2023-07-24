@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { TbPlayCard } from 'react-icons/tb'
 
 import { Avatar, ExperienceBar } from '@components'

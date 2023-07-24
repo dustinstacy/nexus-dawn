@@ -1,19 +1,30 @@
-import React, { useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { CardList } from '@components'
 import { useGlobalContext } from '@context'
 
 import * as Sorters from '../../utils'
 import './CardCollection.scss'
+import { User } from 'src/global.interfaces'
+
+interface CardCollectionProps {
+    deckFilter: string
+    rarityFilter: string
+    valueFilter: string
+}
 
 // Renders all of the user's cards and provides options to filter them out
-const CardCollection = ({ deckFilter, rarityFilter, valueFilter }) => {
+const CardCollection = ({
+    deckFilter,
+    rarityFilter,
+    valueFilter,
+}: CardCollectionProps) => {
     const { user, userCards, userDeck } = useGlobalContext()
 
     // Applies filters to the user's cards based on the selected filter options
     const filteredCards = useMemo(() => {
         userCards.forEach((card) => {
-            card.color = user.color
+            card.color = user?.color
         })
         let filtered = Sorters.sortByCardNumber(userCards)
         if (deckFilter === 'In Deck') {

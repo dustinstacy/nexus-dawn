@@ -6,6 +6,7 @@ interface FilterProps {
     setValue: (value: string | number) => void
     options: Array<string | number>
     id: string
+    selectedOption?: string
 }
 
 // Dropdown filter component that allows selection from multiple options to set a state value

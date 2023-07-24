@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { ThreeCircles } from 'react-loader-spinner'
 
 import { addCardToDeck, removeCardFromDeck } from '@api'
 import { Filter, Button } from '@components'
 import { useGlobalContext } from '@context'
 import { calculateDeckPower, calculateOptimizedDeck } from '@utils'
+import { ICard } from 'src/global.interfaces'
 
 import { removeAllFromDeck } from './api'
 import './DeckBar.scss'
@@ -25,17 +26,19 @@ const DeckBar = () => {
     const userOptimizedDeckPower = calculateDeckPower(userOptimizedDeck)
 
     const optimizeDeck = async () => {
-        userDeck.forEach((card) => {
+        userDeck.forEach((card: ICard) => {
             if (
                 !userOptimizedDeck.some(
-                    (optimizedCard) => optimizedCard._id === card._id
+                    (optimizedCard: ICard) => optimizedCard._id === card._id
                 )
             ) {
                 removeCardFromDeck(card)
             }
         })
-        userOptimizedDeck.forEach((optimizedCard) => {
-            if (!userDeck.some((card) => card._id === optimizedCard._id)) {
+        userOptimizedDeck.forEach((optimizedCard: ICard) => {
+            if (
+                !userDeck.some((card: ICard) => card._id === optimizedCard._id)
+            ) {
                 addCardToDeck(optimizedCard)
             }
         })
@@ -85,7 +88,7 @@ const DeckBar = () => {
         'Clear Deck'
     )
 
-    const optimizedDeckCountOptions = ['15', userCards?.length > 25 && '25']
+    const optimizedDeckCountOptions = ['15', userCards?.length > 25 ? '25' : '']
 
     return (
         <div className='deck center-column'>
@@ -105,14 +108,15 @@ const DeckBar = () => {
             <div className='section center'>
                 <div className='optimize-deck center'>
                     <Filter
+                        id='cardCount'
                         label='Card Count'
                         value={deckCount}
-                        setValue={setDeckCount}
+                        setValue={() => setDeckCount}
                         options={optimizedDeckCountOptions}
                     />
                     <Button
                         onClick={autoBuild}
-                        label={fillDeckLabel}
+                        label={fillDeckLabel as string}
                         disabled={
                             userDeckPower === userOptimizedDeckPower ||
                             fillDeckLoading ||
@@ -122,7 +126,7 @@ const DeckBar = () => {
                 </div>
                 <Button
                     onClick={emptyDeck}
-                    label={clearDeckLabel}
+                    label={clearDeckLabel as string}
                     disabled={clearDeckLoading || fillDeckLoading}
                 />
             </div>
