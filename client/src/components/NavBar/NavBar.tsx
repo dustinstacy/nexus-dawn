@@ -8,15 +8,22 @@ import { classSet } from '@utils'
 import { BurgerMenu, Links, UserSection } from './components'
 import './NavBar.scss'
 
+interface NavBarProps {
+    landing: boolean
+}
+
 // Renders navigation Bar component that includes page links and user information
 // Renders a login button based on the value of the `landing` prop
-const NavBar = ({ landing }) => {
+const NavBar = ({ landing }: NavBarProps) => {
     const navigate = useNavigate()
 
     const { user } = useGlobalContext()
     const stage = user?.onboardingStage ?? {}
 
-    const logoClasses = classSet('navbar__logo', stage <= 5 && 'disabled')
+    const logoClasses = classSet(
+        'navbar__logo',
+        (stage as number) <= 5 ? 'disabled' : ''
+    )
 
     return (
         <div className='navbar between background-gradient'>

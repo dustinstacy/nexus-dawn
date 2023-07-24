@@ -24,6 +24,7 @@
             "@context": ["src/context/GlobalContext"],
             "@hooks": ["src/hooks/"],
             "@pages": ["src/pages"],
+            "@randomizers": ["src/utils/randomizers"],
             "@utils": ["src/utils"]
         }
     },

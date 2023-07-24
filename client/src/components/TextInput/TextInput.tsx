@@ -1,10 +1,18 @@
-import React from 'react'
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 import { useToggle } from '@hooks'
 import { classSet } from '@utils'
 
 import './TextInput.scss'
+
+interface TextInputProps {
+    label: string
+    name: string
+    value: string
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    loading: boolean
+    autofocus: boolean
+}
 
 // A reusable component that represents a text input field with optional password visibility toggle.
 // label: The label text for the input field.
@@ -13,7 +21,14 @@ import './TextInput.scss'
 // onChange: The event handler function for the onChange event.
 // loading: Indicates whether the input field is in a loading state.
 // autofocus: Indicates whether the input field should be autofocused.
-const TextInput = ({ label, name, value, onChange, loading, autofocus }) => {
+const TextInput = ({
+    label,
+    name,
+    value,
+    onChange,
+    loading,
+    autofocus,
+}: TextInputProps) => {
     const [passwordVisible, togglePasswordVisible] = useToggle()
     const isPasswordInput = label.includes('Password')
 

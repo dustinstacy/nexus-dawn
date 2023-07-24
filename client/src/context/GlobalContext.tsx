@@ -6,21 +6,30 @@ import React, {
     useReducer,
 } from 'react'
 import axios from 'axios'
+import { User } from 'src/global.interfaces'
 
 //****** return to declare arrays when global interface is set up *******//
 interface State {
-    user: object | null // User | null
+    user: User | null
     fetchingUser: boolean
     userCards: any[] // Array<Card>
     userDeck: any[] // Array<Card>
     allCards: any[] // Array<Card>
     allItems: any[] // Array<Item>
     allOpponents: any[] // Array<Opponent>
+    getGlobalState: () => Promise<void>
+    getCurrentUser: () => Promise<void>
+    getUserCards: () => Promise<void>
+    getUserDeck: () => Promise<void>
+    getAllCards: () => Promise<void>
+    getAllItems: () => Promise<void>
+    getAllOpponents: () => Promise<void>
+    logout: () => Promise<void>
 }
 
 // Adjust payloads when state types are updated //
 type Action =
-    | { type: 'SET_USER'; payload: object }
+    | { type: 'SET_USER'; payload: User }
     | { type: 'RESET_USER' }
     | { type: 'SET_USER_CARDS'; payload: any[] }
     | { type: 'SET_USER_DECK'; payload: any[] }
@@ -36,6 +45,14 @@ const initialState: State = {
     allCards: [],
     allItems: [],
     allOpponents: [],
+    getGlobalState: async () => {},
+    getCurrentUser: async () => {},
+    getUserCards: async () => {},
+    getUserDeck: async () => {},
+    getAllCards: async () => {},
+    getAllItems: async () => {},
+    getAllOpponents: async () => {},
+    logout: async () => {},
 }
 
 const globalReducer = (state: State, action: Action) => {

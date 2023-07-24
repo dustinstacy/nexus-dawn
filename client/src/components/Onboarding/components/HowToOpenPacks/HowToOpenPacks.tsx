@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { addCardToCollection } from '@api'
 import { smlogo } from '@assets'
@@ -6,13 +6,15 @@ import { Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
 import { useToggle } from '@hooks'
 import { createCardData } from '@utils'
-import { getRandomCards, assignRandomCardValues } from '@utils/randomizers'
+import { getRandomCards, assignRandomCardValues } from '@randomizers'
+import { NextStage } from 'src/global.interfaces'
 
 import { onboardingStages } from '../../constants'
 import { packOdds, openPack, cardValues } from '../../images'
+
 import './HowToOpenPacks.scss'
 
-const HowToOpenPacks = ({ nextStage }) => {
+const HowToOpenPacks = ({ nextStage }: NextStage) => {
     const { allCards, user, userCards } = useGlobalContext()
     const stage = user?.onboardingStage
     const [step, setStep] = useState(1)

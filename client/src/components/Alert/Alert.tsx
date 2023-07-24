@@ -1,10 +1,10 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import { ModalOverlay } from '@components'
 
 import './Alert.scss'
 
 // Component that alerts the user to an unfinished battle and provides options to continue or forfeit.
-const Alert = ({ children }) => {
+const Alert = ({ children }: { children: ReactNode }) => {
     return (
         <ModalOverlay>
             <div className='alert box center-column'>

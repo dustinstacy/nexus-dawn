@@ -2,44 +2,61 @@ import React, { useRef } from 'react'
 
 import { cardback } from '@assets'
 import { classSet } from '@utils'
+import { ICard } from 'src/global.interfaces'
 
 import './Card.scss'
 
+interface CardProps {
+    card: ICard
+    isDraggable?: boolean
+    isDragged?: boolean
+    isShowing?: boolean
+    isSelected?: boolean
+    handleClick?: (e: React.MouseEvent<HTMLDivElement>, card: ICard) => void
+    setCardDragged?: (card: ICard | null) => void
+}
+
 const Card = ({
     card,
-    handleClick,
     isDraggable,
     isDragged,
     isShowing,
     isSelected,
+    handleClick,
     setCardDragged,
-}) => {
+}: CardProps) => {
     const { captured, color, _id, image, values } = card || {}
 
     const defaultColor = `rgb(3, 48, 59)`
 
     const cardClasses = classSet(
         'card',
-        captured && 'captured',
-        isDragged && 'is-dragged',
-        isShowing && 'is-showing',
-        isSelected && 'is-selected'
+        captured ? 'captured' : '',
+        isDragged ? 'is-dragged' : '',
+        isShowing ? 'is-showing' : '',
+        isSelected ? 'is-selected' : ''
     )
 
-    const dragImageRef = useRef(null)
+    const dragImageRef = useRef<HTMLDivElement>(null)
 
-    const handleDragStart = (e, card) => {
-        const dragImage = dragImageRef.current
-        setCardDragged(card)
+    const handleDragStart = (
+        e: React.DragEvent<HTMLDivElement>,
+        card: ICard
+    ) => {
+        const dragImage = dragImageRef.current as HTMLDivElement
+        setCardDragged?.(card)
+
+        // Make sure the event target is an HTML element before calling getBoundingClientRect
+        const targetElement = e.currentTarget as HTMLDivElement
 
         // Position the drag image at the center of the mouse cursor
-        const offsetX = e.clientX - e.target.getBoundingClientRect().left
-        const offsetY = e.clientY - e.target.getBoundingClientRect().top
+        const offsetX = e.clientX - targetElement.getBoundingClientRect().left
+        const offsetY = e.clientY - targetElement.getBoundingClientRect().top
         e.dataTransfer.setDragImage(dragImage, offsetX, offsetY)
     }
 
-    const handleDragEnd = (e) => {
-        setCardDragged(null)
+    const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+        setCardDragged?.(null)
     }
 
     return (
@@ -47,7 +64,7 @@ const Card = ({
             className={cardClasses}
             id={_id}
             draggable={isDraggable}
-            onClick={(e) => handleClick(e, card)}
+            onClick={(e) => handleClick?.(e, card)}
             onDragStart={(e) => handleDragStart(e, card)}
             onDragEnd={(e) => handleDragEnd(e)}
         >

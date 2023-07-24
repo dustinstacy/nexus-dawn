@@ -13,6 +13,7 @@ export default defineConfig({
             '@context': path.resolve(__dirname, 'src/context/GlobalContext'),
             '@hooks': path.resolve(__dirname, 'src/hooks/'),
             '@pages': path.resolve(__dirname, 'src/pages'),
+            '@randomizers': path.resolve(__dirname, 'src/utils/randomizers'),
             '@utils': path.resolve(__dirname, 'src/utils'),
         },
     },

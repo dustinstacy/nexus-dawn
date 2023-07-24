@@ -145,11 +145,11 @@ export const assignRandomDeckValues = (
 }
 
 interface Odds {
-    Common: number
-    Uncommon: number
-    Rare: number
-    Epic: number
-    Legendary: number
+    Common?: number
+    Uncommon?: number
+    Rare?: number
+    Epic?: number
+    Legendary?: number
 }
 
 // nCards: Number of cards to return
@@ -189,7 +189,7 @@ export const randomRarity = (odds: Odds) => {
     // Calculate the total odds percentage from the object values
     // Suggested total = 100.0
     for (const rarity in odds) {
-        totalPercentage += odds[rarity as keyof Odds]
+        totalPercentage += odds[rarity as keyof Odds]!
     }
     // Variable to track the cumulative percentage
     let cumulativePercentage = 0
@@ -197,7 +197,7 @@ export const randomRarity = (odds: Odds) => {
     for (const rarity in odds) {
         // Calculate the normalized percentage
         // normalized percentage = number between 0 and 1
-        const percentage = odds[rarity as keyof Odds] / totalPercentage
+        const percentage = odds[rarity as keyof Odds]! / totalPercentage
         // Accumulate the normalized percentage
         cumulativePercentage += percentage
         // Check if the generated random number falls within the

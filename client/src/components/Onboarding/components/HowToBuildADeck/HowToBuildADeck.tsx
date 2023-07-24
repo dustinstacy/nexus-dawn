@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
 import { useToggle } from '@hooks'
+import { NextStage } from 'src/global.interfaces'
 
 import { onboardingStages } from '../../constants'
 import { checkbox, optimizeDeck } from '../../images'
 
 import './HowToBuildADeck.scss'
 
-const HowToBuildADeck = ({ nextStage }) => {
+const HowToBuildADeck = ({ nextStage }: NextStage) => {
     const { user, userDeck } = useGlobalContext()
     const stage = user?.onboardingStage
     const [step, setStep] = useState(1)

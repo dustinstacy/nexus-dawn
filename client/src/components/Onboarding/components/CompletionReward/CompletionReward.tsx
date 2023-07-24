@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
+import { NextStage } from 'src/global.interfaces'
 
 import { onboardingStages } from '../../constants'
 
 import './CompletionReward.scss'
 
-const CompletionReward = ({ nextStage }) => {
+const CompletionReward = ({ nextStage }: NextStage) => {
     const { allItems } = useGlobalContext()
     const [step, setStep] = useState(1)
     const rarePack = allItems.find((item) => item.name === 'Rare Pack')

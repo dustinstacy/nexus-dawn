@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useGlobalContext } from '@context'
@@ -13,6 +13,7 @@ import {
     CompletionReward,
 } from './components'
 import './Onboarding.scss'
+import { User } from 'src/global.interfaces'
 
 const Onboarding = () => {
     const navigate = useNavigate()
@@ -39,9 +40,9 @@ const Onboarding = () => {
     }, [, stage])
 
     // Advances the user to next onboarding stage
-    const nextStage = async (path) => {
+    const nextStage = async (path: string) => {
         try {
-            await incrementOnboardingStage(user)
+            await incrementOnboardingStage(user as User)
             await getCurrentUser()
             path && navigate(`${path}`)
         } catch (error) {
@@ -51,12 +52,12 @@ const Onboarding = () => {
 
     return (
         <>
-            {stage === 0 && <Introduction nextStage={nextStage} />}
-            {stage === 1 && <HowToGetCards nextStage={nextStage} />}
-            {stage === 2 && <HowToOpenPacks nextStage={nextStage} />}
-            {stage === 3 && <HowToBuildADeck nextStage={nextStage} />}
-            {stage === 4 && <HowToPlay nextStage={nextStage} />}
-            {stage === 5 && <CompletionReward nextStage={nextStage} />}
+            {stage === 0 && <Introduction nextStage={() => nextStage} />}
+            {stage === 1 && <HowToGetCards nextStage={() => nextStage} />}
+            {stage === 2 && <HowToOpenPacks nextStage={() => nextStage} />}
+            {stage === 3 && <HowToBuildADeck nextStage={() => nextStage} />}
+            {stage === 4 && <HowToPlay nextStage={() => nextStage} />}
+            {stage === 5 && <CompletionReward nextStage={() => nextStage} />}
         </>
     )
 }
