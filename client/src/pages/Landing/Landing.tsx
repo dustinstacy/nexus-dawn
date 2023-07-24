@@ -5,12 +5,13 @@ import { logo } from '@assets'
 import { NavBar } from '@components'
 import { useGlobalContext } from '@context'
 import { useWindowResize } from '@hooks'
+import { Register } from 'src/global.interfaces'
 
 import { AuthForm } from './components'
 import './Landing.scss'
 
 // Displays login of registration form based on the value of the register prop
-const Landing = ({ register }) => {
+const Landing = ({ register }: Register) => {
     const { user } = useGlobalContext()
     const { height, width } = useWindowResize()
     const navigate = useNavigate()

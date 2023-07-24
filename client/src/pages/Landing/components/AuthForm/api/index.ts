@@ -1,7 +1,11 @@
 import axios from 'axios'
+import { FormData } from 'src/global.interfaces'
 
 // Sends a request to the appropriate endpoint based on the value of the 'register' prop.
-export const sendAuthRequest = async (formData, register) => {
+export const sendAuthRequest = async (
+    formData: FormData,
+    register: boolean
+) => {
     try {
         // Deconstruct the formData object to extract values needed for the POST request
         const { username, email, password, confirmPassword } = formData

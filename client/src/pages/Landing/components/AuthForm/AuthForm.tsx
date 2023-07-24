@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button, TextInput } from '@components'
 import { useGlobalContext } from '@context'
+import { FormData, Register } from 'src/global.interfaces'
 
 import { sendAuthRequest } from './api'
 import { FormFooter } from './components'
@@ -10,7 +11,7 @@ import { toCamelCase } from './utils'
 import './AuthForm.scss'
 
 // Displays login of registration form based on the value of the register prop
-const AuthForm = ({ register }) => {
+const AuthForm = ({ register }: Register) => {
     const { getGlobalState } = useGlobalContext()
 
     const initialFormData = {
@@ -18,11 +19,11 @@ const AuthForm = ({ register }) => {
         email: '',
         password: '',
         confirmPassword: '',
-    }
+    } as FormData
 
-    const [formData, setFormData] = useState(initialFormData)
-    const [loading, setLoading] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [formData, setFormData] = useState<FormData>(initialFormData)
+    const [loading, setLoading] = useState<boolean>(false)
+    const [errors, setErrors] = useState<any>({})
     const navigate = useNavigate()
 
     // Define the form fields to be rendered based on the value of register prop
@@ -32,13 +33,17 @@ const AuthForm = ({ register }) => {
         formFields.splice(3, 0, 'Confirm Password')
     }
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target
         setErrors({})
         setFormData({ ...formData, [name]: value })
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (
+        e:
+            | React.MouseEvent<HTMLFormElement>
+            | React.KeyboardEvent<HTMLFormElement>
+    ) => {
         e.preventDefault()
         setLoading(true)
 
@@ -46,7 +51,7 @@ const AuthForm = ({ register }) => {
             await sendAuthRequest(formData, register)
             await getGlobalState()
             navigate('/') // Refresh user data after updating and navigate to Home page
-        } catch (error) {
+        } catch (error: any) {
             if (error?.response?.data) {
                 setErrors(error.response.data)
             }
@@ -56,7 +61,7 @@ const AuthForm = ({ register }) => {
     }
 
     // Execute handleSubmit function when user presses Enter key
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
         if (e.key === 'Enter') {
             handleSubmit(e)
         }
@@ -81,7 +86,7 @@ const AuthForm = ({ register }) => {
                         <TextInput
                             label={field}
                             name={toCamelCase(field)}
-                            value={formData[toCamelCase(field)]}
+                            value={formData[toCamelCase(field)] as string}
                             onChange={handleInputChange}
                             loading={loading}
                             autofocus={field === 'Username'}
@@ -102,7 +107,7 @@ const AuthForm = ({ register }) => {
             <Button
                 label='Submit'
                 type='submit'
-                onClick={handleSubmit}
+                onClick={(e) => handleSubmit}
                 disabled={loading}
                 onKeyDown
             />

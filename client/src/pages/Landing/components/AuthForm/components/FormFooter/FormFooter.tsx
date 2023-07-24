@@ -1,10 +1,10 @@
-import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { Register } from 'src/global.interfaces'
 
 import './FormFooter.scss'
 
 // Displays text and link path based on the register prop value
-const FormFooter = ({ register }) => {
+const FormFooter = ({ register }: Register) => {
     return (
         <div className='form-footer'>
             <span>

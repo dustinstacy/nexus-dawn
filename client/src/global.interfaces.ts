@@ -114,6 +114,14 @@ interface BattleState {
     battleOver: boolean
 }
 
+export interface FormData {
+    username: string
+    email?: string
+    password: string
+    confirmPassword?: string
+    [key: string]: string | undefined
+}
+
 export interface BattleLog {
     playerOne: PlayerDetails
     playerTwo: PlayerDetails
@@ -128,4 +136,8 @@ export interface HandleToggle {
 
 export interface NextStage {
     nextStage: (path?: string) => void
+}
+
+export interface Register {
+    register: boolean
 }

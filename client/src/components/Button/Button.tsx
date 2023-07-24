@@ -11,6 +11,7 @@ interface ButtonProps {
     path?: string
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
     disabled?: boolean
+    onKeyDown?: boolean
 }
 
 // Renders button component that can function as a navigation link or a custom onClick function.
