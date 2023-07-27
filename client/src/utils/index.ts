@@ -1,3 +1,5 @@
+import { CardData, ICard } from 'src/global.interfaces'
+
 // Helper function to simplify updating state objects
 export const updateState = (setState: any, updates: any) => {
     setState((state: any) => ({ ...state, ...updates }))
@@ -9,29 +11,7 @@ export const classSet = (...classes: Array<string>) => {
     return classes.filter(Boolean).join(' ')
 }
 
-type CardValues = [number, number, number, number]
-
-interface CardData {
-    name: string
-    number: number
-    image: string
-    rarity: string
-    empower: string
-    weaken: string
-    values: CardValues
-}
-
-interface Card {
-    name: string
-    number: number
-    image: string
-    rarity: string
-    empower: string
-    weaken: string
-    values: CardValues
-}
-
-export const createCardData = (card: Card): CardData => {
+export const createCardData = (card: ICard): CardData => {
     return {
         name: card.name,
         number: card.number,
@@ -44,9 +24,9 @@ export const createCardData = (card: Card): CardData => {
 }
 
 // Calculate the sum of all card values within an array
-export const calculateDeckPower = (array: Array<Card>): number => {
+export const calculateDeckPower = (array: Array<ICard>): number => {
     const power = array.reduce(
-        (total: number, card: Card) =>
+        (total: number, card: ICard) =>
             total + card.values.reduce((sum, current) => sum + current, 0),
         0
     )
@@ -56,16 +36,16 @@ export const calculateDeckPower = (array: Array<Card>): number => {
 
 // Calculate the sum of all card values within an array
 export const calculateOptimizedDeck = (
-    userCards: Array<Card>,
-    count: number
-): Array<Card> => {
+    userCards: Array<ICard>,
+    count: string
+): Array<ICard> => {
     const sortedArray = userCards.sort(
         (a, b) =>
             b.values.reduce((sum, current) => sum + current, 0) -
             a.values.reduce((sum, current) => sum + current, 0)
     )
 
-    const optimizedDeck = sortedArray.slice(0, count)
+    const optimizedDeck = sortedArray.slice(0, Number(count))
 
     return optimizedDeck
 }

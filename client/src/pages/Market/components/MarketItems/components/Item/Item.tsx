@@ -2,8 +2,17 @@ import React from 'react'
 
 import { coinImage } from '@assets'
 import { classSet } from '@utils'
+import { IItem } from 'src/global.interfaces'
 
 import './Item.scss'
+
+interface ItemComponent {
+    item: IItem
+    index: number
+    chosenItem: IItem | null
+    setChosenItem: React.Dispatch<React.SetStateAction<IItem | null>>
+    allItems: Array<IItem>
+}
 
 // Renders a single item in the Market menu
 // item: Object containing all item data
@@ -11,9 +20,15 @@ import './Item.scss'
 // chosenItem: State used to track the currently chosen item
 // setChosenItem: Function to update the chosen item state based on user selection
 // allItems: Array containing all market items
-const Item = ({ item, index, chosenItem, setChosenItem, allItems }) => {
-    const itemClasses = (item) =>
-        classSet('item', 'between', chosenItem === item && 'chosen')
+const Item = ({
+    item,
+    index,
+    chosenItem,
+    setChosenItem,
+    allItems,
+}: ItemComponent) => {
+    const itemClasses = (item: IItem) =>
+        classSet('item', 'between', chosenItem === item ? 'chosen' : '')
 
     return (
         <div

@@ -3,28 +3,30 @@ import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Button, Card } from '@components'
+import { ICard } from 'src/global.interfaces'
+
+interface AquaRegiaSuperior {
+    setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
+    selectedCard: ICard | null
+    selectedCardValues: Array<number>
+    setSelectedCardValues: React.Dispatch<React.SetStateAction<Array<number>>>
+}
 
 const AquaRegiaSuperior = ({
     selectedCard,
     selectedCardValues,
     setSelectedCardValues,
     setModificationInProgress,
-}) => {
+}: AquaRegiaSuperior) => {
     let updatedCardValues = [...selectedCardValues]
 
     const rotateValues = () => {
-        updatedCardValues.unshift(updatedCardValues.pop())
+        updatedCardValues.unshift(updatedCardValues.pop() as number)
         setSelectedCardValues(updatedCardValues)
     }
 
-    const completeMod = async () => {
-        await updateCardValues(selectedCard, updatedCardValues)
-        await getUserCards()
-        setModificationComplete(true)
-    }
-
     const reset = () => {
-        setSelectedCardValues(selectedCard.values)
+        setSelectedCardValues(selectedCard!.values)
     }
 
     return (
@@ -46,7 +48,7 @@ const AquaRegiaSuperior = ({
                         onClick={() => reset()}
                     />
                     <div className='selected-card center fill'>
-                        <Card card={selectedCard} isShowing />
+                        <Card card={selectedCard!} isShowing />
                     </div>
                     {updatedCardValues?.map((value, i) => (
                         <div

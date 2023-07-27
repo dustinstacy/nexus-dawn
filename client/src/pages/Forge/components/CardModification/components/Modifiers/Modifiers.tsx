@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { useGlobalContext } from '@context'
 import { updateState } from '@utils'
+import { ICard, IItem } from 'src/global.interfaces'
 
 import {
     AquaVitae,
@@ -16,26 +17,44 @@ import {
 import { modificationOptions } from './constants'
 import './Modifiers.scss'
 
+interface Modifiers {
+    selectedCard: ICard | null
+    selectedModification: string
+    setModificationComplete: React.Dispatch<React.SetStateAction<boolean>>
+    setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+interface ModCost {
+    aquaType: IItem | null
+    aquaAmount: number
+    fluxType: IItem | null
+    fluxAmount: number
+}
+
+type ComponentMap = {
+    [key: string]: React.ComponentType<any>
+}
+
 const Modifiers = ({
     selectedCard,
     selectedModification,
     setModificationComplete,
     setModificationInProgress,
-}) => {
+}: Modifiers) => {
     const { allItems } = useGlobalContext()
 
     const [selectedCardValues, setSelectedCardValues] = useState([
-        ...selectedCard.values,
+        ...selectedCard!.values,
     ])
-    const [modCost, setModCost] = useState({
-        aquaType: '',
+    const [modCost, setModCost] = useState<ModCost>({
+        aquaType: null,
         aquaAmount: 1,
-        fluxType: '',
+        fluxType: null,
         fluxAmount: 1,
     })
 
     const modifiers = [...modificationOptions].slice(1)
-    const componentMap = {
+    const componentMap: ComponentMap = {
         AquaVitae,
         AquaRegia,
         AquaFortis,
@@ -60,7 +79,7 @@ const Modifiers = ({
     const setFluxType = () => {
         const fluxItem = allItems.find(
             (item) =>
-                item.name.includes(selectedCard.rarity) && item.type === 'flux'
+                item.name.includes(selectedCard?.rarity) && item.type === 'flux'
         )
         updateState(setModCost, { fluxType: fluxItem })
     }

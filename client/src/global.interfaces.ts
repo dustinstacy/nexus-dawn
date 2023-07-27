@@ -9,7 +9,7 @@ export interface User {
     createdAt: string
     email: string
     image: string
-    inventory: Array<Item>
+    inventory: Array<IItem>
     level: number
     onboardingStage: number
     xp: number
@@ -28,7 +28,7 @@ enum Role {
     player = 'player',
 }
 
-type CardValues = [number, number, number, number]
+export type CardValues = [number, number, number, number]
 
 interface BaseCard {
     image: string
@@ -71,7 +71,7 @@ export interface ICard extends CardData, DeckCard {
     captured?: boolean | null
 }
 
-export interface Item {
+export interface IItem {
     contents: ItemContents
     image: string
     info: string
@@ -85,6 +85,11 @@ export interface Item {
 interface ItemContents {
     count: number
     odds: any
+}
+
+export interface ChosenQuantity {
+    amount: number
+    discount: string
 }
 
 interface PlayerDetails {

@@ -3,7 +3,7 @@ import './Filter.scss'
 interface FilterProps {
     label: string
     value: string | number
-    setValue: (value: string | number) => void
+    setValue: React.Dispatch<React.SetStateAction<string>>
     options: Array<string | number>
     id: string
     selectedOption?: string

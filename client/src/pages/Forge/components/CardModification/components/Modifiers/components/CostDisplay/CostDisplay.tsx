@@ -3,30 +3,46 @@ import React from 'react'
 import { removeItemFromInventory } from '@api'
 import { Button } from '@components'
 import { useGlobalContext } from '@context'
+import { CardValues, ICard, IItem, User } from 'src/global.interfaces'
 
 import { updateCardValues } from '../../../../api'
 import './CostDisplay.scss'
+
+interface CostDipslay {
+    modCost: {
+        aquaType: IItem | null
+        aquaAmount: number
+        fluxType: IItem | null
+        fluxAmount: number
+    }
+    setModificationComplete: React.Dispatch<React.SetStateAction<boolean>>
+    selectedCard: ICard | null
+    selectedCardValues: Array<number | string>
+}
 
 const CostDisplay = ({
     modCost,
     setModificationComplete,
     selectedCard,
     selectedCardValues,
-}) => {
+}: CostDipslay) => {
     const { getUserCards, user } = useGlobalContext()
 
     const userAquaTypeCount = user?.inventory.filter(
-        (item) => item.name === modCost.aquaType.name
+        (item) => item.name === modCost.aquaType?.name
     ).length
 
     const userFluxTypeCount = user?.inventory.filter(
-        (item) => item.name === modCost.fluxType.name
+        (item) => item.name === modCost.fluxType?.name
     ).length
 
     const completeMod = async () => {
-        await updateCardValues(selectedCard, selectedCardValues)
-        await removeItemFromInventory(user, modCost.aquaType)
-        await removeItemFromInventory(user, modCost.fluxType)
+        await updateCardValues(
+            selectedCard as ICard,
+            selectedCardValues as CardValues
+        )
+        await removeItemFromInventory(user as User, modCost.aquaType)
+        await removeItemFromInventory(user as User, modCost.fluxType)
         await getUserCards()
         setModificationComplete(true)
     }
@@ -36,8 +52,8 @@ const CostDisplay = ({
             <div className='mod-cost center'>
                 <div className='aqua-cost center'>
                     <img
-                        src={modCost.aquaType.image}
-                        alt={modCost.aquaType.name}
+                        src={modCost.aquaType?.image}
+                        alt={modCost.aquaType?.name}
                     />
                     <div className='cost center'>
                         <span>{userAquaTypeCount}</span>
@@ -47,13 +63,13 @@ const CostDisplay = ({
                 </div>
                 <div className='flux-cost center'>
                     <img
-                        src={modCost.fluxType.image}
-                        alt={modCost.fluxType.name}
+                        src={modCost.fluxType?.image}
+                        alt={modCost.fluxType?.name}
                     />
                     <div
                         className={`cost center ${
-                            userFluxTypeCount < modCost.fluxAmount &&
-                            'insufficient'
+                            (userFluxTypeCount as number) <
+                                modCost.fluxAmount && 'insufficient'
                         }`}
                     >
                         <span>{userFluxTypeCount}</span>
@@ -66,11 +82,11 @@ const CostDisplay = ({
                 label='Complete Modification'
                 onClick={() => completeMod()}
                 disabled={
-                    selectedCard.values.every(
+                    selectedCard?.values.every(
                         (value, index) => value === selectedCardValues[index]
                     ) ||
                     selectedCardValues.includes('') ||
-                    userFluxTypeCount < modCost.fluxAmount
+                    (userFluxTypeCount as number) < modCost.fluxAmount
                 }
             />
         </div>

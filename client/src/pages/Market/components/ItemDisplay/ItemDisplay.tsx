@@ -1,13 +1,21 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { UserInventory } from '@components'
+import { IItem, ChosenQuantity } from 'src/global.interfaces'
 
 import { PurchaseBar, ChosenItem } from './components'
 import './ItemDisplay.scss'
 
+interface ItemDisplay {
+    chosenItem: IItem | null
+}
+
 // Represents the parent component for all the components related to the chosen items and user coin display.
-const ItemDisplay = ({ chosenItem }) => {
-    const [chosenQuantity, setChosenQuantity] = useState({})
+const ItemDisplay = ({ chosenItem }: ItemDisplay) => {
+    const [chosenQuantity, setChosenQuantity] = useState<ChosenQuantity>({
+        amount: 1,
+        discount: '0',
+    })
     const [finalPrice, setFinalPrice] = useState(0)
     const [purchaseComplete, setPurchaseComplete] = useState(false)
 
@@ -28,7 +36,7 @@ const ItemDisplay = ({ chosenItem }) => {
                     />
                     <PurchaseBar
                         chosenItem={chosenItem}
-                        chosenQuantity={chosenQuantity}
+                        chosenQuantity={chosenQuantity as ChosenQuantity}
                         purchaseComplete={purchaseComplete}
                         setPurchaseComplete={setPurchaseComplete}
                         finalPrice={finalPrice}

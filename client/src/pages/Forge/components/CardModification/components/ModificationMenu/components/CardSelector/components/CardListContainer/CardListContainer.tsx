@@ -1,28 +1,29 @@
-import React from 'react'
-
 import { Button, CardList } from '@components'
 import { useGlobalContext } from '@context'
+import { ICard } from 'src/global.interfaces'
 
 import './CardListContainer'
 
-const CardListContainer = ({ setCardSelectOpen, setSelectedCard }) => {
+interface CardListContainer {
+    setCardSelectOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setSelectedCard: React.Dispatch<React.SetStateAction<ICard | null>>
+}
+
+const CardListContainer = ({
+    setCardSelectOpen,
+    setSelectedCard,
+}: CardListContainer) => {
     const { userCards } = useGlobalContext()
 
     const sortedCards = userCards.sort(
         (a, b) =>
-            b.values.reduce(
-                (sum, current) => parseInt(sum) + parseInt(current),
-                0
-            ) -
-            a.values.reduce(
-                (sum, current) => parseInt(sum) + parseInt(current),
-                0
-            )
+            b.values.reduce((sum, current) => sum + current, 0) -
+            a.values.reduce((sum, current) => sum + current, 0)
     )
 
-    const selectCard = (e, card) => {
+    const selectCard = (e: React.MouseEvent<HTMLDivElement>, card: ICard) => {
         e.preventDefault()
-        setSelectedCard(card)
+        setSelectedCard?.(card)
         setCardSelectOpen(false)
     }
 

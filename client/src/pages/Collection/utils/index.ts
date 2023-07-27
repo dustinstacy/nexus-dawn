@@ -24,7 +24,7 @@ export const sortByCardsNotInDeck = (
     return sortedCards
 }
 
-export const sortByRarity = (array: Array<ICard>, rarity: Rarity) => {
+export const sortByRarity = (array: Array<ICard>, rarity: string) => {
     const sortedCards = array.filter((card) => card.rarity === rarity)
     return sortedCards
 }

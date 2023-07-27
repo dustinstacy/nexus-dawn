@@ -3,9 +3,14 @@ import React from 'react'
 import { useGlobalContext } from '@context'
 
 import './ItemInformation.scss'
+import { IItem } from 'src/global.interfaces'
+
+interface ItemInformation {
+    chosenItem: IItem
+}
 
 // chosenItem: Item currently chosen from market items
-const ItemInformation = ({ chosenItem }) => {
+const ItemInformation = ({ chosenItem }: ItemInformation) => {
     const { user } = useGlobalContext()
     const { image, info, contents, name } = chosenItem || {}
 
@@ -33,7 +38,7 @@ const ItemInformation = ({ chosenItem }) => {
                         {Object.entries(contents?.odds).map(([key, value]) => (
                             <div key={key}>
                                 <p>
-                                    {key}: &nbsp;{value} %
+                                    {key}: &nbsp;{value as number} %
                                 </p>
                             </div>
                         ))}

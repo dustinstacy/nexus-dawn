@@ -13,7 +13,7 @@ import './DeckBar.scss'
 // Renders the user's deck statistics and provides options to automatically manage the deck
 const DeckBar = () => {
     const { userCards, userDeck, getCurrentUser } = useGlobalContext()
-    const [deckCount, setDeckCount] = useState(15)
+    const [deckCount, setDeckCount] = useState('15')
     const [fillDeckLoading, setFillDeckLoading] = useState(false)
     const [clearDeckLoading, setClearDeckLoading] = useState(false)
 
@@ -88,7 +88,7 @@ const DeckBar = () => {
         'Clear Deck'
     )
 
-    const optimizedDeckCountOptions = ['15', userCards?.length > 25 ? '25' : '']
+    const optimizedDeckCountOptions = ['15', '25']
 
     return (
         <div className='deck center-column'>
@@ -111,7 +111,7 @@ const DeckBar = () => {
                         id='cardCount'
                         label='Card Count'
                         value={deckCount}
-                        setValue={() => setDeckCount}
+                        setValue={setDeckCount}
                         options={optimizedDeckCountOptions}
                     />
                     <Button

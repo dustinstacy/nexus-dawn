@@ -1,14 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { VscDebugRestart } from 'react-icons/vsc'
 
-import { Button, Card } from '@components'
+import { Card } from '@components'
+import { ICard } from 'src/global.interfaces'
+
+interface AquaManna {
+    setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
+    selectedCard: ICard | null
+    selectedCardValues: Array<number>
+}
 
 const AquaManna = ({
     selectedCard,
     selectedCardValues,
     setModificationInProgress,
-}) => {
+}: AquaManna) => {
     let updatedCardValues = [...selectedCardValues]
 
     return (
@@ -20,12 +27,9 @@ const AquaManna = ({
                         className='cancel'
                         onClick={() => setModificationInProgress(false)}
                     />
-                    <VscDebugRestart
-                        className='reset'
-                        onClick={() => reset()}
-                    />
+                    <VscDebugRestart className='reset' onClick={() => {}} />
                     <div className='selected-card center fill'>
-                        <Card card={selectedCard} isShowing />
+                        <Card card={selectedCard!} isShowing />
                     </div>
                     {updatedCardValues?.map((value, i) => (
                         <div

@@ -2,11 +2,17 @@ import React, { useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import { Card, ModalOverlay } from '@components'
+import { ICard } from 'src/global.interfaces'
 
 import { CardListContainer } from './components'
 import './CardSelector.scss'
 
-const CardSelector = ({ selectedCard, setSelectedCard }) => {
+interface CardSelector {
+    selectedCard: ICard | null
+    setSelectedCard: React.Dispatch<React.SetStateAction<ICard | null>>
+}
+
+const CardSelector = ({ selectedCard, setSelectedCard }: CardSelector) => {
     const [cardSelectOpen, setCardSelectOpen] = useState(false)
 
     return (
@@ -15,7 +21,7 @@ const CardSelector = ({ selectedCard, setSelectedCard }) => {
                 <div className='selected-card center fill'>
                     <AiOutlineCloseCircle
                         className='unselect-card'
-                        onClick={() => setSelectedCard(null)}
+                        onClick={() => setSelectedCard?.(null)}
                     />
                     <Card card={selectedCard} isShowing />
                     {selectedCard?.values.map((value, i) => (

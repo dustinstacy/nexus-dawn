@@ -1,9 +1,19 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { Button } from '@components'
 
 import { CardSelector, ModificationSelector } from './components'
 import './ModificationMenu.scss'
+import { ICard } from 'src/global.interfaces'
+
+interface ModificationMenu {
+    selectedCard: ICard | null
+    setSelectedCard: React.Dispatch<React.SetStateAction<ICard | null>>
+    setCardModification: React.Dispatch<React.SetStateAction<boolean>>
+    selectedModification: string
+    setSelectedModification: React.Dispatch<React.SetStateAction<string>>
+    setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const ModificationMenu = ({
     selectedCard,
@@ -12,10 +22,10 @@ const ModificationMenu = ({
     setSelectedModification,
     setModificationInProgress,
     setCardModification,
-}) => {
+}: ModificationMenu) => {
     useEffect(() => {
         if (selectedCard == null) {
-            setSelectedModification('-')
+            setSelectedModification?.('-')
         }
     }, [selectedCard])
 
@@ -28,14 +38,12 @@ const ModificationMenu = ({
                 />
             </div>
             <ModificationSelector
-                selectedCard={selectedCard}
                 selectedModification={selectedModification}
                 setSelectedModification={setSelectedModification}
-                setModificationInProgress={setModificationInProgress}
             />
             <Button
                 label='Modify Card'
-                onClick={() => setModificationInProgress(true)}
+                onClick={() => setModificationInProgress?.(true)}
                 disabled={
                     selectedModification === null ||
                     selectedModification === '-' ||

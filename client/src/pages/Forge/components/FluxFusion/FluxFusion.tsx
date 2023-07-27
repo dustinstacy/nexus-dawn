@@ -6,9 +6,15 @@ import { Button } from '@components'
 import { useGlobalContext } from '@context'
 
 import './FluxFusion.scss'
+import { IItem, User } from 'src/global.interfaces'
 
-const FluxFusion = ({ setFluxFusion }) => {
+interface FluxFusion {
+    setFluxFusion: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
     const { allItems, getCurrentUser, user } = useGlobalContext()
+    const { inventory } = (user as User) || {}
 
     const allFlux = allItems.filter((item) => item.type === 'flux')
 
@@ -17,14 +23,16 @@ const FluxFusion = ({ setFluxFusion }) => {
     startingFlux.pop()
     fusedFlux.shift()
 
-    const fuseFlux = async (startingFlux, fusedFlux) => {
+    const fuseFlux = async (startingFlux: IItem, fusedFlux: IItem) => {
         const removeItemPromises = []
 
         for (let i = 0; i < 10; i++) {
-            removeItemPromises.push(removeItemFromInventory(user, startingFlux))
+            removeItemPromises.push(
+                removeItemFromInventory(user as User, startingFlux)
+            )
         }
         await Promise.all(removeItemPromises)
-        await addItemToInventory(user, fusedFlux)
+        await addItemToInventory(user as User, fusedFlux)
         await getCurrentUser()
     }
 
@@ -32,12 +40,12 @@ const FluxFusion = ({ setFluxFusion }) => {
         <div className='start-column'>
             <div className='fusion-panel around-column'>
                 {startingFlux.map((starting, index) => (
-                    <div className='flux-row around'>
+                    <div className='flux-row around' key={starting + index}>
                         <div className='current flux center'>
                             <img src={starting?.image} alt={starting?.name} />
                             <div
                                 className={`count center ${
-                                    user?.inventory.filter(
+                                    inventory.filter(
                                         (item) => item.name === starting.name
                                     ).length < 10 && 'insufficient'
                                 }`}
@@ -55,7 +63,7 @@ const FluxFusion = ({ setFluxFusion }) => {
                         </div>
                         <TbArrowBigRightLines
                             className={`flux-arrow ${
-                                user?.inventory.filter(
+                                inventory.filter(
                                     (item) => item.name === starting.name
                                 ).length < 10 && 'disabled'
                             }`}

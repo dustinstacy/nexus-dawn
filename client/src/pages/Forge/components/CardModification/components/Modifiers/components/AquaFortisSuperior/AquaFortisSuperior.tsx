@@ -1,25 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Card } from '@components'
 import { maxValues } from '@constants'
+import { ICard } from 'src/global.interfaces'
 
-const AquaFortis = ({
+interface AquaFortisSuperior {
+    setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
+    selectedCard: ICard | null
+    selectedCardValues: Array<number>
+    setSelectedCardValues: React.Dispatch<React.SetStateAction<Array<number>>>
+}
+
+const AquaFortisSuperior = ({
     selectedCard,
     selectedCardValues,
     setSelectedCardValues,
     setModificationInProgress,
-}) => {
-    const [modValue, setModValue] = useState(0)
-    const [cardModified, setCardModified] = useState(false)
+}: AquaFortisSuperior) => {
+    const [modValue, setModValue] = useState(
+        selectedCard!.values.reduce((total, current) => total + current)
+    )
 
-    const selectedCardMaxSingleValue = maxValues[selectedCard.rarity]
+    const selectedCardMaxSingleValue =
+        maxValues[selectedCard!.rarity as keyof typeof maxValues]
 
     let updatedCardValues = [...selectedCardValues]
     let updatedModValue = modValue
 
-    const cardValueClick = (value, i) => {
+    useEffect(() => {
+        setSelectedCardValues(Array(4).fill(''))
+    }, [])
+
+    const cardValueClick = (value: number, i: number) => {
         if (modValue === 0) {
             deductValue(value, i)
         } else {
@@ -27,44 +41,32 @@ const AquaFortis = ({
         }
     }
 
-    const deductValue = (value, i) => {
+    const deductValue = (value: number, i: number) => {
         updatedCardValues[i] = Number(value) - 1
         updatedModValue += 1
         setSelectedCardValues(updatedCardValues)
         setModValue(updatedModValue)
     }
 
-    const addValue = (value, i) => {
+    const addValue = (value: number, i: number) => {
         updatedCardValues[i] = Number(value) + 1
         updatedModValue -= 1
         setSelectedCardValues(updatedCardValues)
         setModValue(updatedModValue)
-        if (
-            !selectedCard.values.every(
-                (value, index) => value === updatedCardValues[index]
-            )
-        ) {
-            setCardModified(true)
-        }
     }
 
     const reset = () => {
-        setModValue(0)
-        setSelectedCardValues(selectedCard.values)
-        setCardModified(false)
+        setModValue(
+            selectedCard!.values.reduce((total, current) => total + current)
+        )
+        setSelectedCardValues(Array(4).fill(0))
     }
 
     return (
         <div className='fortis center fill'>
             <div className='start-column'>
                 <div className='mod-bar center'>
-                    <div
-                        className={`value box center ${
-                            cardModified && 'disabled'
-                        }`}
-                    >
-                        {modValue}
-                    </div>
+                    <div className='value box center'>{modValue}</div>
                 </div>
                 <div className='mod-panel center'>
                     <AiOutlineCloseCircle
@@ -76,7 +78,7 @@ const AquaFortis = ({
                         onClick={() => reset()}
                     />
                     <div className='selected-card center fill'>
-                        <Card card={selectedCard} isShowing />
+                        <Card card={selectedCard!} isShowing />
                     </div>
                     {updatedCardValues?.map((value, i) => (
                         <div
@@ -85,7 +87,7 @@ const AquaFortis = ({
                                 modValue !== 0 &&
                                 value === selectedCardMaxSingleValue &&
                                 'disabled'
-                            } ${cardModified && 'disabled'}`}
+                            }`}
                             onClick={() => cardValueClick(value, i)}
                         >
                             {value}
@@ -97,4 +99,4 @@ const AquaFortis = ({
     )
 }
 
-export default AquaFortis
+export default AquaFortisSuperior

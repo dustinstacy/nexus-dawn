@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Onboarding } from '@components'
 import { useGlobalContext } from '@context'
 
 import { ItemDisplay, MarketItems } from './components'
 import './Market.scss'
+import { IItem } from 'src/global.interfaces'
 
 // Represents the Market page component that displays the market menu, items, and item details.
 const Market = () => {
     const { user } = useGlobalContext()
     const stage = user?.onboardingStage ?? {}
 
-    const [chosenItem, setChosenItem] = useState(null)
+    const [chosenItem, setChosenItem] = useState<IItem | null>(null)
 
     return (
         <div className='market page'>

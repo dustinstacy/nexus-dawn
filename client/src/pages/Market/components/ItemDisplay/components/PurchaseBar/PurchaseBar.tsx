@@ -5,9 +5,19 @@ import { deductCoin, addItemToInventory } from '@api'
 import { coinImage } from '@assets'
 import { useGlobalContext } from '@context'
 import { Button } from '@components'
+import { IItem, User } from 'src/global.interfaces'
 
 import { calculatePrice } from './utils'
 import './PurchaseBar.scss'
+
+interface PurchaseBar {
+    chosenItem: IItem | null
+    chosenQuantity: { amount: number; discount: string }
+    purchaseComplete: boolean
+    setPurchaseComplete: React.Dispatch<React.SetStateAction<boolean>>
+    finalPrice: number
+    setFinalPrice: React.Dispatch<React.SetStateAction<number>>
+}
 
 // Renders a container displaying the purchase price and a button to initiate the purchase
 const PurchaseBar = ({
@@ -17,15 +27,15 @@ const PurchaseBar = ({
     setPurchaseComplete,
     finalPrice,
     setFinalPrice,
-}) => {
+}: PurchaseBar) => {
     const { user, getCurrentUser } = useGlobalContext()
-    const { coin } = user ?? {}
+    const { coin } = (user as User) ?? {}
 
     const [loading, setLoading] = useState(false)
 
     // Create an array representing the final purchase based on the chosen item and quantity
     const finalPurchase = Array.from(
-        { length: chosenQuantity.amount },
+        { length: chosenQuantity?.amount },
         () => chosenItem
     )
 
@@ -51,8 +61,8 @@ const PurchaseBar = ({
 
             // Simulate loading for 1.5 seconds
             await new Promise((resolve) => setTimeout(resolve, 500))
-            await deductCoin(user, finalPrice)
-            await addItemToInventory(user, finalPurchase)
+            await deductCoin(user as User, finalPrice)
+            await addItemToInventory(user as User, finalPurchase)
             await getCurrentUser()
 
             setLoading(false)
@@ -94,7 +104,9 @@ const PurchaseBar = ({
                         <div className='amount center'>
                             {chosenQuantity.amount > 1 && (
                                 <span className='previous-amount'>
-                                    {chosenItem.price * chosenQuantity.amount}
+                                    {chosenItem &&
+                                        chosenItem.price *
+                                            chosenQuantity.amount}
                                 </span>
                             )}
                             {finalPrice}
@@ -102,7 +114,7 @@ const PurchaseBar = ({
                         </div>
                     </div>
                     <Button
-                        label={buttonLabel}
+                        label={buttonLabel as string}
                         disabled={!canPurchase}
                         onClick={completePurchase}
                     />

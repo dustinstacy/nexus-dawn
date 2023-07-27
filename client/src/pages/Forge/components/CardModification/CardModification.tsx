@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ModifiedCard, Modifiers, ModificationMenu } from './components'
 import './CardModification.scss'
+import { ICard } from 'src/global.interfaces'
 
-const CardModification = ({ setCardModification }) => {
-    const [selectedCard, setSelectedCard] = useState(null)
+interface CardModification {
+    setCardModification: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const CardModification = ({ setCardModification }: CardModification) => {
+    const [selectedCard, setSelectedCard] = useState<ICard | null>(null)
     const [selectedModification, setSelectedModification] = useState('-')
     const [modificationInProgress, setModificationInProgress] = useState(false)
     const [modificationComplete, setModificationComplete] = useState(false)

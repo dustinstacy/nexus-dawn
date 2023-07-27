@@ -1,15 +1,22 @@
 import React, { useEffect } from 'react'
 
 import { classSet } from '@utils'
+import { ChosenQuantity, IItem } from 'src/global.interfaces'
 
 import './QuantitySelector.scss'
+
+interface QuantitySelector {
+    chosenItem: IItem | null
+    chosenQuantity: ChosenQuantity
+    setChosenQuantity: React.Dispatch<React.SetStateAction<ChosenQuantity>>
+}
 
 // Renders quantity options, passes and displays applicable discount
 const QuantitySelector = ({
     chosenItem,
     chosenQuantity,
     setChosenQuantity,
-}) => {
+}: QuantitySelector) => {
     // An array of quantity options, each containing an amount and a discount
     const quantityOptions = [
         { amount: 1, discount: '0' },
@@ -22,14 +29,14 @@ const QuantitySelector = ({
         setChosenQuantity(quantityOptions[0])
     }, [chosenItem])
 
-    const handleQuantityChange = (quantity) => {
+    const handleQuantityChange = (quantity: ChosenQuantity) => {
         setChosenQuantity(quantity)
     }
 
-    const quantityButtonClasses = (quantity) =>
+    const quantityButtonClasses = (quantity: ChosenQuantity) =>
         classSet(
             'quantity-button',
-            chosenQuantity.amount === quantity.amount && 'chosen'
+            chosenQuantity?.amount === quantity?.amount ? 'chosen' : ''
         )
 
     return (
@@ -48,8 +55,9 @@ const QuantitySelector = ({
             </div>
 
             <div className='discount'>
-                {chosenQuantity.discount !== '0' &&
-                    chosenQuantity.discount + ' Discount'}
+                {chosenQuantity?.discount !== '0'
+                    ? chosenQuantity?.discount + ' Discount'
+                    : ''}
             </div>
         </div>
     )

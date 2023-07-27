@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Filter, Onboarding } from '@components'
 import { useGlobalContext } from '@context'
-import { calculateDeckPower } from '@utils'
 
 import { CardCollection, DeckBar, UserPanel } from './components'
 import {
@@ -38,21 +37,21 @@ const Collection = () => {
                 <Filter
                     label='Cards Filter'
                     value={deckFilter}
-                    setValue={() => setDeckFilter}
+                    setValue={setDeckFilter}
                     options={deckOptions}
                     id='deck-filter'
                 />
                 <Filter
                     label='Rarity Filter'
                     value={rarityFilter}
-                    setValue={() => setRarityFilter}
+                    setValue={setRarityFilter}
                     options={rarityOptions}
                     id='rarity-filter'
                 />
                 <Filter
                     label='Value Filter'
                     value={valueFilter}
-                    setValue={() => setValueFilter}
+                    setValue={setValueFilter}
                     options={valueOptions}
                     selectedOption='Total'
                     id='value=filter'
