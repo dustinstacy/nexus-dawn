@@ -32,10 +32,10 @@ function App() {
 
     return (
         <>
-            {pathname !== '/battle' && <NavBar />}
+            {pathname !== '/battle' && <NavBar landing={false} />}
             <Routes>
                 <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Landing />} />
+                <Route path='/login' element={<Landing register={false} />} />
                 <Route path='/register' element={<Landing register />} />
                 <Route path='/opponentSelect' element={<OpponentSelect />} />
                 <Route path='/battleIntro' element={<BattleIntro />} />
