@@ -1,19 +1,20 @@
-import express from 'express'
-import BattleLog from '../models/BattleLog.js'
+import express, { Request, Response, NextFunction } from 'express'
+
+import BattleLog from '../models/BattleLog'
 
 const router = express.Router()
 
 // @route GET /api/battleLogs/test
 // @desc Test the Battle Logs route
 // @access Public
-router.get('/test', (req, res) => {
+router.get('/test', (req: Request, res: Response) => {
     res.send('Battle Logs route working')
 })
 
 // @route GET /api/battleLogs
 // @desc Get Battle Logs
 // @access Public
-router.get('/', async (req, res, next) => {
+router.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const battleLogs = await BattleLog.find()
 
@@ -26,20 +27,23 @@ router.get('/', async (req, res, next) => {
 // @route GET /api/battleLogs/battleNumber
 // @desc Get current Battle Log number
 // @access Public
-router.get('/battleNumber', async (req, res, next) => {
-    try {
-        const battleNumber = await getCurrentBattleNumber()
+router.get(
+    '/battleNumber',
+    async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const battleNumber = await getCurrentBattleNumber()
 
-        return res.json({ battleNumber })
-    } catch (error) {
-        next(error)
+            return res.json({ battleNumber })
+        } catch (error) {
+            next(error)
+        }
     }
-})
+)
 
 // @route POST /api/battleLogs
 // @route Add Battle Log
 // @access Public
-router.post('/', async (req, res, next) => {
+router.post('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { battleLog } = req.body
 
@@ -76,12 +80,12 @@ const getCurrentBattleNumber = async () => {
 }
 
 // Helper function to remove 'image' properties recursively
-const removeImageProperties = (obj) => {
+const removeImageProperties = (obj: object) => {
     for (let key in obj) {
         if (key === 'image') {
-            delete obj[key]
-        } else if (typeof obj[key] === 'object') {
-            removeImageProperties(obj[key])
+            delete obj[key as keyof object]
+        } else if (typeof obj[key as keyof object] === 'object') {
+            removeImageProperties(obj[key as keyof object])
         }
     }
 }

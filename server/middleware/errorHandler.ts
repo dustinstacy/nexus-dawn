@@ -1,5 +1,17 @@
+import { ErrorRequestHandler, Request, Response, NextFunction } from 'express'
+
+interface CustomError extends Error {
+    statusCode?: number
+    errorMessage?: string
+}
+
 // Provides error handling middleware for routes
-const errorHandler = (error, req, res, next) => {
+const errorHandler: ErrorRequestHandler = (
+    error: CustomError,
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     // Set status code equal to 500 if none is provided
     const statusCode = error.statusCode || 500
     // Set default error message
