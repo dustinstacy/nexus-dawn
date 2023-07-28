@@ -1,14 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import { coinImage } from '@assets'
 import { useGlobalContext } from '@context'
+import { User } from 'src/global.interfaces'
 
 import './LevelUpScreen.scss'
 
-const LevelUpScreen = ({ setNewLevelAlert }) => {
+interface LevelUpScreenProps {
+    setNewLevelAlert: (state: boolean) => void
+}
+
+const LevelUpScreen = ({ setNewLevelAlert }: LevelUpScreenProps) => {
     const { user, allItems, allOpponents } = useGlobalContext()
-    const { level } = user
+    const { level } = user as User
     const [animationFinished, setAnimationFinished] = useState(false)
 
     const sortedItems = allItems.sort((a, b) => a.level - b.level)
@@ -66,7 +71,7 @@ const LevelUpScreen = ({ setNewLevelAlert }) => {
                         Level <br /> Rewards
                     </h2>
                     <div className='coin-reward center'>
-                        <span>{user?.level * 1.5 * 100}</span>
+                        <span>{level * 1.5 * 100}</span>
                         <img src={coinImage} alt='coin-image' />
                     </div>
                 </div>

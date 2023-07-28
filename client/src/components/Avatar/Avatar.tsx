@@ -1,8 +1,7 @@
-import React from 'react'
-
 import { useGlobalContext } from '@context'
 import { useToggle } from '@hooks'
 import { classSet } from '@utils'
+import { User } from 'src/global.interfaces'
 
 import { AvatarMenu } from './components'
 import './Avatar.scss'
@@ -12,14 +11,14 @@ import './Avatar.scss'
 // menu: Indicates whether the avatar has an onClick menu
 // small, medium, large: Indicates the avatar's size
 const Avatar = ({
-    levelShowing = false,
-    menu = false,
-    small = false,
-    medium = false,
-    large = false,
+    levelShowing = false as boolean,
+    menu = false as boolean,
+    small = false as boolean,
+    medium = false as boolean,
+    large = false as boolean,
 }) => {
     const { user } = useGlobalContext()
-    const { image, level } = user ?? {}
+    const { image, level } = (user as User) ?? {}
 
     const [isOpen, toggleIsOpen] = useToggle(false)
 
@@ -31,12 +30,12 @@ const Avatar = ({
     const avatarClasses = classSet(
         'avatar',
         'primary-border',
-        small && 'small',
-        medium && 'medium',
-        large && 'large'
+        small ? 'small' : '',
+        medium ? 'medium' : '',
+        large ? 'large' : ''
     )
 
-    const imageClasses = classSet('fill', menu && 'pointer')
+    const imageClasses = classSet('fill', menu ? 'pointer' : '')
 
     return (
         <div className={avatarClasses} style={{ backgroundColor: user?.color }}>

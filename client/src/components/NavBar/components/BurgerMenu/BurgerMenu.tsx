@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { MdOutlineClose, MdMenu } from 'react-icons/md'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { motion } from 'framer-motion'

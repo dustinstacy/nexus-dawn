@@ -1,20 +1,19 @@
-import React from 'react'
-
 import { addItemToInventory } from '@api'
 import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
+import { NextStage, User } from 'src/global.interfaces'
 
 import { onboardingStages } from '../../constants'
 
 import './HowToPlay.scss'
 
-const HowToPlay = ({ nextStage }) => {
+const HowToPlay = ({ nextStage }: NextStage) => {
     const { user, allItems } = useGlobalContext()
 
     const handleClick = async () => {
         const rareCard = allItems.find((item) => item.name === 'Rare Card')
-        await addItemToInventory(user, rareCard)
+        await addItemToInventory(user as User, rareCard)
         await nextStage()
     }
 
@@ -34,7 +33,7 @@ const HowToPlay = ({ nextStage }) => {
                 <div className='body box start-column'>
                     <p>{onboardingStages[4].body}</p>
                     <Button
-                        label={onboardingStages[4].label}
+                        label={onboardingStages[4].label as string}
                         onClick={handleClick}
                     />
                 </div>

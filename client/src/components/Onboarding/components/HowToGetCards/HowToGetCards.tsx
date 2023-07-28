@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
 import { useToggle } from '@hooks'
+import { NextStage, User } from 'src/global.interfaces'
 
 import { onboardingStages } from '../../constants'
 import { marketMenu, purchaseButton } from '../../images'
 
 import './HowToGetCards.scss'
 
-const HowToGetCards = ({ nextStage }) => {
+const HowToGetCards = ({ nextStage }: NextStage) => {
     const { user } = useGlobalContext()
+    const { inventory } = (user as User) || {}
     const stage = user?.onboardingStage
     const [step, setStep] = useState(1)
     const [modalOpen, toggleModalOpen, setModalOpen] = useToggle(true)
@@ -21,7 +23,7 @@ const HowToGetCards = ({ nextStage }) => {
     }
 
     useEffect(() => {
-        if (user?.inventory.length > 0 && stage === 1) {
+        if (inventory.length > 0 && stage === 1) {
             setTimeout(() => {
                 setModalOpen(true)
                 setStep(4)

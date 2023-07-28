@@ -1,7 +1,37 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react'
+import { ReactNode, createContext, useContext, useReducer } from 'react'
 import axios from 'axios'
+import { User } from 'src/global.interfaces'
 
-const initialState = {
+//****** return to declare arrays when global interface is set up *******//
+interface State {
+    user: User | null
+    fetchingUser: boolean
+    userCards: any[] // Array<Card>
+    userDeck: any[] // Array<Card>
+    allCards: any[] // Array<Card>
+    allItems: any[] // Array<Item>
+    allOpponents: any[] // Array<Opponent>
+    getGlobalState: () => Promise<void>
+    getCurrentUser: () => Promise<void>
+    getUserCards: () => Promise<void>
+    getUserDeck: () => Promise<void>
+    getAllCards: () => Promise<void>
+    getAllItems: () => Promise<void>
+    getAllOpponents: () => Promise<void>
+    logout: () => Promise<void>
+}
+
+// Adjust payloads when state types are updated //
+type Action =
+    | { type: 'SET_USER'; payload: User }
+    | { type: 'RESET_USER' }
+    | { type: 'SET_USER_CARDS'; payload: any[] }
+    | { type: 'SET_USER_DECK'; payload: any[] }
+    | { type: 'SET_ALL_CARDS'; payload: any[] }
+    | { type: 'SET_ALL_ITEMS'; payload: any[] }
+    | { type: 'SET_ALL_OPPONENTS'; payload: any[] }
+
+const initialState: State = {
     user: null,
     fetchingUser: true,
     userCards: [],
@@ -9,9 +39,17 @@ const initialState = {
     allCards: [],
     allItems: [],
     allOpponents: [],
+    getGlobalState: async () => {},
+    getCurrentUser: async () => {},
+    getUserCards: async () => {},
+    getUserDeck: async () => {},
+    getAllCards: async () => {},
+    getAllItems: async () => {},
+    getAllOpponents: async () => {},
+    logout: async () => {},
 }
 
-const globalReducer = (state, action) => {
+const globalReducer = (state: State, action: Action) => {
     switch (action.type) {
         case 'SET_USER':
             return {
@@ -60,7 +98,7 @@ const globalReducer = (state, action) => {
 
 const GlobalContext = createContext(initialState)
 
-export const GlobalProvider = ({ children }) => {
+export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(globalReducer, initialState)
 
     const getGlobalState = async () => {
@@ -175,7 +213,7 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-    const value = useMemo(() => ({
+    const value = {
         ...state,
         getGlobalState,
         getCurrentUser,
@@ -185,7 +223,7 @@ export const GlobalProvider = ({ children }) => {
         getAllItems,
         getAllOpponents,
         logout,
-    }))
+    }
 
     return (
         <GlobalContext.Provider value={value}>

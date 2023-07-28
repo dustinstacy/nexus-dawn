@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
@@ -6,12 +6,14 @@ import { useGlobalContext } from '@context'
 import { handleLevelUp } from './api'
 import { LevelUpScreen } from './components'
 import { userLevels } from './constants'
+import { User } from 'src/global.interfaces'
+
 import './ExperienceBar.scss'
 
 // Renders the user's experience bar and handles level up functionality when XP thresholds are reached.
 const ExperienceBar = () => {
     const { getCurrentUser, user } = useGlobalContext()
-    const { xp, level } = user ?? {}
+    const { xp, level } = (user as User) ?? {}
 
     const [newLevelAlert, setNewLevelAlert] = useState(false)
     const [startXP, setStartXP] = useState(xp)
@@ -32,7 +34,7 @@ const ExperienceBar = () => {
     useEffect(() => {
         const checkLevelUp = async () => {
             if (xp >= userNextLevel) {
-                await handleLevelUp(user)
+                await handleLevelUp(user as User)
                 await getCurrentUser()
                 setTimeout(async () => {
                     setNewLevelAlert(true)

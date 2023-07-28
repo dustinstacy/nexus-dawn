@@ -1,126 +1,17 @@
 import axios, { AxiosResponse } from 'axios'
 import { removeObjectByValue } from './../utils'
-
-type CardValues = [number, number, number, number]
+import {
+    BattleLog,
+    CardData,
+    DeckCard,
+    Item,
+    User,
+} from 'src/global.interfaces'
 
 enum BattleResult {
     win = 'win',
     loss = 'loss',
     draw = 'draw',
-}
-
-enum Role {
-    admin = 'admin',
-    player = 'player',
-}
-
-enum Rarity {
-    Common = 'Common',
-    Uncommon = 'Uncommon',
-    Rare = 'Rare',
-    Epic = 'Epic',
-    Legendary = 'Legendary',
-}
-
-interface PlayerDetails {
-    user: User
-    name: string
-    deck: Array<CardLog>
-    hand: Array<CardLog>
-    roundScore: number
-    battleScore: number
-}
-
-interface User {
-    stats: Stats
-    _id: string
-    role: Role
-    username: string
-    activeBattle: Boolean
-    coin: number
-    color: string
-    createdAt: string
-    email: string
-    image: string
-    inventory: Array<Item>
-    level: number
-    onboardingStage: number
-    xp: number
-    __v: string
-}
-
-interface Stats {
-    battles: number
-    draws: number
-    losses: number
-    wins: number
-}
-
-interface Item {
-    contents: ItemContents
-    image: string
-    info: string
-    level: number
-    name: string
-    price: number
-    type: string
-    _id: string
-}
-
-interface ItemContents {
-    count: number
-    odds: any
-}
-
-interface BaseCard {
-    image: string
-    values: CardValues
-}
-
-export interface CardData extends BaseCard {
-    name: string
-    number: string
-    rarity: Rarity
-    empower?: any
-    weaken?: any
-}
-
-export interface CardLog extends BaseCard {
-    _id: string
-    color: string
-}
-
-export interface DeckCard extends CardLog {
-    enemiesConverted: number
-    level: number
-    rarity: Rarity
-    selected: boolean
-    timesPlayed: number
-    xp: number
-}
-
-interface RoundResults {
-    round: number
-    p1Score: number
-    p2Score: number
-}
-
-interface BattleLog {
-    playerOne: PlayerDetails
-    playerTwo: PlayerDetails
-    battleState: BattleState
-}
-
-interface BattleState {
-    board: Array<any>
-    decksShuffled: boolean
-    handsDealt: boolean
-    battleStarted: boolean
-    round: number
-    isP1Turn: boolean
-    roundOver: boolean
-    roundResults: Array<RoundResults>
-    battleOver: boolean
 }
 
 export const addCardToCollection = async (cardData: CardData) => {
