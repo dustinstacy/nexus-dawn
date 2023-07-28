@@ -1,19 +1,19 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
-import authRoute from './routes/auth.js'
-import cardsRoute from './routes/cards.js'
-import collectionRoute from './routes/collection.js'
-import deckRoute from './routes/deck.js'
-import profileRoute from './routes/profile.js'
-import cpuOpponentsRoute from './routes/cpuOpponents.js'
-import itemsRoute from './routes/items.js'
-import battleLogsRoute from './routes/battleLogs.js'
-import errorHandler from './middleware/errorHandler.js'
+import authRoute from './routes/auth'
+import cardsRoute from './routes/cards'
+import collectionRoute from './routes/collection'
+import deckRoute from './routes/deck'
+import profileRoute from './routes/profile'
+import cpuOpponentsRoute from './routes/cpuOpponents'
+import itemsRoute from './routes/items'
+import battleLogsRoute from './routes/battleLogs'
+import errorHandler from './middleware/errorHandler'
 
 dotenv.config()
 
@@ -37,17 +37,23 @@ app.use(errorHandler)
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')))
 
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
     res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
 })
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Server Running')
 })
 
+const MONGO_DEV_URI = process.env.MONGO_DEV_URI
+
+if (typeof MONGO_DEV_URI !== 'string') {
+    throw new Error('MONGO_DEV_URI must be a valid string')
+}
+
 mongoose.set('strictQuery', true)
 mongoose
-    .connect(process.env.MONGO_DEV_URI)
+    .connect(MONGO_DEV_URI)
     .then(() => {
         console.log('*****Connected to database*****')
 

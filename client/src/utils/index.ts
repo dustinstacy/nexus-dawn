@@ -50,22 +50,6 @@ export const calculateOptimizedDeck = (
     return optimizedDeck
 }
 
-interface Item {
-    contents: ItemContents
-    image: string
-    info: string
-    level: number
-    name: string
-    price: number
-    type: string
-    _id: string
-}
-
-interface ItemContents {
-    count: number
-    odds: any
-}
-
 // array: The array from which the object will be removed
 // property: The property name used for comparison to find the object
 // value: The value of the property to match and remove the corresponding object

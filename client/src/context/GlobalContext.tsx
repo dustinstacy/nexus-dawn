@@ -1,12 +1,7 @@
-import {
-    ReactNode,
-    createContext,
-    useContext,
-    useMemo,
-    useReducer,
-} from 'react'
+import { ReactNode, createContext, useContext, useReducer } from 'react'
+
 import axios from 'axios'
-import { ICard, Item, User } from 'src/global.interfaces'
+import { ICard, IItem, User } from 'src/global.interfaces'
 
 //****** return to declare arrays when global interface is set up *******//
 interface State {
@@ -15,7 +10,7 @@ interface State {
     userCards: Array<ICard> // Array<Card>
     userDeck: Array<ICard> // Array<Card>
     allCards: Array<ICard> // Array<Card>
-    allItems: Array<Item> // Array<Item>
+    allItems: Array<IItem> // Array<Item>
     allOpponents: any[] // Array<Opponent>
     getGlobalState: () => Promise<void>
     getCurrentUser: () => Promise<void>
@@ -219,8 +214,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
-    // @ts-ignore
-    const value = useMemo(() => ({
+    const value = {
         ...state,
         getGlobalState,
         getCurrentUser,
@@ -230,7 +224,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         getAllItems,
         getAllOpponents,
         logout,
-    }))
+    }
 
     return (
         <GlobalContext.Provider value={value}>

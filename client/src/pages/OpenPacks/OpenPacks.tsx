@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import { Onboarding } from '@components'
 import { useGlobalContext } from '@context'
+import { ICard } from 'src/global.interfaces'
 
 import { Loader, PackContents, UserPacks } from './components'
 import './OpenPacks.scss'
@@ -11,7 +12,7 @@ const OpenPacks = () => {
     const { user } = useGlobalContext()
     const stage = user?.onboardingStage ?? {}
 
-    const [packContents, setPackContents] = useState(null)
+    const [packContents, setPackContents] = useState<Array<ICard> | null>(null)
     const [isLoading, setIsLoading] = useState(false)
 
     return (

@@ -1,10 +1,14 @@
-import React from 'react'
-
+import { IItem } from 'src/global.interfaces'
 import './UserPack.scss'
 
+interface UserPack {
+    itemData: IItem | null
+    allItems: Array<IItem>
+}
+
 // Renders the details of a user pack within the carousel
-const UserPack = ({ itemData, allItems }) => {
-    const { contents, image, info, level, name } = itemData
+const UserPack: React.FC<UserPack> = ({ itemData, allItems }) => {
+    const { contents, image, info, name } = itemData || {}
 
     return (
         <div className='user-pack around'>
@@ -25,7 +29,8 @@ const UserPack = ({ itemData, allItems }) => {
                                         ([key, value]) => (
                                             <div key={key}>
                                                 <p>
-                                                    {key}: &nbsp;{value}%
+                                                    {key}: &nbsp;
+                                                    {value as number}%
                                                 </p>
                                             </div>
                                         )

@@ -1,7 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
+import { IItem } from 'src/global.interfaces'
 
 import './Carousel.scss'
+
+interface Carousel {
+    uniqueItems: Array<IItem>
+    allItems: Array<IItem>
+    setCurrentItem: React.Dispatch<React.SetStateAction<IItem | null>>
+    emptyMessage: string
+    children: ReactElement<{ itemData: IItem; allItems: Array<IItem> }>
+}
 
 // Carousel component that displays a set of items with slide navigation
 const Carousel = ({
@@ -10,7 +19,7 @@ const Carousel = ({
     setCurrentItem,
     emptyMessage,
     children,
-}) => {
+}: Carousel) => {
     const [currentItemIndex, setCurrentItemIndex] = useState(0)
     const [slideDirection, setSlideDirection] = useState('')
 
@@ -35,7 +44,7 @@ const Carousel = ({
     }, [current, setCurrentItem])
 
     // Handle the slide action based on the specified direction
-    const handleSlide = (direction) => {
+    const handleSlide = (direction: string) => {
         setSlideDirection(direction)
         setTimeout(() => {
             setCurrentItemIndex((index) =>

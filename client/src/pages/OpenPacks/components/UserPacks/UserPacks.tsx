@@ -4,16 +4,22 @@ import { addCardToCollection, removeItemFromInventory } from '@api'
 import { Button } from '@components'
 import { useGlobalContext } from '@context'
 import { createCardData, uniqueItemsFilter } from '@utils'
-import { assignRandomCardValues, getRandomCards } from '@utils/randomizers'
+import { assignRandomCardValues, getRandomCards } from '@randomizers'
 
 import { Carousel, UserPack } from './components'
 import './UserPacks.scss'
+import { ICard, IItem, User } from 'src/global.interfaces'
 
-const UserPacks = ({ setIsLoading, setPackContents }) => {
+interface UserPacks {
+    setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+    setPackContents: React.Dispatch<React.SetStateAction<Array<ICard> | null>>
+}
+
+const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     const { user, getGlobalState, getCurrentUser, allCards } =
         useGlobalContext()
 
-    const [currentPack, setCurrentPack] = useState(null)
+    const [currentPack, setCurrentPack] = useState<IItem | null>(null)
 
     const noPacksMessage = 'Head to the MaRKet to buy more packs'
     // Filtering user's inventory to get only packs and sorting them by level in descending order
@@ -33,13 +39,13 @@ const UserPacks = ({ setIsLoading, setPackContents }) => {
         // Simulating a delay of 5 seconds for loader animation
         await new Promise((resolve) => setTimeout(resolve, 5000))
         await getRandomCardsFromPack()
-        await removeItemFromInventory(user, currentPack)
+        await removeItemFromInventory(user as User, currentPack)
         await getCurrentUser()
         setIsLoading(false)
     }
 
     const getRandomCardsFromPack = async () => {
-        const { contents } = currentPack
+        const { contents } = currentPack!
         const newCards = getRandomCards(contents.count, contents.odds, allCards)
 
         newCards.forEach(async (card) => {
@@ -54,7 +60,8 @@ const UserPacks = ({ setIsLoading, setPackContents }) => {
         setPackContents(newCards)
     }
 
-    const buttonDisablers = !currentPack || user?.onboardingstage <= 6
+    const buttonDisablers =
+        !currentPack || (user?.onboardingStage as number) <= 5
 
     return (
         <div className='user-packs panel fill between-column'>
@@ -68,7 +75,7 @@ const UserPacks = ({ setIsLoading, setPackContents }) => {
                 setCurrentItem={setCurrentPack}
                 emptyMessage={noPacksMessage}
             >
-                <UserPack />
+                <UserPack itemData={currentPack} allItems={userPacks} />
             </Carousel>
             <Button
                 label='OpeN PacK'

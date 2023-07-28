@@ -1,11 +1,13 @@
-import React from 'react'
-
 import { classSet } from '@utils'
 import './Loader.scss'
 
+interface Loader {
+    depth: number
+}
+
 // Loader component that renders a recursive pattern of squares
-const Loader = ({ depth }) => {
-    const renderSquares = (currentDepth) => {
+const Loader = ({ depth }: Loader) => {
+    const renderSquares = (currentDepth: number) => {
         if (currentDepth === 0) {
             return null
         }

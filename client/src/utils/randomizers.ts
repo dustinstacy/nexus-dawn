@@ -1,21 +1,10 @@
 import { maxValues } from '@constants'
+import { ICard, CardValues } from 'src/global.interfaces'
 
 // Helper function to generate a random integer within a specified range
 const randomIntFromInterval = (min: number, max: number) => {
     // + 1 ensures a returned integer in the inclusive range
     return Math.floor(Math.random() * (max - min + 1) + min)
-}
-
-type CardValues = [number, number, number, number]
-
-interface Card {
-    name: string
-    number: number
-    image: string
-    rarity: string
-    empower: string
-    weaken: string
-    values: CardValues
 }
 
 interface ValueLimits {
@@ -25,7 +14,7 @@ interface ValueLimits {
 
 // Helper function to generate random sum of all 4 card values
 // and maximum value of any single value based on the card's rarity
-const setValueLimits = (card: Card): ValueLimits => {
+const setValueLimits = (card: ICard): ValueLimits => {
     let sumOfValues = 0
     let maxSingleValue = 0
 
@@ -50,7 +39,7 @@ const setValueLimits = (card: Card): ValueLimits => {
 }
 
 // Generates random values for a card
-export const assignRandomCardValues = (card: Card): CardValues => {
+export const assignRandomCardValues = (card: ICard): CardValues => {
     // See setValueLimits()
     const { sumOfValues, maxSingleValue } = setValueLimits(card)
 
@@ -90,7 +79,7 @@ export const assignRandomCardValues = (card: Card): CardValues => {
 // minDeckValue: Minimum total sum of all card values allowed.
 // maxDeckValue: Maximum total sum of all card values allowed.
 export const assignRandomDeckValues = (
-    deck: Array<Card>,
+    deck: Array<ICard>,
     minDeckValue: number,
     maxDeckValue: number
 ) => {
@@ -159,8 +148,8 @@ interface Odds {
 export const getRandomCards = (
     nCards: number,
     odds: Odds,
-    cardSet: Array<Card>
-): Array<Card> => {
+    cardSet: Array<ICard>
+): Array<ICard> => {
     const randomCardsArray = [...new Array(nCards)]
     for (let i = 0; i < randomCardsArray.length; i++) {
         // Get random rarity based on odds
