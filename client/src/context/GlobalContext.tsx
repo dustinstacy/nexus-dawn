@@ -1,10 +1,4 @@
-import React, {
-    ReactNode,
-    createContext,
-    useContext,
-    useMemo,
-    useReducer,
-} from 'react'
+import { ReactNode, createContext, useContext, useReducer } from 'react'
 import axios from 'axios'
 import { User } from 'src/global.interfaces'
 
@@ -219,8 +213,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
-    // @ts-ignore
-    const value = useMemo(() => ({
+    const value = {
         ...state,
         getGlobalState,
         getCurrentUser,
@@ -230,7 +223,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         getAllItems,
         getAllOpponents,
         logout,
-    }))
+    }
 
     return (
         <GlobalContext.Provider value={value}>
