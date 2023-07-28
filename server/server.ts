@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import * as dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
@@ -37,17 +37,23 @@ app.use(errorHandler)
 
 app.use(express.static(path.resolve(__dirname, '../client/dist')))
 
-app.get('*', (req, res) => {
+app.get('*', (req: Request, res: Response) => {
     res.sendFile(path.resolve(__dirname, '../client/dist', 'index.html'))
 })
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
     res.send('Server Running')
 })
 
+const MONGO_DEV_URI = process.env.MONGO_DEV_URI
+
+if (typeof MONGO_DEV_URI !== 'string') {
+    throw new Error('MONGO_DEV_URI must be a valid string')
+}
+
 mongoose.set('strictQuery', true)
 mongoose
-    .connect(process.env.MONGO_DEV_URI)
+    .connect(MONGO_DEV_URI)
     .then(() => {
         console.log('*****Connected to database*****')
 

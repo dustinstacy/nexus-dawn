@@ -1,18 +1,19 @@
-import express from 'express'
+import express, { Request, Response, NextFunction } from 'express'
+
 import { requiresAuth } from '../middleware/permissions.js'
 import {
     checkForExistingEmail,
     checkForExistingUsername,
     validateRegisterInput,
 } from '../validation/registerValidation.js'
-import User from '../models/User.js'
+import User, { IUser } from '../models/User.ts'
 
 const router = express.Router()
 
 // @route GET /api/profile/test
 // @desc Test the profile route
 // @access Public
-router.get('/test', (req, res) => {
+router.get('/test', (req: Request, res: Response) => {
     res.send('Auth route working')
 })
 
@@ -24,9 +25,13 @@ router.put(
     requiresAuth,
     checkForExistingEmail,
     checkForExistingUsername,
-    async (req, res, next) => {
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const user = await User.findOne({ _id: req.user._id })
+            if (!hasUser(req)) {
+                return res.status(404).json({ error: 'User not found' })
+            }
+
+            const user = (await User.findOne({ _id: req.user._id })) as IUser
             const {
                 role,
                 username,
@@ -61,11 +66,8 @@ router.put(
                         email: email || user.email,
                         image: image || user.image,
                         color: color || user.color,
-                        defeatedEnemies:
-                            defeatedEnemies || user.defeatedEnemies,
                         activeBattle: activeBattle || user.activeBattle,
                         coin: coin || user.coin,
-                        runes: runes || user.runes,
                     }
                     break
                 case 'stats':
@@ -110,5 +112,10 @@ router.put(
         }
     }
 )
+
+// Type guard function to check if 'req.user' is defined and has IUser type
+function hasUser(req: Request): req is Request & { user: IUser } {
+    return !!req.user
+}
 
 export default router

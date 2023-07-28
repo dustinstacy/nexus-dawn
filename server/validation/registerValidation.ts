@@ -1,14 +1,29 @@
+import { Request, Response, NextFunction } from 'express'
 import validator from 'validator'
-import User from '../models/User.js'
+import User from '../models/User.ts'
 
-const isEmpty = (value) =>
+interface Data {
+    username: string
+    email: string
+    password: string
+    confirmPassword: string
+}
+
+interface Errors {
+    username?: string
+    email?: string
+    password?: string
+    confirmPassword?: string
+}
+
+const isEmpty = (value: any) =>
     value === undefined ||
     value === null ||
     (typeof value === 'object' && Object.keys(value).length === 0) ||
     (typeof value === 'string' && value.trim().length === 0)
 
-export const validateRegisterInput = (data) => {
-    let errors = {}
+export const validateRegisterInput = (data: Data) => {
+    let errors: Errors = {}
     const { username, email, password, confirmPassword } = data
 
     if ('username' in data) {
@@ -51,7 +66,11 @@ export const validateRegisterInput = (data) => {
     }
 }
 
-export const checkForExistingEmail = async (req, res, next) => {
+export const checkForExistingEmail = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     try {
         const existingEmail = await User.findOne({
             email: new RegExp('^' + req.body.email + '$', 'i'),
@@ -67,7 +86,11 @@ export const checkForExistingEmail = async (req, res, next) => {
     }
 }
 
-export const checkForExistingUsername = async (req, res, next) => {
+export const checkForExistingUsername = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
     try {
         const existingUsername = await User.findOne({
             username: new RegExp('^' + req.body.username + '$', 'i'),

@@ -1,14 +1,3 @@
-// Helper function to simplify updating state objects
-export const updateState = (setState: any, updates: any) => {
-    setState((state: any) => ({ ...state, ...updates }))
-}
-
-// Combines multiple class names into a single string
-// and filters out any falsy values.
-export const classSet = (...classes: Array<string>) => {
-    return classes.filter(Boolean).join(' ')
-}
-
 type CardValues = [number, number, number, number]
 
 interface CardData {
@@ -29,6 +18,33 @@ interface Card {
     empower: string
     weaken: string
     values: CardValues
+}
+
+interface Item {
+    contents: ItemContents
+    image: string
+    info: string
+    level: number
+    name: string
+    price: number
+    type: string
+    _id: string
+}
+
+interface ItemContents {
+    count: number
+    odds: any
+}
+
+// Helper function to simplify updating state objects
+export const updateState = (setState: any, updates: any) => {
+    setState((state: any) => ({ ...state, ...updates }))
+}
+
+// Combines multiple class names into a single string
+// and filters out any falsy values.
+export const classSet = (...classes: Array<string>) => {
+    return classes.filter(Boolean).join(' ')
 }
 
 export const createCardData = (card: Card): CardData => {
@@ -68,22 +84,6 @@ export const calculateOptimizedDeck = (
     const optimizedDeck = sortedArray.slice(0, count)
 
     return optimizedDeck
-}
-
-interface Item {
-    contents: ItemContents
-    image: string
-    info: string
-    level: number
-    name: string
-    price: number
-    type: string
-    _id: string
-}
-
-interface ItemContents {
-    count: number
-    odds: any
 }
 
 // array: The array from which the object will be removed

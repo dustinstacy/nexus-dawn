@@ -1,7 +1,8 @@
-import express from 'express'
-import { requiresAuth } from '../middleware/permissions.js'
-import Deck from '../models/Deck.js'
-import User from '../models/User.js'
+import express, { Request, Response, NextFunction } from 'express'
+
+import { checkUser, requiresAuth } from '../middleware/permissions.js'
+import Deck from '../models/Deck.ts'
+import User, { IUser } from '../models/User.ts'
 
 const router = express.Router()
 
@@ -17,6 +18,10 @@ router.get('/test', (req, res) => {
 // @access Private
 router.get('/', requiresAuth, async (req, res, next) => {
     try {
+        if (!hasUser(req)) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+
         const deck = await Deck.findOne({
             user: req.user._id,
         }).lean()
@@ -32,6 +37,10 @@ router.get('/', requiresAuth, async (req, res, next) => {
 // @access Private
 router.post('/', requiresAuth, async (req, res, next) => {
     try {
+        if (!hasUser(req)) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+
         const user = await User.findOne({
             _id: req.user._id,
         })
@@ -58,6 +67,10 @@ router.post('/', requiresAuth, async (req, res, next) => {
 // @access Private
 router.put('/add', requiresAuth, async (req, res, next) => {
     try {
+        if (!hasUser(req)) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+
         const cardData = req.body
 
         const deck = await Deck.findOneAndUpdate(
@@ -81,6 +94,10 @@ router.put('/add', requiresAuth, async (req, res, next) => {
 // @access Private
 router.put('/:card_id/remove', requiresAuth, async (req, res, next) => {
     try {
+        if (!hasUser(req)) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+
         const deck = await Deck.findOneAndUpdate(
             { user: req.user._id },
             { $pull: { cards: { _id: req.params.card_id } } },
@@ -102,6 +119,10 @@ router.put('/:card_id/remove', requiresAuth, async (req, res, next) => {
 // @access Private
 router.put('/empty', requiresAuth, async (req, res, next) => {
     try {
+        if (!hasUser(req)) {
+            return res.status(404).json({ error: 'User not found' })
+        }
+
         const deck = await Deck.findOneAndUpdate(
             { user: req.user._id },
             { $set: { cards: [] } },
@@ -117,5 +138,10 @@ router.put('/empty', requiresAuth, async (req, res, next) => {
         next(error)
     }
 })
+
+// Type guard function to check if 'req.user' is defined and has IUser type
+function hasUser(req: Request): req is Request & { user: IUser } {
+    return !!req.user
+}
 
 export default router
