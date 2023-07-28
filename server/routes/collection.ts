@@ -1,7 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { requiresAuth } from '../middleware/permissions.js'
-import Collection from '../models/Collection.ts'
-import User, { IUser } from '../models/User.ts'
+
+import { requiresAuth } from '../middleware/permissions'
+import Collection from '../models/Collection'
+import User from '../models/User'
+import { hasUser } from '../utils'
 
 const router = express.Router()
 
@@ -204,10 +206,5 @@ router.delete(
         }
     }
 )
-
-// Type guard function to check if 'req.user' is defined and has IUser type
-function hasUser(req: Request): req is Request & { user: IUser } {
-    return !!req.user
-}
 
 export default router

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import validator from 'validator'
-import User from '../models/User.ts'
+import User from '../models/User'
 
 interface Data {
     username: string
