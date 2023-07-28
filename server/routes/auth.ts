@@ -2,14 +2,14 @@ import express, { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt, { Secret } from 'jsonwebtoken'
 
-import { UserToReturn } from '../global.interface.js'
-import { requiresAuth } from '../middleware/permissions.js'
+import { requiresAuth } from '../middleware/permissions'
 import {
     validateRegisterInput,
     checkForExistingEmail,
     checkForExistingUsername,
-} from '../validation/registerValidation.js'
-import User, { IUser } from '../models/User.ts'
+} from '../validation/registerValidation'
+import User, { IUser } from '../models/User'
+import { UserToReturn } from '../global.interface'
 
 const router = express.Router()
 

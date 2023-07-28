@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 
-import { requiresAuth, requiresAdmin } from '../middleware/permissions.js'
-import CPUOpponent from '../models/CPUOpponent.ts'
+import { requiresAuth, requiresAdmin } from '../middleware/permissions'
+import CPUOpponent from '../models/CPUOpponent'
 
 const router = express.Router()
 

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
-import User, { IUser } from '../models/User.js'
+import User, { IUser } from '../models/User'
 import jwt, { Secret } from 'jsonwebtoken'
-import { UserToReturn } from '../global.interface.js'
+import { UserToReturn } from '../global.interface'
 
 interface DecodedToken {
     userId: string

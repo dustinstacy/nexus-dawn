@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { requiresAuth, requiresAdmin } from '../middleware/permissions.js'
-import Card from '../models/Card.ts'
+
+import { requiresAuth, requiresAdmin } from '../middleware/permissions'
+import Card from '../models/Card'
 
 const router = express.Router()
 

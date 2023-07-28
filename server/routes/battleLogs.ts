@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express'
-import BattleLog from '../models/BattleLog.ts'
+
+import BattleLog from '../models/BattleLog'
 
 const router = express.Router()
 

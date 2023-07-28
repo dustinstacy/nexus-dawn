@@ -1,7 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express'
 
-import { requiresAuth, requiresAdmin } from '../middleware/permissions.js'
-import Item from '../models/Item.ts'
+import { requiresAuth, requiresAdmin } from '../middleware/permissions'
+import Item from '../models/Item'
 
 const router = express.Router()
 
