@@ -9,7 +9,7 @@ interface ButtonProps {
     label: string
     type?: string
     path?: string
-    onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
     disabled?: boolean
     onKeyDown?: boolean
 }
@@ -21,7 +21,7 @@ const Button = ({ label, type, path, onClick, disabled }: ButtonProps) => {
     const navigate = useNavigate()
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        type === 'link' ? navigate(`${path}`) : onClick(e)
+        type === 'link' ? navigate(`${path}`) : onClick?.(e)
     }
 
     const buttonClasses = classSet(

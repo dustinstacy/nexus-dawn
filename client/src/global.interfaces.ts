@@ -127,12 +127,6 @@ export interface FormData {
     [key: string]: string | undefined
 }
 
-export interface BattleLog {
-    playerOne: PlayerDetails
-    playerTwo: PlayerDetails
-    battleState: BattleState
-}
-
 export interface HandleToggle {
     isOpen: boolean
     toggleIsOpen?: () => void
@@ -145,4 +139,39 @@ export interface NextStage {
 
 export interface Register {
     register: boolean
+}
+
+export enum BattleResult {
+    win = 'win',
+    loss = 'loss',
+    draw = 'draw',
+}
+
+export interface IOpponent {
+    name: string
+    avatar: string
+    image: string
+    color: string
+    level: number
+    deckOdds: Object
+    cardCount: number
+    minPower: number
+    maxPower: number
+    rules: Array<string>
+    rounds: number
+    rewards: OpponentRewards
+}
+
+interface OpponentRewards {
+    xp: number
+    coin: number
+    items: Array<IItem>
+}
+
+export interface Odds {
+    Common?: number
+    Uncommon?: number
+    Rare?: number
+    Epic?: number
+    Legendary?: number
 }

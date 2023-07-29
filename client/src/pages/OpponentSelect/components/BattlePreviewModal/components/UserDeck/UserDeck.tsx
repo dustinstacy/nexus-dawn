@@ -1,21 +1,24 @@
-import React from 'react'
-
 import { addCardToDeck, removeCardFromDeck } from '@api'
 import { headerStyle } from '@assets'
 import { Button } from '@components'
 import { useGlobalContext } from '@context'
 import { calculateDeckPower, calculateOptimizedDeck, classSet } from '@utils'
+import { IOpponent } from 'src/global.interfaces'
 
 import './UserDeck.scss'
 
+interface UserDeckProps {
+    selectedOpponent: IOpponent
+}
+
 // Renders the user's deck information.
-const UserDeck = ({ selectedOpponent }) => {
+const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
     const { getCurrentUser, userCards, userDeck } = useGlobalContext()
 
     // Calculate the strongest combination of the user's cards based on the opponent's card count requirement
     const userOptimizedDeck = calculateOptimizedDeck(
         userCards,
-        selectedOpponent.cardCount
+        String(selectedOpponent.cardCount)
     )
 
     // Calculate the sum of all card values in the user's deck

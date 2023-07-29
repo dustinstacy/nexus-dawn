@@ -1,12 +1,15 @@
-import React from 'react'
-
 import { coinImage, headerStyle } from '@assets'
 import { useGlobalContext } from '@context'
+import { IOpponent } from 'src/global.interfaces'
 
 import './SelectedOpponent.scss'
 
+interface SelectedOpponentProps {
+    selectedOpponent: IOpponent
+}
+
 // Renders selected opponent information
-const SelectedOpponent = ({ selectedOpponent }) => {
+const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
     const { allItems } = useGlobalContext()
     const { name, image, minPower, maxPower, rewards, rounds } =
         selectedOpponent

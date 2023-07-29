@@ -1,5 +1,5 @@
 import { maxValues } from '@constants'
-import { ICard, CardValues } from 'src/global.interfaces'
+import { ICard, CardValues, Odds } from 'src/global.interfaces'
 
 // Helper function to generate a random integer within a specified range
 const randomIntFromInterval = (min: number, max: number) => {
@@ -131,14 +131,6 @@ export const assignRandomDeckValues = (
         finalValue < minDeckValue ||
         finalValue > maxDeckValue
     )
-}
-
-interface Odds {
-    Common?: number
-    Uncommon?: number
-    Rare?: number
-    Epic?: number
-    Legendary?: number
 }
 
 // nCards: Number of cards to return

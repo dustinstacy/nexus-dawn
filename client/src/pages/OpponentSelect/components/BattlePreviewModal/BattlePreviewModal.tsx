@@ -4,21 +4,31 @@ import { useNavigate } from 'react-router-dom'
 
 import { Button, ModalOverlay } from '@components'
 import { useGlobalContext } from '@context'
-import { getRandomCards, assignRandomDeckValues } from '@utils/randomizers'
+import { getRandomCards, assignRandomDeckValues } from '@randomizers'
+import { ICard, IOpponent, Odds } from 'src/global.interfaces'
 
 import { SelectedOpponent, UserDeck } from './components'
 import './BattlePreviewModal.scss'
 
+interface BattlePreviewModalProps {
+    selectedOpponent: IOpponent | null
+    setSelectedOpponent: React.Dispatch<React.SetStateAction<IOpponent | null>>
+}
+
 // Renders the battle preview overlay upon selection of an opponent
 // Allows the user to view the selected opponent, battle rules, and user deck.
 // Provides options to edit the deck and start the battle.
-const BattlePreviewModal = ({ selectedOpponent, setSelectedOpponent }) => {
+const BattlePreviewModal = ({
+    selectedOpponent,
+    setSelectedOpponent,
+}: BattlePreviewModalProps) => {
     const navigate = useNavigate()
     const { allCards, userDeck } = useGlobalContext()
-    const { deckOdds, cardCount, minPower, maxPower, rewards } =
-        selectedOpponent
+    const { deckOdds, cardCount, minPower, maxPower } = selectedOpponent || {}
 
-    const [selectedOpponentDeck, setSelectedOpponentDeck] = useState([])
+    const [selectedOpponentDeck, setSelectedOpponentDeck] = useState<
+        Array<ICard> | []
+    >([])
 
     // Randomize and set opponents deck on component mount
     useEffect(() => {
@@ -27,19 +37,25 @@ const BattlePreviewModal = ({ selectedOpponent, setSelectedOpponent }) => {
 
     const getOpponentDeck = () => {
         const opponentRandomCards = getRandomCards(
-            cardCount,
-            deckOdds,
-            allCards
+            cardCount as number,
+            deckOdds as Odds,
+            allCards as Array<ICard>
         )
-        assignRandomDeckValues(opponentRandomCards, minPower, maxPower)
+        assignRandomDeckValues(
+            opponentRandomCards,
+            minPower as number,
+            maxPower as number
+        )
         const currentOpponentDeck = opponentRandomCards.map((card, i) => {
             return {
                 image: card.image,
                 values: card.values,
-                _id: card._id + i,
+                _id: card._id! + i,
             }
         })
-        setSelectedOpponentDeck((prevDeck) => currentOpponentDeck)
+        setSelectedOpponentDeck(
+            (prevDeck) => currentOpponentDeck as Array<ICard>
+        )
     }
 
     // Navigate to battle page with stored opponent and opponent deck statee
@@ -62,13 +78,13 @@ const BattlePreviewModal = ({ selectedOpponent, setSelectedOpponent }) => {
                             onClick={() => setSelectedOpponent(null)}
                         />
                         <SelectedOpponent selectedOpponent={selectedOpponent} />
-                        <UserDeck selectedOpponent={selectedOpponent} />
+                        <UserDeck selectedOpponent={selectedOpponent!} />
 
                         <Button
                             label='Start Battle'
-                            onClick={(e) => startBattle(e)}
+                            onClick={startBattle}
                             disabled={
-                                userDeck?.length !== selectedOpponent.cardCount
+                                userDeck?.length !== selectedOpponent?.cardCount
                             }
                         />
                     </>

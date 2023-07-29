@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { postBattleLog, updateUserStats } from '@api'
 import { Alert, Button } from '@components'
@@ -7,12 +7,15 @@ import { useGlobalContext } from '@context'
 import { BattlePreviewModal, OpponentCard } from './components'
 
 import './OpponentSelect.scss'
+import { BattleResult, IOpponent, User } from 'src/global.interfaces'
 
 // Renders a menu of CPU opponents to select from.
 // Displays alert if saved battle state exists.
 const OpponentSelect = () => {
     const { allOpponents, user } = useGlobalContext()
-    const [selectedOpponent, setSelectedOpponent] = useState(null)
+    const [selectedOpponent, setSelectedOpponent] = useState<IOpponent | null>(
+        null
+    )
     const [alertActive, setAlertActive] = useState(false)
 
     const sortedOpponents = allOpponents.sort((a, b) => a.level - b.level)
@@ -29,9 +32,11 @@ const OpponentSelect = () => {
 
     const forfeitBattle = async () => {
         const battleLog = localStorage.getItem('battleLog')
-        await postBattleLog(battleLog)
+
+        await postBattleLog(battleLog as string)
+
         localStorage.removeItem('battleLog')
-        await updateUserStats(user, 'loss')
+        await updateUserStats(user as User, 'loss' as BattleResult)
         setAlertActive((current) => !current)
     }
 
