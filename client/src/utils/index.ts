@@ -1,40 +1,4 @@
-type CardValues = [number, number, number, number]
-
-interface CardData {
-    name: string
-    number: number
-    image: string
-    rarity: string
-    empower: string
-    weaken: string
-    values: CardValues
-}
-
-interface Card {
-    name: string
-    number: number
-    image: string
-    rarity: string
-    empower: string
-    weaken: string
-    values: CardValues
-}
-
-interface Item {
-    contents: ItemContents
-    image: string
-    info: string
-    level: number
-    name: string
-    price: number
-    type: string
-    _id: string
-}
-
-interface ItemContents {
-    count: number
-    odds: any
-}
+import { CardData, ICard, IItem } from 'src/global.interfaces'
 
 // Helper function to simplify updating state objects
 export const updateState = (setState: any, updates: any) => {
@@ -47,7 +11,7 @@ export const classSet = (...classes: Array<string>) => {
     return classes.filter(Boolean).join(' ')
 }
 
-export const createCardData = (card: Card): CardData => {
+export const createCardData = (card: ICard): CardData => {
     return {
         name: card.name,
         number: card.number,
@@ -60,9 +24,9 @@ export const createCardData = (card: Card): CardData => {
 }
 
 // Calculate the sum of all card values within an array
-export const calculateDeckPower = (array: Array<Card>): number => {
+export const calculateDeckPower = (array: Array<ICard>): number => {
     const power = array.reduce(
-        (total: number, card: Card) =>
+        (total: number, card: ICard) =>
             total + card.values.reduce((sum, current) => sum + current, 0),
         0
     )
@@ -72,16 +36,16 @@ export const calculateDeckPower = (array: Array<Card>): number => {
 
 // Calculate the sum of all card values within an array
 export const calculateOptimizedDeck = (
-    userCards: Array<Card>,
-    count: number
-): Array<Card> => {
+    userCards: Array<ICard>,
+    count: string
+): Array<ICard> => {
     const sortedArray = userCards.sort(
         (a, b) =>
             b.values.reduce((sum, current) => sum + current, 0) -
             a.values.reduce((sum, current) => sum + current, 0)
     )
 
-    const optimizedDeck = sortedArray.slice(0, count)
+    const optimizedDeck = sortedArray.slice(0, Number(count))
 
     return optimizedDeck
 }
@@ -90,7 +54,7 @@ export const calculateOptimizedDeck = (
 // property: The property name used for comparison to find the object
 // value: The value of the property to match and remove the corresponding object
 export const removeObjectByValue = (
-    userInventory: Array<Item>,
+    userInventory: Array<IItem>,
     value: string
 ) => {
     const index = userInventory.findIndex((obj) => obj['name'] === value)
@@ -100,8 +64,10 @@ export const removeObjectByValue = (
 }
 
 // Filters out all duplicates inside an array, returns only one instance of each unique value
-export const uniqueItemsFilter = (userInventory: Array<Item>): Array<Item> => {
-    return userInventory.reduce((uniqueItems: Array<Item>, currentItem) => {
+export const uniqueItemsFilter = (
+    userInventory: Array<IItem>
+): Array<IItem> => {
+    return userInventory.reduce((uniqueItems: Array<IItem>, currentItem) => {
         const foundItem = uniqueItems.find(
             (item) =>
                 item.name === currentItem.name && item.type === currentItem.type

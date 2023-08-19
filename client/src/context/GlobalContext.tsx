@@ -1,15 +1,16 @@
 import { ReactNode, createContext, useContext, useReducer } from 'react'
+
 import axios from 'axios'
-import { User } from 'src/global.interfaces'
+import { ICard, IItem, User } from 'src/global.interfaces'
 
 //****** return to declare arrays when global interface is set up *******//
 interface State {
     user: User | null
     fetchingUser: boolean
-    userCards: any[] // Array<Card>
-    userDeck: any[] // Array<Card>
-    allCards: any[] // Array<Card>
-    allItems: any[] // Array<Item>
+    userCards: Array<ICard> // Array<Card>
+    userDeck: Array<ICard> // Array<Card>
+    allCards: Array<ICard> // Array<Card>
+    allItems: Array<IItem> // Array<Item>
     allOpponents: any[] // Array<Opponent>
     getGlobalState: () => Promise<void>
     getCurrentUser: () => Promise<void>

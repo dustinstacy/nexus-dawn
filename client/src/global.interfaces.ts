@@ -9,7 +9,7 @@ export interface User {
     createdAt: string
     email: string
     image: string
-    inventory: Array<Item>
+    inventory: Array<IItem>
     level: number
     onboardingStage: number
     xp: number
@@ -28,14 +28,14 @@ enum Role {
     player = 'player',
 }
 
-type CardValues = [number, number, number, number]
+export type CardValues = [number, number, number, number]
 
 interface BaseCard {
     image: string
     values: CardValues
 }
 
-enum Rarity {
+export enum Rarity {
     Common = 'Common',
     Uncommon = 'Uncommon',
     Rare = 'Rare',
@@ -52,24 +52,26 @@ export interface CardData extends BaseCard {
 }
 
 export interface CardLog extends BaseCard {
-    _id: string
-    color: string
+    _id?: string
+    color?: string
 }
 
 export interface DeckCard extends CardLog {
-    enemiesConverted: number
-    level: number
+    enemiesConverted?: number
+    level?: number
     rarity: string
-    selected: boolean
-    timesPlayed: number
-    xp: number
+    selected?: boolean
+    timesPlayed?: number
+    xp?: number
+    empower?: any
+    weaken?: any
 }
 
 export interface ICard extends CardData, DeckCard {
-    captured: boolean | null
+    captured?: boolean | null
 }
 
-export interface Item {
+export interface IItem {
     contents: ItemContents
     image: string
     info: string
@@ -83,6 +85,11 @@ export interface Item {
 interface ItemContents {
     count: number
     odds: any
+}
+
+export interface ChosenQuantity {
+    amount: number
+    discount: string
 }
 
 interface PlayerDetails {
@@ -112,10 +119,12 @@ interface BattleState {
     battleOver: boolean
 }
 
-export interface BattleLog {
-    playerOne: PlayerDetails
-    playerTwo: PlayerDetails
-    battleState: BattleState
+export interface FormData {
+    username: string
+    email?: string
+    password: string
+    confirmPassword?: string
+    [key: string]: string | undefined
 }
 
 export interface HandleToggle {
@@ -126,4 +135,43 @@ export interface HandleToggle {
 
 export interface NextStage {
     nextStage: (path?: string) => void
+}
+
+export interface Register {
+    register: boolean
+}
+
+export enum BattleResult {
+    win = 'win',
+    loss = 'loss',
+    draw = 'draw',
+}
+
+export interface IOpponent {
+    name: string
+    avatar: string
+    image: string
+    color: string
+    level: number
+    deckOdds: Object
+    cardCount: number
+    minPower: number
+    maxPower: number
+    rules: Array<string>
+    rounds: number
+    rewards: OpponentRewards
+}
+
+interface OpponentRewards {
+    xp: number
+    coin: number
+    items: Array<IItem>
+}
+
+export interface Odds {
+    Common?: number
+    Uncommon?: number
+    Rare?: number
+    Epic?: number
+    Legendary?: number
 }

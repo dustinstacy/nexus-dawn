@@ -1,18 +1,13 @@
 import axios, { AxiosResponse } from 'axios'
 import { removeObjectByValue } from './../utils'
 import {
-    BattleLog,
+    BattleResult,
     CardData,
     DeckCard,
-    Item,
+    ICard,
+    IItem,
     User,
 } from 'src/global.interfaces'
-
-enum BattleResult {
-    win = 'win',
-    loss = 'loss',
-    draw = 'draw',
-}
 
 export const addCardToCollection = async (cardData: CardData) => {
     await axios.put('/api/collection/new', cardData)
@@ -31,12 +26,12 @@ export const addCoin = async (user: User, amount: number) => {
 }
 
 // Mark card as selected and add card to user's deck
-export const addCardToDeck = async (card: DeckCard) => {
+export const addCardToDeck = async (card: ICard) => {
     await axios.put(`/api/deck/add`, card)
     await axios.put(`/api/collection/${card._id}/select`)
 }
 
-export const addItemToInventory = async (user: User, item: Item) => {
+export const addItemToInventory = async (user: User, item: IItem) => {
     let updatedInventory = [...user.inventory]
 
     if (Array.isArray(item)) {
@@ -63,7 +58,7 @@ export const removeCardFromDeck = async (card: DeckCard) => {
     await axios.put(`/api/collection/${card._id}/unselect`)
 }
 
-export const removeItemFromInventory = async (user: User, item: Item) => {
+export const removeItemFromInventory = async (user: User, item: IItem) => {
     removeObjectByValue(user.inventory, item.name)
     await axios.put('/api/profile/inventory', {
         inventory: user.inventory,
@@ -109,7 +104,7 @@ export const updateUserStats = async (user: User, result: BattleResult) => {
 }
 
 // Add battle log to database
-export const postBattleLog = async (battleLog: BattleLog) => {
+export const postBattleLog = async (battleLog: string) => {
     await axios.post('/api/battleLogs', {
         battleLog: battleLog,
     })

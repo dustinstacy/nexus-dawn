@@ -8,8 +8,8 @@ import './CardList.scss'
 
 interface CardListProps {
     cardArray: Array<ICard> | null
-    handleClick: (e: React.MouseEvent<HTMLDivElement>, card: ICard) => void
-    hasCheckbox: boolean
+    handleClick?: (e: React.MouseEvent<HTMLDivElement>, card: ICard) => void
+    hasCheckbox?: boolean
 }
 
 const CardList = ({ cardArray, handleClick, hasCheckbox }: CardListProps) => {
@@ -19,7 +19,7 @@ const CardList = ({ cardArray, handleClick, hasCheckbox }: CardListProps) => {
                 <div key={card._id} className='card-container'>
                     <Card
                         card={card}
-                        handleClick={(e) => handleClick(e, card)}
+                        handleClick={(e) => handleClick?.(e, card)}
                         isShowing
                     />
                     {hasCheckbox && <CheckBox card={card} />}
