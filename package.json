@@ -4,7 +4,7 @@
     "description": "",
     "type": "module",
     "scripts": {
-        "server": "cd server && npm run server",
+        "server": "cd server && npm run dev",
         "client": "cd client && npm start",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "start": "npm start --prefix server",

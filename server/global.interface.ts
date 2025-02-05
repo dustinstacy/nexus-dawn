@@ -1,4 +1,4 @@
-import { IUser } from './models/User'
+import { IUser } from "./src/models/User"
 
 declare global {
     namespace Express {
@@ -8,7 +8,7 @@ declare global {
     }
 }
 
-export interface UserToReturn extends Omit<IUser, 'password'> {
+export interface UserToReturn extends Omit<IUser, "password"> {
     password?: string
 }
 
