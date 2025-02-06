@@ -34,7 +34,6 @@ const Onboarding = () => {
 
     // Advances the user to next onboarding stage
     const nextStage = async (path?: string) => {
-        console.log("next stage")
         try {
             await incrementOnboardingStage(user as User)
             await getCurrentUser()

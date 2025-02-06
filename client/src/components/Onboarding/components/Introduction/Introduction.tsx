@@ -14,7 +14,6 @@ const Introduction = ({ nextStage }: NextStage) => {
     const { allCards, allItems, getCurrentUser, user } = useGlobalContext()
 
     const handleBegin = async () => {
-        console.log("begin")
         await completeUserStartingData()
         await addCoin(user as User, 200)
         nextStage("/market")
