@@ -11,7 +11,7 @@ export const sendAuthRequest = async (formData: FormData, register: boolean) => 
         const data = register ? { username, email, password, confirmPassword } : { username, password }
 
         const endpoint = register ? "/api/auth/register" : "/api/auth/login"
-        const response = await axios.post(endpoint, data)
+        const response = await axios.post(endpoint, data, { withCredentials: true })
         console.log(response)
 
         // If the response contains errors, throw an error with the response data
