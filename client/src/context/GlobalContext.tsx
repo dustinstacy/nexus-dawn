@@ -113,7 +113,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getCurrentUser = async () => {
         try {
-            const res = await axios.get("/api/auth/current")
+            const res = await axios.get("/api/auth/current", { withCredentials: true })
 
             if (res.data) {
                 dispatch({
