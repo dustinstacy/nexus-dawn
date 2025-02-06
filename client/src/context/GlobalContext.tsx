@@ -105,10 +105,10 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(globalReducer, initialState)
 
     const getGlobalState = async () => {
-        await getCurrentUser()
         await getAllCards()
         await getAllItems()
         await getAllOpponents()
+        await getCurrentUser()
     }
 
     const getCurrentUser = async () => {
