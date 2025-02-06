@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { ThreeCircles } from 'react-loader-spinner'
+import React, { useEffect, useState } from "react"
+import { ThreeCircles } from "react-loader-spinner"
 
-import { deductCoin, addItemToInventory } from '@api'
-import { coinImage } from '@assets'
-import { useGlobalContext } from '@context'
-import { Button } from '@components'
-import { IItem, User } from 'src/global.interfaces'
+import { deductCoin, addItemToInventory } from "@api"
+import { coinImage } from "@assets"
+import { useGlobalContext } from "@context"
+import { Button } from "@components"
+import { IItem, User } from "src/global.interfaces"
 
-import { calculatePrice } from './utils'
-import './PurchaseBar.scss'
+import { calculatePrice } from "./utils"
+import "./PurchaseBar.scss"
 
 interface PurchaseBar {
     chosenItem: IItem | null
@@ -34,10 +34,7 @@ const PurchaseBar = ({
     const [loading, setLoading] = useState(false)
 
     // Create an array representing the final purchase based on the chosen item and quantity
-    const finalPurchase = Array.from(
-        { length: chosenQuantity?.amount },
-        () => chosenItem
-    )
+    const finalPurchase = Array.from({ length: chosenQuantity?.amount }, () => chosenItem)
 
     // Check if the user has enough coins to make the purchase
     const canPurchase = finalPrice <= (coin || 0)
@@ -45,11 +42,7 @@ const PurchaseBar = ({
     useEffect(() => {
         if (chosenItem) {
             // Calculate the final price based on the chosen item, quantity, and discount
-            const calculatedPrice = calculatePrice(
-                chosenItem,
-                chosenQuantity.amount,
-                chosenQuantity.discount
-            )
+            const calculatedPrice = calculatePrice(chosenItem, chosenQuantity.amount, chosenQuantity.discount)
 
             setFinalPrice(calculatedPrice)
         }
@@ -62,13 +55,13 @@ const PurchaseBar = ({
             // Simulate loading for 1.5 seconds
             await new Promise((resolve) => setTimeout(resolve, 500))
             await deductCoin(user as User, finalPrice)
-            await addItemToInventory(user as User, finalPurchase)
+            await addItemToInventory(user as User, finalPurchase as IItem[])
             await getCurrentUser()
 
             setLoading(false)
             setPurchaseComplete(true)
         } catch (error) {
-            console.error('Error completing purchase:', error)
+            console.error("Error completing purchase:", error)
         }
     }
 
@@ -83,14 +76,9 @@ const PurchaseBar = ({
 
     // Determine the label for the purchase button based on the loading state
     const buttonLabel = loading ? (
-        <ThreeCircles
-            color='#ffffff'
-            wrapperClass='purchase-loader'
-            visible={loading}
-            height={'24px'}
-        />
+        <ThreeCircles color='#ffffff' wrapperClass='purchase-loader' visible={loading} height={"24px"} />
     ) : (
-        'Purchase'
+        "Purchase"
     )
 
     return (
@@ -104,20 +92,14 @@ const PurchaseBar = ({
                         <div className='amount center'>
                             {chosenQuantity.amount > 1 && (
                                 <span className='previous-amount'>
-                                    {chosenItem &&
-                                        chosenItem.price *
-                                            chosenQuantity.amount}
+                                    {chosenItem && chosenItem.price * chosenQuantity.amount}
                                 </span>
                             )}
                             {finalPrice}
                             <img src={coinImage} alt='coin' />
                         </div>
                     </div>
-                    <Button
-                        label={buttonLabel as string}
-                        disabled={!canPurchase}
-                        onClick={completePurchase}
-                    />
+                    <Button label={buttonLabel as string} disabled={!canPurchase} onClick={completePurchase} />
                 </>
             )}
         </div>

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 
-import { useGlobalContext } from '@context'
+import { useGlobalContext } from "@context"
 
-import './ItemInformation.scss'
-import { IItem } from 'src/global.interfaces'
+import "./ItemInformation.scss"
+import { IItem } from "src/global.interfaces"
 
 interface ItemInformation {
     chosenItem: IItem
@@ -20,10 +20,7 @@ const ItemInformation = ({ chosenItem }: ItemInformation) => {
                 <img src={image} alt={name} />
                 <div className='owned-inventory'>
                     <span>Owned: &nbsp;</span>
-                    {
-                        user?.inventory.filter((item) => item?.name === name)
-                            .length
-                    }
+                    {user?.inventory.filter((item) => item?.name === name).length}
                 </div>
             </div>
             <div className='item-details between-column'>

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 
-import { IItem, ChosenQuantity } from 'src/global.interfaces'
+import { IItem, ChosenQuantity } from "src/global.interfaces"
 
-import { ItemInformation, QuantitySelector } from './components'
-import './ChosenItem.scss'
+import { ItemInformation, QuantitySelector } from "./components"
+import "./ChosenItem.scss"
 
 interface ChosenItem {
     chosenItem: IItem | null
@@ -15,14 +15,10 @@ interface ChosenItem {
 // chosenItem: Item currently chosen from market items
 // chosenQuanityt: Quantity currently chosen
 // setChosenQuantity: Function to update state of quantity chosen
-const ChosenItem = ({
-    chosenItem,
-    chosenQuantity,
-    setChosenQuantity,
-}: ChosenItem) => {
+const ChosenItem = ({ chosenItem, chosenQuantity, setChosenQuantity }: ChosenItem) => {
     return (
         <div className='chosen-item panel between-column'>
-            <ItemInformation chosenItem={chosenItem} />
+            <ItemInformation chosenItem={chosenItem as IItem} />
             <QuantitySelector
                 chosenItem={chosenItem}
                 chosenQuantity={chosenQuantity}
