@@ -14,7 +14,7 @@ export const addAllToDeck = async (array: Array<ICard>) => {
             weaken: card.weaken,
             values: card.values,
         }
-        return axios.put(`/api/deck/add`, cardData)
+        return axios.put(`/api/deck/add`, cardData, { withCredentials: true })
     })
 
     await axios.all(selectPromises)

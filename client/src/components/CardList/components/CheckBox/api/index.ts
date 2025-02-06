@@ -10,10 +10,10 @@ export const addSelection = async (card: ICard) => {
         weaken: card.weaken,
         values: card.values,
     }
-    await axios.put(`/api/deck/add`, cardData)
+    await axios.put(`/api/deck/add`, cardData, { withCredentials: true })
 }
 
 export const removeSelection = async (card: ICard) => {
     await axios.put(`/api/collection/${card._id}/unselect`, { withCredentials: true })
-    await axios.put(`/api/deck/${card._id}/remove`)
+    await axios.put(`/api/deck/${card._id}/remove`, { withCredentials: true })
 }

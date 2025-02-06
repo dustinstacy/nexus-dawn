@@ -4,7 +4,7 @@ import { User } from "src/global.interfaces"
 // Adds empty collection and deck to user's account
 export const completeUserStartingData = async () => {
     await axios.post("/api/collection/", { withCredentials: true })
-    await axios.post("/api/deck/")
+    await axios.post("/api/deck/", { withCredentials: true })
 }
 
 export const incrementOnboardingStage = async (user: User) => {
