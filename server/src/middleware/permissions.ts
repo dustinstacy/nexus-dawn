@@ -9,6 +9,7 @@ interface DecodedToken {
 
 export const requiresAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const token = req.cookies["access-token"]
+    console.log("Token:", token)
     let isAuthed = false
 
     if (token) {
@@ -18,7 +19,9 @@ export const requiresAuth = async (req: Request, res: Response, next: NextFuncti
             }
 
             const { userId } = jwt.verify(token, process.env.JWT_SECRET as Secret) as DecodedToken
+            console.log("User ID:", userId)
             const user = await User.findById(userId)
+            console.log("User:", user)
 
             if (user) {
                 const userToReturn = { ...user.toJSON() } as UserToReturn
@@ -32,6 +35,7 @@ export const requiresAuth = async (req: Request, res: Response, next: NextFuncti
     }
 
     if (!isAuthed) {
+        console.log("No Token")
         res.status(401).send("Unauthorized")
         return
     }
