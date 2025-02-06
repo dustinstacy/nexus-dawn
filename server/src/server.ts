@@ -19,19 +19,20 @@ dotenv.config()
 const app = express()
 const MONGO_DEV_URI =
     "mongodb+srv://cloudwalker0013:A3GeYLhO5pOjF6nc@development-data.e0khqcy.mongodb.net/?retryWrites=true&w=majority&appName=Development-Data"
-const corsOptions = {
-    credentials: true,
-    origin: [
-        "http://localhost:5000",
-        "https://nexus-dawn.vercel.app/",
-        "https://nexus-dawn-7oekhx7mh-dustinstacys-projects.vercel.app/",
-    ], // Whitelist the domains you want to allow
-}
+
+// Allow requests from your frontend domain
+const allowedOrigins = ["https://nexus-dawn-988sf56nh-dustinstacys-projects.vercel.app"]
+
+app.use(
+    cors({
+        origin: allowedOrigins, // Allows only the specific domain
+        methods: ["GET", "POST", "PUT", "DELETE"], // Customize allowed methods if needed
+    })
+)
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: "50mb" }))
 app.use(cookieParser())
-app.use(cors(corsOptions))
 
 app.use("/api/auth", authRoute)
 app.use("/api/cards", cardsRoute)
