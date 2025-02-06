@@ -2,6 +2,7 @@ import express, { Request, Response } from "express"
 import * as dotenv from "dotenv"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser"
+import cors from "cors"
 
 import authRoute from "./api/auth"
 import cardsRoute from "./api/cards"
@@ -18,10 +19,19 @@ dotenv.config()
 const app = express()
 const MONGO_DEV_URI =
     "mongodb+srv://cloudwalker0013:A3GeYLhO5pOjF6nc@development-data.e0khqcy.mongodb.net/?retryWrites=true&w=majority&appName=Development-Data"
+const corsOptions = {
+    credentials: true,
+    origin: [
+        "http://localhost:5000",
+        "https://nexus-dawn.vercel.app/",
+        "https://nexus-dawn-7oekhx7mh-dustinstacys-projects.vercel.app/",
+    ], // Whitelist the domains you want to allow
+}
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: "50mb" }))
 app.use(cookieParser())
+app.use(cors(corsOptions))
 
 app.use("/api/auth", authRoute)
 app.use("/api/cards", cardsRoute)
