@@ -101,7 +101,7 @@ router.put("/new", requiresAuth, async (req: Request, res: Response, next: NextF
 // @route PUT /api/collection/:cardId/:action
 // @desc Update a card in user's Collection
 // @access Private
-router.put("/:cardId/:action", requiresAuth, async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+router.put("/:cardId/:action", async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
         if (!hasUser(req)) {
             res.status(404).json({ error: "User not found" })
