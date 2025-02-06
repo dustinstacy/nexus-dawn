@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState } from "react"
 
-import { Onboarding } from '@components'
-import { useGlobalContext } from '@context'
-import { ICard } from 'src/global.interfaces'
+import { Onboarding } from "@components"
+import { useGlobalContext } from "@context"
+import { ICard } from "src/global.interfaces"
 
-import { Loader, PackContents, UserPacks } from './components'
-import './OpenPacks.scss'
+import { Loader, PackContents, UserPacks } from "./components"
+import "./OpenPacks.scss"
 
 // Component for opening packs and displaying their contents
 const OpenPacks = () => {
@@ -19,19 +19,13 @@ const OpenPacks = () => {
         <div className='open-packs page center'>
             {stage === 2 && <Onboarding />}
             {packContents && !isLoading ? (
-                <PackContents
-                    packContents={packContents}
-                    setPackContents={setPackContents}
-                />
+                <PackContents packContents={packContents} setPackContents={setPackContents} />
             ) : isLoading ? (
                 <div className='loader-container'>
                     <Loader depth={60} />
                 </div>
             ) : (
-                <UserPacks
-                    setIsLoading={setIsLoading}
-                    setPackContents={setPackContents}
-                />
+                <UserPacks setIsLoading={setIsLoading} setPackContents={setPackContents} />
             )}
         </div>
     )

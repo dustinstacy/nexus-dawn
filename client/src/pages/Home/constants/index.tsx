@@ -1,19 +1,16 @@
-import { classSet } from '@utils'
-import { User } from 'src/global.interfaces'
+import { classSet } from "@utils"
+import { User } from "src/global.interfaces"
 
 export const subPanels = (user: User) => {
-    const userPacks = user?.inventory.filter((item) => item.type === 'pack')
+    const userPacks = user?.inventory.filter((item) => item?.type === "pack")
 
-    const packsClasses = classSet(
-        userPacks?.length ? 'unopened' : '',
-        !user ? 'hidden' : ''
-    )
+    const packsClasses = classSet(userPacks?.length ? "unopened" : "", !user ? "hidden" : "")
 
     return [
         {
-            className: 'packs',
-            type: 'sub',
-            to: '/packs',
+            className: "packs",
+            type: "sub",
+            to: "/packs",
             jsx: (
                 <>
                     <p className={packsClasses}>
@@ -24,9 +21,9 @@ export const subPanels = (user: User) => {
             ),
         },
         {
-            className: 'how-to-play',
-            type: 'sub',
-            to: '/rules',
+            className: "how-to-play",
+            type: "sub",
+            to: "/rules",
             jsx: (
                 <>
                     <h2>How To Play</h2>
@@ -34,9 +31,9 @@ export const subPanels = (user: User) => {
             ),
         },
         {
-            className: 'news',
-            type: 'sub',
-            to: '/',
+            className: "news",
+            type: "sub",
+            to: "/",
             jsx: (
                 <>
                     <p>Coming Soon!</p>
@@ -49,24 +46,24 @@ export const subPanels = (user: User) => {
 
 export const mainPanels = [
     {
-        className: 'battle',
-        type: 'main',
-        to: '/opponentSelect',
-        text: 'Test your skill',
-        header: 'Battle',
+        className: "battle",
+        type: "main",
+        to: "/opponentSelect",
+        text: "Test your skill",
+        header: "Battle",
     },
     {
-        className: 'collection',
-        type: 'main',
-        to: '/collection',
-        text: 'Prepare for battle',
-        header: 'Deck',
+        className: "collection",
+        type: "main",
+        to: "/collection",
+        text: "Prepare for battle",
+        header: "Deck",
     },
     {
-        className: 'market',
-        type: 'main',
-        to: '/market',
-        text: 'Purchase packs',
-        header: 'Market',
+        className: "market",
+        type: "main",
+        to: "/market",
+        text: "Purchase packs",
+        header: "Market",
     },
 ]

@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 
-import { addCardToCollection, removeItemFromInventory } from '@api'
-import { Button } from '@components'
-import { useGlobalContext } from '@context'
-import { createCardData, uniqueItemsFilter } from '@utils'
-import { assignRandomCardValues, getRandomCards } from '@randomizers'
+import { addCardToCollection, removeItemFromInventory } from "@api"
+import { Button } from "@components"
+import { useGlobalContext } from "@context"
+import { createCardData, uniqueItemsFilter } from "@utils"
+import { assignRandomCardValues, getRandomCards } from "@randomizers"
 
-import { Carousel, UserPack } from './components'
-import './UserPacks.scss'
-import { ICard, IItem, User } from 'src/global.interfaces'
+import { Carousel, UserPack } from "./components"
+import "./UserPacks.scss"
+import { ICard, IItem, User } from "src/global.interfaces"
 
 interface UserPacks {
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
@@ -16,19 +16,15 @@ interface UserPacks {
 }
 
 const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
-    const { user, getGlobalState, getCurrentUser, allCards } =
-        useGlobalContext()
+    const { user, getGlobalState, getCurrentUser, allCards } = useGlobalContext()
 
     const [currentPack, setCurrentPack] = useState<IItem | null>(null)
 
-    const noPacksMessage = 'Head to the MaRKet to buy more packs'
+    const noPacksMessage = "Head to the MaRKet to buy more packs"
     // Filtering user's inventory to get only packs and sorting them by level in descending order
-    const userPacks =
-        user?.inventory.filter((item) => item?.type === 'pack') || []
+    const userPacks = user?.inventory.filter((item) => item?.type === "pack") || []
     // Removing duplicates from userPacks and sorting them by level in descending order
-    const uniquePacks = uniqueItemsFilter(userPacks).sort(
-        (a, b) => b.level - a.level
-    )
+    const uniquePacks = uniqueItemsFilter(userPacks).sort((a, b) => b.level - a.level)
 
     useEffect(() => {
         getGlobalState()
@@ -39,7 +35,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
         // Simulating a delay of 5 seconds for loader animation
         await new Promise((resolve) => setTimeout(resolve, 5000))
         await getRandomCardsFromPack()
-        await removeItemFromInventory(user as User, currentPack)
+        await removeItemFromInventory(user as User, currentPack as IItem)
         await getCurrentUser()
         setIsLoading(false)
     }
@@ -60,8 +56,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
         setPackContents(newCards)
     }
 
-    const buttonDisablers =
-        !currentPack || (user?.onboardingStage as number) <= 5
+    const buttonDisablers = !currentPack || (user?.onboardingStage as number) <= 1
 
     return (
         <div className='user-packs panel fill between-column'>
@@ -77,11 +72,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
             >
                 <UserPack itemData={currentPack} allItems={userPacks} />
             </Carousel>
-            <Button
-                label='OpeN PacK'
-                onClick={openCurrentPack}
-                disabled={buttonDisablers}
-            />
+            <Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
         </div>
     )
 }
