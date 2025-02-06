@@ -27,6 +27,8 @@ app.use(
     cors({
         origin: allowedOrigins, // Allows only the specific domain
         methods: ["GET", "POST", "PUT", "DELETE"], // Customize allowed methods if needed
+        credentials: true, // Enable credentials in requests
+        allowedHeaders: ["Content-Type", "Authorization"], // Add headers you need to support
     })
 )
 
