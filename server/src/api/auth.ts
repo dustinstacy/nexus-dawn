@@ -111,7 +111,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction): P
 // @route Get /api/auth/current
 // @desc Return currently authed user
 // @access Private
-router.get("/current", requiresAuth, (req: Request, res: Response, next: NextFunction) => {
+router.get("/current", (req: Request, res: Response, next: NextFunction) => {
     try {
         if (!req.user) {
             res.status(401).json({ error: "Unauthorized" })
