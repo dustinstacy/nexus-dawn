@@ -13,6 +13,9 @@
         "heroku-postbuild": "npm run install-client && npm run install-server",
         "lint:md": "markdownlint \"**/*.md\" \".github/**/*.md\""
     },
+    "engines": {
+        "node": "22.x"
+    },
     "keywords": [],
     "author": "",
     "license": "ISC",
