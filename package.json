@@ -3,11 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "type": "module",
-    "engines": {
-        "node": "22.x"
-    },
     "scripts": {
-        "server": "cd server && npm run dev",
+        "server": "cd server && npm run start",
         "client": "cd client && npm start",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "start": "npm start --prefix server",

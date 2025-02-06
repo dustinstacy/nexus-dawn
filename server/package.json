@@ -3,7 +3,10 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-        "dev": "nodemon --watch ./src  --ext ts --exec 'ts-node ./src/server.ts'"
+        "start": "nodemon --watch ./src  --ext ts --exec 'ts-node ./src/server.ts'"
+    },
+    "engines": {
+        "node": "22.x"
     },
     "keywords": [],
     "author": "",
