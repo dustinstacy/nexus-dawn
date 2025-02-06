@@ -115,7 +115,7 @@ router.post("/login", async (req: Request, res: Response, next: NextFunction): P
 // @access Private
 router.get("/current", requiresAuth, (req: Request, res: Response, next: NextFunction) => {
     try {
-        console.log(req)
+        console.log("/current", req.user)
         if (!req.user) {
             res.status(401).json({ error: "Unauthorized" })
             return

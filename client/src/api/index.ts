@@ -2,8 +2,6 @@ import axios, { AxiosResponse } from "axios"
 import { removeObjectByValue } from "./../utils"
 import { BattleResult, CardData, DeckCard, ICard, IItem, User } from "src/global.interfaces"
 
-axios.defaults.baseURL = "https://nexus-dawn-backend-b310f7b6fbcc.herokuapp.com/"
-
 export const addCardToCollection = async (cardData: CardData) => {
     await axios.put("/api/collection/new", cardData)
 }

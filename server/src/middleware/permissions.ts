@@ -9,7 +9,7 @@ interface DecodedToken {
 
 export const requiresAuth = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const token = req.cookies["access-token"]
-    console.log("Token:", token)
+    console.log("requiresAuth token:", token)
     let isAuthed = false
 
     if (token) {
@@ -35,7 +35,6 @@ export const requiresAuth = async (req: Request, res: Response, next: NextFuncti
     }
 
     if (!isAuthed) {
-        console.log("No Token")
         res.status(401).send("Unauthorized")
         return
     }
