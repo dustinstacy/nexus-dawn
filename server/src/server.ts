@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express"
+import express, { NextFunction, Request, Response } from "express"
 import * as dotenv from "dotenv"
 import mongoose from "mongoose"
 import cookieParser from "cookie-parser"
@@ -20,17 +20,26 @@ const app = express()
 const MONGO_DEV_URI =
     "mongodb+srv://cloudwalker0013:A3GeYLhO5pOjF6nc@development-data.e0khqcy.mongodb.net/?retryWrites=true&w=majority&appName=Development-Data"
 
-// Allow requests from your frontend domain
-const allowedOrigins = ["https://nexus-dawn.vercel.app/"]
+app.use((req: Request, res: Response, next: NextFunction): void => {
+    // Allow specific origin for CORS
+    const allowedOrigin = "https://nexus-dawn.vercel.app"
+    res.header("Access-Control-Allow-Origin", allowedOrigin) // Replace "*" with specific allowed origin
 
-app.use(
-    cors({
-        origin: allowedOrigins, // Allows only the specific domain
-        methods: ["GET", "POST", "PUT", "DELETE"], // Customize allowed methods if needed
-        credentials: true, // Enable credentials in requests
-        allowedHeaders: ["Content-Type", "Authorization"], // Add headers you need to support
-    })
-)
+    // Allow specific headers
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
+
+    // Handle pre-flight OPTIONS request
+    if (req.method === "OPTIONS") {
+        res.header("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE")
+        res.status(200).json({})
+        return
+    }
+
+    // Allow credentials if you're using cookies or sessions
+    res.header("Access-Control-Allow-Credentials", "true") // Allow credentials like cookies if needed
+
+    next()
+})
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: "50mb" }))
