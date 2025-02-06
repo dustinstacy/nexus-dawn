@@ -16,8 +16,8 @@ import errorHandler from "./errors/errorHandler"
 dotenv.config()
 
 const app = express()
-// const __filename = fileURLToPath(import.meta.url)
-// const __dirname = dirname(__filename)
+const MONGO_DEV_URI =
+    "mongodb+srv://cloudwalker0013:A3GeYLhO5pOjF6nc@development-data.e0khqcy.mongodb.net/?retryWrites=true&w=majority&appName=Development-Data"
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json({ limit: "50mb" }))
@@ -37,20 +37,14 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Server Running")
 })
 
-const MONGO_DEV_URI = process.env.MONGO_DEV_URI
-
-if (typeof MONGO_DEV_URI !== "string") {
-    throw new Error("MONGO_DEV_URI must be a valid string")
-}
-
 mongoose.set("strictQuery", true)
 mongoose
-    .connect(MONGO_DEV_URI)
+    .connect(process.env.MONGO_URI || MONGO_DEV_URI)
     .then(() => {
         console.log("*****Connected to database*****")
 
         app.listen(process.env.PORT, () => {
-            console.log(`Server running on http://localhost:${process.env.PORT}`)
+            console.log(`Server running on http://localhost:5000`)
         })
     })
     .catch((error) => {
