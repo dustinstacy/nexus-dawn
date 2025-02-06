@@ -1,7 +1,7 @@
-import { ReactNode, createContext, useContext, useReducer } from 'react'
+import { ReactNode, createContext, useContext, useReducer } from "react"
 
-import axios from 'axios'
-import { ICard, IItem, User } from 'src/global.interfaces'
+import axios from "axios"
+import { ICard, IItem, User } from "src/global.interfaces"
 
 //****** return to declare arrays when global interface is set up *******//
 interface State {
@@ -24,13 +24,13 @@ interface State {
 
 // Adjust payloads when state types are updated //
 type Action =
-    | { type: 'SET_USER'; payload: User }
-    | { type: 'RESET_USER' }
-    | { type: 'SET_USER_CARDS'; payload: any[] }
-    | { type: 'SET_USER_DECK'; payload: any[] }
-    | { type: 'SET_ALL_CARDS'; payload: any[] }
-    | { type: 'SET_ALL_ITEMS'; payload: any[] }
-    | { type: 'SET_ALL_OPPONENTS'; payload: any[] }
+    | { type: "SET_USER"; payload: User }
+    | { type: "RESET_USER" }
+    | { type: "SET_USER_CARDS"; payload: any[] }
+    | { type: "SET_USER_DECK"; payload: any[] }
+    | { type: "SET_ALL_CARDS"; payload: any[] }
+    | { type: "SET_ALL_ITEMS"; payload: any[] }
+    | { type: "SET_ALL_OPPONENTS"; payload: any[] }
 
 const initialState: State = {
     user: null,
@@ -52,13 +52,13 @@ const initialState: State = {
 
 const globalReducer = (state: State, action: Action) => {
     switch (action.type) {
-        case 'SET_USER':
+        case "SET_USER":
             return {
                 ...state,
                 user: action.payload,
                 fetchingUser: false,
             }
-        case 'RESET_USER':
+        case "RESET_USER":
             return {
                 ...state,
                 user: null,
@@ -67,27 +67,27 @@ const globalReducer = (state: State, action: Action) => {
                 userCards: [],
                 userDeck: [],
             }
-        case 'SET_USER_CARDS':
+        case "SET_USER_CARDS":
             return {
                 ...state,
                 userCards: action.payload,
             }
-        case 'SET_USER_DECK':
+        case "SET_USER_DECK":
             return {
                 ...state,
                 userDeck: action.payload,
             }
-        case 'SET_ALL_CARDS':
+        case "SET_ALL_CARDS":
             return {
                 ...state,
                 allCards: action.payload,
             }
-        case 'SET_ALL_ITEMS':
+        case "SET_ALL_ITEMS":
             return {
                 ...state,
                 allItems: action.payload,
             }
-        case 'SET_ALL_OPPONENTS':
+        case "SET_ALL_OPPONENTS":
             return {
                 ...state,
                 allOpponents: action.payload,
@@ -111,31 +111,31 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getCurrentUser = async () => {
         try {
-            const res = await axios.get('/api/auth/current')
+            const res = await axios.get("/api/auth/current")
 
             if (res.data) {
                 dispatch({
-                    type: 'SET_USER',
+                    type: "SET_USER",
                     payload: res.data,
                 })
                 getUserCards()
                 getUserDeck()
             } else {
-                dispatch({ type: 'RESET_USER' })
+                dispatch({ type: "RESET_USER" })
             }
         } catch (error) {
-            console.log(error, 'No User')
-            dispatch({ type: 'RESET_USER' })
+            console.log("No User")
+            dispatch({ type: "RESET_USER" })
         }
     }
 
     const getUserCards = async () => {
         try {
-            const res = await axios.get('/api/collection/')
+            const res = await axios.get("/api/collection/")
 
             if (res.data) {
                 dispatch({
-                    type: 'SET_USER_CARDS',
+                    type: "SET_USER_CARDS",
                     payload: res.data.cards,
                 })
             }
@@ -146,11 +146,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getUserDeck = async () => {
         try {
-            const res = await axios.get('/api/deck/')
+            const res = await axios.get("/api/deck/")
 
             if (res.data) {
                 dispatch({
-                    type: 'SET_USER_DECK',
+                    type: "SET_USER_DECK",
                     payload: res.data.cards,
                 })
             }
@@ -161,11 +161,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getAllCards = async () => {
         try {
-            const res = await axios.get('/api/cards/')
+            const res = await axios.get("/api/cards/")
 
             if (res.data) {
                 dispatch({
-                    type: 'SET_ALL_CARDS',
+                    type: "SET_ALL_CARDS",
                     payload: res.data,
                 })
             }
@@ -176,11 +176,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getAllItems = async () => {
         try {
-            const res = await axios.get('/api/items/')
+            const res = await axios.get("/api/items/")
 
             if (res.data) {
                 dispatch({
-                    type: 'SET_ALL_ITEMS',
+                    type: "SET_ALL_ITEMS",
                     payload: res.data,
                 })
             }
@@ -191,11 +191,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getAllOpponents = async () => {
         try {
-            const res = await axios.get('/api/cpuOpponents/')
+            const res = await axios.get("/api/cpuOpponents/")
 
             if (res.data) {
                 dispatch({
-                    type: 'SET_ALL_OPPONENTS',
+                    type: "SET_ALL_OPPONENTS",
                     payload: res.data,
                 })
             }
@@ -206,11 +206,11 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const logout = async () => {
         try {
-            await axios.put('/api/auth/logout')
-            dispatch({ type: 'RESET_USER' })
+            await axios.put("/api/auth/logout")
+            dispatch({ type: "RESET_USER" })
         } catch (error) {
             console.log(error)
-            dispatch({ type: 'RESET_USER' })
+            dispatch({ type: "RESET_USER" })
         }
     }
 
@@ -226,11 +226,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
         logout,
     }
 
-    return (
-        <GlobalContext.Provider value={value}>
-            {children}
-        </GlobalContext.Provider>
-    )
+    return <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>
 }
 
 export const useGlobalContext = () => useContext(GlobalContext)

@@ -24,8 +24,8 @@ interface Stats {
 }
 
 enum Role {
-    admin = 'admin',
-    player = 'player',
+    admin = "admin",
+    player = "player",
 }
 
 export type CardValues = [number, number, number, number]
@@ -36,11 +36,11 @@ interface BaseCard {
 }
 
 export enum Rarity {
-    Common = 'Common',
-    Uncommon = 'Uncommon',
-    Rare = 'Rare',
-    Epic = 'Epic',
-    Legendary = 'Legendary',
+    Common = "Common",
+    Uncommon = "Uncommon",
+    Rare = "Rare",
+    Epic = "Epic",
+    Legendary = "Legendary",
 }
 
 export interface CardData extends BaseCard {
@@ -134,7 +134,7 @@ export interface HandleToggle {
 }
 
 export interface NextStage {
-    nextStage: (path?: string) => void
+    nextStage: (path?: string) => Promise<void>
 }
 
 export interface Register {
@@ -142,9 +142,9 @@ export interface Register {
 }
 
 export enum BattleResult {
-    win = 'win',
-    loss = 'loss',
-    draw = 'draw',
+    win = "win",
+    loss = "loss",
+    draw = "draw",
 }
 
 export interface IOpponent {
