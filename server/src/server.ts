@@ -21,7 +21,7 @@ const MONGO_DEV_URI =
     "mongodb+srv://cloudwalker0013:A3GeYLhO5pOjF6nc@development-data.e0khqcy.mongodb.net/?retryWrites=true&w=majority&appName=Development-Data"
 
 // Allow requests from your frontend domain
-const allowedOrigins = ["https://nexus-dawn-988sf56nh-dustinstacys-projects.vercel.app"]
+const allowedOrigins = ["https://nexus-dawn.vercel.app/"]
 
 app.use(
     cors({
