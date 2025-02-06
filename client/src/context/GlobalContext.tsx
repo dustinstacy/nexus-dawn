@@ -3,6 +3,8 @@ import { ReactNode, createContext, useContext, useReducer } from "react"
 import axios from "axios"
 import { ICard, IItem, User } from "src/global.interfaces"
 
+axios.defaults.baseURL = "https://nexus-dawn-backend-b310f7b6fbcc.herokuapp.com/"
+
 //****** return to declare arrays when global interface is set up *******//
 interface State {
     user: User | null

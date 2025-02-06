@@ -1,9 +1,6 @@
 import { defineConfig } from "vitest/config"
 import react from "@vitejs/plugin-react"
 import path from "path"
-import axios from "axios"
-
-axios.defaults.baseURL = "https://nexus-dawn-backend-b310f7b6fbcc.herokuapp.com/"
 
 export default defineConfig({
     plugins: [react()],
