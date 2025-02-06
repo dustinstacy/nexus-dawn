@@ -133,7 +133,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getUserCards = async () => {
         try {
-            const res = await axios.get("/api/collection/")
+            const res = await axios.get("/api/collection/", { withCredentials: true })
 
             if (res.data) {
                 dispatch({
@@ -148,7 +148,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getUserDeck = async () => {
         try {
-            const res = await axios.get("/api/deck/")
+            const res = await axios.get("/api/deck/", { withCredentials: true })
 
             if (res.data) {
                 dispatch({
@@ -163,7 +163,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getAllCards = async () => {
         try {
-            const res = await axios.get("/api/cards/")
+            const res = await axios.get("/api/cards/", { withCredentials: true })
 
             if (res.data) {
                 dispatch({
@@ -178,7 +178,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getAllItems = async () => {
         try {
-            const res = await axios.get("/api/items/")
+            const res = await axios.get("/api/items/", { withCredentials: true })
 
             if (res.data) {
                 dispatch({
@@ -193,7 +193,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const getAllOpponents = async () => {
         try {
-            const res = await axios.get("/api/cpuOpponents/")
+            const res = await axios.get("/api/cpuOpponents/", { withCredentials: true })
 
             if (res.data) {
                 dispatch({
@@ -208,7 +208,7 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
     const logout = async () => {
         try {
-            await axios.put("/api/auth/logout")
+            await axios.put("/api/auth/logout", { withCredentials: true })
             dispatch({ type: "RESET_USER" })
         } catch (error) {
             console.log(error)

@@ -1,8 +1,8 @@
-import axios from 'axios'
-import { ICard } from 'src/global.interfaces'
+import axios from "axios"
+import { ICard } from "src/global.interfaces"
 
 export const addSelection = async (card: ICard) => {
-    await axios.put(`/api/collection/${card._id}/select`)
+    await axios.put(`/api/collection/${card._id}/select`, { withCredentials: true })
     const cardData = {
         _id: card._id,
         image: card.image,
@@ -14,6 +14,6 @@ export const addSelection = async (card: ICard) => {
 }
 
 export const removeSelection = async (card: ICard) => {
-    await axios.put(`/api/collection/${card._id}/unselect`)
+    await axios.put(`/api/collection/${card._id}/unselect`, { withCredentials: true })
     await axios.put(`/api/deck/${card._id}/remove`)
 }
