@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react"
 
-import { removeItemFromInventory } from '@api'
-import { Button } from '@components'
-import { useGlobalContext } from '@context'
-import { CardValues, ICard, IItem, User } from 'src/global.interfaces'
+import { removeItemFromInventory } from "@api"
+import { Button } from "@components"
+import { useGlobalContext } from "@context"
+import { CardValues, ICard, IItem, User } from "src/global.interfaces"
 
-import { updateCardValues } from '../../../../api'
-import './CostDisplay.scss'
+import { updateCardValues } from "../../../../api"
+import "./CostDisplay.scss"
 
 interface CostDipslay {
     modCost: {
@@ -20,29 +20,17 @@ interface CostDipslay {
     selectedCardValues: Array<number | string>
 }
 
-const CostDisplay = ({
-    modCost,
-    setModificationComplete,
-    selectedCard,
-    selectedCardValues,
-}: CostDipslay) => {
+const CostDisplay = ({ modCost, setModificationComplete, selectedCard, selectedCardValues }: CostDipslay) => {
     const { getUserCards, user } = useGlobalContext()
 
-    const userAquaTypeCount = user?.inventory.filter(
-        (item) => item.name === modCost.aquaType?.name
-    ).length
+    const userAquaTypeCount = user?.inventory.filter((item) => item.name === modCost.aquaType?.name).length
 
-    const userFluxTypeCount = user?.inventory.filter(
-        (item) => item.name === modCost.fluxType?.name
-    ).length
+    const userFluxTypeCount = user?.inventory.filter((item) => item.name === modCost.fluxType?.name).length
 
     const completeMod = async () => {
-        await updateCardValues(
-            selectedCard as ICard,
-            selectedCardValues as CardValues
-        )
-        await removeItemFromInventory(user as User, modCost.aquaType)
-        await removeItemFromInventory(user as User, modCost.fluxType)
+        await updateCardValues(selectedCard as ICard, selectedCardValues as CardValues)
+        await removeItemFromInventory(user as User, modCost.aquaType as IItem)
+        await removeItemFromInventory(user as User, modCost.fluxType as IItem)
         await getUserCards()
         setModificationComplete(true)
     }
@@ -51,10 +39,7 @@ const CostDisplay = ({
         <div className='cost-bar box start-column'>
             <div className='mod-cost center'>
                 <div className='aqua-cost center'>
-                    <img
-                        src={modCost.aquaType?.image}
-                        alt={modCost.aquaType?.name}
-                    />
+                    <img src={modCost.aquaType?.image} alt={modCost.aquaType?.name} />
                     <div className='cost center'>
                         <span>{userAquaTypeCount}</span>
                         <p>/</p>
@@ -62,14 +47,10 @@ const CostDisplay = ({
                     </div>
                 </div>
                 <div className='flux-cost center'>
-                    <img
-                        src={modCost.fluxType?.image}
-                        alt={modCost.fluxType?.name}
-                    />
+                    <img src={modCost.fluxType?.image} alt={modCost.fluxType?.name} />
                     <div
                         className={`cost center ${
-                            (userFluxTypeCount as number) <
-                                modCost.fluxAmount && 'insufficient'
+                            (userFluxTypeCount as number) < modCost.fluxAmount && "insufficient"
                         }`}
                     >
                         <span>{userFluxTypeCount}</span>
@@ -82,10 +63,8 @@ const CostDisplay = ({
                 label='Complete Modification'
                 onClick={() => completeMod()}
                 disabled={
-                    selectedCard?.values.every(
-                        (value, index) => value === selectedCardValues[index]
-                    ) ||
-                    selectedCardValues.includes('') ||
+                    selectedCard?.values.every((value, index) => value === selectedCardValues[index]) ||
+                    selectedCardValues.includes("") ||
                     (userFluxTypeCount as number) < modCost.fluxAmount
                 }
             />

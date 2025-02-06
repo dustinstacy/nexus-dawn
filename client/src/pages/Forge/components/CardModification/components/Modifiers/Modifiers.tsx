@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react"
 
-import { useGlobalContext } from '@context'
-import { updateState } from '@utils'
-import { ICard, IItem } from 'src/global.interfaces'
+import { useGlobalContext } from "@context"
+import { updateState } from "@utils"
+import { ICard, IItem } from "src/global.interfaces"
 
 import {
     AquaVitae,
@@ -13,9 +13,9 @@ import {
     AquaFortisSuperior,
     AquaManna,
     CostDisplay,
-} from './components'
-import { modificationOptions } from './constants'
-import './Modifiers.scss'
+} from "./components"
+import { modificationOptions } from "./constants"
+import "./Modifiers.scss"
 
 interface Modifiers {
     selectedCard: ICard | null
@@ -43,9 +43,7 @@ const Modifiers = ({
 }: Modifiers) => {
     const { allItems } = useGlobalContext()
 
-    const [selectedCardValues, setSelectedCardValues] = useState([
-        ...selectedCard!.values,
-    ])
+    const [selectedCardValues, setSelectedCardValues] = useState([...selectedCard!.values])
     const [modCost, setModCost] = useState<ModCost>({
         aquaType: null,
         aquaAmount: 1,
@@ -70,24 +68,19 @@ const Modifiers = ({
     }, [])
 
     const setAquaType = () => {
-        const aquaItem = allItems.find(
-            (item) => item.name === selectedModification
-        )
+        const aquaItem = allItems.find((item) => item.name === selectedModification)
         updateState(setModCost, { aquaType: aquaItem })
     }
 
     const setFluxType = () => {
-        const fluxItem = allItems.find(
-            (item) =>
-                item.name.includes(selectedCard?.rarity) && item.type === 'flux'
-        )
+        const fluxItem = allItems.find((item) => item.name.includes(selectedCard!.rarity) && item.type === "flux")
         updateState(setModCost, { fluxType: fluxItem })
     }
 
     return (
         <div className='modifier'>
             {modifiers.map((modifier) => {
-                const Component = componentMap[modifier.replace(/\s/g, '')]
+                const Component = componentMap[modifier.replace(/\s/g, "")]
                 return (
                     selectedModification === `${modifier}` && (
                         <Component
@@ -95,9 +88,7 @@ const Modifiers = ({
                             selectedCard={selectedCard}
                             selectedCardValues={selectedCardValues}
                             setSelectedCardValues={setSelectedCardValues}
-                            setModificationInProgress={
-                                setModificationInProgress
-                            }
+                            setModificationInProgress={setModificationInProgress}
                         />
                     )
                 )

@@ -24,7 +24,7 @@ export const addCardToDeck = async (card: ICard) => {
     await axios.put(`/api/collection/${card._id}/select`)
 }
 
-export const addItemToInventory = async (user: User, item: IItem) => {
+export const addItemToInventory = async (user: User, item: IItem | IItem[]) => {
     let updatedInventory = [...user.inventory]
 
     if (Array.isArray(item)) {
@@ -52,12 +52,10 @@ export const removeCardFromDeck = async (card: DeckCard) => {
 }
 
 export const removeItemFromInventory = async (user: User, item: IItem) => {
-    console.log("Removing item from inventory", item)
     removeObjectByValue(user.inventory, item.name)
     await axios.put("/api/profile/inventory", {
         inventory: user.inventory,
     })
-    console.log(user.inventory)
 }
 
 export const updateUserInfo = async <T extends keyof User>(property: T, value: any) => {

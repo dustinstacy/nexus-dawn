@@ -1,8 +1,8 @@
-import { coinImage, headerStyle } from '@assets'
-import { useGlobalContext } from '@context'
-import { IOpponent } from 'src/global.interfaces'
+import { coinImage, headerStyle } from "@assets"
+import { useGlobalContext } from "@context"
+import { IOpponent } from "src/global.interfaces"
 
-import './SelectedOpponent.scss'
+import "./SelectedOpponent.scss"
 
 interface SelectedOpponentProps {
     selectedOpponent: IOpponent
@@ -11,32 +11,21 @@ interface SelectedOpponentProps {
 // Renders selected opponent information
 const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
     const { allItems } = useGlobalContext()
-    const { name, image, minPower, maxPower, rewards, rounds } =
-        selectedOpponent
+    const { name, image, minPower, maxPower, rewards, rounds } = selectedOpponent
 
-    const roundsDisplay = ' Round' + (rounds > 1 ? 's' : '')
+    const roundsDisplay = " Round" + (rounds > 1 ? "s" : "")
 
-    const rewardItems = allItems.filter((item) =>
-        rewards.items[0].name.includes(item.name)
-    )
+    const rewardItems = allItems.filter((item) => rewards.items[0].name.includes(item.name))
 
     return (
         <div className='selected-opponent fill'>
             <h1 className='opponent-name'>{name}</h1>
-            <img
-                className='opponent-image fill'
-                src={image}
-                alt='opponent image'
-            />
+            <img className='opponent-image fill' src={image} alt='opponent image' />
             <div className='side-bar' />
             <div className='opponent-info start-column'>
                 <div className='power-attribute between-column'>
                     <div className='header-wrapper center'>
-                        <img
-                            className='header-style'
-                            src={headerStyle}
-                            alt='header style'
-                        />
+                        <img className='header-style' src={headerStyle} alt='header style' />
                         POWER
                     </div>
                     <div className='value'>
@@ -45,11 +34,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
                 </div>
                 <div className='rules-attribute between-column'>
                     <div className='header-wrapper center'>
-                        <img
-                            className='header-style'
-                            src={headerStyle}
-                            alt='header style'
-                        />
+                        <img className='header-style' src={headerStyle} alt='header style' />
                         Rules
                     </div>
                     <div className='value center-column'>
@@ -62,20 +47,12 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
                 </div>
                 <div className='rewards-attribute between-column'>
                     <div className='header-wrapper center'>
-                        <img
-                            className='header-style'
-                            src={headerStyle}
-                            alt='header style'
-                        />
+                        <img className='header-style' src={headerStyle} alt='header style' />
                         Drops
                     </div>
                     <div className='value around'>
                         {rewardItems?.map((item) => (
-                            <img
-                                key={item.name}
-                                src={item.image}
-                                alt='item image'
-                            />
+                            <img key={item.name} src={item.image} alt='item image' />
                         ))}
                     </div>
                 </div>

@@ -49,12 +49,10 @@ export const calculateOptimizedDeck = (userCards: Array<ICard>, count: string): 
 // property: The property name used for comparison to find the object
 // value: The value of the property to match and remove the corresponding object
 export const removeObjectByValue = (userInventory: Array<IItem>, value: string) => {
-    console.log(userInventory)
     const index = userInventory.findIndex((obj) => obj["name"] === value)
     if (index !== -1) {
         userInventory.splice(index, 1)
     }
-    console.log(userInventory)
 }
 
 // Filters out all duplicates inside an array, returns only one instance of each unique value
