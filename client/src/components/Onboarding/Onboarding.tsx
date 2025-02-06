@@ -1,19 +1,12 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
-import { useGlobalContext } from '@context'
+import { useGlobalContext } from "@context"
 
-import { incrementOnboardingStage } from './api'
-import {
-    Introduction,
-    HowToGetCards,
-    HowToOpenPacks,
-    HowToBuildADeck,
-    HowToPlay,
-    CompletionReward,
-} from './components'
-import './Onboarding.scss'
-import { User } from 'src/global.interfaces'
+import { incrementOnboardingStage } from "./api"
+import { Introduction, HowToGetCards, HowToOpenPacks, HowToBuildADeck, HowToPlay, CompletionReward } from "./components"
+import "./Onboarding.scss"
+import { User } from "src/global.interfaces"
 
 const Onboarding = () => {
     const navigate = useNavigate()
@@ -23,24 +16,25 @@ const Onboarding = () => {
     // Conditionally navigate and update state progress based on the current stage and progress
     useEffect(() => {
         if (stage === 0) {
-            navigate('/')
+            navigate("/")
         }
         if (stage === 1) {
-            navigate('/market')
+            navigate("/market")
         }
         if (stage === 2) {
-            navigate('/packs')
+            navigate("/packs")
         }
         if (stage === 3) {
-            navigate('/collection')
+            navigate("/collection")
         }
         if (stage === 4 || stage === 5) {
-            navigate('/rules')
+            navigate("/rules")
         }
     }, [, stage])
 
     // Advances the user to next onboarding stage
-    const nextStage = async (path: string) => {
+    const nextStage = async (path?: string) => {
+        console.log("next stage")
         try {
             await incrementOnboardingStage(user as User)
             await getCurrentUser()
@@ -52,12 +46,12 @@ const Onboarding = () => {
 
     return (
         <>
-            {stage === 0 && <Introduction nextStage={() => nextStage} />}
-            {stage === 1 && <HowToGetCards nextStage={() => nextStage} />}
-            {stage === 2 && <HowToOpenPacks nextStage={() => nextStage} />}
-            {stage === 3 && <HowToBuildADeck nextStage={() => nextStage} />}
-            {stage === 4 && <HowToPlay nextStage={() => nextStage} />}
-            {stage === 5 && <CompletionReward nextStage={() => nextStage} />}
+            {stage === 0 && <Introduction nextStage={nextStage} />}
+            {stage === 1 && <HowToGetCards nextStage={nextStage} />}
+            {stage === 2 && <HowToOpenPacks nextStage={nextStage} />}
+            {stage === 3 && <HowToBuildADeck nextStage={nextStage} />}
+            {stage === 4 && <HowToPlay nextStage={nextStage} />}
+            {stage === 5 && <CompletionReward nextStage={nextStage} />}
         </>
     )
 }

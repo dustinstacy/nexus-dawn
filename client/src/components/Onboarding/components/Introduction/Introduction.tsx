@@ -1,22 +1,23 @@
-import { addCardToCollection, addCoin, addItemToInventory } from '@api'
-import { smlogo } from '@assets'
-import { Button, ModalOverlay } from '@components'
-import { useGlobalContext } from '@context'
-import { createCardData } from '@utils'
-import { assignRandomCardValues, getRandomCards } from '@randomizers'
-import { NextStage, User } from 'src/global.interfaces'
+import { addCardToCollection, addCoin, addItemToInventory } from "@api"
+import { smlogo } from "@assets"
+import { Button, ModalOverlay } from "@components"
+import { useGlobalContext } from "@context"
+import { createCardData } from "@utils"
+import { assignRandomCardValues, getRandomCards } from "@randomizers"
+import { IItem, NextStage, User } from "src/global.interfaces"
 
-import { completeUserStartingData, skipOnboarding } from '../../api'
-import { onboardingStages } from '../../constants'
-import './Introduction.scss'
+import { completeUserStartingData, skipOnboarding } from "../../api"
+import { onboardingStages } from "../../constants"
+import "./Introduction.scss"
 
 const Introduction = ({ nextStage }: NextStage) => {
     const { allCards, allItems, getCurrentUser, user } = useGlobalContext()
 
     const handleBegin = async () => {
+        console.log("begin")
         await completeUserStartingData()
         await addCoin(user as User, 200)
-        nextStage('/market')
+        nextStage("/market")
     }
 
     const handleSkip = async () => {
@@ -35,8 +36,8 @@ const Introduction = ({ nextStage }: NextStage) => {
                 console.log(error)
             }
         })
-        const rarePack = allItems.find((item) => item.name === 'Rare Pack')
-        await addItemToInventory(user as User, rarePack)
+        const rarePack = allItems.find((item) => item.name === "Rare Pack")
+        await addItemToInventory(user as User, rarePack as IItem)
         await skipOnboarding(user as User)
         await getCurrentUser()
     }
@@ -47,20 +48,13 @@ const Introduction = ({ nextStage }: NextStage) => {
                 <div className='header-wrapper'>
                     <h1 className='header'>
                         {onboardingStages[0].header}
-                        <img
-                            className='logo abs-center'
-                            src={smlogo}
-                            alt='small logo'
-                        />
+                        <img className='logo abs-center' src={smlogo} alt='small logo' />
                     </h1>
                 </div>
                 <div className='body box start-column'>
                     <p>{onboardingStages[0].body}</p>
                     <div className='buttons center-column'>
-                        <Button
-                            label={onboardingStages[0].label as string}
-                            onClick={handleBegin}
-                        />
+                        <Button label={onboardingStages[0].label as string} onClick={handleBegin} />
                         <a onClick={handleSkip}>Skip</a>
                     </div>
                 </div>
