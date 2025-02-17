@@ -1,0 +1,51 @@
+.user-section {
+    height: 100%;
+    max-width: 700px;
+    gap: 1vw;
+
+    @media screen and (max-width: 1079px) {
+        justify-content: center;
+    }
+
+    .user-inventory {
+        height: 90%;
+        width: 100px;
+        margin-right: 18px;
+
+        @media screen and (max-width: 1079px) {
+            display: none;
+        }
+
+        .coin {
+            img {
+                height: 18px;
+            }
+        }
+    }
+
+    & .experience-bar {
+        gap: 4px;
+        font-size: 14px;
+    }
+
+    .user-info {
+        gap: 4px;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+
+    hr {
+        height: 100%;
+        width: 0.5px;
+        margin-right: 24px;
+        background: var(--gray-color);
+        border: none;
+        opacity: 0.6;
+
+        @media screen and (max-width: 768px) {
+            display: none;
+        }
+    }
+}
