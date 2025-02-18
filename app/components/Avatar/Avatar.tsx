@@ -4,7 +4,7 @@ import { useAuthStore } from "@stores"
 import { classSet } from "@utils"
 
 import { AvatarMenu } from "./components"
-import "./Avatar.scss"
+import "./avatar.scss"
 
 // Renders user image avatar
 // levelShowing: Indicates whether the user's level should be displayed

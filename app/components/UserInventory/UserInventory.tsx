@@ -2,7 +2,7 @@ import { coinImage } from "@assets"
 import { User } from "@interfaces"
 import { useAuthStore } from "@stores"
 
-import "./UserInventory.scss"
+import "./userInventory.scss"
 
 // Section to display user inventory items and counts
 const UserInventory = () => {

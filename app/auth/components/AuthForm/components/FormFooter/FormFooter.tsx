@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { Register } from "@interfaces"
 
-import "./FormFooter.scss"
+import "./formFooter.scss"
 
 // Displays text and link path based on the register prop value
 const FormFooter = ({ register }: Register) => {

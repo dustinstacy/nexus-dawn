@@ -5,7 +5,7 @@ import { coinImage } from "@assets"
 import { User } from "@interfaces"
 import { useAuthStore, useItemsStore, useOpponentsStore } from "@stores"
 
-import "./LevelUpScreen.scss"
+import "./levelUpScreen.scss"
 
 interface LevelUpScreenProps {
     setNewLevelAlert: (state: boolean) => void

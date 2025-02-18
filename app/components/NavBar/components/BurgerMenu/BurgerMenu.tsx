@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import { useToggle } from "@hooks"
 
 import { Links } from ".."
-import "./BurgerMenu.scss"
+import "./burgerMenu.scss"
 
 // Renders burger icon menu for navigation bar
 const BurgerMenu = () => {

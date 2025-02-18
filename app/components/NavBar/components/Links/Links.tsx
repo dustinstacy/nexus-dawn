@@ -5,7 +5,7 @@ import { navlinks } from "@constants"
 import { useAuthStore } from "@stores"
 import { classSet } from "@utils"
 
-import "./Links.scss"
+import "./links.scss"
 
 interface LinksProps {
     menu: string

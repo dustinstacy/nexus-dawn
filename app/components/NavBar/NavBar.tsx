@@ -8,7 +8,7 @@ import { classSet } from "@utils"
 
 import { BurgerMenu, Links, UserSection } from "./components"
 
-import "./NavBar.scss"
+import "./navBar.scss"
 
 interface NavBarProps {
     landing: boolean

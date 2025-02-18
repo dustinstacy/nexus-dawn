@@ -1,6 +1,6 @@
-import { ReactNode } from 'react'
+import { ReactNode } from "react"
 
-import './ModalOverlay.scss'
+import "./modalOverlay.scss"
 
 // Screen overlay to disable and blur all elements behind Modal/Alert
 // children: The desired Modal/Alert to be rendered

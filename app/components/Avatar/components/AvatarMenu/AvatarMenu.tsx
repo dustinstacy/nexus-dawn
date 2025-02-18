@@ -6,7 +6,7 @@ import { useAuthStore } from "@stores"
 import { classSet } from "@utils"
 import { HandleToggle } from "@interfaces"
 
-import "./AvatarMenu.scss"
+import "./avatarMenu.scss"
 
 // Renders the menu that is displayed when the user clicks on their navigation bar image.
 const AvatarMenu = ({ isOpen, toggleIsOpen }: HandleToggle) => {

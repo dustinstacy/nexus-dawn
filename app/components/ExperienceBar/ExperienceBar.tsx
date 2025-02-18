@@ -8,7 +8,7 @@ import { LevelUpScreen } from "./components"
 import { userLevels } from "@constants"
 import { User } from "@interfaces"
 
-import "./ExperienceBar.scss"
+import "./experienceBar.scss"
 
 // Renders the user's experience bar and handles level up functionality when XP thresholds are reached.
 const ExperienceBar = () => {

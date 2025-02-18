@@ -3,7 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
 import { useToggle } from "@hooks"
 import { classSet } from "@utils"
 
-import "./TextInput.scss"
+import "./textInput.scss"
 
 interface TextInputProps {
     label: string

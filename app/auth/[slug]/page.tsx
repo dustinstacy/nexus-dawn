@@ -9,7 +9,7 @@ import { useAuthStore } from "@stores"
 
 import { AuthForm } from "../components"
 
-import "./Auth.scss"
+import "./auth.scss"
 
 // Displays login of registration form based on the value of the register prop
 const Auth = () => {

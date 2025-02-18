@@ -3,7 +3,7 @@ import React from "react"
 
 import { classSet } from "@utils"
 
-import "./Button.scss"
+import "./button.scss"
 
 interface ButtonProps {
     label: string
