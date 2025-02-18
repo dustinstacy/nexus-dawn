@@ -25,11 +25,12 @@
             "@components": ["app/components"],
             "@constants": ["app/constants"],
             "@context": ["app/context/GlobalContext"],
+            "@interfaces": ["app/global.interfaces"],
             "@hooks": ["app/hooks/"],
             "@pages": ["app/pages"],
             "@randomizers": ["app/utils/randomizers"],
-            "@utils": ["app/utils"],
-            "@interfaces": ["app/global.interfaces"]
+            "@stores": ["app/stores"],
+            "@utils": ["app/utils"]
         }
     },
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
