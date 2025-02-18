@@ -1,9 +1,10 @@
+"use client"
+
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
 
 import { smlogo } from "@assets"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 import { classSet } from "@utils"
 
 import { BurgerMenu, Links, UserSection } from "./components"
@@ -18,12 +19,7 @@ interface NavBarProps {
 // Renders a login button based on the value of the `login` prop
 const NavBar = ({ login }: NavBarProps) => {
     const router = useRouter()
-    const user = useAuthStore((state) => state.user)
-    const checkToken = useAuthStore((state) => state.checkToken)
-
-    useEffect(() => {
-        checkToken()
-    }, [checkToken])
+    const user = useUserStore((state) => state.user)
 
     const stage = user?.onboardingStage ?? {}
 

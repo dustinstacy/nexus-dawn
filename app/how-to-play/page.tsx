@@ -3,13 +3,13 @@
 import React from "react"
 
 // import { Onboarding } from "@components"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 
 import { howToPlay } from "./constants"
 import "./howToPlay.scss"
 
 const HowToPlay = () => {
-    const user = useAuthStore((state) => state.user)
+    const user = useUserStore((state) => state.user)
     const stage = user?.onboardingStage ?? {}
 
     return (

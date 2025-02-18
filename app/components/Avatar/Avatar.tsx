@@ -1,6 +1,6 @@
 import { useToggle } from "@hooks"
 import { User } from "@interfaces"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 import { classSet } from "@utils"
 
 import { AvatarMenu } from "./components"
@@ -17,7 +17,7 @@ const Avatar = ({
     medium = false as boolean,
     large = false as boolean,
 }) => {
-    const user = useAuthStore((state) => state.user)
+    const user = useUserStore((state) => state.user)
     const { image, level } = (user as User) ?? {}
 
     const [isOpen, toggleIsOpen] = useToggle(false)

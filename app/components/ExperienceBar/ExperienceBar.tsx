@@ -1,7 +1,9 @@
+"use client"
+
 import { useEffect, useState } from "react"
 
 import { ModalOverlay } from "@components"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 
 import { handleLevelUp } from "./api"
 import { LevelUpScreen } from "./components"
@@ -12,7 +14,7 @@ import "./experienceBar.scss"
 
 // Renders the user's experience bar and handles level up functionality when XP thresholds are reached.
 const ExperienceBar = () => {
-    const { user } = useAuthStore()
+    const { user } = useUserStore()
     const { xp, level } = (user as User) ?? {}
 
     const [newLevelAlert, setNewLevelAlert] = useState(false)

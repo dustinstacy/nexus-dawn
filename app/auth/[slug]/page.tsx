@@ -4,14 +4,14 @@ import { usePathname, useRouter } from "next/navigation"
 import React, { useEffect } from "react"
 
 import { logo } from "@assets"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 
 import { AuthForm } from "../components"
 
 import "./auth.scss"
 
 const Auth = () => {
-    const user = useAuthStore((state) => state.user)
+    const user = useUserStore((state) => state.user)
     const pathname = usePathname()
     const router = useRouter()
 

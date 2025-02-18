@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react"
 
 import { Button, TextInput } from "@components"
 import { FormData, Register } from "@interfaces"
-import { useAuthStore } from "@stores"
+import { useAuthStore, useUserStore } from "@stores"
 
 import { sendAuthRequest } from "./api"
 import { FormFooter } from "./components"
@@ -28,7 +28,7 @@ const AuthForm = ({ register }: Register) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [errors, setErrors] = useState<any>({})
 
-    const setUser = useAuthStore((state) => state.setUser)
+    const setUser = useUserStore((state) => state.setUser)
     const setAccessToken = useAuthStore((state) => state.setAccessToken)
 
     // Define the form fields to be rendered based on the value of register prop

@@ -1,12 +1,12 @@
 import { Avatar, ExperienceBar, UserInventory } from "@components"
 import { User } from "@interfaces"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 
 import "./userSection.scss"
 
 // This component acts as the parent component for all User-related navigation bar components
 const UserSection = () => {
-    const user = useAuthStore((state) => state.user)
+    const user = useUserStore((state) => state.user)
     const { username } = (user as User) ?? {}
 
     return (
