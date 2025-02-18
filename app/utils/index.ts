@@ -57,6 +57,8 @@ export const removeObjectByValue = (userInventory: Array<IItem>, value: string) 
     if (index !== -1) {
         userInventory.splice(index, 1)
     }
+
+    return userInventory
 }
 
 // Filters out all duplicates inside an array, returns only one instance of each unique value

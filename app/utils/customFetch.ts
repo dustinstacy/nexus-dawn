@@ -2,6 +2,7 @@
 const customFetch = async (url: string, options: RequestInit = {}) => {
     // Set the base URL for the API
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+    const token = sessionStorage.getItem("accessToken")
 
     // Merge the default headers with the options headers
     const config = {
@@ -9,6 +10,7 @@ const customFetch = async (url: string, options: RequestInit = {}) => {
         headers: {
             ...options.headers,
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
         },
     }
 
