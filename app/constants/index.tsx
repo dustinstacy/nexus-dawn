@@ -18,6 +18,11 @@ export const maxValues = {
     Legendary: 9,
 }
 
+export const userLevels = [
+    0, 10, 40, 100, 200, 350, 560, 840, 1200, 1650, 2200, 11440, 12000, 12750, 13750, 15000, 16500, 18250, 110000,
+    112200, 115300, 121400, 128900, 139100, 153400, 168800, 187600, 1110600, 1150000, 1200000, 1300000,
+]
+
 // The case of the names is intentionally varied to achieve different letter stylings
 export const navlinks = [
     {
