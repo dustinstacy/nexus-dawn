@@ -18,7 +18,7 @@ interface LinksProps {
 const Links = ({ menu, onClick }: LinksProps) => {
     const user = useAuthStore((state) => state.user)
     const stage = user?.onboardingStage ?? {}
-    const publicLinks = ["/", "/rules"]
+    const publicLinks = ["/", "/how-to-play"]
 
     const linkClasses = (linkPath: string) =>
         classSet(
