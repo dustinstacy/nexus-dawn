@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react"
 
 import { Button, TextInput } from "@components"
 import { FormData, Register } from "@interfaces"
-import { useAuthStore, useUserStore } from "@stores"
+import { useUserStore } from "@stores"
 
 import { sendAuthRequest } from "./api"
 import { FormFooter } from "./components"
@@ -29,7 +29,6 @@ const AuthForm = ({ register }: Register) => {
     const [errors, setErrors] = useState<any>({})
 
     const setUser = useUserStore((state) => state.setUser)
-    const setAccessToken = useAuthStore((state) => state.setAccessToken)
 
     // Define the form fields to be rendered based on the value of register prop
     const formFields = ["Username", "Password"]
@@ -52,7 +51,7 @@ const AuthForm = ({ register }: Register) => {
             const res = await sendAuthRequest(formData, register)
             const { accessToken, user } = res
 
-            setAccessToken(accessToken)
+            sessionStorage.setItem("accessToken", accessToken)
             setUser(user)
 
             if (user) {

@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { MdLogout } from "react-icons/md"
 
-import { useAuthStore, useUserStore } from "@stores"
+import { useUserStore } from "@stores"
 import { classSet } from "@utils"
 import { HandleToggle } from "@interfaces"
 
@@ -13,12 +13,13 @@ import "./avatarMenu.scss"
 // Renders the menu that is displayed when the user clicks on their navigation bar image.
 const AvatarMenu = ({ isOpen, toggleIsOpen }: HandleToggle) => {
     const user = useUserStore((state) => state.user)
-    const logout = useAuthStore((state) => state.logout)
+    const setUser = useUserStore((state) => state.setUser)
     const stage = (user?.onboardingStage as number) ?? {}
     const router = useRouter()
 
     const handleLogout = async () => {
-        logout()
+        sessionStorage.removeItem("accessToken")
+        setUser(null)
         toggleIsOpen?.()
         router.push("/auth/login")
     }

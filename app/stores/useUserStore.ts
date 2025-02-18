@@ -6,7 +6,7 @@ import { customFetch } from "@utils"
 
 interface UserState {
     user: User | null
-    setUser: (user: User) => void
+    setUser: (user: User | null) => void
     updateUser: () => Promise<void>
     checkForUser: () => void
 }
@@ -28,6 +28,11 @@ const useUserStore = create<UserState>((set) => ({
         if (typeof window === "undefined") return
 
         const token = sessionStorage?.getItem("accessToken")
+
+        if (!token) {
+            set({ user: null })
+            return
+        }
 
         try {
             const decoded: any = jwtDecode(token as string)

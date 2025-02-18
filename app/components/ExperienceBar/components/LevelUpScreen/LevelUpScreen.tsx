@@ -3,7 +3,7 @@ import { AiOutlineCloseCircle } from "react-icons/ai"
 
 import { coinImage } from "@assets"
 import { User } from "@interfaces"
-import { useAuthStore, useItemsStore, useOpponentsStore } from "@stores"
+import { useUserStore, useItemsStore, useOpponentsStore } from "@stores"
 
 import "./levelUpScreen.scss"
 
@@ -12,7 +12,7 @@ interface LevelUpScreenProps {
 }
 
 const LevelUpScreen = ({ setNewLevelAlert }: LevelUpScreenProps) => {
-    const { user } = useAuthStore()
+    const { user } = useUserStore()
     const { allItems } = useItemsStore()
     const { allOpponents } = useOpponentsStore()
     const { level } = user as User

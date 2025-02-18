@@ -5,13 +5,13 @@ import { useState } from "react"
 import { addCoin, addExperience } from "@api"
 import { Button, TextInput } from "@components"
 import { User } from "@interfaces"
-import { useAuthStore } from "@stores"
+import { useUserStore } from "@stores"
 
 import { checkPromoCode } from "./utils"
 import "./promoCode.scss"
 
 const PromoCode = () => {
-    const { user } = useAuthStore()
+    const { user } = useUserStore()
 
     const [promoCode, setPromoCode] = useState("")
     const [loading, setLoading] = useState(false)
