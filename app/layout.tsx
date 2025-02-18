@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import ClientLayout from "./client-layout"
 
 import "./styles/base.scss"
 import "./styles/layout.scss"
@@ -21,7 +22,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <body>{children}</body>
+            <body>
+                <ClientLayout>{children}</ClientLayout>
+            </body>
         </html>
     )
 }
