@@ -1,17 +1,22 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import React, { useState, useEffect } from "react"
 
 import { Button, TextInput } from "@components"
 import { FormData, Register } from "@interfaces"
+import { useAuthStore } from "@stores"
 
 import { sendAuthRequest } from "./api"
 import { FormFooter } from "./components"
 import { toCamelCase } from "./utils"
+
 import "./AuthForm.scss"
 
 // Displays login of registration form based on the value of the register prop
 const AuthForm = ({ register }: Register) => {
+    const router = useRouter()
+
     const initialFormData = {
         username: "",
         email: "",
@@ -22,6 +27,9 @@ const AuthForm = ({ register }: Register) => {
     const [formData, setFormData] = useState<FormData>(initialFormData)
     const [loading, setLoading] = useState<boolean>(false)
     const [errors, setErrors] = useState<any>({})
+
+    const setUser = useAuthStore((state) => state.setUser)
+    const setAccessToken = useAuthStore((state) => state.setAccessToken)
 
     // Define the form fields to be rendered based on the value of register prop
     const formFields = ["Username", "Password"]
@@ -41,7 +49,15 @@ const AuthForm = ({ register }: Register) => {
         setLoading(true)
 
         try {
-            await sendAuthRequest(formData, register)
+            const res = await sendAuthRequest(formData, register)
+            const { accessToken, user } = res
+
+            setAccessToken(accessToken)
+            setUser(user)
+
+            if (user) {
+                router.push("/")
+            }
         } catch (error: any) {
             if (error?.response?.data) {
                 setErrors(error.response.data)

@@ -1,4 +1,5 @@
 import Link from "next/link"
+
 import { Register } from "@interfaces"
 
 import "./FormFooter.scss"

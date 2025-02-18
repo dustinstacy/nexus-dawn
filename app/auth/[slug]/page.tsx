@@ -1,19 +1,25 @@
 "use client"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 
-import { NavBar } from "@components"
-import { AuthForm } from "../components"
+import { usePathname, useRouter } from "next/navigation"
+import React, { useEffect } from "react"
+
 import { logo } from "@assets"
+import { NavBar } from "@components"
+import { useAuthStore } from "@stores"
+
+import { AuthForm } from "../components"
+
 import "./Auth.scss"
 
 // Displays login of registration form based on the value of the register prop
 const Auth = () => {
+    const user = useAuthStore((state) => state.user)
     const pathname = usePathname()
+    const router = useRouter()
     // Redirect to the home page if a user is already authenticated
-    // useEffect(() => {
-    //     if (user) navigate("/")
-    // }, [user])
+    useEffect(() => {
+        if (user) router.push("/")
+    }, [user])
 
     const register = pathname?.includes("register")
 

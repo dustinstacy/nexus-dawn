@@ -1,5 +1,7 @@
 import { CardData, ICard, IItem } from "@interfaces"
 
+export { default as customFetch } from "./customFetch"
+
 // Helper function to simplify updating state objects
 export const updateState = (setState: any, updates: any) => {
     setState((state: any) => ({ ...state, ...updates }))
@@ -11,6 +13,7 @@ export const classSet = (...classes: Array<string>) => {
     return classes.filter(Boolean).join(" ")
 }
 
+// Helper function to conver a card object to a CardData object
 export const createCardData = (card: ICard): CardData => {
     return {
         name: card.name,
