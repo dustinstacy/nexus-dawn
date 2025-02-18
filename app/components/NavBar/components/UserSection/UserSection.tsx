@@ -1,4 +1,4 @@
-import { Avatar } from "@components"
+import { Avatar, UserInventory } from "@components"
 import { User } from "@interfaces"
 import { useAuthStore } from "@stores"
 
@@ -12,7 +12,7 @@ const UserSection = () => {
     return (
         <div className='user-section end'>
             <hr />
-            {/* <UserInventory /> */}
+            <UserInventory />
             <div className='user-info center-column'>
                 <h2>{username}</h2>
                 {/* <ExperienceBar /> */}
