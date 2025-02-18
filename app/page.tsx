@@ -8,7 +8,7 @@ import { NavBar } from "@components"
 // import { Onboarding } from '@components'
 import { mainPanels, subPanels } from "@constants"
 import { User } from "@interfaces"
-import { useAuthStore } from "@stores"
+import { useAuthStore, useItemsStore, useOpponentsStore } from "@stores"
 import { classSet } from "@utils"
 
 import "./styles/home.scss"
@@ -16,10 +16,20 @@ import "./styles/home.scss"
 export default function Home() {
     const checkToken = useAuthStore((state) => state.checkToken)
     const user = useAuthStore((state) => state.user)
+    const fetchItems = useItemsStore((state) => state.fetchItems)
+    const fetchOpponents = useOpponentsStore((state) => state.fetchOpponents)
 
     useEffect(() => {
         checkToken()
     }, [checkToken])
+
+    useEffect(() => {
+        if (user) {
+            console.log("fetching items")
+            fetchItems()
+            fetchOpponents()
+        }
+    }, [user])
 
     const stage = user?.onboardingStage ?? {}
 

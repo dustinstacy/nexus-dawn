@@ -49,6 +49,7 @@ const useAuthStore = create<AuthState>((set) => ({
                 set({ accessToken: null, user: null })
             }
         } catch (error) {
+            console.error("Error checking token:", error)
             set({ accessToken: null, user: null })
         }
     },
