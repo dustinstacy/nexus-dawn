@@ -1,4 +1,4 @@
-// import { Avatar, ExperienceBar, UserInventory } from "@components"
+import { Avatar } from "@components"
 import { User } from "@interfaces"
 import { useAuthStore } from "@stores"
 
@@ -17,7 +17,7 @@ const UserSection = () => {
                 <h2>{username}</h2>
                 {/* <ExperienceBar /> */}
             </div>
-            {/* <Avatar levelShowing menu small /> */}
+            <Avatar levelShowing menu small />
         </div>
     )
 }

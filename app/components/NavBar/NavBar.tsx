@@ -37,7 +37,7 @@ const NavBar = ({ landing }: NavBarProps) => {
             {user ? (
                 <UserSection />
             ) : landing ? null : (
-                <Link className='navbar__login box' href='/login'>
+                <Link className='navbar__login box' href='/auth/login'>
                     Login
                 </Link>
             )}
