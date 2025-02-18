@@ -57,7 +57,7 @@ export const navlinks = [
     },
     {
         name: "HoW to pLAy",
-        path: "/rules",
+        path: "/how-to-play",
         image: <GiAbstract116 />,
     },
 ]
@@ -84,7 +84,7 @@ export const subPanels = (user: User) => {
         {
             className: "how-to-play",
             type: "sub",
-            to: "/rules",
+            to: "/how-to-play",
             jsx: (
                 <>
                     <h2>How To Play</h2>
