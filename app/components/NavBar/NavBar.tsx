@@ -1,10 +1,13 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 import { smlogo } from "@assets"
+import { useAuthStore } from "@stores"
 import { classSet } from "@utils"
 
 import { BurgerMenu, Links, UserSection } from "./components"
+
 import "./NavBar.scss"
 
 interface NavBarProps {
@@ -15,26 +18,29 @@ interface NavBarProps {
 // Renders a login button based on the value of the `landing` prop
 const NavBar = ({ landing }: NavBarProps) => {
     const router = useRouter()
+    const user = useAuthStore((state) => state.user)
+    const checkToken = useAuthStore((state) => state.checkToken)
 
-    // const stage = user?.onboardingStage ?? {}
+    useEffect(() => {
+        checkToken()
+    }, [checkToken])
 
-    const logoClasses = classSet("navbar__logo" /*(stage as number) <= 5 ? "disabled" : ""*/)
+    const stage = user?.onboardingStage ?? {}
+
+    const logoClasses = classSet("navbar__logo", (stage as number) <= 5 ? "disabled" : "")
 
     return (
         <div className='navbar between background-gradient'>
             <BurgerMenu />
             <img src={smlogo.src} alt='logo' className={logoClasses} onClick={() => router.push("/")} />
             <Links menu='navbar' />
-            {/* {user ? (
+            {user ? (
                 <UserSection />
             ) : landing ? null : (
-                <NavLink className='navbar__login box' to='/login'>
+                <Link className='navbar__login box' href='/login'>
                     Login
-                </NavLink>
-            )} */}
-            <Link className='navbar__login box' href='/auth/login'>
-                Login
-            </Link>
+                </Link>
+            )}
 
             <hr className='gold-border' />
         </div>

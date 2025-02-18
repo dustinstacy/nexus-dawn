@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+
 import "./styles/base.scss"
 import "./styles/layout.scss"
 import "./styles/modules.scss"

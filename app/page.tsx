@@ -2,24 +2,29 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import React, { useEffect } from "react"
 
 import { NavBar } from "@components"
 // import { Onboarding } from '@components'
-import { classSet } from "@utils"
+import { mainPanels, subPanels } from "@constants"
 import { User } from "@interfaces"
-import { mainPanels, subPanels } from "./constants"
+import { useAuthStore } from "@stores"
+import { classSet } from "@utils"
+
 import "./styles/home.scss"
 
 export default function Home() {
-    // const stage = user?.onboardingStage ?? {}
+    const checkToken = useAuthStore((state) => state.checkToken)
+    const user = useAuthStore((state) => state.user)
+
+    useEffect(() => {
+        checkToken()
+    }, [checkToken])
+
+    const stage = user?.onboardingStage ?? {}
 
     const linkClasses = (className: string, type: string) =>
-        classSet(
-            `${className}-${type}`,
-            "panel",
-            "start-column"
-            // !user ? 'disabled' : ''
-        )
+        classSet(`${className}-${type}`, "panel", "start-column", !user ? "disabled" : "")
     const pathname = usePathname()
     return (
         <div>
@@ -39,7 +44,7 @@ export default function Home() {
                         </Link>
                     ))}
                     <div className='subs start-column'>
-                        {subPanels(/*user as User*/).map((panel) => (
+                        {subPanels(user as User).map((panel) => (
                             <Link
                                 key={panel.className}
                                 href={panel.to}

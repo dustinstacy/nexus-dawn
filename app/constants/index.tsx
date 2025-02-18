@@ -9,10 +9,10 @@ export const maxValues = {
     Legendary: 9,
 }
 
-export const subPanels = (/*user: User*/) => {
-    // const userPacks = user?.inventory.filter((item) => item?.type === "pack")
+export const subPanels = (user: User) => {
+    const userPacks = user?.inventory.filter((item) => item?.type === "pack")
 
-    // const packsClasses = classSet(userPacks?.length ? "unopened" : "", !user ? "hidden" : "")
+    const packsClasses = classSet(userPacks?.length ? "unopened" : "", !user ? "hidden" : "")
 
     return [
         {
@@ -21,9 +21,9 @@ export const subPanels = (/*user: User*/) => {
             to: "/packs",
             jsx: (
                 <>
-                    {/* <p className={packsClasses}>
+                    <p className={packsClasses}>
                         Unopened Packs: <span>{userPacks?.length}</span>
-                    </p> */}
+                    </p>
                     <h2>Packs</h2>
                 </>
             ),
