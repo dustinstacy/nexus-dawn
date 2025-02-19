@@ -1,0 +1,62 @@
+.open-packs {
+    height: 100%;
+    padding-top: var(--navbar-height);
+    background: url("../assets/page-images/openPacksRoom.jpg");
+    background-size: cover;
+    background-position: bottom;
+
+    .panel {
+        height: 600px;
+        width: 80vw;
+        flex-direction: column;
+        padding: 24px;
+        margin: 24px;
+
+        @media screen and (max-width: 912px) {
+            width: 100vw;
+            margin: 0;
+        }
+
+        @media screen and (max-width: 600px) {
+            padding: 8px;
+        }
+
+        .panel-header {
+            height: 75px;
+            width: 80%;
+            text-align: center;
+
+            @media screen and (max-width: 912px) {
+                width: 90vw;
+
+                h1 {
+                    font-size: 28px;
+
+                    @media screen and (max-width: 912px) {
+                        font-size: 22px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.loader-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    animation: shrink 5s forwards;
+}
+
+@keyframes shrink {
+    95% {
+        height: calc(100vh - var(--navbar-height));
+        width: 100%;
+    }
+
+    100% {
+        height: 0;
+        width: 0;
+    }
+}

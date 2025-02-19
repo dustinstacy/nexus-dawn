@@ -1,0 +1,11 @@
+.user-packs {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid white;
+
+    .button {
+        position: absolute;
+        bottom: 16px;
+        font-size: 24px;
+    }
+}
