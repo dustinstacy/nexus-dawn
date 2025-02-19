@@ -1,28 +1,44 @@
 import { jwtDecode } from "jwt-decode"
 import { create } from "zustand"
 
-import { User } from "@interfaces"
+import { ICard, User } from "@interfaces"
 import { customFetch } from "@utils"
 
 interface UserState {
     user: User | null
+    userCards: Array<ICard>
+    userDeck: Array<ICard>
     setUser: (user: User | null) => void
-    updateUser: () => Promise<void>
+    getUserCards: () => void
+    getUserDeck: () => void
     checkForUser: () => void
 }
 
 const useUserStore = create<UserState>((set) => ({
     user: null,
+    userCards: [],
+    userDeck: [],
     setUser: (user) => set({ user: user }),
-    updateUser: async () => {
+    getUserCards: async () => {
         const token = sessionStorage?.getItem("accessToken")
-        const res = await customFetch("/api/auth/current", {
+        const res = await customFetch("/api/collections", {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         })
-        set({ user: { ...res } })
+        set({ userCards: res.cards })
+    },
+    getUserDeck: async () => {
+        const token = sessionStorage?.getItem("accessToken")
+        const res = await customFetch("/api/decks", {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        console.log("res", res)
+        set({ userDeck: res.cards })
     },
     checkForUser: () => {
         if (typeof window === "undefined") return
