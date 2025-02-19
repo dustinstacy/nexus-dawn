@@ -3,7 +3,7 @@ import { ImCheckboxUnchecked, ImCheckboxChecked } from "react-icons/im"
 import { ICard } from "@interfaces"
 import { useUserStore } from "@stores"
 
-import { addSelection, removeSelection } from "./api"
+import { addCardToDeck, removeCardFromDeck } from "@api"
 import "./checkBox.scss"
 
 interface CheckBoxProps {
@@ -13,12 +13,17 @@ interface CheckBoxProps {
 const CheckBox = ({ card }: CheckBoxProps) => {
     const userCards = useUserStore((state) => state.userCards)
     const userDeck = useUserStore((state) => state.userDeck)
+    const fetchUserCards = useUserStore((state) => state.fetchUserCards)
+    const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
 
     // Selects and adds a single card to the user's deck
     const addToDeck = async (card: ICard) => {
         let errorDisplayed = false
         if (userDeck.length < 35 && userDeck.length < userCards.length + 1) {
-            await addSelection(card)
+            await addCardToDeck(card)
+            fetchUserCards()
+            fetchUserDeck()
+            console.log("Card added to deck")
         } else {
             if (!errorDisplayed) {
                 errorDisplayed = true
@@ -29,7 +34,9 @@ const CheckBox = ({ card }: CheckBoxProps) => {
 
     // Unselects and removes a single card from the user's deck
     const removeFromDeck = async (card: ICard) => {
-        await removeSelection(card)
+        await removeCardFromDeck(card)
+        fetchUserCards()
+        fetchUserDeck()
     }
 
     const handleClick = async () => {
