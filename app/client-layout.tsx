@@ -4,12 +4,14 @@ import { usePathname } from "next/navigation"
 import React, { useEffect } from "react"
 
 import { NavBar } from "@components"
+import { customFetch } from "@utils"
 import { useCardsStore, useItemsStore, useOpponentsStore, useUserStore } from "@stores"
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
     const pathname = usePathname()
     const user = useUserStore((state) => state.user)
     const userCards = useUserStore((state) => state.userCards)
+    const userDeck = useUserStore((state) => state.userDeck)
     const checkForUser = useUserStore((state) => state.checkForUser)
     const fetchUserCards = useUserStore((state) => state.fetchUserCards)
     const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
@@ -30,6 +32,11 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
         if (user && userCards.length === 0) {
             fetchUserCards()
             fetchUserDeck()
+        }
+        if (user && userDeck === null) {
+            customFetch("/api/decks/", {
+                method: "POST",
+            })
         }
     }, [user])
 
