@@ -1,0 +1,82 @@
+.round-result {
+    padding: 24px;
+    font-size: 5vh;
+
+    @media screen and (max-width: 912px) {
+        font-size: 4vh;
+    }
+
+    @media screen and (max-width: 600px) {
+        font-size: 3vh;
+    }
+
+    .round-player {
+        height: 80vh;
+
+        @media screen and (max-width: 768px) {
+            height: 90vh;
+        }
+
+        h4 {
+            font-size: 4vh;
+            text-shadow: 4px 4px 4px var(--black-color);
+
+            @media screen and (max-width: 912px) {
+                display: none;
+            }
+        }
+
+        img {
+            height: 20vh;
+            border: 2px solid var(--secondary2-color);
+            border-radius: 8px;
+
+            @media screen and (max-width: 912px) {
+                height: 12vh;
+            }
+
+            @media screen and (max-width: 768px) {
+                height: 10vh;
+            }
+        }
+    }
+
+    .round-player:nth-child(1) {
+        @media screen and (max-width: 600px) {
+            position: absolute;
+            top: 3vh;
+            left: 3vh;
+        }
+    }
+
+    .round-player:nth-child(3) {
+        @media screen and (max-width: 600px) {
+            position: absolute;
+            top: 3vh;
+            right: 3vh;
+        }
+    }
+
+    .score-wrapper {
+        position: relative;
+        height: 85vh;
+        width: 40vw;
+
+        @media screen and (max-width: 912px) {
+            width: 50vw;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 80vw;
+        }
+
+        @media screen and (max-width: 600px) {
+            height: 70vh;
+        }
+
+        .round-scores {
+            width: 100%;
+            flex: 1;
+        }
+    }
+}

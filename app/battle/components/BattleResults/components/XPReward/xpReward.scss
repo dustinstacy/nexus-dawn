@@ -1,0 +1,38 @@
+.results-xp {
+    gap: 1vh;
+    font-size: 24px;
+
+    .gained-xp {
+        gap: 12px;
+        color: var(--secondary-color);
+        opacity: 0;
+        animation: fade-up 1s ease-out 0.5s forwards;
+    }
+
+    .progress-bar {
+        height: 2vh;
+        width: 40vh;
+        margin-bottom: 10px;
+        border: 2px solid var(--background3-color);
+
+        @media screen and (max-width: 600px) {
+            width: 40vw;
+        }
+
+        &__inner {
+            background-color: var(--primary-color);
+        }
+    }
+}
+
+@keyframes fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(1vh);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

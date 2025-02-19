@@ -1,0 +1,29 @@
+.results-buttons {
+    position: absolute;
+    bottom: 18vh;
+    display: flex;
+    gap: 5vh;
+
+    @media screen and (max-width: 912px) {
+        gap: 5vh;
+    }
+
+    @media screen and (max-width: 768px) {
+        bottom: 2vh;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    button {
+        height: 6vh;
+        width: 24vh;
+        background: var(--background3-color);
+        font-size: 2vh;
+
+        @media screen and (max-width: 912px) {
+            height: 5vh;
+            width: 20vh;
+            font-size: 1.5vh;
+        }
+    }
+}
