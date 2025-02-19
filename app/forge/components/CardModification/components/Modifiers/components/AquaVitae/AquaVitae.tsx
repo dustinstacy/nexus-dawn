@@ -21,8 +21,8 @@ const AquaVitae = ({
     const [modValues, setModValues] = useState<Array<number>>([])
     const [chosenValue, setChosenValue] = useState<number | null>(null)
 
-    let updatedCardValues = [...selectedCardValues]
-    let updatedModValues = [...modValues]
+    const updatedCardValues = [...selectedCardValues]
+    const updatedModValues = [...modValues]
 
     const cardValueClick = (value: number | string, i: number) => {
         if (value !== "") {

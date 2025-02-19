@@ -3,7 +3,7 @@ export interface User {
     _id: string
     role: Role
     username: string
-    activeBattle: Boolean
+    activeBattle: boolean
     coin: number
     color: string
     createdAt: string
@@ -169,7 +169,7 @@ export interface IOpponent {
     image: string
     color: string
     level: number
-    deckOdds: Object
+    deckOdds: object
     cardCount: number
     minPower: number
     maxPower: number

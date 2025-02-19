@@ -2,7 +2,7 @@ import { ICard } from "@interfaces"
 
 const cpuMove = (hand: Array<ICard | null>, board: Array<any>, emptyCells: Array<any>) => {
     const newBoard = board
-    let newHand = hand
+    const newHand = hand
     let bestScore = -Infinity
     let move: { card: any; cell: number } = { card: null, cell: 0 }
 

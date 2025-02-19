@@ -12,7 +12,7 @@ interface AquaManna {
 }
 
 const AquaManna = ({ selectedCard, selectedCardValues, setModificationInProgress }: AquaManna) => {
-    let updatedCardValues = [...selectedCardValues]
+    const updatedCardValues = [...selectedCardValues]
 
     return (
         <div>

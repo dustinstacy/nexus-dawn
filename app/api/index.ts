@@ -40,7 +40,7 @@ export const addCardToDeck = async (card: ICard) => {
 }
 
 export const addItemToInventory = async (user: User, item: IItem | IItem[]) => {
-    let updatedInventory = [...user.inventory]
+    const updatedInventory = [...user.inventory]
     if (Array.isArray(item)) {
         updatedInventory.push(...item)
     } else {

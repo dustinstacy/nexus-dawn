@@ -23,7 +23,7 @@ const AquaFortisSuperior = ({
 
     const selectedCardMaxSingleValue = maxValues[selectedCard!.rarity as keyof typeof maxValues]
 
-    let updatedCardValues = [...selectedCardValues]
+    const updatedCardValues = [...selectedCardValues]
     let updatedModValue = modValue
 
     useEffect(() => {

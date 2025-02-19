@@ -11,11 +11,10 @@ import "./battleResults.scss"
 interface BattleResultsProps {
     playerOne: any
     playerTwo: any
-    opponentDeck: any
 }
 
 // Renders the user's battle results including any rewards gained
-const BattleResults = ({ playerOne, playerTwo, opponentDeck }: BattleResultsProps) => {
+const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
     const fetchUserData = useUserStore((state) => state.fetchUserData)
     const allItems = useItemsStore((state) => state.allItems)
 

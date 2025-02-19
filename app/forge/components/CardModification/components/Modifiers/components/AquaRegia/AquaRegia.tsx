@@ -20,7 +20,7 @@ const AquaRegia = ({
 }: AquaRegia) => {
     const [rotated, setRotated] = useState(false)
 
-    let updatedCardValues = [...selectedCardValues]
+    const updatedCardValues = [...selectedCardValues]
 
     const rotateValues = () => {
         updatedCardValues.unshift(updatedCardValues.pop() as number)

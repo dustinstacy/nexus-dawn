@@ -21,8 +21,8 @@ const AquaVitaeSuperior = ({
     const [modValues, setModValues] = useState<Array<number | string>>([...selectedCardValues])
     const [chosenValue, setChosenValue] = useState<number | null>(null)
 
-    let updatedCardValues = [...selectedCardValues]
-    let updatedModValues = [...modValues]
+    const updatedCardValues = [...selectedCardValues]
+    const updatedModValues = [...modValues]
 
     useEffect(() => {
         setSelectedCardValues(Array(4).fill(""))

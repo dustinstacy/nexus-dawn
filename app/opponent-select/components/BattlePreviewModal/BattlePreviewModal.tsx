@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { AiOutlineCloseCircle } from "react-icons/ai"
 import { useRouter } from "next/navigation"
 

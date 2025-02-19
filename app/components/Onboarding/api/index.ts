@@ -20,7 +20,7 @@ export const incrementOnboardingStage = async (user: User) => {
     })
 }
 
-export const skipOnboarding = async (user: User) => {
+export const skipOnboarding = async () => {
     await customFetch("/api/profiles/onboarding", {
         method: "PUT",
         body: JSON.stringify({

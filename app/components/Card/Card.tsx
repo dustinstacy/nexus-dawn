@@ -45,7 +45,7 @@ const Card = ({ card, isDraggable, isDragged, isShowing, isSelected, handleClick
         e.dataTransfer.setDragImage(dragImage, offsetX, offsetY)
     }
 
-    const handleDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragEnd = () => {
         setCardDragged?.(null)
     }
 
@@ -56,7 +56,7 @@ const Card = ({ card, isDraggable, isDragged, isShowing, isSelected, handleClick
             draggable={isDraggable}
             onClick={(e) => handleClick?.(e, card)}
             onDragStart={(e) => handleDragStart(e, card)}
-            onDragEnd={(e) => handleDragEnd(e)}
+            onDragEnd={() => handleDragEnd()}
         >
             <div
                 className='card__side card__front fill'

@@ -406,12 +406,12 @@ const Battle = () => {
             )}
             {battleOver && (
                 <ModalOverlay>
-                    <BattleResults playerOne={playerOne} playerTwo={playerTwo} opponentDeck={selectedOpponentDeck} />
+                    <BattleResults playerOne={playerOne} playerTwo={playerTwo} />
                 </ModalOverlay>
             )}
             {alertActive && (
                 <Alert>
-                    <h2>Don't be a quitter!</h2>
+                    <h2>Don&apos;t be a quitter!</h2>
                     <div className='buttons'>
                         <Button label='Fight on!' onClick={() => setAlertActive(false)} />
                         <Button label='Forefeit' onClick={() => forfeitBattle()} />

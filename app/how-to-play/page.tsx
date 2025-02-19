@@ -23,7 +23,7 @@ const HowToPlay = () => {
                             <div key={section.title} className='panel-section'>
                                 <h2>{section.title}</h2>
                                 <ul className='panel-section-content'>
-                                    {section.content.map((content, i) => (
+                                    {section.content.map((content) => (
                                         <li key={content.line.slice(0, 10)}>{content.line}</li>
                                     ))}
                                 </ul>

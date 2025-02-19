@@ -23,7 +23,7 @@ const UserImageUpdate = () => {
     const handleSubmit = async () => {
         try {
             setLoading(true)
-            await validateURL(newUserImage)
+            await validateURL()
             await updateUserInfo("image", newUserImage)
             fetchUserData("image")
         } catch (error: any) {

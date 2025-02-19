@@ -23,7 +23,7 @@ const PromoCode = () => {
         setPromoCode(e.target.value)
     }
 
-    const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleSubmit = async () => {
         setLoading(true)
         try {
             await checkPromoCode(promoCode)

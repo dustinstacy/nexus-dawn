@@ -18,7 +18,7 @@ const AquaRegiaSuperior = ({
     setSelectedCardValues,
     setModificationInProgress,
 }: AquaRegiaSuperior) => {
-    let updatedCardValues = [...selectedCardValues]
+    const updatedCardValues = [...selectedCardValues]
 
     const rotateValues = () => {
         updatedCardValues.unshift(updatedCardValues.pop() as number)

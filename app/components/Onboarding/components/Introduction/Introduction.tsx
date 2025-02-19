@@ -41,7 +41,7 @@ const Introduction = ({ nextStage }: NextStage) => {
         })
         const rarePack = allItems.find((item) => item.name === "Rare Pack")
         await addItemToInventory(user as User, rarePack as IItem)
-        await skipOnboarding(user as User)
+        await skipOnboarding()
         fetchUserData("coin")
         fetchUserData("inventory")
         fetchUserData("onboardingStage")

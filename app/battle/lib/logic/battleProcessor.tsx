@@ -3,7 +3,7 @@ import { evaluate, evaluateSameAndPlus } from "./evaluations"
 
 // TMP config rules here
 // Remove once battleProcessor accepts rules as an arg
-let rules = {
+const rules = {
     standard: true,
     low: false,
     same: false,
