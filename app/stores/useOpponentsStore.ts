@@ -8,7 +8,7 @@ interface OpponentsState {
     selectedOpponent: IOpponent | null
     selectedOpponentDeck: Array<ICard> | []
     setSelectedOpponent: (opponent: IOpponent | null) => void
-    setSelectedOpponentDeck: (deck: Array<ICard>) => void
+    setSelectedOpponentDeck: (deck: Array<ICard> | null) => void
     fetchOpponents: () => void
 }
 
@@ -20,7 +20,7 @@ const useOpponentsStore = create<OpponentsState>((set) => ({
         set({ selectedOpponent: opponent })
     },
     setSelectedOpponentDeck: (deck) => {
-        set({ selectedOpponentDeck: deck })
+        set({ selectedOpponentDeck: deck as Array<ICard> })
     },
     fetchOpponents: async () => {
         try {
