@@ -4,7 +4,7 @@ import { CircleLoader } from "react-spinners"
 import { addCardToDeck, removeCardFromDeck } from "@api"
 import { Filter, Button } from "@components"
 import { useUserStore } from "@stores"
-import { calculateDeckPower, calculateOptimizedDeck } from "@utils"
+import { calculateDeckPower, calculateOptimizedDeck, customFetch } from "@utils"
 import { ICard } from "@interfaces"
 
 import { removeAllFromDeck } from "./api"
@@ -60,6 +60,13 @@ const DeckBar = () => {
         setClearDeckLoading(false)
     }
 
+    const newDeck = async () => {
+        await customFetch("/api/decks/", {
+            method: "POST",
+        })
+        fetchUserDeck()
+    }
+
     // Determine the label for the fill deck button based on the fillDeckLoading state
     const fillDeckLabel = fillDeckLoading ? (
         <CircleLoader color='#ffffff' size={24} loading={fillDeckLoading} />
@@ -111,6 +118,7 @@ const DeckBar = () => {
                     label={clearDeckLabel as string}
                     disabled={clearDeckLoading || fillDeckLoading}
                 />
+                <Button onClick={newDeck} label={"new deck"} disabled={false} />
             </div>
         </div>
     )

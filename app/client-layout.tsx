@@ -33,7 +33,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
             fetchUserCards()
             fetchUserDeck()
         }
-        if (user && userDeck === null) {
+        if (user && userDeck == null) {
             customFetch("/api/decks/", {
                 method: "POST",
             })
