@@ -17,6 +17,7 @@ interface UserPacks {
 
 const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     const user = useUserStore((state) => state.user)
+    const fetchUserCards = useUserStore((state) => state.fetchUserCards)
     const fetchUserData = useUserStore((state) => state.fetchUserData)
     const allCards = useCardsStore((state) => state.allCards)
 
@@ -35,6 +36,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
         await getRandomCardsFromPack()
         await removeItemFromInventory(user as User, currentPack as IItem)
         fetchUserData("inventory")
+        fetchUserCards()
         setIsLoading(false)
     }
 
