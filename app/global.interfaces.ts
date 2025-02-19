@@ -92,11 +92,20 @@ export interface ChosenQuantity {
     discount: string
 }
 
-interface PlayerDetails {
-    user: User
+export interface UserDetails {
+    user: User | null
     name: string
-    deck: Array<CardLog>
-    hand: Array<CardLog>
+    deck: Array<ICard>
+    hand: Array<ICard>
+    roundScore: number
+    battleScore: number
+}
+
+export interface CPUDetails {
+    user: IOpponent | null
+    name: string
+    deck: Array<ICard>
+    hand: Array<ICard>
     roundScore: number
     battleScore: number
 }
@@ -107,7 +116,7 @@ interface RoundResults {
     p2Score: number
 }
 
-interface BattleState {
+export interface BattleState {
     board: Array<any>
     decksShuffled: boolean
     handsDealt: boolean
@@ -115,8 +124,15 @@ interface BattleState {
     round: number
     isP1Turn: boolean
     roundOver: boolean
+    roundStarted: boolean
     roundResults: Array<RoundResults>
     battleOver: boolean
+}
+
+export interface BattleData {
+    playerOne: UserDetails
+    playerTwo: CPUDetails
+    battleState: BattleState
 }
 
 export interface FormData {
