@@ -45,7 +45,7 @@ const BattlePreviewModal = () => {
 
     // Navigate to battle page with stored opponent and opponent deck statee
     const startBattle = () => {
-        router.push("/battleIntro")
+        router.push("/battle-intro")
     }
 
     return (
