@@ -13,7 +13,7 @@ const useOpponentsStore = create<OpponentsState>((set) => ({
     fetchOpponents: async () => {
         try {
             const res = await customFetch("/api/cpuOpponents")
-            set({ allOpponents: res.items })
+            set({ allOpponents: res })
         } catch (error) {
             console.error(error)
         }
