@@ -14,6 +14,7 @@ interface CardProps {
     isSelected?: boolean
     handleClick?: (e: React.MouseEvent<HTMLDivElement>, card: ICard) => void
     setCardDragged?: (card: ICard | null) => void
+    setCardSelected?: (card: ICard | null) => void
 }
 
 const Card = ({ card, isDraggable, isDragged, isShowing, isSelected, handleClick, setCardDragged }: CardProps) => {
