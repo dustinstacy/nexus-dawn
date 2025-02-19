@@ -11,7 +11,8 @@ import { checkPromoCode } from "./utils"
 import "./promoCode.scss"
 
 const PromoCode = () => {
-    const { user } = useUserStore()
+    const user = useUserStore((state) => state.user)
+    const fetchUserData = useUserStore((state) => state.fetchUserData)
 
     const [promoCode, setPromoCode] = useState("")
     const [loading, setLoading] = useState(false)
@@ -28,7 +29,8 @@ const PromoCode = () => {
             await checkPromoCode(promoCode)
             await addCoin(user as User, 1000000)
             await addExperience(user as User, 100000) // Refresh user data after updating
-            // await getCurrentUser()
+            fetchUserData("coins")
+            fetchUserData("xp")
         } catch (error: any) {
             setError(error.message) // Set the error message for display
         } finally {

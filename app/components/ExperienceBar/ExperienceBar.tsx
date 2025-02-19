@@ -14,7 +14,8 @@ import "./experienceBar.scss"
 
 // Renders the user's experience bar and handles level up functionality when XP thresholds are reached.
 const ExperienceBar = () => {
-    const { user } = useUserStore()
+    const user = useUserStore((state) => state.user)
+    const fetchUserData = useUserStore((state) => state.fetchUserData)
     const { xp, level } = (user as User) ?? {}
 
     const [newLevelAlert, setNewLevelAlert] = useState(false)
@@ -35,7 +36,8 @@ const ExperienceBar = () => {
         const checkLevelUp = async () => {
             if (xp >= userNextLevel) {
                 await handleLevelUp(user as User)
-                // await getCurrentUser()
+                fetchUserData("xp")
+                fetchUserData("level")
                 setTimeout(async () => {
                     setNewLevelAlert(true)
                 }, 3000)
