@@ -44,12 +44,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 
         newCards.forEach(async (card) => {
             assignRandomCardValues(card)
-            try {
-                // Format card into data object for API request before passing as parameter to addCardToCollection
-                await addCardToCollection(createCardData(card))
-            } catch (error) {
-                console.log(error)
-            }
+            await addCardToCollection(createCardData(card))
         })
         setPackContents(newCards)
     }

@@ -23,7 +23,6 @@ const CheckBox = ({ card }: CheckBoxProps) => {
             await addCardToDeck(card)
             fetchUserCards()
             fetchUserDeck()
-            console.log("Card added to deck")
         } else {
             if (!errorDisplayed) {
                 errorDisplayed = true
