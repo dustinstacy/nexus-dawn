@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import React, { useEffect } from "react"
+import React from "react"
 
 // import { Onboarding } from '@components'
 import { mainPanels, subPanels } from "@constants"
@@ -11,7 +10,6 @@ import { useUserStore } from "@stores"
 import { classSet } from "@utils"
 
 import ClientLayout from "./client-layout"
-
 import "./styles/home.scss"
 
 export default function Home() {
@@ -21,8 +19,6 @@ export default function Home() {
 
     const linkClasses = (className: string, type: string) =>
         classSet(`${className}-${type}`, "panel", "start-column", !user ? "disabled" : "")
-
-    const pathname = usePathname()
 
     return (
         <ClientLayout>
