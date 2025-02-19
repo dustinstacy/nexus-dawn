@@ -11,6 +11,7 @@ interface UserState {
     setUser: (user: User | null) => void
     fetchUserCards: () => void
     fetchUserDeck: () => void
+    fetchUserData: (data: string) => void
     checkForUser: () => void
 }
 
@@ -37,8 +38,18 @@ const useUserStore = create<UserState>((set) => ({
                 Authorization: `Bearer ${token}`,
             },
         })
-        console.log("res", res)
         set({ userDeck: res.cards })
+    },
+    fetchUserData: async (data: string) => {
+        const token = sessionStorage?.getItem("accessToken")
+        const res = await customFetch(`/api/profiles/${data}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        const updatedData = res[data]
+        set((state) => ({ user: { ...(state.user as User), [data]: updatedData } }))
     },
     checkForUser: () => {
         if (typeof window === "undefined") return

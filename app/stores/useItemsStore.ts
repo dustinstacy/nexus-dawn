@@ -13,7 +13,7 @@ const useItemsStore = create<ItemsState>((set) => ({
     fetchItems: async () => {
         try {
             const res = await customFetch("/api/items")
-            set({ allItems: res.items })
+            set({ allItems: res })
         } catch (error) {
             console.error(error)
         }
