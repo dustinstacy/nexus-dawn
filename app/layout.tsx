@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import ClientLayout from "./client-layout"
 
+import ClientLayout from "./client-layout"
 import "./styles/base.scss"
 import "./styles/layout.scss"
 import "./styles/modules.scss"
