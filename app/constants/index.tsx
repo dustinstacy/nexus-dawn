@@ -32,7 +32,7 @@ export const navlinks = [
     },
     {
         name: "BAttLe",
-        path: "/opponentSelect",
+        path: "/opponent-select",
         image: <GiAbstract088 />,
     },
     {
@@ -109,7 +109,7 @@ export const mainPanels = [
     {
         className: "battle",
         type: "main",
-        to: "/opponentSelect",
+        to: "/opponent-select",
         text: "Test your skill",
         header: "Battle",
     },
