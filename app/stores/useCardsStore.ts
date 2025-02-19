@@ -13,7 +13,6 @@ const useCardsStore = create<CardsState>((set) => ({
     fetchCards: async () => {
         try {
             const res = await customFetch("/api/cards")
-            console.log(res)
             set({ allCards: res })
         } catch (error) {
             console.error(error)
