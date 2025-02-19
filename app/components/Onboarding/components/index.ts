@@ -1,0 +1,6 @@
+export { default as CompletionReward } from './CompletionReward/CompletionReward'
+export { default as HowToGetCards } from './HowToGetCards/HowToGetCards'
+export { default as HowToOpenPacks } from './HowToOpenPacks/HowToOpenPacks'
+export { default as HowToBuildADeck } from './HowToBuildADeck/HowToBuildADeck'
+export { default as HowToPlay } from './HowToPlay/HowToPlay'
+export { default as Introduction } from './Introduction/Introduction'

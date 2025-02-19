@@ -2,7 +2,7 @@
 
 import React from "react"
 
-// import { Onboarding } from "@components"
+import { Onboarding } from "@components"
 import { useUserStore } from "@stores"
 
 import { howToPlay } from "./constants"
@@ -14,7 +14,7 @@ const HowToPlay = () => {
 
     return (
         <div className='how-to-play page center'>
-            {/* {(stage === 4 || stage === 5) && <Onboarding />} */}
+            {(stage === 4 || stage === 5) && <Onboarding />}
             {howToPlay.map((panel) => (
                 <div key={panel.header} className='panel center-column'>
                     <h1>{panel.header}</h1>

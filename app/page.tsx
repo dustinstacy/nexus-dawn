@@ -3,7 +3,7 @@
 import Link from "next/link"
 import React from "react"
 
-// import { Onboarding } from '@components'
+import { Onboarding } from "@components"
 import { mainPanels, subPanels } from "@constants"
 import { User } from "@interfaces"
 import { useUserStore } from "@stores"
@@ -22,7 +22,7 @@ export default function Home() {
 
     return (
         <ClientLayout>
-            {/* {(stage as number) <= 5 && <Onboarding />} */}
+            {(stage as number) <= 5 && <Onboarding />}
             <div className='home page start'>
                 <div className='home-wrapper '>
                     {mainPanels.map((panel) => (

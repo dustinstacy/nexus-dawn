@@ -13,6 +13,7 @@ import "./deckBar.scss"
 // Renders the user's deck statistics and provides options to automatically manage the deck
 const DeckBar = () => {
     const userCards = useUserStore((state) => state.userCards)
+    const fetchUserCards = useUserStore((state) => state.fetchUserCards)
     const userDeck = useUserStore((state) => state.userDeck)
     const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
     const [deckCount, setDeckCount] = useState("15")
@@ -46,6 +47,7 @@ const DeckBar = () => {
         setFillDeckLoading(true)
         await optimizeDeck()
         fetchUserDeck()
+        fetchUserCards()
         setFillDeckLoading(false)
     }
 

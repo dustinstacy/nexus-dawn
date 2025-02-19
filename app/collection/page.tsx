@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-import { Filter } from "@components"
+import { Filter, Onboarding } from "@components"
 import { useUserStore } from "@stores"
 
 import { CardCollection, DeckBar, UserPanel } from "./components"
@@ -20,7 +20,7 @@ const Collection = () => {
 
     return (
         <div className='collection page'>
-            {/* {stage === 3 && <Onboarding />} */}
+            {stage === 3 && <Onboarding />}
             <UserPanel />
             <DeckBar />
             <div className='header'>

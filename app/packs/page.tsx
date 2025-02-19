@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-// import { Onboarding } from "@components"
+import { Onboarding } from "@components"
 import { ICard } from "@interfaces"
 import { useUserStore } from "@stores"
 
@@ -19,7 +19,7 @@ const OpenPacks = () => {
 
     return (
         <div className='open-packs page center'>
-            {/* {stage === 2 && <Onboarding />} */}
+            {stage === 2 && <Onboarding />}
             {packContents && !isLoading ? (
                 <PackContents packContents={packContents} setPackContents={setPackContents} />
             ) : isLoading ? (

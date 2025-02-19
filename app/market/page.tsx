@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-// import { Onboarding } from "@components"
+import { Onboarding } from "@components"
 import { IItem } from "@interfaces"
 import { useUserStore } from "@stores"
 
@@ -13,12 +13,13 @@ import "./market.scss"
 const Market = () => {
     const user = useUserStore((state) => state.user)
     const stage = user?.onboardingStage ?? {}
+    console.log("stage", stage)
 
     const [chosenItem, setChosenItem] = useState<IItem | null>(null)
 
     return (
         <div className='market page'>
-            {/* {stage === 1 && <Onboarding />} */}
+            {stage === 1 && <Onboarding />}
             <div className='market-menu-header'>
                 <h1>MaRKet</h1>
                 <hr />

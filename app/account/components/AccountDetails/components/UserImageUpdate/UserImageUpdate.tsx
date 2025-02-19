@@ -4,11 +4,13 @@ import React, { useState } from "react"
 
 import { updateUserInfo } from "@api"
 import { Button, TextInput } from "@components"
+import { useUserStore } from "@stores"
 
 import { validateURL } from "./utils"
 import "./userImageUpdate.scss"
 
 const UserImageUpdate = () => {
+    const fetchUserData = useUserStore((state) => state.fetchUserData)
     const [newUserImage, setNewUserImage] = useState("")
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
@@ -23,6 +25,7 @@ const UserImageUpdate = () => {
             setLoading(true)
             await validateURL(newUserImage)
             await updateUserInfo("image", newUserImage)
+            fetchUserData("image")
         } catch (error: any) {
             setError(error.message) // Set the error message for display
         } finally {
