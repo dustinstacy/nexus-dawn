@@ -9,8 +9,8 @@ interface UserState {
     userCards: Array<ICard>
     userDeck: Array<ICard>
     setUser: (user: User | null) => void
-    getUserCards: () => void
-    getUserDeck: () => void
+    fetchUserCards: () => void
+    fetchUserDeck: () => void
     checkForUser: () => void
 }
 
@@ -19,7 +19,7 @@ const useUserStore = create<UserState>((set) => ({
     userCards: [],
     userDeck: [],
     setUser: (user) => set({ user: user }),
-    getUserCards: async () => {
+    fetchUserCards: async () => {
         const token = sessionStorage?.getItem("accessToken")
         const res = await customFetch("/api/collections", {
             method: "GET",
@@ -29,7 +29,7 @@ const useUserStore = create<UserState>((set) => ({
         })
         set({ userCards: res.cards })
     },
-    getUserDeck: async () => {
+    fetchUserDeck: async () => {
         const token = sessionStorage?.getItem("accessToken")
         const res = await customFetch("/api/decks", {
             method: "GET",
