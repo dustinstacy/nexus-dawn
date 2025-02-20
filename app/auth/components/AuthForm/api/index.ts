@@ -24,15 +24,10 @@ export const sendAuthRequest = async (formData: FormData, register: boolean) => 
             body: JSON.stringify(data),
         })
 
-        // If the response contains errors, throw an error with the respones data
-        if (res.errors) {
-            throw new Error(res.errors)
-        }
-
         // Return the response data
         return res as AuthResponse
-    } catch (error) {
-        console.error("Error authenticating user:", error)
+    } catch (error: any) {
+        console.error("Error authenticating user:", error.message)
         throw error // Rethrow the error to propagate it to the caller
     }
 }

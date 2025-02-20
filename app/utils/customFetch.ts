@@ -19,7 +19,8 @@ const customFetch = async (url: string, options: RequestInit = {}) => {
 
     // If the response is not OK, throw an error
     if (!res.ok) {
-        throw new Error(`Error: ${res.statusText}`)
+        const errorData = await res.json()
+        throw new Error(JSON.stringify(errorData))
     }
 
     // Return the JSON response

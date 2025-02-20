@@ -58,8 +58,12 @@ const AuthForm = ({ register }: Register) => {
                 router.push("/")
             }
         } catch (error: any) {
-            if (error?.response?.data) {
-                setErrors(error.response.data)
+            // Make sure the error has the expected structure
+            if (error.message) {
+                const errorData = JSON.parse(error.message)
+                setErrors(errorData) // Update errors state with backend error messages
+            } else {
+                console.error("Unexpected error:", error) // Log unexpected errors
             }
         } finally {
             setLoading(false)
