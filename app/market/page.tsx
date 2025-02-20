@@ -13,7 +13,6 @@ import "./market.scss"
 const Market = () => {
     const user = useUserStore((state) => state.user)
     const stage = user?.onboardingStage ?? {}
-    console.log("stage", stage)
 
     const [chosenItem, setChosenItem] = useState<IItem | null>(null)
 

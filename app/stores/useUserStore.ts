@@ -9,9 +9,9 @@ interface UserState {
     userCards: Array<ICard>
     userDeck: Array<ICard>
     setUser: (user: User | null) => void
-    fetchUserCards: () => void
-    fetchUserDeck: () => void
-    fetchUserData: (data: string) => void
+    fetchUserCards: () => Promise<void>
+    fetchUserDeck: () => Promise<void>
+    fetchUserData: (data: string) => Promise<void>
     checkForUser: () => void
 }
 

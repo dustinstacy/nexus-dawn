@@ -35,8 +35,8 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
         await new Promise((resolve) => setTimeout(resolve, 5000))
         await getRandomCardsFromPack()
         await removeItemFromInventory(user as User, currentPack as IItem)
-        fetchUserData("inventory")
-        fetchUserCards()
+        await fetchUserData("inventory")
+        await fetchUserCards()
         setIsLoading(false)
     }
 

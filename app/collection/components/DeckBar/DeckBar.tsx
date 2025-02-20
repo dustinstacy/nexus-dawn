@@ -1,10 +1,10 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { CircleLoader } from "react-spinners"
 
 import { addCardToDeck, removeCardFromDeck } from "@api"
 import { Filter, Button } from "@components"
 import { useUserStore } from "@stores"
-import { calculateDeckPower, calculateOptimizedDeck, customFetch } from "@utils"
+import { calculateDeckPower, calculateOptimizedDeck } from "@utils"
 import { ICard } from "@interfaces"
 
 import { removeAllFromDeck } from "./api"
@@ -19,36 +19,76 @@ const DeckBar = () => {
     const [deckCount, setDeckCount] = useState("15")
     const [fillDeckLoading, setFillDeckLoading] = useState(false)
     const [clearDeckLoading, setClearDeckLoading] = useState(false)
+    const [isUpToDate, setIsUpToDate] = useState(false)
+    const [userDeckPower, setUserDeckPower] = useState<number>(0)
+    const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
+    const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
 
-    // Calculate the strongest combination of the user's cards based on the opponent's card count requirement
-    const userOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
-    // Calculate sum of all card values in user's deck
-    const userDeckPower = calculateDeckPower(userDeck)
-    // Calculate the sum of all card values in the user's highest potential deck
-    const userOptimizedDeckPower = calculateDeckPower(userOptimizedDeck)
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetchUserDeck()
+            await fetchUserCards()
+            setIsUpToDate(true)
+        }
+
+        fetchData()
+
+        return () => {
+            setIsUpToDate(false)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (isUpToDate) {
+            updateOptimizedDeckState()
+        }
+    }, [isUpToDate])
+
+    useEffect(() => {
+        updateOptimizedDeckState()
+    }, [userDeck])
+
+    useEffect(() => {
+        const newOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
+        const newOptimizedDeckPower = calculateDeckPower(newOptimizedDeck)
+
+        setUserOptimizedDeck(newOptimizedDeck)
+        setUserOptimizedDeckPower(newOptimizedDeckPower)
+    }, [deckCount])
+
+    const updateOptimizedDeckState = async () => {
+        const newUserDeckPower = calculateDeckPower(userDeck)
+        const newUserOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
+        const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
+
+        setUserDeckPower(newUserDeckPower)
+        setUserOptimizedDeck(newUserOptimizedDeck)
+        setUserOptimizedDeckPower(newUserOptimizedDeckPower)
+    }
 
     const optimizeDeck = async () => {
-        userDeck.forEach((card: ICard) => {
-            if (!userOptimizedDeck.some((optimizedCard: ICard) => optimizedCard._id === card._id)) {
+        setFillDeckLoading(true)
+        updateOptimizedDeckState()
+        userDeck.forEach((card) => {
+            if (!userOptimizedDeck.some((optimizedCard) => optimizedCard._id === card._id)) {
                 removeCardFromDeck(card)
             }
         })
-        userOptimizedDeck.forEach((optimizedCard: ICard) => {
-            if (!userDeck.some((card: ICard) => card._id === optimizedCard._id)) {
+        userOptimizedDeck.forEach((optimizedCard) => {
+            if (!userDeck.some((card) => card._id === optimizedCard._id)) {
                 addCardToDeck(optimizedCard)
             }
         })
+        await fetchUserCards()
+        await fetchUserDeck()
+        setFillDeckLoading(false)
     }
 
     // Sorts all cards not in the user's deck and creates an array from the
     // strongest cards equal in length to the remaining space in the deck.
     // Then handles the API requests to add the cards to the deck and updates the user data upon completion
     const autoBuild = async () => {
-        setFillDeckLoading(true)
-        await optimizeDeck()
-        fetchUserDeck()
-        fetchUserCards()
-        setFillDeckLoading(false)
+        optimizeDeck()
     }
 
     // Removes all cards from the user's deck using an API request
@@ -56,15 +96,8 @@ const DeckBar = () => {
     const emptyDeck = async () => {
         setClearDeckLoading(true)
         await removeAllFromDeck(userDeck)
-        fetchUserDeck()
+        await fetchUserDeck()
         setClearDeckLoading(false)
-    }
-
-    const newDeck = async () => {
-        await customFetch("/api/decks/", {
-            method: "POST",
-        })
-        fetchUserDeck()
     }
 
     // Determine the label for the fill deck button based on the fillDeckLoading state
@@ -110,7 +143,7 @@ const DeckBar = () => {
                     <Button
                         onClick={autoBuild}
                         label={fillDeckLabel as string}
-                        disabled={userDeckPower === userOptimizedDeckPower || fillDeckLoading || clearDeckLoading}
+                        disabled={userDeckPower == userOptimizedDeckPower || fillDeckLoading || clearDeckLoading}
                     />
                 </div>
                 <Button
@@ -118,7 +151,6 @@ const DeckBar = () => {
                     label={clearDeckLabel as string}
                     disabled={clearDeckLoading || fillDeckLoading}
                 />
-                <Button onClick={newDeck} label={"new deck"} disabled={false} />
             </div>
         </div>
     )

@@ -40,7 +40,6 @@ const Onboarding = () => {
         try {
             await incrementOnboardingStage(user as User)
             fetchUserData("onboardingStage")
-            console.log("incremented onboarding stage", user?.onboardingStage)
             path && router.push(`${path}`)
         } catch (error) {
             console.log(error)

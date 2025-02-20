@@ -1,11 +1,12 @@
 import { addCardToDeck, removeCardFromDeck } from "@api"
 import { headerStyle } from "@assets"
 import { Button } from "@components"
-import { IOpponent } from "@interfaces"
+import { ICard, IOpponent } from "@interfaces"
 import { useUserStore } from "@stores"
 import { calculateDeckPower, calculateOptimizedDeck, classSet } from "@utils"
 
 import "./userDeck.scss"
+import { useEffect, useState } from "react"
 
 interface UserDeckProps {
     selectedOpponent: IOpponent
@@ -16,16 +17,48 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
     const userCards = useUserStore((state) => state.userCards)
     const userDeck = useUserStore((state) => state.userDeck)
     const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
+    const fetchUserCards = useUserStore((state) => state.fetchUserCards)
+    const [userDeckPower, setUserDeckPower] = useState<number>(0)
+    const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
+    const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
+    const [isUpToDate, setIsUpToDate] = useState(false)
 
-    // Calculate the strongest combination of the user's cards based on the opponent's card count requirement
-    const userOptimizedDeck = calculateOptimizedDeck(userCards, String(selectedOpponent.cardCount))
+    useEffect(() => {
+        const fetchData = async () => {
+            await fetchUserDeck()
+            await fetchUserCards()
+            setIsUpToDate(true)
+        }
 
-    // Calculate the sum of all card values in the user's deck
-    const userDeckPower = calculateDeckPower(userDeck)
-    // Calculate the sum of all card values in the user's highest potential deck
-    const userOptimizedDeckPower = calculateDeckPower(userOptimizedDeck)
+        fetchData()
+
+        return () => {
+            setIsUpToDate(false)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (isUpToDate) {
+            updateOptimizedDeckState()
+        }
+    }, [isUpToDate])
+
+    useEffect(() => {
+        updateOptimizedDeckState()
+    }, [userDeck])
+
+    const updateOptimizedDeckState = async () => {
+        const newUserDeckPower = calculateDeckPower(userDeck)
+        const newUserOptimizedDeck = calculateOptimizedDeck(userCards, String(selectedOpponent.cardCount))
+        const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
+
+        setUserDeckPower(newUserDeckPower)
+        setUserOptimizedDeck(newUserOptimizedDeck)
+        setUserOptimizedDeckPower(newUserOptimizedDeckPower)
+    }
 
     const optimizeDeck = async () => {
+        updateOptimizedDeckState()
         userDeck.forEach((card) => {
             if (!userOptimizedDeck.some((optimizedCard) => optimizedCard._id === card._id)) {
                 removeCardFromDeck(card)
@@ -36,9 +69,9 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
                 addCardToDeck(optimizedCard)
             }
         })
-        fetchUserDeck()
+        await fetchUserCards()
+        await fetchUserDeck()
     }
-
     const countColor = classSet(userDeck?.length === selectedOpponent.cardCount ? "valid" : "invalid")
 
     return (
@@ -64,7 +97,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
                     <Button
                         label='Optimize Deck'
                         onClick={optimizeDeck}
-                        disabled={userDeckPower === userOptimizedDeckPower}
+                        disabled={userDeckPower == userOptimizedDeckPower}
                     />
                     <Button label='Edit Deck' type='link' path='/collection' />
                 </div>
