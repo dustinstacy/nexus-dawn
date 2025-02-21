@@ -1,6 +1,3 @@
-> [!WARNING]
-> **Under Construction**
-
 <h1 align="center">
 Nexus Dawn
 </h1>
