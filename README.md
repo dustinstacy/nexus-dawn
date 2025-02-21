@@ -14,9 +14,6 @@ Nexus Dawn
 <p align="center">
   <a href="#description">Description</a> •
   <a href="#screenshots">Screenshots</a> •
-  <a href="#rules">Rules</a> •
-  <a href="#local-setup">Local Setup</a> •
-  <a href="#contributing">Contributing</a> •
   <a href="#credits">Credits</a> •
   <a href="#license">License</a>
 </p>
@@ -28,6 +25,15 @@ Nexus Dawn
 <br/>
 <h2></h2>
 </div>
+
+<p>
+<h2>Nexus Dawn breathes new life! (again)</h2>
+The repo has been split into two and updated to utilize the most recent package versions. Various bug fixes have also been implemented.
+</p>
+
+ - [Nexus Dawn](https://nexus-dawn.vercel.app)
+ - [Nexus Dawn Frontend Repository](https://github.com/dustinstacy/nexus-dawn-frontend.git)
+ - [Nexus Dawn Backend Repository](https://github.com/dustinstacy/nexus-dawn-backend.git)
 
 ## Description
 
@@ -59,45 +65,6 @@ application.
 
 ![battle screen](https://github.com/dustinstacy/triple-triad-reactjs/assets/70343773/3d7cd26b-8595-49a5-939e-008b1559a87f)
 
-
-## Rules
-
-
-## Local Setup
-
-To clone and run this application, you'll need [Git](https://git-scm.com) and
-[Node.js](https://nodejs.org/en/download/) (which comes with
-[npm](http://npmjs.com)) installed on your computer. From your command line:
-
-```bash
-# Clone this repository
-git clone https://github.com/dustinstacy/triple-triad-reactjs.git
-
-# Go into the repository
-cd triple-triad-reactjs
-
-# Install global dependencies
-npm install
-
-# Install client dependencies
-cd client
-npm install
-cd ..
-
-# Install server dependencies
-cd server
-npm install
-cd ..
-```
-
-## Contributing
-
-1. Fork it!
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request
-
 ## Credits
 
 Huge thanks to the following content provider:
@@ -108,4 +75,3 @@ Character Artwork - AEkashics <https://www.patreon.com/aekashics/posts>
 
 The MIT License (MIT)
 
-Copyright (c) 2023 Dustin Stacy
