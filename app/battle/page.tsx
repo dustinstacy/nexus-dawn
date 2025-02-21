@@ -21,6 +21,7 @@ const Battle = () => {
     // Get user and opponent information from their respective sources
     const user = useUserStore((state) => state.user)
     const userDeck = useUserStore((state) => state.userDeck)
+    const fetchUserData = useUserStore((state) => state.fetchUserData)
     const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
     const selectedOpponentDeck = useOpponentsStore((state) => state.selectedOpponentDeck)
 
@@ -360,10 +361,12 @@ const Battle = () => {
 
     const forfeitBattle = async () => {
         const battleLog = localStorage.getItem("battleLog")
+        await fetchUserData("stats")
+        console.log(user!.stats)
         await postBattleLog(battleLog as string)
         localStorage.removeItem("battleLog")
         await updateUserStats(user!, "loss")
-        router.push("/opponentSelect")
+        router.push("/opponent-select")
     }
 
     return (
