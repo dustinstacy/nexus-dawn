@@ -110,7 +110,6 @@ export const updateUserStats = async (user: User, result: string) => {
         default:
             break
     }
-    console.log(user.stats)
     await customFetch("/api/profiles/stats", {
         method: "PUT",
         body: JSON.stringify({
