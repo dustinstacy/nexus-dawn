@@ -95,7 +95,7 @@ export const updateUserInfo = async <T extends keyof User>(property: T, value: a
 }
 
 // Update user's stats when they choose to forfeit an active battle
-export const updateUserStats = async (user: User, result: BattleResult) => {
+export const updateUserStats = async (user: User, result: string) => {
     let results: Array<number> = []
     switch (result) {
         case "win":
@@ -110,6 +110,7 @@ export const updateUserStats = async (user: User, result: BattleResult) => {
         default:
             break
     }
+    console.log(user.stats)
     await customFetch("/api/profiles/stats", {
         method: "PUT",
         body: JSON.stringify({
@@ -123,10 +124,35 @@ export const updateUserStats = async (user: User, result: BattleResult) => {
 
 // Add battle log to database
 export const postBattleLog = async (battleLog: string) => {
+    // Parse the battle log string into an array of objects
+    const parsedBattleLog = JSON.parse(battleLog)
+
+    // Map through each battle log object and reduce it
+    const reducedBattleLogs = parsedBattleLog.map((battleLogObj: any) => {
+        return {
+            battleState: {
+                isP1Turn: battleLogObj.battleState.isP1Turn,
+                round: battleLogObj.battleState.round,
+                board: battleLogObj.battleState.board,
+            },
+            playerOneData: {
+                battleScore: battleLogObj.playerOneData.battleScore,
+                roundScore: battleLogObj.playerOneData.roundScore,
+                hand: battleLogObj.playerOneData.hand,
+            },
+            playerTwoData: {
+                battleScore: battleLogObj.playerTwoData.battleScore,
+                roundScore: battleLogObj.playerTwoData.roundScore,
+                hand: battleLogObj.playerTwoData.hand,
+            },
+        }
+    })
+
+    // Send the reduced battle logs to the server
     await customFetch("/api/battleLogs", {
         method: "POST",
         body: JSON.stringify({
-            battleLog: battleLog,
+            battleLog: reducedBattleLogs, // Note: "battleLogs" should match your server's expected body format
         }),
     })
 }
