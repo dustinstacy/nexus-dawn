@@ -24,10 +24,14 @@ Nexus Dawn
 ---
 
 <div align="center">
+<a href="https://nexus-dawn.vercel.app">
 <img height='400px' src='https://res.cloudinary.com/dsv7k92lb/image/upload/v1687034760/Nexus%20Dawn/logos/logo_c9eaj0.png' alt='logo'/>
 <br/>
-<h2></h2>
+nexus-dawn.vercel.app
+</a>
 </div>
+
+
 
 ## Description
 
