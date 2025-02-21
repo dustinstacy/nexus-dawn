@@ -35,18 +35,19 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 
     const setBattleResults = () => {
         if (playerOne.battleScore > playerTwo.battleScore) {
+            handleResult("win")
             setBattleResult("Victory")
-            handleResult("win" as BattleResult)
         } else if (playerOne.battleScore < playerTwo.battleScore) {
+            handleResult("loss")
             setBattleResult("Defeat")
-            handleResult("loss" as BattleResult)
         } else if (playerOne.battleScore === playerTwo.battleScore) {
+            handleResult("draw")
             setBattleResult("Draw")
-            handleResult("draw" as BattleResult)
         }
     }
 
-    const handleResult = async (resultType: BattleResult) => {
+    const handleResult = async (resultType: string) => {
+        await fetchUserData("stats")
         await updateUserStats(user, resultType)
         const randomRewardChance = Math.random()
 
