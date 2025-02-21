@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react"
 
 import { getCurrentBattleNumber, postBattleLog, updateUserStats } from "@api"
 import { Alert, Button, ModalOverlay } from "@components"
-import { BattleResult, BattleState, CPUDetails, ICard, UserDetails } from "@interfaces"
+import { BattleState, CPUDetails, ICard, UserDetails } from "@interfaces"
 import { useOpponentsStore, useUserStore } from "@stores"
 import { updateState } from "@utils"
 
@@ -362,7 +362,7 @@ const Battle = () => {
         const battleLog = localStorage.getItem("battleLog")
         await postBattleLog(battleLog as string)
         localStorage.removeItem("battleLog")
-        await updateUserStats(user!, "loss" as BattleResult)
+        await updateUserStats(user!, "loss")
         router.push("/opponentSelect")
     }
 

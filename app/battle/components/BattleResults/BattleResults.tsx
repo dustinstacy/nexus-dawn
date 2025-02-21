@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import { addCoin, addExperience, addItemToInventory, updateUserStats } from "@api"
-import { BattleResult, IItem } from "@interfaces"
+import { IItem } from "@interfaces"
 import { useItemsStore, useUserStore } from "@stores"
 
 import { BattleResultsButtons, CoinReward, XPReward } from "./components"

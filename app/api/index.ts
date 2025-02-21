@@ -1,5 +1,5 @@
 import { customFetch } from "@utils"
-import { BattleResult, CardData, DeckCard, ICard, IItem, User } from "@interfaces"
+import { CardData, DeckCard, ICard, IItem, User } from "@interfaces"
 
 import { removeObjectByValue } from "../utils"
 
