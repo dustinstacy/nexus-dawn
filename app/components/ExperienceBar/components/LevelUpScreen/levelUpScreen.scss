@@ -1,0 +1,282 @@
+.level-up {
+    position: relative;
+    min-height: 600px;
+    padding: 24px 0;
+    text-align: center;
+
+    h1 {
+        height: auto;
+        width: 100%;
+        font-size: 15vh;
+        white-space: nowrap;
+
+        @media screen and (max-width: 912px) {
+            font-size: 10vh;
+        }
+
+        @media screen and (max-width: 600px) {
+            font-size: 5vh;
+        }
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        font-size: 72px;
+        cursor: pointer;
+
+        @media screen and (max-width: 912px) {
+            font-size: 48px;
+        }
+
+        @media screen and (max-width: 600px) {
+            font-size: 40px;
+            right: 12px;
+        }
+    }
+
+    .level-wrapper {
+        margin-top: 3vh;
+
+        @media screen and (max-width: 912px) {
+            height: 25vh;
+        }
+
+        .new-level-border {
+            position: relative;
+            height: 20vh;
+            width: 20vh;
+            background: var(--gold-gradient45);
+            border-radius: 50%;
+            box-shadow: 4px 4px 4px 4px var(--black-color),
+                -4px 4px 4px 4px var(--black-color),
+                4px -4px 4px 4px var(--black-color),
+                -4px -4px 4px 4px var(--black-color),
+                8px 8px 8px 8px var(--primary-color),
+                8px -8px 8px 8px var(--primary-color),
+                -8px 8px 8px 8px var(--primary-color),
+                -8px -8px 8px 8px var(--primary-color);
+            animation: level-slide 1s ease-out 1s forwards;
+
+            @media screen and (max-width: 912px) {
+                height: 15vh;
+                width: 15vh;
+            }
+        }
+
+        .prev-level,
+        .new-level {
+            height: 20vh;
+            width: calc(20vh * 0.725);
+            border-radius: 8px;
+            color: var(--background3-color);
+            font-size: 15vh;
+            z-index: 1;
+
+            @media screen and (max-width: 912px) {
+                height: 15vh;
+                font-size: 10vh;
+            }
+        }
+
+        .prev-level {
+            opacity: 1;
+            animation: fade-out 1s linear 1s forwards;
+        }
+
+        .new-level {
+            opacity: 0;
+            animation: fade-in 1s linear 1s forwards;
+        }
+    }
+
+    .wrapper-hr {
+        position: absolute;
+        height: 0;
+        width: 100vw;
+        border: 3px solid;
+        border-image: var(--gold-gradient) 1;
+        z-index: -1;
+    }
+
+    .level-up-unlocks {
+        width: 80vw;
+        margin-top: 3vh;
+        padding: 24px 0;
+        gap: 2vh;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+
+        @media screen and (max-width: 920px) and (orientation: portrait) {
+            flex-direction: column;
+        }
+
+        .unlock {
+            min-height: 250px;
+            height: 100%;
+            width: 25vw;
+            gap: 2vh;
+            padding: 2vh 0;
+            opacity: 0;
+            transform: scale(0);
+            animation-duration: 1s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+
+            @media screen and (max-width: 768px) {
+                min-height: 100px;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            @media screen and (max-width: 920px) and (orientation: portrait) {
+                min-height: 100px;
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            h2 {
+                font-size: 2vh;
+
+                @media screen and (max-width: 768px) {
+                    width: 25%;
+                }
+
+                @media screen and (max-width: 920px) and (orientation: portrait) {
+                    width: 25%;
+                }
+            }
+
+            img {
+                height: 20vh;
+
+                @media screen and (max-width: 920px) and (orientation: portrait) {
+                    height: 15vh;
+                }
+
+                @media screen and (max-width: 768px) {
+                    height: 15vh;
+                }
+            }
+
+            p {
+                @media screen and (max-width: 768px) {
+                    width: 25%;
+                }
+
+                @media screen and (max-width: 920px) and (orientation: portrait) {
+                    width: 25%;
+                }
+
+                @media screen and (max-width: 600px) {
+                    display: none;
+                }
+            }
+
+            .coin-reward {
+                height: 100%;
+                flex-wrap: wrap;
+
+                span {
+                    font-size: 5vh;
+                }
+                img {
+                    height: 7.5vh;
+                }
+            }
+        }
+
+        .unlock:nth-child(1) {
+            animation-name: scale-in;
+            animation-delay: 2s;
+        }
+
+        .unlock:nth-child(2) {
+            animation-name: scale-in;
+            animation-delay: 3s;
+        }
+
+        .unlock:nth-child(3) {
+            animation-name: scale-in;
+            animation-delay: 4s;
+        }
+    }
+}
+
+@keyframes level-slide {
+    0% {
+        transform: translateX(0px);
+    }
+
+    15% {
+        transform: translateX(2000px);
+        opacity: 0;
+    }
+
+    30% {
+        transform: translateX(-2000px);
+        opacity: 0;
+    }
+
+    45% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    60% {
+        transform: translateX(2000px);
+        opacity: 0;
+    }
+    75% {
+        transform: translateX(-2000px);
+        opacity: 0;
+    }
+    90% {
+        transform: translateX(-40vw);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-out {
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fade-in {
+    50% {
+        /* Add initial state */
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes scale-in {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    25% {
+        transform: scale(0.75);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

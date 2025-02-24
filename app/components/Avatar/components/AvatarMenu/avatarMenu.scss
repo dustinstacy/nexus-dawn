@@ -1,0 +1,12 @@
+.avatar-menu {
+    position: absolute;
+    top: 125%;
+    right: -25%;
+    gap: 8px;
+    padding: 12px;
+    background: var(--secondary2-color);
+
+    .avatar-menu-link {
+        gap: 8px;
+    }
+}

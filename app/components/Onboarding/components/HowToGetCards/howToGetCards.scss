@@ -1,0 +1,31 @@
+.get-cards {
+    .step-2 {
+        @media screen and (max-width: 912px) {
+            flex-direction: column !important;
+            font-size: 2vh;
+        }
+    }
+    .market-menu-image {
+        height: 50vh;
+
+        @media screen and (max-width: 1024px) {
+            height: 40vh;
+        }
+
+        @media screen and (max-width: 400px) {
+            height: 30vh;
+        }
+    }
+
+    .purchase-bar-image {
+        width: 40vw;
+
+        @media screen and (max-width: 912px) {
+            width: 50vw;
+        }
+
+        @media screen and (max-width: 768px) {
+            width: 60vw;
+        }
+    }
+}

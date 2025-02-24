@@ -1,0 +1,72 @@
+.stage {
+    height: 100%;
+    width: 95%;
+    gap: 5vh;
+    padding-top: 5vh;
+    font-size: 3.5vh;
+    text-align: center;
+
+    @media screen and (max-width: 912px) {
+        font-size: 3vh;
+    }
+
+    @media screen and (max-width: 768px) {
+        font-size: 2.5vh;
+    }
+
+    @media screen and (max-width: 480px) {
+        font-size: 1.75vh;
+    }
+
+    .header-wrapper {
+        position: fixed;
+        top: 15vh;
+
+        .header {
+            position: relative;
+            background-color: transparent;
+            text-shadow: 2px 2px 5px var(--secondary-color),
+                2px 2px 5px var(--black-color);
+        }
+    }
+
+    .logo {
+        height: 25vh;
+        z-index: -1;
+
+        @media screen and (max-width: 400px) {
+            height: 15vh;
+        }
+    }
+
+    .body {
+        position: relative;
+        height: auto;
+        width: 70vw;
+        margin-top: 20vh;
+        padding: 2vh 2vh 4vh;
+        gap: 24px;
+
+        @media screen and (max-width: 600px) {
+            width: 80vw;
+        }
+
+        p {
+            padding: 2vh;
+
+            @media screen and (max-width: 600px) {
+                padding: 8px;
+            }
+        }
+
+        img {
+            border: 2px solid var(--secondary2-color);
+        }
+
+        .button {
+            position: absolute;
+            bottom: -3vh;
+            padding: 4px 24px;
+        }
+    }
+}

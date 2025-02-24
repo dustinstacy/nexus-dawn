@@ -1,0 +1,61 @@
+.how-to-play {
+    gap: 48px;
+    padding: 128px 0 64px 0;
+    background: url("../assets/page-images/rules.jpg");
+    background-position: center;
+    background-size: 60%;
+
+    .panel {
+        min-height: 600px;
+        width: 80vw;
+        padding: 48px;
+
+        @media screen and (max-width: 768px) {
+            width: 95vw;
+        }
+
+        @media screen and (max-width: 600px) {
+            padding: 24px;
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+        }
+    }
+
+    .panel-body {
+        padding: 36px;
+
+        @media screen and (max-width: 912px) {
+            padding: 12px;
+        }
+
+        @media screen and (max-width: 912px) {
+            padding: 0;
+        }
+    }
+
+    .panel-section {
+        margin: 36px 0;
+
+        h2 {
+            margin-bottom: 12px;
+        }
+
+        li {
+            margin: 8px 0;
+            font-family: "Open Sans";
+            font-size: 20px;
+            font-weight: 600;
+
+            @media screen and (max-width: 912px) {
+                font-size: 18px;
+            }
+
+            @media screen and (max-width: 600px) {
+                font-size: 16px;
+            }
+        }
+    }
+}

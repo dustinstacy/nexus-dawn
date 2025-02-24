@@ -1,0 +1,51 @@
+.avatar {
+    position: relative;
+
+    .level {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        pointer-events: none;
+    }
+}
+
+.avatar.small {
+    height: 64px;
+    width: 64px;
+
+    .level {
+        bottom: -6px;
+        height: 20px;
+        width: 56px;
+        font-size: 12px;
+    }
+}
+
+.avatar.medium {
+    height: 128px;
+    width: 128px;
+
+    .level {
+        bottom: -12px;
+        height: 30px;
+        width: 108px;
+        font-size: 18px;
+    }
+}
+
+.avatar.large {
+    height: 192px;
+    width: 192px;
+
+    .level {
+        bottom: -18px;
+        height: 60px;
+        width: 162px;
+        font-size: 12px;
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}

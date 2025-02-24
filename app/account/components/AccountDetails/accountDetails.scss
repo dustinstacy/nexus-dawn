@@ -1,0 +1,31 @@
+.account-details {
+    .wrapper {
+        align-items: flex-end;
+        gap: 36px;
+        margin-bottom: 12px;
+
+        @media screen and (max-width: 768px) {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+
+            span {
+                display: flex;
+
+                @media screen and (max-width: 400px) {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                p {
+                    margin-left: 18px;
+                }
+            }
+        }
+    }
+}
