@@ -23,7 +23,9 @@ const Avatar = ({
     const [isOpen, toggleIsOpen] = useToggle(false)
 
     const handleClick = () => {
-        menu ? toggleIsOpen() : null
+        if (menu) {
+            toggleIsOpen()
+        }
     }
 
     // Dynamically set CSS classes based on props

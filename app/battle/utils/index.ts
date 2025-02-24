@@ -22,6 +22,7 @@ export const assignColorsAndDealCards = (player: any) => {
     const handSize = 5
     let i = 0
     do {
-        hand.push(deck.shift()), i++
+        hand.push(deck.shift())
+        i++
     } while (i < handSize)
 }
