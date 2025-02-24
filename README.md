@@ -68,7 +68,7 @@ application.
 
 Interested in contirbuting? Check out the current [issues](https://github.com/dustinstacy/nexus-dawn-frontned/issues) or submit your own idea.
 
-1. Fork it!
+1. Fork it!: `git clone https://github.com/dustinstacy/nexus-dawn.git`
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -m 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
