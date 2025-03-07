@@ -31,3 +31,31 @@ export const sendAuthRequest = async (formData: FormData, register: boolean) => 
         throw error // Rethrow the error to propagate it to the caller
     }
 }
+
+// A new request would be needed on the backend to facilitate an email check
+export const sendPasswordResetRequest = async (email: string) => {
+    try {
+        // Ensure base URL is consistent with backend
+        // const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+        // const endpoint = register ? "/api/auth/register" : "/api/auth/login"
+
+
+        // Send a POST request to the backend API
+        const res = await customFetch(`/api/auth/reset-password`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email }),
+        });
+
+        // Handle errors if the response is not OK
+        if (!res.ok) {
+            throw new Error(await res.text());
+        }
+
+        return res.json();
+    } catch (error: any) {
+        console.error("Error sending password reset request:", error.message);
+        throw error; // Rethrow error for handling at the caller level
+    }
+};
+
