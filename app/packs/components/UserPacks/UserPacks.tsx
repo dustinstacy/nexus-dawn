@@ -21,6 +21,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     const fetchUserData = useUserStore((state) => state.fetchUserData)
     const allCards = useCardsStore((state) => state.allCards)
 
+		const [pullCount, setPullCount] = useState<number>(1); //Default pack counter to 1
     const [currentPack, setCurrentPack] = useState<IItem | null>(null)
 
     const noPacksMessage = "Head to the MaRKet to buy more packs"
@@ -31,18 +32,34 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 
     const openCurrentPack = async () => {
         setIsLoading(true)
+
         // Simulating a delay of 5 seconds for loader animation
         await new Promise((resolve) => setTimeout(resolve, 5000))
-        await getRandomCardsFromPack()
-        await removeItemFromInventory(user as User, currentPack as IItem)
-        await fetchUserData("inventory")
-        await fetchUserCards()
+				await getRandomCardsFromPack()
+				await removeItemFromInventory(user as User, currentPack as IItem)
+				await fetchUserData("inventory")
+				await fetchUserCards()
         setIsLoading(false)
     }
 
-    const getRandomCardsFromPack = async () => {
+    const openMultiplePacks = async () => {
+        setIsLoading(true)
+
+        // Simulating a delay of 5 seconds for loader animation
+        await new Promise((resolve) => setTimeout(resolve, 5000))
+				await getRandomCardsFromPack(pullCount);
+				await removeItemFromInventory(user as User, currentPack as IItem, pullCount)
+				await fetchUserData("inventory")
+				await fetchUserCards()
+
+				setIsLoading(false)
+    }
+
+    const getRandomCardsFromPack = async (numberOfPackToOpen: number  = 1) => {
         const { contents } = currentPack!
-        const newCards = getRandomCards(contents.count, contents.odds, allCards)
+				const cardPackCount = contents.count;
+				const totalCardsToPull = cardPackCount * numberOfPackToOpen;
+        const newCards = getRandomCards(totalCardsToPull, contents.odds, allCards)
 
         newCards.forEach(async (card) => {
             assignRandomCardValues(card)
@@ -51,8 +68,23 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
         setPackContents(newCards)
     }
 
-    const buttonDisablers = !currentPack || (user?.onboardingStage as number) <= 1
+		const incrementValue = () => {
+			if(pullCount === userPacks.length) {
+				return;
+			}
 
+			setPullCount(pullCount + 1);
+		}
+		const decrementValue = () => {
+			if(pullCount === 1){
+				return;
+			}
+
+			setPullCount(pullCount - 1);
+		}
+		
+    const buttonDisablers = !currentPack || (user?.onboardingStage as number) <= 1
+		const disableMultiPackOpen = buttonDisablers || pullCount > userPacks.length || pullCount <= 0;
     return (
         <div className='user-packs panel fill between-column'>
             <div className='panel-header'>
@@ -65,9 +97,15 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
                 setCurrentItem={setCurrentPack}
                 emptyMessage={noPacksMessage}
             >
-                <UserPack itemData={currentPack} allItems={userPacks} />
+							<UserPack itemData={currentPack} allItems={userPacks} />
             </Carousel>
-            <Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
+						<Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
+						<Button label="+" onClick={incrementValue} disabled={pullCount > userPacks.length} />
+						<Button label="-" onClick={decrementValue} disabled={pullCount <= 0} />
+						<Button label={`OpeN ${pullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
+
+            
+            
         </div>
     )
 }

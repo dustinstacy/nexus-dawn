@@ -52,10 +52,12 @@ export const calculateOptimizedDeck = (userCards: Array<ICard>, count: string): 
 // array: The array from which the object will be removed
 // property: The property name used for comparison to find the object
 // value: The value of the property to match and remove the corresponding object
-export const removeObjectByValue = (userInventory: Array<IItem>, value: string) => {
-    const index = userInventory.findIndex((obj) => obj["name"] === value)
-    if (index !== -1) {
-        userInventory.splice(index, 1)
+export const removeObjectByValue = (userInventory: Array<IItem>, value: string, quantityToRemove: number) => {
+    for(let i = 0; i < quantityToRemove; i++){
+        const index = userInventory.findIndex((obj) => obj["name"] === value)
+        if (index !== -1) {
+            userInventory.splice(index, 1)
+        }
     }
 
     return userInventory
