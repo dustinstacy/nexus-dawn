@@ -12,6 +12,7 @@ import { FormFooter } from "./components";
 import { toCamelCase } from "./utils";
 
 import "./authForm.scss";
+import { toast } from "react-toastify";
 
 // Displays login or registration form based on the value of the register prop
 const AuthForm = ({ register }: Register) => {
@@ -26,6 +27,7 @@ const AuthForm = ({ register }: Register) => {
 
     const [formData, setFormData] = useState<FormData>(initialFormData);
     const [loading, setLoading] = useState<boolean>(false);
+    const [resetLoading, setResetLoading] = useState<boolean>(false);
     const [errors, setErrors] = useState<any>({});
     const [showResetModal, setShowResetModal] = useState<boolean>(false);
     const [resetEmail, setResetEmail] = useState<string>("");
@@ -59,14 +61,18 @@ const AuthForm = ({ register }: Register) => {
 
             if (user) {
                 router.push("/");
+                toast.success("User logged in successfully");
             }
         } catch (error: any) {
+            let loginError = await JSON.parse(error.message);
+
             if (error.message) {
                 const errorData = JSON.parse(error.message);
                 setErrors(errorData);
             } else {
                 console.error("Unexpected error:", error);
             }
+            toast.error(`${loginError.error}`);
         } finally {
             setLoading(false);
         }
@@ -86,12 +92,16 @@ const AuthForm = ({ register }: Register) => {
 
     const handlePasswordReset = async () => {
         if (!resetEmail) return;
-
+        setResetLoading(true);
         try {
             await sendPasswordResetRequest(resetEmail);
-            setResetMessage("If the email is registered, a reset link has been sent.");
+            toast.success("Reset link has been sent to registered email");
+            setShowResetModal(false);
+            setResetEmail("");
         } catch (error: any) {
             setResetMessage("Failed to send reset email. Please try again.");
+        } finally {
+            setResetLoading(false);
         }
     };
 
@@ -101,40 +111,7 @@ const AuthForm = ({ register }: Register) => {
 
     return (
         <div className="auth-form center">
-            <form className="form center" onKeyDown={(e) => handleKeyDown(e)}>
-                {formFields.map((field) => (
-                    <React.Fragment key={field}>
-                        <TextInput
-                            label={field}
-                            name={toCamelCase(field)}
-                            value={formData[toCamelCase(field)] as string}
-                            onChange={handleInputChange}
-                            loading={loading}
-                            autoFocus={field === "Username"}
-                            autoComplete={field === "Password" ? "new-password" : "on"}
-                        />
-                        {errors[toCamelCase(field)] && <p className="error">{errors[toCamelCase(field)]}</p>}
-                    </React.Fragment>
-                ))}
-
-                {!register && (
-                    <p className="forgot-password" onClick={() => setShowResetModal(true)}>
-                        Forgot Password?
-                    </p>
-                )}
-
-                {Object.keys(errors).length > 0 && !register && <p className="error">Nope. Try Again.</p>}
-                <FormFooter register={register} />
-            </form>
-            <Button
-                label="Submit"
-                type="submit"
-                onClick={(e: React.MouseEvent) => handleSubmit(e)}
-                disabled={loading}
-            />
-
-            {/* Password Reset Modal using div */}
-            {showResetModal && (
+            {showResetModal ? (
                 <div className="reset-modal">
                     <div className="reset-modal-content">
                         <h3>Reset Password</h3>
@@ -145,12 +122,45 @@ const AuthForm = ({ register }: Register) => {
                             onChange={(e) => setResetEmail(e.target.value)}
                             loading={false}
                         />
-                        <Button label="Send Reset Link" onClick={handlePasswordReset} />
+                        <Button label={resetLoading ? "Sending..." : "Send Reset Link"} onClick={handlePasswordReset} />
                         {resetMessage && <p className="reset-message">{resetMessage}</p>}
                         <button className="close-modal" onClick={() => setShowResetModal(false)}>Close</button>
                     </div>
                 </div>
-            )}
+            ) : <div className="center">
+                <form className="form center" onKeyDown={(e) => handleKeyDown(e)}>
+                    {formFields.map((field) => (
+                        <React.Fragment key={field}>
+                            <TextInput
+                                label={field}
+                                name={toCamelCase(field)}
+                                value={formData[toCamelCase(field)] as string}
+                                onChange={handleInputChange}
+                                loading={loading}
+                                autoFocus={field === "Username"}
+                                autoComplete={field === "Password" ? "new-password" : "on"}
+                            />
+                            {errors[toCamelCase(field)] && <p className="error">{errors[toCamelCase(field)]}</p>}
+                        </React.Fragment>
+                    ))}
+
+                    {!register && (
+                        <p className="forgot-password cursor-pointer" onClick={() => setShowResetModal(true)}>
+                            Forgot Password?
+                        </p>
+                    )}
+
+                    {/* {Object.keys(errors).length > 0 && !register && <p className="error">Nope. Try Again.</p>} */}
+                    <FormFooter register={register} />
+                </form>
+                <Button
+                    label="Submit"
+                    type="submit"
+                    onClick={(e: React.MouseEvent) => handleSubmit(e)}
+                    disabled={loading}
+                />
+
+            </div>}
         </div>
     );
 };

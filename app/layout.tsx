@@ -1,4 +1,6 @@
 import type { Metadata } from "next"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import ClientLayout from "./client-layout"
 import "./styles/base.scss"
@@ -24,6 +26,7 @@ export default function RootLayout({
         <html lang='en'>
             <body>
                 <ClientLayout>{children}</ClientLayout>
+                <ToastContainer />
             </body>
         </html>
     )
