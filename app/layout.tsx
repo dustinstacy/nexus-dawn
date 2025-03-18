@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import ClientLayout from "./client-layout"
 import "./styles/base.scss"

@@ -7,11 +7,11 @@ export const updatePassword = async (token: string, newPassword: string) => {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ newPassword }),
-        });
+        })
 
-        return res;
+        return res
     } catch (error: any) {
         console.error("Error updating password:", error.message);
         throw error; // Rethrow for handling at the caller level
     }
-};
+}
