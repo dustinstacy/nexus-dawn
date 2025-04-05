@@ -99,10 +99,13 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
             >
 							<UserPack itemData={currentPack} allItems={userPacks} />
             </Carousel>
-						<Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
-						<Button label="+" onClick={incrementValue} disabled={pullCount > userPacks.length} />
-						<Button label="-" onClick={decrementValue} disabled={pullCount <= 0} />
-						<Button label={`OpeN ${pullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
+
+            <div className="button-menu">
+						    <Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
+						    <Button label="-" onClick={decrementValue} disabled={pullCount <= 0} />
+						    <Button label={`OpeN ${pullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
+						    <Button label="+" onClick={incrementValue} disabled={pullCount > userPacks.length} />
+            </div>
 
             
             

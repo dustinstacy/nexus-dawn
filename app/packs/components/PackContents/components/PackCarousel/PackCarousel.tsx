@@ -52,13 +52,13 @@ const PackCarousel = ({ uniqueItems, setCurrentItem, emptyMessage, children }: P
     }
 
     return (
-        <div className='carousel fill between'>
+        <div className='pack-carousel fill between'>
             {uniqueItems.length ? (
                 <>
                     <BiLeftArrow className='arrow-previous' onClick={() => handleSlide("left")} />
 
                     {carouselPositions.map(({ position }) => (
-                        <div key={position} className={`carousel-item start-column ${position} ${slideDirection}`}>
+                        <div key={position} className={`pack-carousel-item start-column ${position} ${slideDirection}`}>
                             {React.cloneElement(children)} 
                         </div>
                     ))}
