@@ -88,7 +88,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     
     useEffect(() => {
       const filteredPackCount = userPacks.filter((item) => item.name === currentPack?.name).length
-      if(filteredPackCount < packPullCount){
+      if(filteredPackCount < packPullCount && currentPack){
         setPackPullCount(filteredPackCount);
       }
       setCurrentPackQuantity(userPacks.filter((item) => item.name === currentPack?.name).length);
