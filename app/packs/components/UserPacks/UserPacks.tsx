@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 import { addCardToCollection, removeItemFromInventory } from "@api"
 import { Button } from "@components"
@@ -21,9 +21,9 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     const fetchUserData = useUserStore((state) => state.fetchUserData)
     const allCards = useCardsStore((state) => state.allCards)
 
-		const [pullCount, setPullCount] = useState<number>(1); //Default pack counter to 1
+		const [packPullCount, setPackPullCount] = useState<number>(1); //Default pack counter to 1
     const [currentPack, setCurrentPack] = useState<IItem | null>(null)
-
+    const [currentPackQuantity, setCurrentPackQuantity] = useState<number>(1);
     const noPacksMessage = "Head to the MaRKet to buy more packs"
     // Filtering user's inventory to get only packs and sorting them by level in descending order
     const userPacks = user?.inventory.filter((item) => item?.type === "pack") || []
@@ -47,8 +47,8 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 
         // Simulating a delay of 5 seconds for loader animation
         await new Promise((resolve) => setTimeout(resolve, 5000))
-				await getRandomCardsFromPack(pullCount);
-				await removeItemFromInventory(user as User, currentPack as IItem, pullCount)
+				await getRandomCardsFromPack(packPullCount);
+				await removeItemFromInventory(user as User, currentPack as IItem, packPullCount)
 				await fetchUserData("inventory")
 				await fetchUserCards()
 
@@ -68,23 +68,32 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
         setPackContents(newCards)
     }
 
-		const incrementValue = () => {
-			if(pullCount === userPacks.length) {
+		const incrementPackCount = () => {
+			if(packPullCount === userPacks.length) {
 				return;
 			}
 
-			setPullCount(pullCount + 1);
+			setPackPullCount(packPullCount + 1);
 		}
-		const decrementValue = () => {
-			if(pullCount === 1){
+		const decrementPackCount = () => {
+			if(packPullCount === 1){
 				return;
 			}
 
-			setPullCount(pullCount - 1);
+			setPackPullCount(packPullCount - 1);
 		}
 		
     const buttonDisablers = !currentPack || (user?.onboardingStage as number) <= 1
-		const disableMultiPackOpen = buttonDisablers || pullCount > userPacks.length || pullCount <= 0;
+		const disableMultiPackOpen = buttonDisablers || packPullCount > currentPackQuantity|| packPullCount <= 0;
+    
+    useEffect(() => {
+      const filteredPackCount = userPacks.filter((item) => item.name === currentPack?.name).length
+      if(filteredPackCount < packPullCount){
+        setPackPullCount(filteredPackCount);
+      }
+      setCurrentPackQuantity(userPacks.filter((item) => item.name === currentPack?.name).length);
+    }, [currentPack]);
+
     return (
         <div className='user-packs panel fill between-column'>
             <div className='panel-header'>
@@ -102,9 +111,9 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 
             <div className="button-menu">
 						    <Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
-						    <Button label="-" onClick={decrementValue} disabled={pullCount <= 0} />
-						    <Button label={`OpeN ${pullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
-						    <Button label="+" onClick={incrementValue} disabled={pullCount > userPacks.length} />
+						    <Button label="-" onClick={decrementPackCount} disabled={packPullCount <= 0} />
+						    <Button label={`OpeN ${packPullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
+						    <Button label="+" onClick={incrementPackCount} disabled={packPullCount === currentPackQuantity} />
             </div>
 
             

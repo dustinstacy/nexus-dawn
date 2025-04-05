@@ -43,7 +43,7 @@ const PackContents = ({ packContents, setPackContents }: PackContents) => {
             >   
                 <MultiCardShow packContents={currentCardBatch} />    
             </PackCarousel>
-            <Button label='Go Back' onClick={() => setPackContents(null)} disabled={(stage as number) < 5} />
+            <Button label='Go BaCk' onClick={() => setPackContents(null)} disabled={(stage as number) < 5} />
         </div>
     )
 }

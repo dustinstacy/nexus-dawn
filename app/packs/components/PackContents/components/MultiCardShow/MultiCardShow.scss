@@ -1,11 +1,9 @@
 .multi-packs {
-  // position: relative;
-  // overflow: hidden;
   border: 1px solid white;
-  // display: grid;
+  display: flex;
+  flex-direction: row !important; 
+
   .button {
-      // position: absolute;
-      display: flex;
       margin-left: 15px;
       margin-right: 15px;
       bottom: 16px;
