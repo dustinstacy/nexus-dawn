@@ -34,7 +34,7 @@ const PackContents = ({ packContents, setPackContents }: PackContents) => {
     }
 
     return (
-        <div className='packs-contents fill center'>
+        <div className='packs-contents fill center between-column'>
             <PackCarousel
                 uniqueItems={batchedCards}
                 currentBatch={currentCardBatch}

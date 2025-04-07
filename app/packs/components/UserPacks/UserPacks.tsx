@@ -115,9 +115,6 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 						    <Button label={`OpeN ${packPullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
 						    <Button label="+" onClick={incrementPackCount} disabled={packPullCount === currentPackQuantity} />
             </div>
-
-            
-            
         </div>
     )
 }

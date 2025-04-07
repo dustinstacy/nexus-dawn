@@ -1,11 +1,15 @@
 .pack-carousel {
+    position: relative;
+    padding: 12px;
+    border-radius: 4px;
+    overflow: hidden;
 
   @media screen and (max-width: 600px) {
       padding: 4px;
   }
 
-  .arrow-previous,
-  .arrow-next {
+  .pack-arrow-previous,
+  .pack-arrow-next {
       color: var(--primary-color);
       font-size: 36px;
       z-index: 90;
@@ -17,7 +21,7 @@
       }
   }
 
-  .arrow-next {
+  .pack-arrow-next {
       @media screen and (max-width: 768px) {
           right: 0;
       }
