@@ -1,1 +1,1 @@
-export { default as UserImageUpdate } from './UserImageUpdate/UserImageUpdate'
+export { default as AvatarUpdate } from "./AvatarUpdate/AvatarUpdate"
