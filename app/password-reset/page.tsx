@@ -6,12 +6,10 @@ import { Button, TextInput } from "@components"
 import { toast } from "react-toastify"
 import { updatePassword } from "./api"
 import { logo } from "@assets"
-
 import "./passwordReset.scss"
 
-const ResetPassword = () => {
+function ResetPasswordContent() {
     const router = useRouter()
-
     const searchParams = useSearchParams()
     const token = searchParams.get("token")
 
@@ -20,11 +18,11 @@ const ResetPassword = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (!token) {
+        if (searchParams && !token) {
             toast.error("Invalid or expired reset link")
-            router.push("/login")
+            router.replace("/login")
         }
-    }, [token, router])
+    }, [searchParams, token, router])
 
     const handleSubmit = async (e: React.MouseEvent | React.KeyboardEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -44,7 +42,7 @@ const ResetPassword = () => {
             await updatePassword(token, password)
             toast.success("Password reset successfully. Please log in")
             setTimeout(() => {
-                router.replace("/auth/login") // Ensures clean redirection
+                router.replace("/auth/login")
             }, 1500)
         } catch (error) {
             console.error("Error resetting password:", error)
@@ -60,38 +58,56 @@ const ResetPassword = () => {
         }
     }
 
+    if (searchParams && !token) {
+        return <div>Invalid link...</div>
+    }
+
     return (
-        <Suspense fallback={<div className='loading'>Loading...</div>}>
-            <div className='reset-password page center'>
-                <div className=' reset-container box around-column'>
-                    <img className='logo' src={logo.src} alt='logo' />
-                    <h2>Reset Password</h2>
-                    <form className='form' onKeyDown={(e) => handleKeyDown(e)}>
-                        <TextInput
-                            label='New Password'
-                            name='password'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            loading={false}
-                        />
-                        <TextInput
-                            label='Confirm Password'
-                            name='confirmPassword'
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            loading={false}
-                        />
-                    </form>
-                    <Button
-                        label={loading ? "Resetting..." : "Reset Password"}
-                        type='submit'
-                        onClick={(e: React.MouseEvent) => handleSubmit(e)}
-                        disabled={loading}
+        <div className='reset-password page center'>
+            <div className=' reset-container box around-column'>
+                <img className='logo' src={logo.src} alt='logo' />
+                <h2>Reset Password</h2>
+                <form className='form' onKeyDown={handleKeyDown}>
+                    <TextInput
+                        label='New Password'
+                        name='password'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        loading={false}
                     />
-                </div>
+                    <TextInput
+                        label='Confirm Password'
+                        name='confirmPassword'
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        loading={false}
+                    />
+                </form>
+                <Button
+                    label={loading ? "Resetting..." : "Reset Password"}
+                    type='submit'
+                    onClick={handleSubmit}
+                    disabled={loading}
+                />
             </div>
-        </Suspense>
+        </div>
     )
 }
 
-export default ResetPassword
+function LoadingFallback() {
+    return (
+        <div className='reset-password page center'>
+            <div className=' reset-container box around-column'>
+                <h2>Loading...</h2>
+            </div>
+        </div>
+    )
+}
+
+export default function PasswordResetPage() {
+    return (
+        <Suspense fallback={<LoadingFallback />}>
+            <ResetPasswordContent />
+        </Suspense>
+    )
+}
