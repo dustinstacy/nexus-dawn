@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter, useSearchParams } from "next/navigation"
-import React, { useState, useEffect } from "react"
+import React, { Suspense, useState, useEffect } from "react"
 import { Button, TextInput } from "@components"
 import { toast } from "react-toastify"
 import { updatePassword } from "./api"
@@ -61,34 +61,36 @@ const ResetPassword = () => {
     }
 
     return (
-        <div className='reset-password page center'>
-            <div className=' reset-container box around-column'>
-                <img className='logo' src={logo.src} alt='logo' />
-                <h2>Reset Password</h2>
-                <form className='form' onKeyDown={(e) => handleKeyDown(e)}>
-                    <TextInput
-                        label='New Password'
-                        name='password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        loading={false}
+        <Suspense fallback={<div className='loading'>Loading...</div>}>
+            <div className='reset-password page center'>
+                <div className=' reset-container box around-column'>
+                    <img className='logo' src={logo.src} alt='logo' />
+                    <h2>Reset Password</h2>
+                    <form className='form' onKeyDown={(e) => handleKeyDown(e)}>
+                        <TextInput
+                            label='New Password'
+                            name='password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            loading={false}
+                        />
+                        <TextInput
+                            label='Confirm Password'
+                            name='confirmPassword'
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            loading={false}
+                        />
+                    </form>
+                    <Button
+                        label={loading ? "Resetting..." : "Reset Password"}
+                        type='submit'
+                        onClick={(e: React.MouseEvent) => handleSubmit(e)}
+                        disabled={loading}
                     />
-                    <TextInput
-                        label='Confirm Password'
-                        name='confirmPassword'
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        loading={false}
-                    />
-                </form>
-                <Button
-                    label={loading ? "Resetting..." : "Reset Password"}
-                    type='submit'
-                    onClick={(e: React.MouseEvent) => handleSubmit(e)}
-                    disabled={loading}
-                />
+                </div>
             </div>
-        </div>
+        </Suspense>
     )
 }
 
