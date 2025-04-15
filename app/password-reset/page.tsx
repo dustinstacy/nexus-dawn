@@ -47,6 +47,7 @@ const ResetPassword = () => {
                 router.replace("/auth/login") // Ensures clean redirection
             }, 1500)
         } catch (error) {
+            console.error("Error resetting password:", error)
             toast.error("Failed to reset password. Try again")
         } finally {
             setLoading(false)
@@ -60,28 +61,32 @@ const ResetPassword = () => {
     }
 
     return (
-        <div className="reset-password page center">
-            <div className=" reset-container box around-column">
+        <div className='reset-password page center'>
+            <div className=' reset-container box around-column'>
                 <img className='logo' src={logo.src} alt='logo' />
                 <h2>Reset Password</h2>
-                <form className="form" onKeyDown={(e) => handleKeyDown(e)}>
+                <form className='form' onKeyDown={(e) => handleKeyDown(e)}>
                     <TextInput
-                        label="New Password"
-                        name="password"
+                        label='New Password'
+                        name='password'
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         loading={false}
                     />
                     <TextInput
-                        label="Confirm Password"
-                        name="confirmPassword"
+                        label='Confirm Password'
+                        name='confirmPassword'
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         loading={false}
                     />
                 </form>
-                <Button label={loading ? "Resetting..." : "Reset Password"} type="submit" onClick={(e: React.MouseEvent) => handleSubmit(e)}
-                    disabled={loading} />
+                <Button
+                    label={loading ? "Resetting..." : "Reset Password"}
+                    type='submit'
+                    onClick={(e: React.MouseEvent) => handleSubmit(e)}
+                    disabled={loading}
+                />
             </div>
         </div>
     )

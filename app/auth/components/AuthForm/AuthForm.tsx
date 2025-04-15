@@ -22,7 +22,7 @@ const AuthForm = ({ register }: Register) => {
         username: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
     } as FormData
 
     const [formData, setFormData] = useState<FormData>(initialFormData)
@@ -64,7 +64,7 @@ const AuthForm = ({ register }: Register) => {
                 toast.success("User logged in successfully")
             }
         } catch (error: any) {
-            let loginError = await JSON.parse(error.message)
+            const loginError = await JSON.parse(error.message)
 
             if (error.message) {
                 const errorData = JSON.parse(error.message)
@@ -99,6 +99,7 @@ const AuthForm = ({ register }: Register) => {
             setShowResetModal(false)
             setResetEmail("")
         } catch (error: any) {
+            console.error("Error sending password reset email:", error)
             setResetMessage("Failed to send reset email. Please try again.")
         } finally {
             setResetLoading(false)
@@ -110,56 +111,67 @@ const AuthForm = ({ register }: Register) => {
     }, [register])
 
     return (
-        <div className="auth-form center">
+        <div className='auth-form center'>
             {showResetModal ? (
-                <div className="reset-modal">
-                    <div className="reset-modal-content">
+                <div className='reset-modal'>
+                    <div className='reset-modal-content'>
                         <h3>Reset Password</h3>
                         <TextInput
-                            label="Email"
-                            name="resetEmail"
+                            label='Email'
+                            name='resetEmail'
                             value={resetEmail}
                             onChange={(e) => setResetEmail(e.target.value)}
                             loading={false}
                         />
-                        <Button label={resetLoading ? "Sending..." : "Send Reset Link"} onClick={handlePasswordReset} />
-                        {resetMessage && <p className="reset-message">{resetMessage}</p>}
-                        <button className="close-modal" onClick={() => setShowResetModal(false)}>Close</button>
+                        <Button
+                            label={resetLoading ? "Sending..." : "Send Reset Link"}
+                            onClick={handlePasswordReset}
+                        />
+                        {resetMessage && <p className='reset-message'>{resetMessage}</p>}
+                        <button className='close-modal' onClick={() => setShowResetModal(false)}>
+                            Close
+                        </button>
                     </div>
                 </div>
-            ) : <div className="center">
-                <form className="form center" onKeyDown={(e) => handleKeyDown(e)}>
-                    {formFields.map((field) => (
-                        <React.Fragment key={field}>
-                            <TextInput
-                                label={field}
-                                name={toCamelCase(field)}
-                                value={formData[toCamelCase(field)] as string}
-                                onChange={handleInputChange}
-                                loading={loading}
-                                autoFocus={field === "Username"}
-                                autoComplete={field === "Password" ? "new-password" : "on"}
-                            />
-                            {errors[toCamelCase(field)] && <p className="error">{errors[toCamelCase(field)]}</p>}
-                        </React.Fragment>
-                    ))}
+            ) : (
+                <div className='center'>
+                    <form className='form center' onKeyDown={(e) => handleKeyDown(e)}>
+                        {formFields.map((field) => (
+                            <React.Fragment key={field}>
+                                <TextInput
+                                    label={field}
+                                    name={toCamelCase(field)}
+                                    value={formData[toCamelCase(field)] as string}
+                                    onChange={handleInputChange}
+                                    loading={loading}
+                                    autoFocus={field === "Username"}
+                                    autoComplete={field === "Password" ? "new-password" : "on"}
+                                />
+                                {errors[toCamelCase(field)] && (
+                                    <p className='error'>{errors[toCamelCase(field)]}</p>
+                                )}
+                            </React.Fragment>
+                        ))}
 
-                    {!register && (
-                        <p className="forgot-password cursor-pointer" onClick={() => setShowResetModal(true)}>
-                            Forgot Password?
-                        </p>
-                    )}
+                        {!register && (
+                            <p
+                                className='forgot-password cursor-pointer'
+                                onClick={() => setShowResetModal(true)}
+                            >
+                                Forgot Password?
+                            </p>
+                        )}
 
-                    <FormFooter register={register} />
-                </form>
-                <Button
-                    label="Submit"
-                    type="submit"
-                    onClick={(e: React.MouseEvent) => handleSubmit(e)}
-                    disabled={loading}
-                />
-
-            </div>}
+                        <FormFooter register={register} />
+                    </form>
+                    <Button
+                        label='Submit'
+                        type='submit'
+                        onClick={(e: React.MouseEvent) => handleSubmit(e)}
+                        disabled={loading}
+                    />
+                </div>
+            )}
         </div>
     )
 }
