@@ -1,5 +1,5 @@
 export const getCroppedImg = async (imageSrc: string, crop: { x: number; y: number; width: number; height: number }, userName: string) => {
-  const avatarMaxSizeInPx = 192
+  const avatarDimensions = { x: 192, y: 192 }
   const image = new Image()
   image.src = imageSrc
 
@@ -12,10 +12,8 @@ export const getCroppedImg = async (imageSrc: string, crop: { x: number; y: numb
         return reject(new Error("Failed to get canvas context"))
       }
 
-      const size = 129
-
-      canvas.width = size
-      canvas.height = size
+      canvas.width = avatarDimensions.x
+      canvas.height = avatarDimensions.y
 
       ctx.drawImage(image, crop.x, crop.y, crop.width, crop.height, 0, 0, canvas.width, canvas.height)
 

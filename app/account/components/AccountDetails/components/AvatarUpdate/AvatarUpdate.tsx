@@ -5,8 +5,8 @@ import { Button, ModalOverlay } from "@components"
 import { User } from "@interfaces"
 import { useUserStore } from "@stores"
 import { customFetch } from "@utils"
-import React, { useCallback, useState } from "react"
-import Cropper from "react-easy-crop"
+import React, { useState } from "react"
+import Cropper, { Area } from "react-easy-crop"
 import "./avatarUpdate.scss"
 import { getCroppedImg } from "./cropUtils"
 
@@ -47,9 +47,9 @@ const AvatarUpdate = () => {
     }
   }
 
-  const handleCropComplete = useCallback((croppedArea: any, croppedAreaPixels: any) => {
+  const handleCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     setCroppedAreaPixels(croppedAreaPixels)
-  }, [])
+  }
 
   const showErrorMsg = () => {
     setUserMsg("Failed to update avatar. Please try again.")
