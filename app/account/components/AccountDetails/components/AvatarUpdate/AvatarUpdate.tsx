@@ -51,7 +51,8 @@ const AvatarUpdate = () => {
     setCroppedAreaPixels(croppedAreaPixels)
   }
 
-  const showErrorMsg = () => {
+  const showErrorMsg = (error: unknown) => {
+    console.log(error)
     setUserMsg("Failed to update avatar. Please try again.")
 
     setTimeout(() => {
@@ -73,7 +74,7 @@ const AvatarUpdate = () => {
         setUserMsg(undefined)
       }, msgShowDuration)
     } catch (error) {
-      showErrorMsg()
+      showErrorMsg(error)
     }
   }
 
@@ -103,7 +104,7 @@ const AvatarUpdate = () => {
         throw new Error()
       }
     } catch (error) {
-      showErrorMsg()
+      showErrorMsg(error)
     } finally {
       setIsCropping(false)
     }
