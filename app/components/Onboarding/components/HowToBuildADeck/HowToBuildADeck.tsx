@@ -12,8 +12,7 @@ import { checkbox, optimizeDeck } from '../../images'
 import './howToBuildADeck.scss'
 
 const HowToBuildADeck = ({ nextStage }: NextStage) => {
-	const user = useUserStore((state) => state.user)
-	const userDeck = useUserStore((state) => state.userDeck)
+	const { user, userDeck } = useUserStore((state) => state)
 	const stage = user?.onboardingStage
 	const [step, setStep] = useState(1)
 	const [modalOpen, toggleModalOpen, setModalOpen] = useToggle(true)
@@ -29,7 +28,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 				setStep(4)
 			}, 1000)
 		}
-	}, [, userDeck])
+	}, [userDeck, stage, setModalOpen])
 
 	return (
 		<>

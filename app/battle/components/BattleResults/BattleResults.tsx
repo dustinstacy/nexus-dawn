@@ -41,10 +41,42 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 	)
 
 	useEffect(() => {
-		setBattleResults()
-	}, [])
+		const handleResult = async (resultType: string) => {
+			await fetchUserData('stats')
+			await updateUserStats(user, resultType)
+			const randomRewardChance = Math.random()
 
-	const setBattleResults = () => {
+			if (
+				resultType === 'win' &&
+				randomRewardChance < opponent.rewards.items[0].chance / 100
+			) {
+				const rewardItem = allItems.filter((item) =>
+					opponent.rewards.items[0].name.includes(item.name)
+				)
+				setTimeout(async () => {
+					setItemReward(rewardItem)
+					await addItemToInventory(user, rewardItem)
+				}, 3500)
+			}
+
+			if (resultType === 'loss') {
+				setTimeout(() => {
+					setLoading(false)
+				}, 1000)
+				return
+			} else {
+				await addCoin(user, coinReward)
+				fetchUserData('coin')
+				setTimeout(async () => {
+					await addExperience(user, xpReward)
+					fetchUserData('xp')
+				}, 1000)
+				setTimeout(() => {
+					setLoading(false)
+				}, 4000)
+			}
+		}
+
 		if (playerOne.battleScore > playerTwo.battleScore) {
 			handleResult('win')
 			setBattleResult('Victory')
@@ -55,43 +87,9 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 			handleResult('draw')
 			setBattleResult('Draw')
 		}
-	}
-
-	const handleResult = async (resultType: string) => {
-		await fetchUserData('stats')
-		await updateUserStats(user, resultType)
-		const randomRewardChance = Math.random()
-
-		if (
-			resultType === 'win' &&
-			randomRewardChance < opponent.rewards.items[0].chance / 100
-		) {
-			const rewardItem = allItems.filter((item) =>
-				opponent.rewards.items[0].name.includes(item.name)
-			)
-			setTimeout(async () => {
-				setItemReward(rewardItem)
-				await addItemToInventory(user, rewardItem)
-			}, 3500)
-		}
-
-		if (resultType === 'loss') {
-			setTimeout(() => {
-				setLoading(false)
-			}, 1000)
-			return
-		} else {
-			await addCoin(user, coinReward)
-			fetchUserData('coin')
-			setTimeout(async () => {
-				await addExperience(user, xpReward)
-				fetchUserData('xp')
-			}, 1000)
-			setTimeout(() => {
-				setLoading(false)
-			}, 4000)
-		}
-	}
+		// Should only run once
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<div className="battle-over fill center">

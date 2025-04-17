@@ -45,7 +45,7 @@ const CoinReward = ({ coinReward }: CoinRewardProps) => {
 			// Delay animation by 2 1/2 seconds
 			setTimeout(() => startAnimation(), 2500)
 		}
-	}, [user?.coin])
+	}, [user?.coin, coinReward, displayCoin, hasAnimated])
 
 	return (
 		<div className="results-coin center">

@@ -28,7 +28,7 @@ const AquaVitaeSuperior = ({
 
 	useEffect(() => {
 		setSelectedCardValues(Array(4).fill(''))
-	}, [])
+	}, [setSelectedCardValues])
 
 	const cardValueClick = (value: number | string, i: number) => {
 		if (value !== '') {

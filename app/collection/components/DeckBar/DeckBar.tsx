@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
 import { addCardToDeck, removeCardFromDeck } from '@api'
@@ -12,10 +12,9 @@ import './deckBar.scss'
 
 // Renders the user's deck statistics and provides options to automatically manage the deck
 const DeckBar = () => {
-	const userCards = useUserStore((state) => state.userCards)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
-	const userDeck = useUserStore((state) => state.userDeck)
-	const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
+	const { userCards, fetchUserCards, userDeck, fetchUserDeck } = useUserStore(
+		(state) => state
+	)
 	const [deckCount, setDeckCount] = useState('15')
 	const [fillDeckLoading, setFillDeckLoading] = useState(false)
 	const [clearDeckLoading, setClearDeckLoading] = useState(false)
@@ -25,39 +24,7 @@ const DeckBar = () => {
 	const [userOptimizedDeckPower, setUserOptimizedDeckPower] =
 		useState<number>(0)
 
-	useEffect(() => {
-		const fetchData = async () => {
-			await fetchUserDeck()
-			await fetchUserCards()
-			setIsUpToDate(true)
-		}
-
-		fetchData()
-
-		return () => {
-			setIsUpToDate(false)
-		}
-	}, [])
-
-	useEffect(() => {
-		if (isUpToDate) {
-			updateOptimizedDeckState()
-		}
-	}, [isUpToDate])
-
-	useEffect(() => {
-		updateOptimizedDeckState()
-	}, [userDeck])
-
-	useEffect(() => {
-		const newOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
-		const newOptimizedDeckPower = calculateDeckPower(newOptimizedDeck)
-
-		setUserOptimizedDeck(newOptimizedDeck)
-		setUserOptimizedDeckPower(newOptimizedDeckPower)
-	}, [deckCount])
-
-	const updateOptimizedDeckState = async () => {
+	const updateOptimizedDeckState = useCallback(async () => {
 		const newUserDeckPower = calculateDeckPower(userDeck)
 		const newUserOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
 		const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
@@ -65,7 +32,7 @@ const DeckBar = () => {
 		setUserDeckPower(newUserDeckPower)
 		setUserOptimizedDeck(newUserOptimizedDeck)
 		setUserOptimizedDeckPower(newUserOptimizedDeckPower)
-	}
+	}, [userCards, deckCount, userDeck])
 
 	const optimizeDeck = async () => {
 		setFillDeckLoading(true)
@@ -88,6 +55,40 @@ const DeckBar = () => {
 		await fetchUserDeck()
 		setFillDeckLoading(false)
 	}
+
+	useEffect(() => {
+		const fetchData = async () => {
+			await fetchUserDeck()
+			await fetchUserCards()
+			setIsUpToDate(true)
+		}
+
+		fetchData()
+
+		return () => {
+			setIsUpToDate(false)
+		}
+	}, [fetchUserCards, fetchUserDeck])
+
+	useEffect(() => {
+		if (isUpToDate) {
+			updateOptimizedDeckState()
+		}
+	}, [isUpToDate, updateOptimizedDeckState])
+
+	useEffect(() => {
+		updateOptimizedDeckState()
+		// Only run this effect when the userDeck changes, not when updateOptimizedDeckState changes
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userDeck])
+
+	useEffect(() => {
+		const newOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
+		const newOptimizedDeckPower = calculateDeckPower(newOptimizedDeck)
+
+		setUserOptimizedDeck(newOptimizedDeck)
+		setUserOptimizedDeckPower(newOptimizedDeckPower)
+	}, [deckCount, userCards])
 
 	// Sorts all cards not in the user's deck and creates an array from the
 	// strongest cards equal in length to the remaining space in the deck.

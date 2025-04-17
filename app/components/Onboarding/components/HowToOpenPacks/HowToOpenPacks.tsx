@@ -15,8 +15,7 @@ import { cardValues, openPack, packOdds } from '../../images'
 import './howToOpenPacks.scss'
 
 const HowToOpenPacks = ({ nextStage }: NextStage) => {
-	const user = useUserStore((state) => state.user)
-	const userCards = useUserStore((state) => state.userCards)
+	const { user, userCards } = useUserStore((state) => state)
 	const allCards = useCardsStore((state) => state.allCards)
 	const stage = user?.onboardingStage
 	const [step, setStep] = useState(1)
@@ -26,6 +25,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 		let starterCards = []
 		const commonCards = getRandomCards(12, { Common: 100 }, allCards)
 		const uncommonCards = getRandomCards(2, { Uncommon: 100 }, allCards)
+
 		starterCards = [...commonCards, ...uncommonCards]
 		starterCards.forEach(async (card) => {
 			assignRandomCardValues(card)
@@ -50,7 +50,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 				setStep(4)
 			}, 1000)
 		}
-	}, [, userCards])
+	}, [userCards, setModalOpen, stage])
 
 	return (
 		<>

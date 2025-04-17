@@ -37,7 +37,7 @@ const Hand = ({
 		} else {
 			setShouldCollapse(false)
 		}
-	}, [cardDragged])
+	}, [cardDragged, setCardSelected])
 
 	const handleClick = (e: MouseEvent, card: ICard) => {
 		e.preventDefault()

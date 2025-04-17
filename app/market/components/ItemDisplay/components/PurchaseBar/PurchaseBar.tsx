@@ -28,10 +28,8 @@ const PurchaseBar = ({
 	finalPrice,
 	setFinalPrice
 }: PurchaseBar) => {
-	const user = useUserStore((state) => state.user)
-	const fetchUserData = useUserStore((state) => state.fetchUserData)
+	const { user, fetchUserData } = useUserStore((state) => state)
 	const { coin } = (user as User) ?? {}
-
 	const [loading, setLoading] = useState(false)
 
 	// Create an array representing the final purchase based on the chosen item and quantity
@@ -54,7 +52,7 @@ const PurchaseBar = ({
 
 			setFinalPrice(calculatedPrice)
 		}
-	}, [chosenItem, chosenQuantity])
+	}, [chosenItem, chosenQuantity, setFinalPrice])
 
 	const completePurchase = async () => {
 		try {
@@ -81,7 +79,7 @@ const PurchaseBar = ({
 				setPurchaseComplete(false)
 			}, 1500)
 		}
-	}, [purchaseComplete])
+	}, [purchaseComplete, setPurchaseComplete])
 
 	// Determine the label for the purchase button based on the loading state
 	const buttonLabel =

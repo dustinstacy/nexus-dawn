@@ -14,10 +14,9 @@ interface UserDeckProps {
 
 // Renders the user's deck information.
 const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
-	const userCards = useUserStore((state) => state.userCards)
-	const userDeck = useUserStore((state) => state.userDeck)
-	const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
+	const { userCards, userDeck, fetchUserDeck, fetchUserCards } = useUserStore(
+		(state) => state
+	)
 	const [userDeckPower, setUserDeckPower] = useState<number>(0)
 	const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
 	const [userOptimizedDeckPower, setUserOptimizedDeckPower] =
@@ -36,17 +35,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 		return () => {
 			setIsUpToDate(false)
 		}
-	}, [])
-
-	useEffect(() => {
-		if (isUpToDate) {
-			updateOptimizedDeckState()
-		}
-	}, [isUpToDate])
-
-	useEffect(() => {
-		updateOptimizedDeckState()
-	}, [userDeck])
+	}, [fetchUserDeck, fetchUserCards])
 
 	const updateOptimizedDeckState = async () => {
 		const newUserDeckPower = calculateDeckPower(userDeck)
@@ -61,8 +50,23 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 		setUserOptimizedDeckPower(newUserOptimizedDeckPower)
 	}
 
+	useEffect(() => {
+		if (isUpToDate) {
+			updateOptimizedDeckState()
+		}
+		// Only want to run this effect when isUpToDate changes, not when updateOptimizeDeckState does
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [isUpToDate])
+
+	useEffect(() => {
+		updateOptimizedDeckState()
+		// Only want to run this effect when userDeck changes, not when updateOptimizeDeckState does
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userDeck])
+
 	const optimizeDeck = async () => {
 		updateOptimizedDeckState()
+
 		userDeck.forEach((card) => {
 			if (
 				!userOptimizedDeck.some(
@@ -72,6 +76,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 				removeCardFromDeck(card)
 			}
 		})
+
 		userOptimizedDeck.forEach((optimizedCard) => {
 			if (!userDeck.some((card) => card._id === optimizedCard._id)) {
 				addCardToDeck(optimizedCard)

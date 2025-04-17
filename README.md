@@ -27,14 +27,12 @@ nexus-dawn.vercel.app
 </a>
 </div>
 
-
-
 ## Description
 
 This web app is a playable card game that allows users to collect and upgrade
 cards, construct a deck, and compete in various game modes. Inspired by the
 Final Fantasy VIII [minigame](https://finalfantasy.fandom.com/wiki/Triple_Triad)
-called Triple Triad. 
+called Triple Triad.
 
 ## Screenshots
 
@@ -117,7 +115,6 @@ NEXT_PUBLIC_API_BASE_URL=<number>
 NEXT_PUBLIC_PROMO_CODE=<string>
 ```
 
-
 ## Contributing
 
 Interested in contirbuting? Check out the current [issues](https://github.com/dustinstacy/nexus-dawn/issues) or submit your own idea.
@@ -137,4 +134,3 @@ Character Artwork - AEkashics <https://www.patreon.com/aekashics/posts>
 ## License
 
 The MIT License (MIT)
-

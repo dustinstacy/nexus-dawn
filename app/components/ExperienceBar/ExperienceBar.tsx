@@ -14,8 +14,7 @@ import './experienceBar.scss'
 
 // Renders the user's experience bar and handles level up functionality when XP thresholds are reached.
 const ExperienceBar = () => {
-	const user = useUserStore((state) => state.user)
-	const fetchUserData = useUserStore((state) => state.fetchUserData)
+	const { user, fetchUserData } = useUserStore((state) => state)
 	const { xp, level } = (user as User) ?? {}
 
 	const [newLevelAlert, setNewLevelAlert] = useState(false)
@@ -45,7 +44,7 @@ const ExperienceBar = () => {
 		}
 
 		checkLevelUp()
-	}, [xp, userNextLevel])
+	}, [xp, userNextLevel, fetchUserData, user])
 
 	// Animate the displayed xp to increment to the new total xp
 	useEffect(() => {
@@ -76,7 +75,7 @@ const ExperienceBar = () => {
 
 			requestAnimationFrame(animateXP)
 		}
-	}, [xp])
+	}, [xp, startXP, userNextLevel, userPrevLevel])
 
 	return (
 		<div className="experience-bar center-column">

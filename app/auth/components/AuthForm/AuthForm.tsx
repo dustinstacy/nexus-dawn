@@ -14,16 +14,16 @@ import { toCamelCase } from './utils'
 import { toast } from 'react-toastify'
 import './authForm.scss'
 
+const initialFormData = {
+	username: '',
+	email: '',
+	password: '',
+	confirmPassword: ''
+} as FormData
+
 // Displays login or registration form based on the value of the register prop
 const AuthForm = ({ register }: Register) => {
 	const router = useRouter()
-
-	const initialFormData = {
-		username: '',
-		email: '',
-		password: '',
-		confirmPassword: ''
-	} as FormData
 
 	const [formData, setFormData] = useState<FormData>(initialFormData)
 	const [loading, setLoading] = useState<boolean>(false)
@@ -86,12 +86,6 @@ const AuthForm = ({ register }: Register) => {
 		}
 	}
 
-	const reset = () => {
-		setFormData(initialFormData)
-		setLoading(false)
-		setErrors({})
-	}
-
 	const handlePasswordReset = async () => {
 		if (!resetEmail) return
 		setResetLoading(true)
@@ -109,7 +103,9 @@ const AuthForm = ({ register }: Register) => {
 	}
 
 	useEffect(() => {
-		reset()
+		setFormData(initialFormData)
+		setLoading(false)
+		setErrors({})
 	}, [register])
 
 	return (

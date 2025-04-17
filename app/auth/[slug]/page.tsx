@@ -18,7 +18,7 @@ const Auth = () => {
 	// Redirect to the home page if a user is already authenticated
 	useEffect(() => {
 		if (user) router.push('/')
-	}, [])
+	}, [user, router])
 
 	const register = pathname?.includes('register')
 

@@ -67,21 +67,24 @@ const Modifiers = ({
 	}
 
 	useEffect(() => {
+		const setAquaType = () => {
+			const aquaItem = allItems.find(
+				(item) => item.name === selectedModification
+			)
+			updateState(setModCost, { aquaType: aquaItem })
+		}
+
+		const setFluxType = () => {
+			const fluxItem = allItems.find(
+				(item) =>
+					item.name.includes(selectedCard!.rarity) && item.type === 'flux'
+			)
+			updateState(setModCost, { fluxType: fluxItem })
+		}
+
 		setAquaType()
 		setFluxType()
-	}, [])
-
-	const setAquaType = () => {
-		const aquaItem = allItems.find((item) => item.name === selectedModification)
-		updateState(setModCost, { aquaType: aquaItem })
-	}
-
-	const setFluxType = () => {
-		const fluxItem = allItems.find(
-			(item) => item.name.includes(selectedCard!.rarity) && item.type === 'flux'
-		)
-		updateState(setModCost, { fluxType: fluxItem })
-	}
+	}, [allItems, selectedCard, selectedModification])
 
 	return (
 		<div className="modifier">

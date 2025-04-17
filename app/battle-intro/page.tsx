@@ -18,7 +18,7 @@ const BattleIntro = () => {
 		setTimeout(() => {
 			router.push('/battle')
 		}, 4000)
-	}, [])
+	}, [router])
 
 	return (
 		<ModalOverlay>

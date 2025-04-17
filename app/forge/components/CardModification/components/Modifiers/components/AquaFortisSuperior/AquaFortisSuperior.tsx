@@ -31,7 +31,7 @@ const AquaFortisSuperior = ({
 
 	useEffect(() => {
 		setSelectedCardValues(Array(4).fill(''))
-	}, [])
+	}, [setSelectedCardValues])
 
 	const cardValueClick = (value: number, i: number) => {
 		if (modValue === 0) {
@@ -86,11 +86,7 @@ const AquaFortisSuperior = ({
 					{updatedCardValues?.map((value, i) => (
 						<div
 							key={value + i * 10}
-							className={`value-${i} box center ${
-								modValue !== 0 &&
-								value === selectedCardMaxSingleValue &&
-								'disabled'
-							}`}
+							className={`value-${i} box center ${modValue !== 0 && value === selectedCardMaxSingleValue && 'disabled'}`}
 							onClick={() => cardValueClick(value, i)}
 						>
 							{value}

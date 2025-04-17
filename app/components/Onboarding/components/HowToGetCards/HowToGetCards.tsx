@@ -23,13 +23,13 @@ const HowToGetCards = ({ nextStage }: NextStage) => {
 	}
 
 	useEffect(() => {
-		if (inventory.length > 0 && stage === 1) {
+		if (inventory?.length > 0 && stage === 1) {
 			setTimeout(() => {
 				setModalOpen(true)
 				setStep(4)
 			}, 1000)
 		}
-	}, [, user?.inventory])
+	}, [inventory?.length, setModalOpen, stage])
 
 	return (
 		<>

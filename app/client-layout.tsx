@@ -17,17 +17,11 @@ export default function ClientLayout({
 	children: React.ReactNode
 }) {
 	const pathname = usePathname()
-	const user = useUserStore((state) => state.user)
-	const userCards = useUserStore((state) => state.userCards)
-	const checkForUser = useUserStore((state) => state.checkForUser)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
-	const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
-	const allCards = useCardsStore((state) => state.allCards)
-	const allItems = useItemsStore((state) => state.allItems)
-	const allOpponents = useOpponentsStore((state) => state.allOpponents)
-	const fetchCards = useCardsStore((state) => state.fetchCards)
-	const fetchItems = useItemsStore((state) => state.fetchItems)
-	const fetchOpponents = useOpponentsStore((state) => state.fetchOpponents)
+	const { user, userCards, checkForUser, fetchUserCards, fetchUserDeck } =
+		useUserStore((state) => state)
+	const { allCards, fetchCards } = useCardsStore((state) => state)
+	const { allItems, fetchItems } = useItemsStore((state) => state)
+	const { allOpponents, fetchOpponents } = useOpponentsStore((state) => state)
 
 	const isAuthRoute = pathname.startsWith('/auth')
 	const isBattleRoute = pathname === '/battle'
@@ -40,7 +34,7 @@ export default function ClientLayout({
 			fetchUserCards()
 			fetchUserDeck()
 		}
-	}, [user])
+	}, [user, userCards.length, checkForUser, fetchUserCards, fetchUserDeck])
 
 	useEffect(() => {
 		if (
@@ -52,7 +46,15 @@ export default function ClientLayout({
 			fetchItems()
 			fetchOpponents()
 		}
-	}, [])
+	}, [
+		allItems?.length,
+		allOpponents?.length,
+		allCards?.length,
+		fetchCards,
+		fetchItems,
+		fetchOpponents,
+		user
+	])
 
 	return (
 		<div>

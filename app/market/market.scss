@@ -1,55 +1,55 @@
 .market {
-    height: calc(100vh - var(--navbar-height));
-    padding-top: var(--navbar-height);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    overflow: auto;
+	height: calc(100vh - var(--navbar-height));
+	padding-top: var(--navbar-height);
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	overflow: auto;
 
-    .market-menu-header {
-        width: 100%;
-        background: var(--background3-color);
-        text-align: center;
-        line-height: 64px;
-        z-index: 80;
+	.market-menu-header {
+		width: 100%;
+		background: var(--background3-color);
+		text-align: center;
+		line-height: 64px;
+		z-index: 80;
 
-        @media screen and (max-width: 768px) {
-            line-height: 48px;
-        }
+		@media screen and (max-width: 768px) {
+			line-height: 48px;
+		}
 
-        @media screen and (max-width: 600px) {
-            line-height: 36px;
-        }
+		@media screen and (max-width: 600px) {
+			line-height: 36px;
+		}
 
-        h1 {
-            padding-top: 16px;
-            font-size: 84px;
+		h1 {
+			padding-top: 16px;
+			font-size: 84px;
 
-            @media screen and (max-width: 768px) {
-                font-size: 64px;
-            }
+			@media screen and (max-width: 768px) {
+				font-size: 64px;
+			}
 
-            @media screen and (max-width: 600px) {
-                font-size: 56px;
-            }
-        }
+			@media screen and (max-width: 600px) {
+				font-size: 56px;
+			}
+		}
 
-        hr {
-            height: 2px;
-            margin: 0;
-            border: 0;
-            background: var(--primary-color);
-        }
-    }
+		hr {
+			height: 2px;
+			margin: 0;
+			border: 0;
+			background: var(--primary-color);
+		}
+	}
 
-    .market-menu {
-        width: 100vw;
-        display: flex;
-        flex: 1;
-        overflow-y: auto;
+	.market-menu {
+		width: 100vw;
+		display: flex;
+		flex: 1;
+		overflow-y: auto;
 
-        @media screen and (max-width: 768px) {
-            flex-direction: column;
-        }
-    }
+		@media screen and (max-width: 768px) {
+			flex-direction: column;
+		}
+	}
 }

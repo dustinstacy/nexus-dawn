@@ -17,23 +17,21 @@ const ModifiedCard = ({
 	setModificationComplete,
 	setSelectedCard
 }: ModifiedCard) => {
-	const userCards = useUserStore((state) => state.userCards)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
-
+	const { userCards, fetchUserCards } = useUserStore((state) => state)
 	const [updatedCard, setUpdatedCard] = useState<ICard | null>(null)
 
 	useEffect(() => {
-		updateSelectedCard()
-	}, [])
+		const updateSelectedCard = async () => {
+			fetchUserCards()
+			const updatedSelectedCard = userCards.find(
+				(card) => card._id === selectedCard?._id
+			)
+			setUpdatedCard(updatedSelectedCard ?? null)
+			setSelectedCard?.(null)
+		}
 
-	const updateSelectedCard = async () => {
-		fetchUserCards()
-		const updatedSelectedCard = userCards.find(
-			(card) => card._id === selectedCard?._id
-		)
-		setUpdatedCard(updatedSelectedCard ?? null)
-		setSelectedCard?.(null)
-	}
+		updateSelectedCard()
+	}, [fetchUserCards, selectedCard?._id, setSelectedCard, userCards])
 
 	return (
 		<div className="mod-card center-column">

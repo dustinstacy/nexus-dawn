@@ -18,39 +18,43 @@ const CardCollection = ({
 	rarityFilter,
 	valueFilter
 }: CardCollectionProps) => {
-	const user = useUserStore((state) => state.user)
-	const userCards = useUserStore((state) => state.userCards)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
-	const userDeck = useUserStore((state) => state.userDeck)
+	const { user, userCards, fetchUserCards, userDeck } = useUserStore(
+		(state) => state
+	)
 
 	useEffect(() => {
 		fetchUserCards()
-	}, [userDeck])
+	}, [userDeck, fetchUserCards])
 
 	// Applies filters to the user's cards based on the selected filter options
 	const filteredCards = useMemo(() => {
 		userCards.forEach((card) => {
 			card.color = user?.color
 		})
+
 		let filtered = Sorters.sortByCardNumber(userCards)
+
 		if (deckFilter === 'In Deck') {
 			filtered = Sorters.sortByCardsInDeck(userCards, userDeck)
 		} else if (deckFilter === 'Not In Deck') {
 			filtered = Sorters.sortByCardsNotInDeck(userCards, userDeck)
 		}
+
 		if (rarityFilter && rarityFilter !== '-') {
 			filtered = Sorters.sortByRarity(filtered, rarityFilter)
 		}
+
 		if (valueFilter == 'Total') {
 			filtered = Sorters.sortByTotalCardValue(filtered)
 		} else if (valueFilter && valueFilter !== '-') {
 			const valuesArray = ['Up', 'Right', 'Down', 'Left', 'Total']
 			const valueIndex = valuesArray.indexOf(valueFilter)
+
 			filtered = Sorters.sortBySingleValue(filtered, valueIndex)
 		}
 
 		return filtered
-	}, [deckFilter, rarityFilter, valueFilter, userCards, userDeck])
+	}, [deckFilter, rarityFilter, valueFilter, userCards, userDeck, user?.color])
 
 	return (
 		<div className="card-collection start-column">

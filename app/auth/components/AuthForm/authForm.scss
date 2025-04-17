@@ -1,22 +1,22 @@
 .auth-form {
-    width: 100%;
+	width: 100%;
 
-    .form {
-        width: 100%;
-        flex-direction: column;
+	.form {
+		width: 100%;
+		flex-direction: column;
 
-        .text-input {
-            width: 65%;
-        }
-    }
+		.text-input {
+			width: 65%;
+		}
+	}
 
-    .button {
-        position: absolute;
-        bottom: -2.5%;
-        width: 250px;
-    }
+	.button {
+		position: absolute;
+		bottom: -2.5%;
+		width: 250px;
+	}
 
-    .cursor-pointer {
-        cursor: pointer;
-    }
+	.cursor-pointer {
+		cursor: pointer;
+	}
 }

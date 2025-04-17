@@ -1,130 +1,132 @@
 .card-mod {
-    .cost-bar,
-    .mod-panel,
-    .mod-bar {
-        position: relative;
-        width: calc(45vh);
-    }
+	.cost-bar,
+	.mod-panel,
+	.mod-bar {
+		position: relative;
+		width: calc(45vh);
+	}
 
-    .mod-panel,
-    .mod-bar {
-        margin-top: 12px;
-        background: rgb(255, 137, 2);
-        background: radial-gradient(
-            circle,
-            rgba(255, 137, 2, 1) 0%,
-            rgba(255, 230, 2, 0.8) 100%
-        );
-        border: 4px solid var(--background2-color);
-        border-radius: 4px;
-        box-shadow: 2px 2px 5px #ff8902cc, 2px -2px 5px rgba(255, 74, 2, 0.8),
-            -2px 2px 5px rgba(255, 137, 2, 0.8),
-            -2px -2px 5px rgba(255, 74, 2, 0.8);
+	.mod-panel,
+	.mod-bar {
+		margin-top: 12px;
+		background: rgb(255, 137, 2);
+		background: radial-gradient(
+			circle,
+			rgba(255, 137, 2, 1) 0%,
+			rgba(255, 230, 2, 0.8) 100%
+		);
+		border: 4px solid var(--background2-color);
+		border-radius: 4px;
+		box-shadow:
+			2px 2px 5px #ff8902cc,
+			2px -2px 5px rgba(255, 74, 2, 0.8),
+			-2px 2px 5px rgba(255, 137, 2, 0.8),
+			-2px -2px 5px rgba(255, 74, 2, 0.8);
 
-        .value,
-        .value-0,
-        .value-1,
-        .value-2,
-        .value-3 {
-            height: 64px;
-            width: 64px;
-            font-size: 48px;
+		.value,
+		.value-0,
+		.value-1,
+		.value-2,
+		.value-3 {
+			height: 64px;
+			width: 64px;
+			font-size: 48px;
 
-            &.box {
-                cursor: pointer;
-            }
+			&.box {
+				cursor: pointer;
+			}
 
-            &.disabled {
-                pointer-events: none;
-                filter: grayscale(0.9);
-            }
-        }
+			&.disabled {
+				pointer-events: none;
+				filter: grayscale(0.9);
+			}
+		}
 
-        .value-0,
-        .value-1,
-        .value-2,
-        .value-3 {
-            position: absolute;
-        }
+		.value-0,
+		.value-1,
+		.value-2,
+		.value-3 {
+			position: absolute;
+		}
 
-        .value-0 {
-            top: 8px;
-        }
+		.value-0 {
+			top: 8px;
+		}
 
-        .value-1 {
-            right: 24px;
-        }
+		.value-1 {
+			right: 24px;
+		}
 
-        .value-2 {
-            bottom: 8px;
-        }
+		.value-2 {
+			bottom: 8px;
+		}
 
-        .value-3 {
-            left: 24px;
-        }
+		.value-3 {
+			left: 24px;
+		}
 
-        .cancel,
-        .reset {
-            top: 12px;
-            position: absolute;
-            color: var(--background3-color);
-            font-size: 36px;
-            cursor: pointer;
-        }
+		.cancel,
+		.reset {
+			top: 12px;
+			position: absolute;
+			color: var(--background3-color);
+			font-size: 36px;
+			cursor: pointer;
+		}
 
-        .cancel {
-            right: 12px;
-        }
+		.cancel {
+			right: 12px;
+		}
 
-        .reset {
-            left: 12px;
-        }
-    }
+		.reset {
+			left: 12px;
+		}
+	}
 
-    .mod-panel {
-        height: calc(45vh);
-    }
+	.mod-panel {
+		height: calc(45vh);
+	}
 
-    .mod-bar {
-        height: calc(10vh);
-        gap: 12px;
+	.mod-bar {
+		height: calc(10vh);
+		gap: 12px;
 
-        .value.selected {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-        }
-    }
+		.value.selected {
+			background-color: var(--secondary-color);
+			color: var(--primary-color);
+		}
+	}
 
-    .collection-display {
-        height: 720px;
-        width: 900px;
-        overflow-y: auto;
+	.collection-display {
+		height: 720px;
+		width: 900px;
+		overflow-y: auto;
 
-        .card {
-            cursor: pointer;
-        }
-    }
+		.card {
+			cursor: pointer;
+		}
+	}
 
-    .box {
-        margin: 12px 0;
-        padding: 12px;
-        text-align: center;
+	.box {
+		margin: 12px 0;
+		padding: 12px;
+		text-align: center;
 
-        .filter {
-            margin-bottom: 8px;
-        }
-    }
+		.filter {
+			margin-bottom: 8px;
+		}
+	}
 
-    .mod-cost {
-        width: 100%;
-        gap: 24px;
-        background-color: var(--secondary2-color);
-        img {
-            height: 7vh;
-        }
-    }
+	.mod-cost {
+		width: 100%;
+		gap: 24px;
+		background-color: var(--secondary2-color);
+		img {
+			height: 7vh;
+		}
+	}
 
-    .button {
-        margin-top: 12px;
-    }
+	.button {
+		margin-top: 12px;
+	}
 }

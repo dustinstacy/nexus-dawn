@@ -27,20 +27,16 @@ const Onboarding = () => {
 	useEffect(() => {
 		if (stage === 0) {
 			router.push('/')
-		}
-		if (stage === 1) {
+		} else if (stage === 1) {
 			router.push('/market')
-		}
-		if (stage === 2) {
+		} else if (stage === 2) {
 			router.push('/packs')
-		}
-		if (stage === 3) {
+		} else if (stage === 3) {
 			router.push('/collection')
-		}
-		if (stage === 4 || stage === 5) {
+		} else if (stage === 4 || stage === 5) {
 			router.push('/how-to-play')
 		}
-	}, [, stage])
+	}, [stage, router])
 
 	// Advances the user to next onboarding stage
 	const nextStage = async (path?: string) => {
