@@ -6,7 +6,6 @@ import { ICard } from "@interfaces"
 
 interface PackCarousel {
     uniqueItems: ICard[][]
-    currentBatch?: ICard[]
     setCurrentItem: React.Dispatch<React.SetStateAction<ICard[]>>
     emptyMessage?: string
     children: ReactElement<{ packContents: ICard[] }>
@@ -32,7 +31,7 @@ const PackCarousel = ({ uniqueItems, setCurrentItem, emptyMessage, children }: P
     // Update the current item when it changes
     useEffect(() => {
         setCurrentItem(current)
-    }, [current, setCurrentItem])
+    }, [current])
 
     // Handle the slide action based on the specified direction
     const handleSlide = (direction: string) => {
@@ -55,14 +54,14 @@ const PackCarousel = ({ uniqueItems, setCurrentItem, emptyMessage, children }: P
         <div className='pack-carousel fill between'>
             {uniqueItems.length ? (
                 <>
-                    <BiLeftArrow className='pack-arrow-previous' onClick={() => handleSlide("left")} />
+                    {uniqueItems.length > 1 ? <BiLeftArrow className='pack-arrow-previous' onClick={() => handleSlide("left")} /> : null}
 
                     {carouselPositions.map(({ position }) => (
                         <div key={position} className={`pack-carousel-item start-column ${position} ${slideDirection}`}>
                             {React.cloneElement(children)} 
                         </div>
                     ))}
-                    <BiRightArrow className='pack-arrow-next' onClick={() => handleSlide("right")} />
+                    {uniqueItems.length > 1 ? <BiRightArrow className='pack-arrow-next' onClick={() => handleSlide("right")} /> : null}
                 </>
             ) : (
                 <h2 className='center'>{emptyMessage}</h2>

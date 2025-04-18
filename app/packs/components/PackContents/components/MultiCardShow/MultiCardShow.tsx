@@ -5,6 +5,7 @@ import './MultiCardShow.scss'
 interface IPackContents {
   packContents: ICard[]
 }
+
 const MultiCardShow = ( {packContents} : IPackContents ) => { 
   return (
     <div className="multi-packs panel fill">

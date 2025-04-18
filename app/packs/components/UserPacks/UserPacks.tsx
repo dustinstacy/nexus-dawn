@@ -30,18 +30,6 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     // Removing duplicates from userPacks and sorting them by level in descending order
     const uniquePacks = uniqueItemsFilter(userPacks).sort((a, b) => b.level - a.level)
 
-    const openCurrentPack = async () => {
-        setIsLoading(true)
-
-        // Simulating a delay of 5 seconds for loader animation
-        await new Promise((resolve) => setTimeout(resolve, 5000))
-				await getRandomCardsFromPack()
-				await removeItemFromInventory(user as User, currentPack as IItem)
-				await fetchUserData("inventory")
-				await fetchUserCards()
-        setIsLoading(false)
-    }
-
     const openMultiplePacks = async () => {
         setIsLoading(true)
 
@@ -88,9 +76,7 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
     
     useEffect(() => {
       const filteredPackCount = userPacks.filter((item) => item.name === currentPack?.name).length
-      if(filteredPackCount < packPullCount && currentPack){
-        setPackPullCount(filteredPackCount);
-      }
+      setPackPullCount(filteredPackCount);
       setCurrentPackQuantity(userPacks.filter((item) => item.name === currentPack?.name).length);
     }, [currentPack]);
 
@@ -110,7 +96,6 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
             </Carousel>
 
             <div className="button-menu">
-						    <Button label='OpeN PacK' onClick={openCurrentPack} disabled={buttonDisablers} />
 						    <Button label="-" onClick={decrementPackCount} disabled={packPullCount <= 0} />
 						    <Button label={`OpeN ${packPullCount} PacK(s)`} onClick={openMultiplePacks} disabled={disableMultiPackOpen} />
 						    <Button label="+" onClick={incrementPackCount} disabled={packPullCount === currentPackQuantity} />

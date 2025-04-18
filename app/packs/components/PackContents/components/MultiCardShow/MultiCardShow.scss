@@ -1,8 +1,10 @@
 .multi-packs {
-  // border: 1px solid white;
   display: flex;
-  flex-direction: row !important; 
-
+  flex-direction: row !important;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: center;
+  
   .button {
       margin-left: 15px;
       margin-right: 15px;
