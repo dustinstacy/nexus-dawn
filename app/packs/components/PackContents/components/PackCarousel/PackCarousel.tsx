@@ -35,19 +35,17 @@ const PackCarousel = ({ uniqueItems, setCurrentItem, emptyMessage, children }: P
 
     // Handle the slide action based on the specified direction
     const handleSlide = (direction: string) => {
-        setSlideDirection(direction)
+        setSlideDirection(direction); // triggers animation
+        setCurrentItemIndex((prevIndex) => {
+          if (direction === "right") {
+            return prevIndex === 0 ? uniqueItems.length - 1 : prevIndex - 1;
+          }
+          return prevIndex === uniqueItems.length - 1 ? 0 : prevIndex + 1;
+        });
+      
         setTimeout(() => {
-            setCurrentItemIndex((index) =>
-                direction === "right"
-                    ? index === 0
-                        ? uniqueItems.length - 1
-                        : index - 1
-                    : index === uniqueItems.length - 1
-                    ? 0
-                    : index + 1
-            )
-            setSlideDirection("")
-        }, 500)
+          setSlideDirection("");
+        }, 300);
     }
 
     return (

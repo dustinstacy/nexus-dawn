@@ -1,7 +1,7 @@
 import { Button } from "@components"
 import { ICard } from "@interfaces"
 import { useUserStore } from "@stores"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { PackCarousel, MultiCardShow } from "./components"
 import "./packContents.scss"
