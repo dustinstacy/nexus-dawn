@@ -1,11 +1,13 @@
-import { Button, Card } from "@components"
+import { Button } from "@components"
 import { ICard } from "@interfaces"
 import { useUserStore } from "@stores"
+import { useState } from "react"
 
+import { PackCarousel, MultiCardShow } from "./components"
 import "./packContents.scss"
 
 interface PackContents {
-    packContents: Array<ICard> | null
+    packContents: Array<ICard>
     setPackContents: React.Dispatch<React.SetStateAction<Array<ICard> | null>>
 }
 
@@ -14,12 +16,26 @@ const PackContents = ({ packContents, setPackContents }: PackContents) => {
     const user = useUserStore((state) => state.user)
     const stage = user?.onboardingStage
 
+    const [batchedCards] = useState<ICard[][]>((breakArrayIntoGroups(packContents, 5)));
+    const [currentCardBatch, setCurrentCardBatch] = useState<ICard[]>([]);
+
+    function breakArrayIntoGroups(data: ICard[], maxPerGroup: number) {
+        const groups = [];
+        for (let index = 0; index < data?.length; index += maxPerGroup) {
+            groups.push(data.slice(index, index + maxPerGroup));
+        }
+        return groups;
+    }
+
     return (
-        <div className='packs-contents fill center'>
-            {packContents?.map((data) => (
-                <Card key={data._id} card={data} isShowing />
-            ))}
-            <Button label='Go Back' onClick={() => setPackContents(null)} disabled={(stage as number) < 5} />
+        <div className='packs-contents fill center between-column'>
+            <PackCarousel
+                uniqueItems={batchedCards}
+                setCurrentItem={setCurrentCardBatch}
+            >   
+                <MultiCardShow packContents={currentCardBatch} />    
+            </PackCarousel>
+            <Button label='Go BaCk' onClick={() => setPackContents(null)} disabled={(stage as number) < 5} />
         </div>
     )
 }

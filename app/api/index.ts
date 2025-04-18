@@ -75,8 +75,8 @@ export const removeCardFromDeck = async (card: DeckCard) => {
     })
 }
 
-export const removeItemFromInventory = async (user: User, item: IItem) => {
-    const updatedInventory = removeObjectByValue(user.inventory, item.name)
+export const removeItemFromInventory = async (user: User, item: IItem, quantityToRemove: number = 1) => {
+    const updatedInventory = removeObjectByValue(user.inventory, item.name, quantityToRemove)
     await customFetch("/api/profiles/inventory", {
         method: "PUT",
         body: JSON.stringify({
