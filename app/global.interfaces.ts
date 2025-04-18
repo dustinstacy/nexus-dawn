@@ -16,7 +16,7 @@ export interface User {
     __v: string
 }
 
-interface Stats {
+export interface Stats {
     battles: number
     draws: number
     losses: number
@@ -190,4 +190,19 @@ export interface Odds {
     Rare?: number
     Epic?: number
     Legendary?: number
+}
+
+
+//user needs to have some attributes as optional
+//player interface is an alternative to user with partial attributes
+// did not want to break app by changing user interface
+export interface Player {
+    id: string,
+    username: string,
+    email:  string,
+    color:  string,
+    level: number,
+    xp: number,
+    stats: Stats,
+    coin: number
 }

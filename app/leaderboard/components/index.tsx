@@ -1,0 +1,1 @@
+export { default as Rankings } from './Rankings/Rankings'
