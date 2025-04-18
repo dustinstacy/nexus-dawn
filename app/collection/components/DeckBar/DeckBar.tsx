@@ -97,6 +97,7 @@ const DeckBar = () => {
         setClearDeckLoading(true)
         await removeAllFromDeck(userDeck)
         await fetchUserDeck()
+        await fetchUserCards()
         setClearDeckLoading(false)
     }
 

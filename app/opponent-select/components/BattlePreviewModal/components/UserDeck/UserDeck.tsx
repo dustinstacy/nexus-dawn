@@ -7,7 +7,7 @@ import { calculateDeckPower, calculateOptimizedDeck, classSet } from "@utils"
 import { CircleLoader } from "react-spinners"
 import "./userDeck.scss"
 import { useEffect, useState } from "react"
-import useLoading from "app/hooks/useLoading"
+import { useLoading } from "@hooks"
 
 interface UserDeckProps {
     selectedOpponent: IOpponent
@@ -20,7 +20,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
     const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
     const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 
-    const {isLoading, startLoading, stopLoading} = useLoading();
+    const [isLoading, startLoading, stopLoading] = useLoading();
     const [userDeckPower, setUserDeckPower] = useState<number>(0)
     const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
     const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
@@ -79,7 +79,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 
         await fetchUserCards()
         await fetchUserDeck()
-        stopLoading()
+        stopLoading(true)
     }
 
     const countColor = classSet(userDeck?.length === selectedOpponent.cardCount ? "valid" : "invalid")

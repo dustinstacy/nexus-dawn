@@ -23,9 +23,16 @@ export const addAllToDeck = async (array: Array<ICard>) => {
 
 // Mark all cards as unselected and remove all cards from user's deck
 export const removeAllFromDeck = async (deck: Array<ICard>) => {
-    const unselectPromises = deck.map((card) => {
-        return customFetch(`/api/collections/${card._id}/unselect`, { method: "PUT" })
-    })
+
+    let unselectPromises = []
+
+    for (let i = 0; i < deck.length; i++){
+        if(deck[i].selected) {
+            unselectPromises = deck.map((card) => {
+                return customFetch(`/api/collections/${card._id}/unselect`, { method: "PUT" })
+            })
+        }
+    }
 
     await Promise.all(unselectPromises)
     await customFetch(`/api/decks/empty`, { method: "PUT" })

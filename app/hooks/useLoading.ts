@@ -1,31 +1,31 @@
 "use-client"
 /**
- * Custom Hook: useToggle
+ * Custom Hook: useLoading
  *
- * A reusable hook that manages a boolean toggle state.
+ * A reusable hook that manages a boolean load state.
  *
- * @param {boolean} initialState - The initial state of the toggle (default: false).
- * @returns {Array} An (tuple) array containing the toggle state, toggle function, and a manual toggle state setter.
+ * @returns {Array} An (tuple) array containing the loading state, start load function, and a stop load function
  *
  * Usage:
- *    const [isOpen, toggleIsOpen, setToggleIsOpen] = useToggle();
- *    - isToggled: The current state of the toggle (true/false).
- *    - toggle: A function to toggle the state between true and false.
- *    - setToggleIsOpen: Set state of isOpen to desired value
+ *    const [isLoading, startLoading, stopLoading] = useLoading();
+ *    - isLoading: The current state of the loader (true/false).
+ *    - startLoading: Function to set the loading state to true.
+ *    - stopLoading: Function to set the loading state to false
  */
 import { useState } from "react"
 
-const useLoading = ()  => {
+type LoadingState = [boolean, () => void, () => void]
+const useLoading = () : LoadingState  => {
     const [isLoading, setIsLoading] = useState(false);
 
     const startLoading = () => setIsLoading(true);
     const stopLoading = () => setIsLoading(false);
   
-    return {
+    return [
       isLoading,
       startLoading,
       stopLoading,
-    };
+    ];
 }
 
 export default useLoading
