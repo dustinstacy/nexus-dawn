@@ -4,9 +4,10 @@ import { Button } from "@components"
 import { ICard, IOpponent } from "@interfaces"
 import { useUserStore } from "@stores"
 import { calculateDeckPower, calculateOptimizedDeck, classSet } from "@utils"
-
+import { CircleLoader } from "react-spinners"
 import "./userDeck.scss"
 import { useEffect, useState } from "react"
+import { useLoading } from "@hooks"
 
 interface UserDeckProps {
     selectedOpponent: IOpponent
@@ -18,6 +19,8 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
     const userDeck = useUserStore((state) => state.userDeck)
     const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
     const fetchUserCards = useUserStore((state) => state.fetchUserCards)
+
+    const [isLoading, startLoading, stopLoading] = useLoading();
     const [userDeckPower, setUserDeckPower] = useState<number>(0)
     const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
     const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
@@ -58,21 +61,35 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
     }
 
     const optimizeDeck = async () => {
+        startLoading()
         updateOptimizedDeckState()
         userDeck.forEach((card) => {
             if (!userOptimizedDeck.some((optimizedCard) => optimizedCard._id === card._id)) {
                 removeCardFromDeck(card)
             }
         })
+
         userOptimizedDeck.forEach((optimizedCard) => {
-            if (!userDeck.some((card) => card._id === optimizedCard._id)) {
+            if(userDeck.length >= selectedOpponent.cardCount){
+                removeCardFromDeck(optimizedCard)
+            } else {
                 addCardToDeck(optimizedCard)
             }
         })
+
         await fetchUserCards()
         await fetchUserDeck()
+        stopLoading(true)
     }
+
     const countColor = classSet(userDeck?.length === selectedOpponent.cardCount ? "valid" : "invalid")
+
+    const fillDeckLabel = isLoading ? (
+        <CircleLoader color='#ffffff' size={24} loading={isLoading} />
+    ) : (
+        "Optimize Deck"
+    )
+
 
     return (
         <div className='user-deck start-column'>
@@ -95,9 +112,9 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
                 </div>
                 <div className='buttons start-column'>
                     <Button
-                        label='Optimize Deck'
+                        label={fillDeckLabel as string}
                         onClick={optimizeDeck}
-                        disabled={userDeckPower == userOptimizedDeckPower}
+                        disabled={userDeckPower == userOptimizedDeckPower || isLoading}
                     />
                     <Button label='Edit Deck' type='link' path='/collection' />
                 </div>
