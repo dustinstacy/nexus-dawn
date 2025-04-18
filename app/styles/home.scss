@@ -1,228 +1,240 @@
 .home {
-    min-height: 100vh;
-    padding-top: calc(var(--navbar-height) + 5vh);
-    padding-bottom: 5vh;
-    background-image: url("../assets/page-images/window.jpg");
-    background-position: right;
-    background-size: cover;
-    border-bottom: 2px solid;
-    border-image: var(--gold-gradient) 1;
-    overflow-y: none;
+	min-height: 100vh;
+	padding-top: calc(var(--navbar-height) + 5vh);
+	padding-bottom: 5vh;
+	background-image: url('../assets/page-images/window.jpg');
+	background-position: right;
+	background-size: cover;
+	border-bottom: 2px solid;
+	border-image: var(--gold-gradient) 1;
+	overflow-y: none;
 
-    .home-wrapper {
-        height: 80vh;
-        width: 80vw;
-        display: flex;
-        gap: 12px;
+	.home-wrapper {
+		height: 80vh;
+		width: 80vw;
+		display: flex;
+		gap: 12px;
 
-        @media screen and (max-height: 720px) {
-            flex-direction: column;
-            height: auto;
-            width: 90vw;
-        }
+		@media screen and (max-height: 720px) {
+			flex-direction: column;
+			height: auto;
+			width: 90vw;
+		}
 
-        @media screen and (max-width: 912px) {
-            flex-direction: column;
-            width: 90vw;
-            height: auto;
-        }
+		@media screen and (max-width: 912px) {
+			flex-direction: column;
+			width: 90vw;
+			height: auto;
+		}
 
-        @media screen and (min-width: 768px) and (orientation: portrait) {
-            flex-direction: column;
-            width: 90vw;
-            height: auto;
-        }
-    }
+		@media screen and (min-width: 768px) and (orientation: portrait) {
+			flex-direction: column;
+			width: 90vw;
+			height: auto;
+		}
+	}
 
-    .battle-main,
-    .collection-main,
-    .market-main,
-    .subs {
-        height: 100%;
-        flex: 1;
+	.battle-main,
+	.collection-main,
+	.market-main,
+	.subs {
+		height: 100%;
+		flex: 1;
 
-        @media screen and (max-height: 720px) {
-            flex-direction: row;
-            min-height: 200px;
-            width: 100%;
-        }
+		@media screen and (max-height: 720px) {
+			flex-direction: row;
+			min-height: 200px;
+			width: 100%;
+		}
 
-        @media screen and (max-width: 912px) {
-            flex-direction: row;
-            min-height: 200px;
-            width: 100%;
-        }
+		@media screen and (max-width: 912px) {
+			flex-direction: row;
+			min-height: 200px;
+			width: 100%;
+		}
 
-        @media screen and (min-width: 768px) and (orientation: portrait) {
-            flex-direction: row;
-            min-height: 200px;
-            width: 100%;
-        }
-    }
+		@media screen and (min-width: 768px) and (orientation: portrait) {
+			flex-direction: row;
+			min-height: 200px;
+			width: 100%;
+		}
+	}
 
-    .battle-main,
-    .collection-main,
-    .market-main {
-        padding: 24px;
-        box-shadow: 2px 2vh 5vh 5px var(--black-color) inset, 2px -2vh 5vh 5px var(--black-color) inset;
-        border: 2px solid var(--secondary2-color);
+	.battle-main,
+	.collection-main,
+	.market-main {
+		padding: 24px;
+		box-shadow:
+			2px 2vh 5vh 5px var(--black-color) inset,
+			2px -2vh 5vh 5px var(--black-color) inset;
+		border: 2px solid var(--secondary2-color);
 
-        @media screen and (max-height: 720px) {
-            align-items: flex-start;
-        }
+		@media screen and (max-height: 720px) {
+			align-items: flex-start;
+		}
 
-        @media screen and (max-width: 912px) {
-            align-items: flex-start;
-        }
+		@media screen and (max-width: 912px) {
+			align-items: flex-start;
+		}
 
-        @media screen and (min-width: 768px) and (orientation: portrait) {
-            align-items: flex-start;
-        }
+		@media screen and (min-width: 768px) and (orientation: portrait) {
+			align-items: flex-start;
+		}
 
-        p {
-            font-size: 28px;
+		p {
+			font-size: 28px;
 
-            @media screen and (max-width: 600px) {
-                display: none;
-            }
-        }
-    }
+			@media screen and (max-width: 600px) {
+				display: none;
+			}
+		}
+	}
 
-    .subs {
-        gap: 12px;
+	.subs {
+		gap: 12px;
 
-        @media screen and (max-width: 912px) {
-            flex-wrap: wrap;
-        }
+		@media screen and (max-width: 912px) {
+			flex-wrap: wrap;
+		}
 
-        @media screen and (min-width: 768px) and (orientation: portrait) {
-            flex-wrap: wrap;
-        }
+		@media screen and (min-width: 768px) and (orientation: portrait) {
+			flex-wrap: wrap;
+		}
 
-        .packs-sub,
-        .how-to-play-sub,
-        .news-sub,
-        .contact-sub {
-            width: 100%;
-            flex: 1;
-            padding: 12px;
+		.packs-sub,
+		.how-to-play-sub,
+		.news-sub,
+		.contact-sub {
+			width: 100%;
+			flex: 1;
+			padding: 12px;
 
-            border: 1px solid var(--secondary2-color);
-            box-shadow: 2px 2.5vh 5vh 5px var(--black-color) inset, 2px -2.5vh 5vh 5px var(--black-color) inset;
+			border: 1px solid var(--secondary2-color);
+			box-shadow:
+				2px 2.5vh 5vh 5px var(--black-color) inset,
+				2px -2.5vh 5vh 5px var(--black-color) inset;
 
-            @media screen and (max-height: 720px) {
-                min-height: 200px;
-                width: 40vw;
-            }
+			@media screen and (max-height: 720px) {
+				min-height: 200px;
+				width: 40vw;
+			}
 
-            @media screen and (max-width: 912px) {
-                min-height: 200px;
-                min-width: 40vw;
-            }
+			@media screen and (max-width: 912px) {
+				min-height: 200px;
+				min-width: 40vw;
+			}
 
-            @media screen and (min-width: 768px) and (orientation: portrait) {
-                min-height: 200px;
-                min-width: 40vw;
-            }
+			@media screen and (min-width: 768px) and (orientation: portrait) {
+				min-height: 200px;
+				min-width: 40vw;
+			}
 
-            p {
-                font-size: 18px;
-            }
-        }
-    }
+			p {
+				font-size: 18px;
+			}
+		}
+	}
 
-    .battle-main,
-    .collection-main,
-    .market-main,
-    .packs-sub,
-    .how-to-play-sub,
-    .news-sub,
-    .contact-sub {
-        position: relative;
-        text-align: center;
-        overflow: hidden;
-        cursor: pointer;
-        filter: grayscale(0.6);
+	.battle-main,
+	.collection-main,
+	.market-main,
+	.packs-sub,
+	.how-to-play-sub,
+	.news-sub,
+	.contact-sub {
+		position: relative;
+		text-align: center;
+		overflow: hidden;
+		cursor: pointer;
+		filter: grayscale(0.6);
 
-        &:hover {
-            box-shadow: 2px 2px 1px 0.5px var(--secondary-color), 2px -2px 1px 0.5px var(--secondary-color),
-                -2px 2px 1px 0.5px var(--secondary-color), -2px -2px 1px 0.5px var(--secondary-color),
-                4px 4px 10px 1px var(--primary-color), 4px -4px 10px 1px var(--primary-color),
-                -4px 4px 10px 1px var(--primary-color), -4px -4px 10px 1px var(--primary-color);
-            scale: 1.01;
-            filter: grayscale(0.1);
-        }
-    }
+		&:hover {
+			box-shadow:
+				2px 2px 1px 0.5px var(--secondary-color),
+				2px -2px 1px 0.5px var(--secondary-color),
+				-2px 2px 1px 0.5px var(--secondary-color),
+				-2px -2px 1px 0.5px var(--secondary-color),
+				4px 4px 10px 1px var(--primary-color),
+				4px -4px 10px 1px var(--primary-color),
+				-4px 4px 10px 1px var(--primary-color),
+				-4px -4px 10px 1px var(--primary-color);
+			scale: 1.01;
+			filter: grayscale(0.1);
+		}
+	}
 
-    h1,
-    h2 {
-        position: absolute;
-        text-align: center;
-    }
+	h1,
+	h2 {
+		position: absolute;
+		text-align: center;
+	}
 
-    h1 {
-        bottom: 3vh;
+	h1 {
+		bottom: 3vh;
 
-        @media screen and (min-width: 1200px) {
-            font-size: 48px;
-        }
-    }
+		@media screen and (min-width: 1200px) {
+			font-size: 48px;
+		}
+	}
 
-    h2 {
-        bottom: 1.5vh;
-    }
+	h2 {
+		bottom: 1.5vh;
+	}
 
-    .battle-main {
-        background: url("../assets/page-images/grid.jpg");
-        background-position: center;
-        background-size: cover;
-    }
+	.battle-main {
+		background: url('../assets/page-images/grid.jpg');
+		background-position: center;
+		background-size: cover;
+	}
 
-    .collection-main {
-        background: url("../assets/page-images/collection.jpg");
-        background-position: center;
-        background-size: cover;
-    }
+	.collection-main {
+		background: url('../assets/page-images/collection.jpg');
+		background-position: center;
+		background-size: cover;
+	}
 
-    .market-main {
-        background: url("../assets/page-images/market.jpg");
-        background-position: center;
-        background-size: cover;
-    }
+	.market-main {
+		background: url('../assets/page-images/market.jpg');
+		background-position: center;
+		background-size: cover;
+	}
 
-    .packs-sub {
-        background: url("../assets/page-images/items.png");
-        background-position: center;
-        background-size: cover;
+	.packs-sub {
+		background: url('../assets/page-images/items.png');
+		background-position: center;
+		background-size: cover;
 
-        .unopened {
-            color: var(--secondary-color);
-            text-shadow: 1px 1px 1px var(--black-color), -1px 1px 1px var(--black-color),
-                1px -1px 1px var(--black-color), -1px -1px 1px var(--black-color);
+		.unopened {
+			color: var(--secondary-color);
+			text-shadow:
+				1px 1px 1px var(--black-color),
+				-1px 1px 1px var(--black-color),
+				1px -1px 1px var(--black-color),
+				-1px -1px 1px var(--black-color);
 
-            span {
-                color: var(--primary-color);
-            }
-        }
+			span {
+				color: var(--primary-color);
+			}
+		}
 
-        .hidden {
-            visibility: hidden;
-        }
-    }
+		.hidden {
+			visibility: hidden;
+		}
+	}
 
-    .how-to-play-sub {
-        background: url("../assets/page-images/howToPlay.png");
-        background-position: center;
-        background-size: cover;
-    }
+	.how-to-play-sub {
+		background: url('../assets/page-images/howToPlay.png');
+		background-position: center;
+		background-size: cover;
+	}
 
-    .contact-sub {
-        background: url("../assets/page-images/contact.jpg");
-        background-position: center;
-        background-size: contain;
-    }
+	.contact-sub {
+		background: url('../assets/page-images/contact.jpg');
+		background-position: center;
+		background-size: contain;
+	}
 
-    .news-sub {
-        pointer-events: none;
-    }
+	.news-sub {
+		pointer-events: none;
+	}
 }

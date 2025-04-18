@@ -7,11 +7,11 @@ import packOdds from './packOdds.png'
 import purchaseButton from './purchaseButton.png'
 
 export {
-    cardValues,
-    checkbox,
-    optimizeDeck,
-    marketMenu,
-    openPack,
-    packOdds,
-    purchaseButton,
+	cardValues,
+	checkbox,
+	optimizeDeck,
+	marketMenu,
+	openPack,
+	packOdds,
+	purchaseButton
 }

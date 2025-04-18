@@ -1,135 +1,135 @@
 .hand {
-    position: absolute;
-    width: auto;
-    display: flex;
-    justify-content: center;
-    scale: 0.6;
-    z-index: 10;
+	position: absolute;
+	width: auto;
+	display: flex;
+	justify-content: center;
+	scale: 0.6;
+	z-index: 10;
 
-    @media screen and (max-width: 600px) {
-        scale: 0.4;
-    }
+	@media screen and (max-width: 600px) {
+		scale: 0.4;
+	}
 
-    $cardCount: 5;
+	$cardCount: 5;
 
-    @for $i from 1 through $cardCount {
-        > .card:nth-child(#{$i}) {
-            animation-delay: $i * 200ms;
-        }
-    }
+	@for $i from 1 through $cardCount {
+		> .card:nth-child(#{$i}) {
+			animation-delay: $i * 200ms;
+		}
+	}
 
-    .card {
-        animation: deal 500ms linear forwards;
-        opacity: 0;
-    }
+	.card {
+		animation: deal 500ms linear forwards;
+		opacity: 0;
+	}
 
-    &:not(.dealing) {
-        .card {
-            animation-play-state: paused;
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
+	&:not(.dealing) {
+		.card {
+			animation-play-state: paused;
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
 }
 
 .p1 {
-    bottom: 0;
-    height: 15vh;
-    padding: 24px 48px;
+	bottom: 0;
+	height: 15vh;
+	padding: 24px 48px;
 
-    @media screen and (max-width: 768px) {
-        height: 17.5vh;
-    }
+	@media screen and (max-width: 768px) {
+		height: 17.5vh;
+	}
 
-    @media screen and (max-width: 600px) {
-        height: 20vh;
-    }
+	@media screen and (max-width: 600px) {
+		height: 20vh;
+	}
 
-    &:hover:not(.collapse) {
-        scale: 1;
-        transform: translateY(-14vh);
+	&:hover:not(.collapse) {
+		scale: 1;
+		transform: translateY(-14vh);
 
-        @media screen and (max-width: 768px) {
-            scale: 0.7;
-            transform: translateY(-8vh);
+		@media screen and (max-width: 768px) {
+			scale: 0.7;
+			transform: translateY(-8vh);
 
-            .card.is-selected {
-                position: absolute;
-                bottom: 5vh;
-                scale: 2;
-            }
-        }
+			.card.is-selected {
+				position: absolute;
+				bottom: 5vh;
+				scale: 2;
+			}
+		}
 
-        @media screen and (max-width: 920px) and (orientation: portrait) {
-            scale: 0.7;
-            transform: translateY(-10vh);
+		@media screen and (max-width: 920px) and (orientation: portrait) {
+			scale: 0.7;
+			transform: translateY(-10vh);
 
-            .card.is-selected {
-                position: absolute;
-                bottom: 5vh;
-                scale: 2;
-            }
-        }
+			.card.is-selected {
+				position: absolute;
+				bottom: 5vh;
+				scale: 2;
+			}
+		}
 
-        @media screen and (max-width: 600px) {
-            scale: 0.4;
-            transform: translateY(0);
+		@media screen and (max-width: 600px) {
+			scale: 0.4;
+			transform: translateY(0);
 
-            .card.is-selected {
-                position: absolute;
-                bottom: 5vh;
-                scale: 2;
-            }
-        }
-    }
+			.card.is-selected {
+				position: absolute;
+				bottom: 5vh;
+				scale: 2;
+			}
+		}
+	}
 
-    &:hover .collapse {
-        scale: 0.6;
-    }
+	&:hover .collapse {
+		scale: 0.6;
+	}
 
-    &.collapse {
-        transform: translateY(0) !important;
-    }
+	&.collapse {
+		transform: translateY(0) !important;
+	}
 
-    .card {
-        margin-top: 12px;
-        cursor: pointer;
-    }
+	.card {
+		margin-top: 12px;
+		cursor: pointer;
+	}
 }
 
 .p2 {
-    top: 0;
-    height: 12vh;
-    display: flex;
-    align-items: flex-end;
-    flex-direction: row-reverse;
-    z-index: 10;
+	top: 0;
+	height: 12vh;
+	display: flex;
+	align-items: flex-end;
+	flex-direction: row-reverse;
+	z-index: 10;
 
-    @media screen and (max-width: 768px) {
-        height: 15vh;
-    }
+	@media screen and (max-width: 768px) {
+		height: 15vh;
+	}
 
-    @media screen and (max-width: 600px) {
-        height: 17.5vh;
-    }
+	@media screen and (max-width: 600px) {
+		height: 17.5vh;
+	}
 
-    .card {
-        rotate: 180deg;
-        pointer-events: none;
-    }
+	.card {
+		rotate: 180deg;
+		pointer-events: none;
+	}
 }
 
 @keyframes deal {
-    0% {
-        transform: translateY(500px);
-        opacity: 1;
-    }
-    80% {
-        transform: translateY(-25px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
+	0% {
+		transform: translateY(500px);
+		opacity: 1;
+	}
+	80% {
+		transform: translateY(-25px);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
 }

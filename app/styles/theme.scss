@@ -1,46 +1,46 @@
 .gold-border {
-    height: 2px;
-    margin: 0;
-    border: 0;
-    background: var(--gold-gradient);
+	height: 2px;
+	margin: 0;
+	border: 0;
+	background: var(--gold-gradient);
 }
 
 .primary-border {
-    border: 2px solid var(--primary-color);
-    border-radius: 4px;
+	border: 2px solid var(--primary-color);
+	border-radius: 4px;
 }
 
 .background-gradient {
-    background: var(--background-color);
-    background: -webkit-linear-gradient(
-        45deg,
-        var(--background-color),
-        var(--background2-color)
-    );
-    background: linear-gradient(
-        45deg,
-        var(--background-color),
-        var(--background2-color)
-    );
+	background: var(--background-color);
+	background: -webkit-linear-gradient(
+		45deg,
+		var(--background-color),
+		var(--background2-color)
+	);
+	background: linear-gradient(
+		45deg,
+		var(--background-color),
+		var(--background2-color)
+	);
 }
 
 .background-gradient-reverse {
-    background: var(--background-color);
-    background: -webkit-linear-gradient(
-        45deg,
-        var(--background2-color),
-        var(--background-color)
-    );
-    background: linear-gradient(
-        45deg,
-        var(--background2-color),
-        var(--background-color)
-    );
+	background: var(--background-color);
+	background: -webkit-linear-gradient(
+		45deg,
+		var(--background2-color),
+		var(--background-color)
+	);
+	background: linear-gradient(
+		45deg,
+		var(--background2-color),
+		var(--background-color)
+	);
 }
 
 .error {
-    margin: -16px 0 8px 0;
-    color: var(--error-color);
-    font-family: 'Open Sans';
-    text-align: center;
+	margin: -16px 0 8px 0;
+	color: var(--error-color);
+	font-family: 'Open Sans';
+	text-align: center;
 }

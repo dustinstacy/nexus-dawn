@@ -1,43 +1,43 @@
 .abs-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .around,
 .around-column {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .between,
 .between-column {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .center,
 .center-column {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .end,
 .end-column {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .start,
 .start-column {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
 
 .around-column,
@@ -45,10 +45,10 @@
 .center-column,
 .end-column,
 .start-column {
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .fill {
-    height: 100%;
-    width: 100%;
+	height: 100%;
+	width: 100%;
 }

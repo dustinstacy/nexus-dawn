@@ -4,13 +4,13 @@ import React from 'react'
 import { describe, it, vi } from 'vitest'
 //import { render, fireEvent } from '@testing-library/react'
 
-import { expect } from "vitest"
+import { expect } from 'vitest'
 
 //import { CheckBox } from '@pages/Collection/components'
 describe('CheckBox', () => {
-    it('should call handleClick function when clicked', () => {
-        expect(1).to.eq(1)
-    })
+	it('should call handleClick function when clicked', () => {
+		expect(1).to.eq(1)
+	})
 })
 
 //describe('CheckBox', () => {

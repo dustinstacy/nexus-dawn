@@ -1,21 +1,21 @@
 .burger-menu {
-    width: 80px;
+	width: 80px;
 
-    @media screen and (min-width: 1080px) {
-        display: none;
-    }
+	@media screen and (min-width: 1080px) {
+		display: none;
+	}
 
-    svg {
-        font-size: 24px;
-        cursor: pointer;
-    }
+	svg {
+		font-size: 24px;
+		cursor: pointer;
+	}
 
-    .menu {
-        position: fixed;
-        top: var(--navbar-height);
-        left: -2px;
-        min-height: calc(100vh - var(--navbar-height));
-        padding-top: 18px;
-        border-right: 2px solid var(--primary2-color);
-    }
+	.menu {
+		position: fixed;
+		top: var(--navbar-height);
+		left: -2px;
+		min-height: calc(100vh - var(--navbar-height));
+		padding-top: 18px;
+		border-right: 2px solid var(--primary2-color);
+	}
 }

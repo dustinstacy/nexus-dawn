@@ -1,18 +1,18 @@
 .forge {
-    min-height: 100vh;
-    flex-direction: row !important;
-    padding-top: var(--navbar-height);
-    background: url("../assets/page-images/forge.jpg");
-    background-size: cover;
-    background-position: top;
+	min-height: 100vh;
+	flex-direction: row !important;
+	padding-top: var(--navbar-height);
+	background: url('../assets/page-images/forge.jpg');
+	background-size: cover;
+	background-position: top;
 
-    &__buttons {
-        gap: 24px;
+	&__buttons {
+		gap: 24px;
 
-        .button {
-            width: 400px;
-            padding: 8px 0;
-            font-size: 24px;
-        }
-    }
+		.button {
+			width: 400px;
+			padding: 8px 0;
+			font-size: 24px;
+		}
+	}
 }

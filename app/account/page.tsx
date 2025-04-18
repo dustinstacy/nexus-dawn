@@ -1,16 +1,16 @@
-"use client"
+'use client'
 
-import { AccountDetails, PromoCode } from "./components"
+import { AccountDetails, PromoCode } from './components'
 
-import "./account.scss"
+import './account.scss'
 
 const Account = () => {
-    return (
-        <div className='account page start-column'>
-            <AccountDetails />
-            <PromoCode />
-        </div>
-    )
+	return (
+		<div className="account page start-column">
+			<AccountDetails />
+			<PromoCode />
+		</div>
+	)
 }
 
 export default Account
