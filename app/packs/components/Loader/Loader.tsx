@@ -20,9 +20,7 @@ const Loader = ({ depth }: Loader) => {
 		)
 
 		// Recursively render the nested squares
-		return (
-			<div className={squareClasses}>{renderSquares(currentDepth - 1)}</div>
-		)
+		return <div className={squareClasses}>{renderSquares(currentDepth - 1)}</div>
 	}
 
 	return (

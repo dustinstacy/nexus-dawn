@@ -52,10 +52,7 @@ const AquaVitae = ({
 		removeModValue(value)
 	}
 
-	const modValueClick = (
-		e: React.MouseEvent<HTMLDivElement>,
-		value: number
-	) => {
+	const modValueClick = (e: React.MouseEvent<HTMLDivElement>, value: number) => {
 		const target = e.target as Element
 		if (chosenValue === null) {
 			target.classList.add('selected')

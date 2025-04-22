@@ -17,15 +17,9 @@ const BattlePreviewModal = () => {
 	const userDeck = useUserStore((state) => state.userDeck)
 	const allCards = useCardsStore((state) => state.allCards)
 	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
-	const setSelectedOpponent = useOpponentsStore(
-		(state) => state.setSelectedOpponent
-	)
-	const selectedOpponentDeck = useOpponentsStore(
-		(state) => state.selectedOpponentDeck
-	)
-	const setSelectedOpponentDeck = useOpponentsStore(
-		(state) => state.setSelectedOpponentDeck
-	)
+	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
+	const selectedOpponentDeck = useOpponentsStore((state) => state.selectedOpponentDeck)
+	const setSelectedOpponentDeck = useOpponentsStore((state) => state.setSelectedOpponentDeck)
 
 	const { deckOdds, cardCount, minPower, maxPower } = selectedOpponent || {}
 
@@ -42,11 +36,7 @@ const BattlePreviewModal = () => {
 			deckOdds as Odds,
 			allCards as Array<ICard>
 		)
-		assignRandomDeckValues(
-			opponentRandomCards,
-			minPower as number,
-			maxPower as number
-		)
+		assignRandomDeckValues(opponentRandomCards, minPower as number, maxPower as number)
 		const currentOpponentDeck = opponentRandomCards.map((card, i) => {
 			return {
 				image: card.image,
@@ -71,9 +61,7 @@ const BattlePreviewModal = () => {
 							className="close-modal"
 							onClick={() => setSelectedOpponent(null)}
 						/>
-						<SelectedOpponent
-							selectedOpponent={selectedOpponent as IOpponent}
-						/>
+						<SelectedOpponent selectedOpponent={selectedOpponent as IOpponent} />
 						<UserDeck selectedOpponent={selectedOpponent!} />
 
 						<Button

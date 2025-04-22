@@ -4,11 +4,7 @@
 	margin-top: 12px;
 	padding: 12px;
 	background: rgb(255, 137, 2);
-	background: radial-gradient(
-		circle,
-		rgba(255, 137, 2, 1) 0%,
-		rgba(255, 230, 2, 0.8) 100%
-	);
+	background: radial-gradient(circle, rgba(255, 137, 2, 1) 0%, rgba(255, 230, 2, 0.8) 100%);
 	border: 4px solid var(--background2-color);
 	border-radius: 4px;
 	box-shadow:

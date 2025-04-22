@@ -4,18 +4,9 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 import { NavBar } from '@components'
-import {
-	useCardsStore,
-	useItemsStore,
-	useOpponentsStore,
-	useUserStore
-} from '@stores'
+import { useCardsStore, useItemsStore, useOpponentsStore, useUserStore } from '@stores'
 
-export default function ClientLayout({
-	children
-}: {
-	children: React.ReactNode
-}) {
+export default function ClientLayout({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname()
 	const user = useUserStore((state) => state.user)
 	const userCards = useUserStore((state) => state.userCards)
@@ -43,11 +34,7 @@ export default function ClientLayout({
 	}, [user])
 
 	useEffect(() => {
-		if (
-			allItems?.length === 0 ||
-			allOpponents?.length === 0 ||
-			allCards?.length === 0
-		) {
+		if (allItems?.length === 0 || allOpponents?.length === 0 || allCards?.length === 0) {
 			fetchCards()
 			fetchItems()
 			fetchOpponents()

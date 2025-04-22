@@ -45,9 +45,7 @@ const Modifiers = ({
 }: Modifiers) => {
 	const allItems = useItemsStore((state) => state.allItems)
 
-	const [selectedCardValues, setSelectedCardValues] = useState([
-		...selectedCard!.values
-	])
+	const [selectedCardValues, setSelectedCardValues] = useState([...selectedCard!.values])
 	const [modCost, setModCost] = useState<ModCost>({
 		aquaType: null,
 		aquaAmount: 1,

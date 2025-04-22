@@ -24,9 +24,7 @@ function ResetPasswordContent() {
 		}
 	}, [searchParams, token, router])
 
-	const handleSubmit = async (
-		e: React.MouseEvent | React.KeyboardEvent<HTMLFormElement>
-	) => {
+	const handleSubmit = async (e: React.MouseEvent | React.KeyboardEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		if (!token) {

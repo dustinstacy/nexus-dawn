@@ -23,8 +23,7 @@ const AquaFortisSuperior = ({
 		selectedCard!.values.reduce((total, current) => total + current)
 	)
 
-	const selectedCardMaxSingleValue =
-		maxValues[selectedCard!.rarity as keyof typeof maxValues]
+	const selectedCardMaxSingleValue = maxValues[selectedCard!.rarity as keyof typeof maxValues]
 
 	const updatedCardValues = [...selectedCardValues]
 	let updatedModValue = modValue
@@ -56,9 +55,7 @@ const AquaFortisSuperior = ({
 	}
 
 	const reset = () => {
-		setModValue(
-			selectedCard!.values.reduce((total, current) => total + current)
-		)
+		setModValue(selectedCard!.values.reduce((total, current) => total + current))
 		setSelectedCardValues(Array(4).fill(0))
 	}
 
@@ -87,9 +84,7 @@ const AquaFortisSuperior = ({
 						<div
 							key={value + i * 10}
 							className={`value-${i} box center ${
-								modValue !== 0 &&
-								value === selectedCardMaxSingleValue &&
-								'disabled'
+								modValue !== 0 && value === selectedCardMaxSingleValue && 'disabled'
 							}`}
 							onClick={() => cardValueClick(value, i)}
 						>

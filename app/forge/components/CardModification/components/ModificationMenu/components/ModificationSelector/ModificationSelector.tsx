@@ -21,14 +21,9 @@ const ModificationSelector = ({
 		.filter((item) => item.type === 'modifier')
 		.sort((a, b) => a.level - b.level)
 	const uniqueUserModifiers = uniqueItemsFilter(userModifiers as Array<IItem>)
-	const modificationOptions = [
-		'-',
-		...uniqueUserModifiers.map((modifier) => modifier.name)
-	]
+	const modificationOptions = ['-', ...uniqueUserModifiers.map((modifier) => modifier.name)]
 
-	const currentModificationItem = allItems.find(
-		(item) => item.name === selectedModification
-	)
+	const currentModificationItem = allItems.find((item) => item.name === selectedModification)
 
 	return (
 		<div className="mod-select box">

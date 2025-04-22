@@ -25,12 +25,9 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 
 	const noPacksMessage = 'Head to the MaRKet to buy more packs'
 	// Filtering user's inventory to get only packs and sorting them by level in descending order
-	const userPacks =
-		user?.inventory.filter((item) => item?.type === 'pack') || []
+	const userPacks = user?.inventory.filter((item) => item?.type === 'pack') || []
 	// Removing duplicates from userPacks and sorting them by level in descending order
-	const uniquePacks = uniqueItemsFilter(userPacks).sort(
-		(a, b) => b.level - a.level
-	)
+	const uniquePacks = uniqueItemsFilter(userPacks).sort((a, b) => b.level - a.level)
 
 	const openCurrentPack = async () => {
 		setIsLoading(true)

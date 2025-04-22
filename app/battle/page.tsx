@@ -23,9 +23,7 @@ const Battle = () => {
 	const userDeck = useUserStore((state) => state.userDeck)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
-	const selectedOpponentDeck = useOpponentsStore(
-		(state) => state.selectedOpponentDeck
-	)
+	const selectedOpponentDeck = useOpponentsStore((state) => state.selectedOpponentDeck)
 
 	// Initialize Player One state
 	const [playerOne, setPlayerOne] = useState<UserDetails>({
@@ -64,9 +62,7 @@ const Battle = () => {
 	const [alertActive, setAlertActive] = useState(false)
 	const [cardDragged, setCardDragged] = useState<ICard | null>(null)
 	const [cardSelected, setCardSelected] = useState<ICard | null>(null)
-	const [currentBattleNumber, setCurrentBattleNumber] = useState<number | null>(
-		null
-	)
+	const [currentBattleNumber, setCurrentBattleNumber] = useState<number | null>(null)
 
 	// Destructure Battle State
 	const {
@@ -180,12 +176,9 @@ const Battle = () => {
 	useEffect(() => {
 		if (handsDealt === true && battleStarted === false) {
 			updateState(setBattleState, {
-				roundResults: Array.from(
-					{ length: selectedOpponent!.rounds },
-					(_, index) => {
-						return { round: index + 1, p1Score: '', p2Score: '' }
-					}
-				)
+				roundResults: Array.from({ length: selectedOpponent!.rounds }, (_, index) => {
+					return { round: index + 1, p1Score: '', p2Score: '' }
+				})
 			})
 			randomFirstTurn()
 		}
@@ -212,8 +205,7 @@ const Battle = () => {
 	}, [battleStarted])
 
 	const saveStateToLocalStorage = () => {
-		const battleLog =
-			JSON.parse(localStorage.getItem('battleLog') as string) || []
+		const battleLog = JSON.parse(localStorage.getItem('battleLog') as string) || []
 
 		const playerOneData = {
 			user: playerOne?.user?.username,
@@ -251,11 +243,7 @@ const Battle = () => {
 	}, [isP1Turn, roundStarted, playerTwo.hand])
 
 	const cpuTurn = () => {
-		const { move, newBoard, newHand } = cpuMove(
-			playerTwo.hand,
-			battleState.board,
-			emptyCells
-		)
+		const { move, newBoard, newHand } = cpuMove(playerTwo.hand, battleState.board, emptyCells)
 		battleProcessor(move.cell, move.card, battleState)
 		updateState(setPlayerTwo, { hand: newHand })
 		updateState(setBattleState, { board: newBoard })
@@ -335,10 +323,8 @@ const Battle = () => {
 	const checkForBattleEnd = () => {
 		if (
 			round === selectedOpponent!.rounds ||
-			playerOne.battleScore >
-				playerTwo.battleScore + (selectedOpponent!.rounds - round) * 9 ||
-			playerTwo.battleScore >
-				playerOne.battleScore + (selectedOpponent!.rounds - round) * 9
+			playerOne.battleScore > playerTwo.battleScore + (selectedOpponent!.rounds - round) * 9 ||
+			playerTwo.battleScore > playerOne.battleScore + (selectedOpponent!.rounds - round) * 9
 		) {
 			updateState(setBattleState, { battleOver: true })
 		} else {

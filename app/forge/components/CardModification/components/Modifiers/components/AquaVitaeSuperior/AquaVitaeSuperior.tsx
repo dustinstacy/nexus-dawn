@@ -18,9 +18,7 @@ const AquaVitaeSuperior = ({
 	setSelectedCardValues,
 	setModificationInProgress
 }: AquaVitaeSuperior) => {
-	const [modValues, setModValues] = useState<Array<number | string>>([
-		...selectedCardValues
-	])
+	const [modValues, setModValues] = useState<Array<number | string>>([...selectedCardValues])
 	const [chosenValue, setChosenValue] = useState<number | null>(null)
 
 	const updatedCardValues = [...selectedCardValues]
@@ -59,10 +57,7 @@ const AquaVitaeSuperior = ({
 		removeSelectedClass()
 	}
 
-	const modValueClick = (
-		e: React.MouseEvent<HTMLDivElement>,
-		value: number
-	) => {
+	const modValueClick = (e: React.MouseEvent<HTMLDivElement>, value: number) => {
 		const target = e.target as Element
 		if (chosenValue === null) {
 			target.classList.add('selected')

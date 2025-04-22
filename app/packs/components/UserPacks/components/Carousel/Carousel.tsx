@@ -14,22 +14,13 @@ interface Carousel {
 }
 
 // Carousel component that displays a set of items with slide navigation
-const Carousel = ({
-	uniqueItems,
-	allItems,
-	setCurrentItem,
-	emptyMessage,
-	children
-}: Carousel) => {
+const Carousel = ({ uniqueItems, allItems, setCurrentItem, emptyMessage, children }: Carousel) => {
 	const [currentItemIndex, setCurrentItemIndex] = useState(0)
 	const [slideDirection, setSlideDirection] = useState('')
 
 	// Extract the current, previous, and next items based on the current item index
 	const current = uniqueItems[currentItemIndex]
-	const previous =
-		uniqueItems[
-			(currentItemIndex + uniqueItems.length - 1) % uniqueItems.length
-		]
+	const previous = uniqueItems[(currentItemIndex + uniqueItems.length - 1) % uniqueItems.length]
 	const next = uniqueItems[(currentItemIndex + 1) % uniqueItems.length]
 
 	// Array of carousel positions with corresponding item data

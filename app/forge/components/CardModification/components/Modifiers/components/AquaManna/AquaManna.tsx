@@ -11,11 +11,7 @@ interface AquaManna {
 	selectedCardValues: Array<number>
 }
 
-const AquaManna = ({
-	selectedCard,
-	selectedCardValues,
-	setModificationInProgress
-}: AquaManna) => {
+const AquaManna = ({ selectedCard, selectedCardValues, setModificationInProgress }: AquaManna) => {
 	const updatedCardValues = [...selectedCardValues]
 
 	return (

@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import {
-	addCoin,
-	addExperience,
-	addItemToInventory,
-	updateUserStats
-} from '@api'
+import { addCoin, addExperience, addItemToInventory, updateUserStats } from '@api'
 import { IItem } from '@interfaces'
 import { useItemsStore, useUserStore } from '@stores'
 
@@ -31,13 +26,11 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 	const opponent = playerTwo.user
 
 	const coinReward = Math.floor(
-		opponent.rewards.coin *
-			((playerOne.battleScore - playerTwo.battleScore) / 2 + 1)
+		opponent.rewards.coin * ((playerOne.battleScore - playerTwo.battleScore) / 2 + 1)
 	)
 
 	const xpReward = Math.floor(
-		opponent.rewards.xp *
-			((playerOne.battleScore - playerTwo.battleScore) / 2 + 1)
+		opponent.rewards.xp * ((playerOne.battleScore - playerTwo.battleScore) / 2 + 1)
 	)
 
 	useEffect(() => {
@@ -62,10 +55,7 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 		await updateUserStats(user, resultType)
 		const randomRewardChance = Math.random()
 
-		if (
-			resultType === 'win' &&
-			randomRewardChance < opponent.rewards.items[0].chance / 100
-		) {
+		if (resultType === 'win' && randomRewardChance < opponent.rewards.items[0].chance / 100) {
 			const rewardItem = allItems.filter((item) =>
 				opponent.rewards.items[0].name.includes(item.name)
 			)

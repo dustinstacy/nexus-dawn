@@ -52,9 +52,7 @@ const Board = ({
 		if (cardDragged) {
 			const updatedBoard = [...board]
 			const updatedHand = [...playerOne.hand]
-			const card = playerOne.hand.find(
-				(card: ICard) => card._id === cardDragged._id
-			)
+			const card = playerOne.hand.find((card: ICard) => card._id === cardDragged._id)
 			if (card) {
 				const cardIndex = updatedHand.indexOf(card)
 				updatedHand.splice(cardIndex, 1)
@@ -78,9 +76,7 @@ const Board = ({
 		if (cardSelected) {
 			const updatedBoard = [...board]
 			const updatedHand = [...playerOne.hand]
-			const card = playerOne.hand.find(
-				(card: ICard) => card._id === cardSelected._id
-			)
+			const card = playerOne.hand.find((card: ICard) => card._id === cardSelected._id)
 			if (card) {
 				const cardIndex = updatedHand.indexOf(card)
 				updatedHand.splice(cardIndex, 1)

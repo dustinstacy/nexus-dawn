@@ -9,10 +9,7 @@ interface CardListContainer {
 	setSelectedCard: React.Dispatch<React.SetStateAction<ICard | null>>
 }
 
-const CardListContainer = ({
-	setCardSelectOpen,
-	setSelectedCard
-}: CardListContainer) => {
+const CardListContainer = ({ setCardSelectOpen, setSelectedCard }: CardListContainer) => {
 	const userCards = useUserStore((state) => state.userCards)
 
 	const sortedCards = userCards.sort(

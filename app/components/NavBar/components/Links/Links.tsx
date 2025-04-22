@@ -24,9 +24,7 @@ const Links = ({ menu, onClick }: LinksProps) => {
 		classSet(
 			`${menu}-link`,
 			'center',
-			(!user && !publicLinks.includes(linkPath)) || (stage as number) <= 5 ?
-				'disabled'
-			:	''
+			(!user && !publicLinks.includes(linkPath)) || (stage as number) <= 5 ? 'disabled' : ''
 		)
 
 	return (

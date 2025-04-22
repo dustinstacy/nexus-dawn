@@ -27,9 +27,7 @@ const CoinReward = ({ coinReward }: CoinRewardProps) => {
 					const currentTime = Date.now()
 					const elapsed = currentTime - startTime
 					const progress = Math.min(elapsed / duration, 1)
-					const updatedCoin = Math.round(
-						displayCoin + (targetCoin - displayCoin) * progress
-					)
+					const updatedCoin = Math.round(displayCoin + (targetCoin - displayCoin) * progress)
 
 					setDisplayCoin(updatedCoin)
 

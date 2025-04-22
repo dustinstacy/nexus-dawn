@@ -42,15 +42,10 @@ const CostDisplay = ({
 	).length
 
 	const completeMod = async () => {
-		await updateCardValues(
-			selectedCard as ICard,
-			selectedCardValues as CardValues
-		)
+		await updateCardValues(selectedCard as ICard, selectedCardValues as CardValues)
 		await removeItemFromInventory(user as User, modCost.aquaType as IItem)
 		await removeItemFromInventory(user as User, modCost.fluxType as IItem)
-		setSelectedCard(
-			userCards.find((card) => card._id === selectedCard?._id) as ICard
-		)
+		setSelectedCard(userCards.find((card) => card._id === selectedCard?._id) as ICard)
 		fetchUserCards()
 		fetchUserData('inventory')
 		setModificationComplete(true)
@@ -77,8 +72,7 @@ const CostDisplay = ({
 					/>
 					<div
 						className={`cost center ${
-							(userFluxTypeCount as number) < modCost.fluxAmount &&
-							'insufficient'
+							(userFluxTypeCount as number) < modCost.fluxAmount && 'insufficient'
 						}`}
 					>
 						<span>{userFluxTypeCount}</span>
@@ -91,9 +85,7 @@ const CostDisplay = ({
 				label="Complete Modification"
 				onClick={() => completeMod()}
 				disabled={
-					selectedCard?.values.every(
-						(value, index) => value === selectedCardValues[index]
-					) ||
+					selectedCard?.values.every((value, index) => value === selectedCardValues[index]) ||
 					selectedCardValues.includes('') ||
 					(userFluxTypeCount as number) < modCost.fluxAmount
 				}

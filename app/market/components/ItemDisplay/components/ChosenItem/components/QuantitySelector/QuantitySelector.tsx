@@ -12,11 +12,7 @@ interface QuantitySelector {
 }
 
 // Renders quantity options, passes and displays applicable discount
-const QuantitySelector = ({
-	chosenItem,
-	chosenQuantity,
-	setChosenQuantity
-}: QuantitySelector) => {
+const QuantitySelector = ({ chosenItem, chosenQuantity, setChosenQuantity }: QuantitySelector) => {
 	// An array of quantity options, each containing an amount and a discount
 	const quantityOptions = [
 		{ amount: 1, discount: '0' },
@@ -34,10 +30,7 @@ const QuantitySelector = ({
 	}
 
 	const quantityButtonClasses = (quantity: ChosenQuantity) =>
-		classSet(
-			'quantity-button',
-			chosenQuantity?.amount === quantity?.amount ? 'chosen' : ''
-		)
+		classSet('quantity-button', chosenQuantity?.amount === quantity?.amount ? 'chosen' : '')
 
 	return (
 		<div className="quantity-selector center-column">
@@ -55,9 +48,7 @@ const QuantitySelector = ({
 			</div>
 
 			<div className="discount">
-				{chosenQuantity?.discount !== '0' ?
-					chosenQuantity?.discount + ' Discount'
-				:	''}
+				{chosenQuantity?.discount !== '0' ? chosenQuantity?.discount + ' Discount' : ''}
 			</div>
 		</div>
 	)

@@ -15,9 +15,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
 
 	const roundsDisplay = ' Round' + (rounds > 1 ? 's' : '')
 
-	const rewardItems = allItems.filter((item) =>
-		rewards.items[0].name.includes(item.name)
-	)
+	const rewardItems = allItems.filter((item) => rewards.items[0].name.includes(item.name))
 
 	return (
 		<div className="selected-opponent fill">

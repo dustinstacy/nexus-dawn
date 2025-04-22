@@ -27,9 +27,7 @@ const CompletionReward = ({ nextStage }: NextStage) => {
 			<div className="completion stage around-column">
 				<div className="header-wrapper">
 					<h1 className="header">
-						{step === 1 ?
-							onboardingStages[5].header[0]
-						:	onboardingStages[5].header[1]}
+						{step === 1 ? onboardingStages[5].header[0] : onboardingStages[5].header[1]}
 						<img
 							className="logo abs-center"
 							src={smlogo.src}

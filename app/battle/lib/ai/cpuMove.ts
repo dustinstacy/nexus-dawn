@@ -1,10 +1,6 @@
 import { ICard } from '@interfaces'
 
-const cpuMove = (
-	hand: Array<ICard | null>,
-	board: Array<any>,
-	emptyCells: Array<any>
-) => {
+const cpuMove = (hand: Array<ICard | null>, board: Array<any>, emptyCells: Array<any>) => {
 	const newBoard = board
 	const newHand = hand
 	let bestScore = -Infinity
@@ -79,9 +75,7 @@ const cpuMove = (
 		})
 	})
 	newBoard.splice(move.cell, 1, move.card)
-	const cardIndex = newHand.findIndex(
-		(handCard) => handCard!._id === move.card._id
-	)
+	const cardIndex = newHand.findIndex((handCard) => handCard!._id === move.card._id)
 	if (cardIndex !== -1) {
 		newHand.splice(cardIndex, 1)
 	}

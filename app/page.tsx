@@ -18,12 +18,7 @@ export default function Home() {
 	const stage = user?.onboardingStage ?? {}
 
 	const linkClasses = (className: string, type: string) =>
-		classSet(
-			`${className}-${type}`,
-			'panel',
-			'start-column',
-			!user ? 'disabled' : ''
-		)
+		classSet(`${className}-${type}`, 'panel', 'start-column', !user ? 'disabled' : '')
 
 	return (
 		<ClientLayout>

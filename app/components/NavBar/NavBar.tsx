@@ -23,10 +23,7 @@ const NavBar = ({ login }: NavBarProps) => {
 
 	const stage = user?.onboardingStage ?? {}
 
-	const logoClasses = classSet(
-		'navbar__logo',
-		(stage as number) <= 5 ? 'disabled' : ''
-	)
+	const logoClasses = classSet('navbar__logo', (stage as number) <= 5 ? 'disabled' : '')
 
 	return (
 		<div className="navbar between background-gradient">

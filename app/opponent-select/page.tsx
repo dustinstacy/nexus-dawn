@@ -16,9 +16,7 @@ const OpponentSelect = () => {
 	const user = useUserStore((state) => state.user)
 	const allOpponents = useOpponentsStore((state) => state.allOpponents)
 	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
-	const setSelectedOpponent = useOpponentsStore(
-		(state) => state.setSelectedOpponent
-	)
+	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
 	const [alertActive, setAlertActive] = useState(false)
 
 	const sortedOpponents = allOpponents.sort((a, b) => a.level - b.level)

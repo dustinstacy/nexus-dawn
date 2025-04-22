@@ -22,8 +22,7 @@ const DeckBar = () => {
 	const [isUpToDate, setIsUpToDate] = useState(false)
 	const [userDeckPower, setUserDeckPower] = useState<number>(0)
 	const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
-	const [userOptimizedDeckPower, setUserOptimizedDeckPower] =
-		useState<number>(0)
+	const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -71,11 +70,7 @@ const DeckBar = () => {
 		setFillDeckLoading(true)
 		updateOptimizedDeckState()
 		userDeck.forEach((card) => {
-			if (
-				!userOptimizedDeck.some(
-					(optimizedCard) => optimizedCard._id === card._id
-				)
-			) {
+			if (!userOptimizedDeck.some((optimizedCard) => optimizedCard._id === card._id)) {
 				removeCardFromDeck(card)
 			}
 		})
@@ -155,9 +150,7 @@ const DeckBar = () => {
 						onClick={autoBuild}
 						label={fillDeckLabel as string}
 						disabled={
-							userDeckPower == userOptimizedDeckPower ||
-							fillDeckLoading ||
-							clearDeckLoading
+							userDeckPower == userOptimizedDeckPower || fillDeckLoading || clearDeckLoading
 						}
 					/>
 				</div>

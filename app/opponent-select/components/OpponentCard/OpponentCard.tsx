@@ -13,11 +13,7 @@ interface OpponentCardProps {
 }
 
 // Renders a selectable opponent card with an image and name display.
-const OpponentCard = ({
-	opponent,
-	selectedOpponent,
-	setSelectedOpponent
-}: OpponentCardProps) => {
+const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: OpponentCardProps) => {
 	const user = useUserStore((state) => state.user)
 	const { avatar, level, name } = opponent
 

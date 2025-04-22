@@ -12,12 +12,8 @@ interface BattleResultsButtonsProps {
 }
 
 const BattleResultsButtons = ({ loading }: BattleResultsButtonsProps) => {
-	const setSelectedOpponent = useOpponentsStore(
-		(state) => state.setSelectedOpponent
-	)
-	const setSelectedOpponentDeck = useOpponentsStore(
-		(state) => state.setSelectedOpponentDeck
-	)
+	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
+	const setSelectedOpponentDeck = useOpponentsStore((state) => state.setSelectedOpponentDeck)
 	const router = useRouter()
 
 	const handleClick = async () => {

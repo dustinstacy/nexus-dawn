@@ -8,16 +8,11 @@ export const sortByCardNumber = (array: Array<ICard>) => {
 }
 
 export const sortByCardsInDeck = (cards: Array<ICard>, deck: Array<ICard>) => {
-	const sortedCards = cards
-		.filter((card) => deck.find(({ _id }) => card._id === _id))
-		.sort(ordered)
+	const sortedCards = cards.filter((card) => deck.find(({ _id }) => card._id === _id)).sort(ordered)
 	return sortedCards
 }
 
-export const sortByCardsNotInDeck = (
-	cards: Array<ICard>,
-	deck: Array<ICard>
-) => {
+export const sortByCardsNotInDeck = (cards: Array<ICard>, deck: Array<ICard>) => {
 	const sortedCards = cards
 		.filter((card) => !deck.find(({ _id }) => card._id === _id))
 		.sort(ordered)

@@ -59,9 +59,7 @@ export const assignRandomCardValues = (card: ICard): CardValues => {
 		// be adjusted to reach desired sum
 		const scale = sumOfValues / sum
 		// Scale each value proportionally without exceeding the maxSingleValue
-		values = values.map((value) =>
-			Math.min(maxSingleValue, Math.round(value * scale))
-		)
+		values = values.map((value) => Math.min(maxSingleValue, Math.round(value * scale)))
 
 		// Recalculate the sum to ensure sumOfValues is met
 		sum = values.reduce((sum, value) => sum + value, 0)
@@ -111,9 +109,7 @@ export const assignRandomDeckValues = (
 		// Adjust the values based on the scale to bring total within closer
 		// range of the desired outcome
 		deck.forEach((card) => {
-			card.values = card.values.map((value) =>
-				Math.round(value * scale)
-			) as CardValues
+			card.values = card.values.map((value) => Math.round(value * scale)) as CardValues
 		})
 
 		// Calculate the final sum of all card values in the deck
@@ -135,11 +131,7 @@ export const assignRandomDeckValues = (
 // odds: Object containing rarity names as keys and their corresponding
 // probabilities in float value (i.e. 83.1 = 83.1%)
 // cardSet: Array of cards from which random cards will be selected
-export const getRandomCards = (
-	nCards: number,
-	odds: Odds,
-	cardSet: Array<ICard>
-): Array<ICard> => {
+export const getRandomCards = (nCards: number, odds: Odds, cardSet: Array<ICard>): Array<ICard> => {
 	const randomCardsArray = [...new Array(nCards)]
 	for (let i = 0; i < randomCardsArray.length; i++) {
 		// Get random rarity based on odds
@@ -147,8 +139,7 @@ export const getRandomCards = (
 		// Filter card set to obtain cards with current rarity
 		const currentRarityCards = cardSet.filter((card) => card.rarity === rarity)
 		// Selected a random card from the filtered card set
-		const randomCard =
-			currentRarityCards[Math.floor(Math.random() * currentRarityCards.length)]
+		const randomCard = currentRarityCards[Math.floor(Math.random() * currentRarityCards.length)]
 
 		randomCardsArray[i] = randomCard
 	}

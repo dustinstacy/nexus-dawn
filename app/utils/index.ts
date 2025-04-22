@@ -30,8 +30,7 @@ export const createCardData = (card: ICard): CardData => {
 export const calculateDeckPower = (array: Array<ICard>): number => {
 	const power = array.reduce(
 		(total: number, card: ICard) =>
-			total +
-			card.values.reduce((sum: number, current: number) => sum + current, 0),
+			total + card.values.reduce((sum: number, current: number) => sum + current, 0),
 		0
 	)
 
@@ -39,10 +38,7 @@ export const calculateDeckPower = (array: Array<ICard>): number => {
 }
 
 // Calculate the sum of all card values within an array
-export const calculateOptimizedDeck = (
-	userCards: Array<ICard>,
-	count: string
-): Array<ICard> => {
+export const calculateOptimizedDeck = (userCards: Array<ICard>, count: string): Array<ICard> => {
 	const sortedArray = userCards.sort(
 		(a, b) =>
 			b.values.reduce((sum: number, current: number) => sum + current, 0) -
@@ -57,10 +53,7 @@ export const calculateOptimizedDeck = (
 // array: The array from which the object will be removed
 // property: The property name used for comparison to find the object
 // value: The value of the property to match and remove the corresponding object
-export const removeObjectByValue = (
-	userInventory: Array<IItem>,
-	value: string
-) => {
+export const removeObjectByValue = (userInventory: Array<IItem>, value: string) => {
 	const index = userInventory.findIndex((obj) => obj['name'] === value)
 	if (index !== -1) {
 		userInventory.splice(index, 1)
@@ -70,9 +63,7 @@ export const removeObjectByValue = (
 }
 
 // Filters out all duplicates inside an array, returns only one instance of each unique value
-export const uniqueItemsFilter = (
-	userInventory: Array<IItem>
-): Array<IItem> => {
+export const uniqueItemsFilter = (userInventory: Array<IItem>): Array<IItem> => {
 	return userInventory.reduce((uniqueItems: Array<IItem>, currentItem) => {
 		const foundItem = uniqueItems.find(
 			(item) => item.name === currentItem.name && item.type === currentItem.type

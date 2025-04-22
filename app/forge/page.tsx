@@ -25,9 +25,7 @@ const Forge = () => {
 					/>
 				</div>
 			)}
-			{cardModification && (
-				<CardModification setCardModification={setCardModification} />
-			)}
+			{cardModification && <CardModification setCardModification={setCardModification} />}
 			{fluxFusion && <FluxFusion setFluxFusion={setFluxFusion} />}
 		</div>
 	)

@@ -15,11 +15,7 @@ interface ChosenItem {
 // chosenItem: Item currently chosen from market items
 // chosenQuanityt: Quantity currently chosen
 // setChosenQuantity: Function to update state of quantity chosen
-const ChosenItem = ({
-	chosenItem,
-	chosenQuantity,
-	setChosenQuantity
-}: ChosenItem) => {
+const ChosenItem = ({ chosenItem, chosenQuantity, setChosenQuantity }: ChosenItem) => {
 	return (
 		<div className="chosen-item panel between-column">
 			<ItemInformation chosenItem={chosenItem as IItem} />

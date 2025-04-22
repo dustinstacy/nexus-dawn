@@ -20,8 +20,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 	const [userDeckPower, setUserDeckPower] = useState<number>(0)
 	const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
-	const [userOptimizedDeckPower, setUserOptimizedDeckPower] =
-		useState<number>(0)
+	const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
 	const [isUpToDate, setIsUpToDate] = useState(false)
 
 	useEffect(() => {
@@ -64,11 +63,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 	const optimizeDeck = async () => {
 		updateOptimizedDeckState()
 		userDeck.forEach((card) => {
-			if (
-				!userOptimizedDeck.some(
-					(optimizedCard) => optimizedCard._id === card._id
-				)
-			) {
+			if (!userOptimizedDeck.some((optimizedCard) => optimizedCard._id === card._id)) {
 				removeCardFromDeck(card)
 			}
 		})
@@ -80,9 +75,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 		await fetchUserCards()
 		await fetchUserDeck()
 	}
-	const countColor = classSet(
-		userDeck?.length === selectedOpponent.cardCount ? 'valid' : 'invalid'
-	)
+	const countColor = classSet(userDeck?.length === selectedOpponent.cardCount ? 'valid' : 'invalid')
 
 	return (
 		<div className="user-deck start-column">

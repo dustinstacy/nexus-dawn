@@ -29,9 +29,7 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 		const removeItemPromises = []
 
 		for (let i = 0; i < 10; i++) {
-			removeItemPromises.push(
-				removeItemFromInventory(user as User, startingFlux)
-			)
+			removeItemPromises.push(removeItemFromInventory(user as User, startingFlux))
 		}
 		await Promise.all(removeItemPromises)
 		await addItemToInventory(user as User, fusedFlux)
@@ -53,24 +51,17 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 							/>
 							<div
 								className={`count center ${
-									inventory.filter((item) => item.name === starting.name)
-										.length < 10 && 'insufficient'
+									inventory.filter((item) => item.name === starting.name).length < 10 &&
+									'insufficient'
 								}`}
 							>
 								<p>X</p>
-								<span>
-									{
-										user?.inventory.filter(
-											(item) => item.name === starting.name
-										).length
-									}
-								</span>
+								<span>{user?.inventory.filter((item) => item.name === starting.name).length}</span>
 							</div>
 						</div>
 						<TbArrowBigRightLines
 							className={`flux-arrow ${
-								inventory.filter((item) => item.name === starting.name).length <
-									10 && 'disabled'
+								inventory.filter((item) => item.name === starting.name).length < 10 && 'disabled'
 							}`}
 							onClick={() => fuseFlux(starting, fusedFlux[index])}
 						/>
@@ -82,11 +73,7 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 							<div className="count center">
 								<p>X</p>
 								<span>
-									{
-										user?.inventory.filter(
-											(item) => item.name === fusedFlux[index].name
-										).length
-									}
+									{user?.inventory.filter((item) => item.name === fusedFlux[index].name).length}
 								</span>
 							</div>
 						</div>

@@ -35,11 +35,7 @@ const rules = {
  * @param {object} card - the active card
  * @param {object} battleState - the current state of the board and battle
  */
-const battleProcessor = (
-	index: number,
-	card: ICard,
-	battleState: BattleState
-) => {
+const battleProcessor = (index: number, card: ICard, battleState: BattleState) => {
 	const { board } = battleState
 	const { color, values } = card
 	const up = board[index - 3]

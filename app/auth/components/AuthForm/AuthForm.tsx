@@ -48,9 +48,7 @@ const AuthForm = ({ register }: Register) => {
 		setFormData({ ...formData, [name]: value })
 	}
 
-	const handleSubmit = async (
-		e: React.MouseEvent | React.KeyboardEvent<HTMLFormElement>
-	) => {
+	const handleSubmit = async (e: React.MouseEvent | React.KeyboardEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		setLoading(true)
 

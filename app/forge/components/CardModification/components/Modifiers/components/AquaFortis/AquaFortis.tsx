@@ -22,8 +22,7 @@ const AquaFortis = ({
 	const [modValue, setModValue] = useState(0)
 	const [cardModified, setCardModified] = useState(false)
 
-	const selectedCardMaxSingleValue =
-		maxValues[selectedCard?.rarity as keyof typeof maxValues]
+	const selectedCardMaxSingleValue = maxValues[selectedCard?.rarity as keyof typeof maxValues]
 
 	const updatedCardValues = [...selectedCardValues]
 	let updatedModValue = modValue
@@ -48,11 +47,7 @@ const AquaFortis = ({
 		updatedModValue -= 1
 		setSelectedCardValues(updatedCardValues)
 		setModValue(updatedModValue)
-		if (
-			!selectedCard?.values.every(
-				(value, index) => value === updatedCardValues[index]
-			)
-		) {
+		if (!selectedCard?.values.every((value, index) => value === updatedCardValues[index])) {
 			setCardModified(true)
 		}
 	}
@@ -67,9 +62,7 @@ const AquaFortis = ({
 		<div className="fortis center fill">
 			<div className="start-column">
 				<div className="mod-bar center">
-					<div className={`value box center ${cardModified && 'disabled'}`}>
-						{modValue}
-					</div>
+					<div className={`value box center ${cardModified && 'disabled'}`}>{modValue}</div>
 				</div>
 				<div className="mod-panel center">
 					<AiOutlineCloseCircle
@@ -90,9 +83,7 @@ const AquaFortis = ({
 						<div
 							key={value + i * 10}
 							className={`value-${i} box center ${
-								modValue !== 0 &&
-								value === selectedCardMaxSingleValue &&
-								'disabled'
+								modValue !== 0 && value === selectedCardMaxSingleValue && 'disabled'
 							} ${cardModified && 'disabled'}`}
 							onClick={() => cardValueClick(value, i)}
 						>

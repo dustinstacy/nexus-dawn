@@ -35,10 +35,7 @@ const PurchaseBar = ({
 	const [loading, setLoading] = useState(false)
 
 	// Create an array representing the final purchase based on the chosen item and quantity
-	const finalPurchase = Array.from(
-		{ length: chosenQuantity?.amount },
-		() => chosenItem
-	)
+	const finalPurchase = Array.from({ length: chosenQuantity?.amount }, () => chosenItem)
 
 	// Check if the user has enough coins to make the purchase
 	const canPurchase = finalPrice <= (coin || 0)

@@ -12,30 +12,14 @@
 
 .background-gradient {
 	background: var(--background-color);
-	background: -webkit-linear-gradient(
-		45deg,
-		var(--background-color),
-		var(--background2-color)
-	);
-	background: linear-gradient(
-		45deg,
-		var(--background-color),
-		var(--background2-color)
-	);
+	background: -webkit-linear-gradient(45deg, var(--background-color), var(--background2-color));
+	background: linear-gradient(45deg, var(--background-color), var(--background2-color));
 }
 
 .background-gradient-reverse {
 	background: var(--background-color);
-	background: -webkit-linear-gradient(
-		45deg,
-		var(--background2-color),
-		var(--background-color)
-	);
-	background: linear-gradient(
-		45deg,
-		var(--background2-color),
-		var(--background-color)
-	);
+	background: -webkit-linear-gradient(45deg, var(--background2-color), var(--background-color));
+	background: linear-gradient(45deg, var(--background2-color), var(--background-color));
 }
 
 .error {

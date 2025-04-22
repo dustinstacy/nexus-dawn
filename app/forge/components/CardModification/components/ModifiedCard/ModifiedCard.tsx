@@ -12,11 +12,7 @@ interface ModifiedCard {
 	setModificationComplete: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const ModifiedCard = ({
-	selectedCard,
-	setModificationComplete,
-	setSelectedCard
-}: ModifiedCard) => {
+const ModifiedCard = ({ selectedCard, setModificationComplete, setSelectedCard }: ModifiedCard) => {
 	const userCards = useUserStore((state) => state.userCards)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 
@@ -28,9 +24,7 @@ const ModifiedCard = ({
 
 	const updateSelectedCard = async () => {
 		fetchUserCards()
-		const updatedSelectedCard = userCards.find(
-			(card) => card._id === selectedCard?._id
-		)
+		const updatedSelectedCard = userCards.find((card) => card._id === selectedCard?._id)
 		setUpdatedCard(updatedSelectedCard ?? null)
 		setSelectedCard?.(null)
 	}

@@ -7,17 +7,11 @@ interface AuthResponse {
 }
 
 // Sends a request to the appropriate endpoint based on the value of the 'register' prop.
-export const sendAuthRequest = async (
-	formData: FormData,
-	register: boolean
-) => {
+export const sendAuthRequest = async (formData: FormData, register: boolean) => {
 	try {
 		const { username, email, password, confirmPassword } = formData
 
-		const data =
-			register ?
-				{ username, email, password, confirmPassword }
-			:	{ username, password }
+		const data = register ? { username, email, password, confirmPassword } : { username, password }
 
 		const endpoint = register ? '/api/auth/register' : '/api/auth/login'
 

@@ -26,11 +26,7 @@ const Cell = ({
 	cardSelected,
 	children
 }: CellProps) => {
-	const cellClasses = classSet(
-		'cell',
-		'center',
-		cardSelected ? 'card-selected' : ''
-	)
+	const cellClasses = classSet('cell', 'center', cardSelected ? 'card-selected' : '')
 
 	return (
 		<div

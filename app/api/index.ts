@@ -85,10 +85,7 @@ export const removeItemFromInventory = async (user: User, item: IItem) => {
 	})
 }
 
-export const updateUserInfo = async <T extends keyof User>(
-	property: T,
-	value: any
-) => {
+export const updateUserInfo = async <T extends keyof User>(property: T, value: any) => {
 	await customFetch('/api/profiles/info', {
 		method: 'PUT',
 		body: JSON.stringify({

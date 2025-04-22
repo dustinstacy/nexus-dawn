@@ -8,9 +8,7 @@ import './formFooter.scss'
 const FormFooter = ({ register }: Register) => {
 	return (
 		<div className="form-footer">
-			<span>
-				{register ? 'Already Have An Account? ' : 'Need An AccOunt? '}
-			</span>
+			<span>{register ? 'Already Have An Account? ' : 'Need An AccOunt? '}</span>
 			<Link href={register ? '/auth/login' : '/auth/register'}>
 				{register ? 'Login' : 'Sign up'}
 			</Link>

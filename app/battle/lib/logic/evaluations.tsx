@@ -60,8 +60,7 @@ export const evaluateSameAndPlus = (
 	tVals: Array<number>
 ) => {
 	const isSame = aVals.toString() == tVals.toString()
-	const isPlus =
-		[aVals[0] + tVals[0]].toString() == [aVals[1] + tVals[1]].toString()
+	const isPlus = [aVals[0] + tVals[0]].toString() == [aVals[1] + tVals[1]].toString()
 
 	if (ruleset.plus) {
 		captureOpponentCardsIfTrue(isPlus, [target1, target2], color)
@@ -103,11 +102,7 @@ const captureIfOpponent = (target: object, color: string) => {
 }
 
 // If `isTrue`, `targets` not matching `color` will be captured
-const captureOpponentCardsIfTrue = (
-	isTrue: boolean,
-	targets: Array<any>,
-	color: string
-) => {
+const captureOpponentCardsIfTrue = (isTrue: boolean, targets: Array<any>, color: string) => {
 	if (isTrue) {
 		for (let i = 0; i < targets.length; i++) {
 			captureIfOpponent(targets[i], color)

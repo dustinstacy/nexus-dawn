@@ -20,13 +20,7 @@ interface ItemComponent {
 // chosenItem: State used to track the currently chosen item
 // setChosenItem: Function to update the chosen item state based on user selection
 // allItems: Array containing all market items
-const Item = ({
-	item,
-	index,
-	chosenItem,
-	setChosenItem,
-	allItems
-}: ItemComponent) => {
+const Item = ({ item, index, chosenItem, setChosenItem, allItems }: ItemComponent) => {
 	const itemClasses = (item: IItem) =>
 		classSet('item', 'between', chosenItem === item ? 'chosen' : '')
 

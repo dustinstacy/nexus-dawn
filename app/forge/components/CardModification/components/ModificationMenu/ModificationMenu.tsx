@@ -43,11 +43,7 @@ const ModificationMenu = ({
 			<Button
 				label="Modify Card"
 				onClick={() => setModificationInProgress?.(true)}
-				disabled={
-					selectedModification === null ||
-					selectedModification === '-' ||
-					!selectedCard
-				}
+				disabled={selectedModification === null || selectedModification === '-' || !selectedCard}
 			/>
 			<Button
 				label="Exit"
