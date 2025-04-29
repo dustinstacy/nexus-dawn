@@ -3,7 +3,7 @@
 import { Avatar } from '@components'
 import { useUserStore } from '@stores'
 
-import { UserImageUpdate } from './components'
+import { AvatarUpdate } from './components'
 
 import './accountDetails.scss'
 
@@ -28,7 +28,7 @@ const AccountDetails = () => {
 						</span>
 					</div>
 				</div>
-				<UserImageUpdate />
+				<AvatarUpdate />
 			</div>
 		</div>
 	)

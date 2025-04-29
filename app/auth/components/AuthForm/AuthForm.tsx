@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Button, TextInput } from '@components'
 import { FormData, Register } from '@interfaces'
@@ -11,10 +11,10 @@ import { sendAuthRequest, sendPasswordResetRequest } from './api'
 import { FormFooter } from './components'
 import { toCamelCase } from './utils'
 
-import './authForm.scss'
 import { toast } from 'react-toastify'
+import './authForm.scss'
 
-// Displays login or registration form based on the value of the register prop
+// Displays login of registration form based on the value of the register prop
 const AuthForm = ({ register }: Register) => {
 	const router = useRouter()
 

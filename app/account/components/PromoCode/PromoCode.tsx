@@ -7,8 +7,8 @@ import { Button, TextInput } from '@components'
 import { User } from '@interfaces'
 import { useUserStore } from '@stores'
 
-import { checkPromoCode } from './utils'
 import './promoCode.scss'
+import { checkPromoCode } from './utils'
 
 const PromoCode = () => {
 	const user = useUserStore((state) => state.user)
@@ -41,20 +41,26 @@ const PromoCode = () => {
 	return (
 		<div className="promo-code">
 			<h1>Promo Code</h1>
-			<div className="box center-column">
-				<TextInput
-					label="Enter promo code here"
-					name="promoCode"
-					value={promoCode}
-					onChange={handleInputChange}
-					loading={loading}
-				/>
+			<div className="box">
+				<div className="wrapper center">
+					<TextInput
+						label="Enter promo code here"
+						name="promoCode"
+						value={promoCode}
+						onChange={handleInputChange}
+						loading={loading}
+					/>
+				</div>
 				{error && <p className="error">{error}</p>}
-				<Button
-					label="Try that one"
-					onClick={handleSubmit}
-					disabled={promoCode.length === 0 || loading}
-				/>
+				<div className="wrapper center">
+					<div className="controls">
+						<Button
+							label="Try that one"
+							onClick={handleSubmit}
+							disabled={promoCode.length === 0 || loading}
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	)
