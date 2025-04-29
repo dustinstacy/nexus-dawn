@@ -1,68 +1,70 @@
 .opponent-card {
-    height: 197px;
-    width: 205px;
-    gap: 2px;
-    background-color: var(--background-colorOpacity);
-    border: 2px solid var(--secondary2-color);
-    border-radius: 8px;
-    cursor: pointer;
-    filter: grayscale(0.6);
+	height: 197px;
+	width: 205px;
+	gap: 2px;
+	background-color: var(--background-colorOpacity);
+	border: 2px solid var(--secondary2-color);
+	border-radius: 8px;
+	cursor: pointer;
+	filter: grayscale(0.6);
 
-    &:hover {
-        box-shadow: 2px 2px 1px 0.5px var(--black-color),
-            2px -2px 1px 0.5px var(--black-color),
-            -2px 2px 1px 0.5px var(--black-color),
-            -2px -2px 1px 0.5px var(--black-color),
-            4px 4px 10px 1px var(--primary2-color),
-            4px -4px 10px 1px var(--primary2-color),
-            -4px 4px 10px 1px var(--primary2-color),
-            -4px -4px 10px 1px var(--primary2-color);
-        scale: 1.01;
-        filter: grayscale(0.1);
-    }
+	&:hover {
+		box-shadow:
+			2px 2px 1px 0.5px var(--black-color),
+			2px -2px 1px 0.5px var(--black-color),
+			-2px 2px 1px 0.5px var(--black-color),
+			-2px -2px 1px 0.5px var(--black-color),
+			4px 4px 10px 1px var(--primary2-color),
+			4px -4px 10px 1px var(--primary2-color),
+			-4px 4px 10px 1px var(--primary2-color),
+			-4px -4px 10px 1px var(--primary2-color);
+		scale: 1.01;
+		filter: grayscale(0.1);
+	}
 
-    @media screen and (min-width: 1440px) {
-        height: 245px;
-        width: 250px;
-        gap: 4px;
-    }
+	@media screen and (min-width: 1440px) {
+		height: 245px;
+		width: 250px;
+		gap: 4px;
+	}
 
-    @media screen and (max-width: 600px) {
-        height: 195px;
-    }
+	@media screen and (max-width: 600px) {
+		height: 195px;
+	}
 
-    img {
-        height: 180px;
-        width: 200px;
-        border-radius: 4px;
-        pointer-events: none;
+	img {
+		height: 180px;
+		width: 200px;
+		border-radius: 4px;
+		pointer-events: none;
 
-        @media screen and (min-width: 1440px) {
-            height: 225px;
-            width: 245px;
-        }
+		@media screen and (min-width: 1440px) {
+			height: 225px;
+			width: 245px;
+		}
 
-        @media screen and (max-width: 1080px) {
-            width: 100%;
-        }
-    }
+		@media screen and (max-width: 1080px) {
+			width: 100%;
+		}
+	}
 
-    h3 {
-        width: 100%;
-        text-align: center;
-        white-space: nowrap;
-    }
+	h3 {
+		width: 100%;
+		text-align: center;
+		white-space: nowrap;
+	}
 
-    &.selected {
-        box-shadow: 6px 0px 3px var(--secondary-color),
-            -6px 0px 3px var(--secondary-color);
-    }
+	&.selected {
+		box-shadow:
+			6px 0px 3px var(--secondary-color),
+			-6px 0px 3px var(--secondary-color);
+	}
 
-    &.locked {
-        pointer-events: none;
+	&.locked {
+		pointer-events: none;
 
-        span {
-            font-size: 96px;
-        }
-    }
+		span {
+			font-size: 96px;
+		}
+	}
 }

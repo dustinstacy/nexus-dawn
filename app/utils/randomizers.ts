@@ -1,74 +1,74 @@
-import { maxValues } from "@constants"
-import { ICard, CardValues, Odds } from "@interfaces"
+import { maxValues } from '@constants'
+import { ICard, CardValues, Odds } from '@interfaces'
 
 // Helper function to generate a random integer within a specified range
 const randomIntFromInterval = (min: number, max: number) => {
-    // + 1 ensures a returned integer in the inclusive range
-    return Math.floor(Math.random() * (max - min + 1) + min)
+	// + 1 ensures a returned integer in the inclusive range
+	return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 interface ValueLimits {
-    sumOfValues: number
-    maxSingleValue: number
+	sumOfValues: number
+	maxSingleValue: number
 }
 
 // Helper function to generate random sum of all 4 card values
 // and maximum value of any single value based on the card's rarity
 const setValueLimits = (card: ICard): ValueLimits => {
-    let sumOfValues = 0
-    let maxSingleValue = 0
+	let sumOfValues = 0
+	let maxSingleValue = 0
 
-    if (card.rarity === "Common") {
-        sumOfValues = randomIntFromInterval(6, 10)
-        maxSingleValue = maxValues.Common
-    } else if (card.rarity === "Uncommon") {
-        sumOfValues = randomIntFromInterval(10, 14)
-        maxSingleValue = maxValues.Uncommon
-    } else if (card.rarity === "Rare") {
-        sumOfValues = randomIntFromInterval(14, 18)
-        maxSingleValue = maxValues.Rare
-    } else if (card.rarity === "Epic") {
-        sumOfValues = randomIntFromInterval(18, 24)
-        maxSingleValue = maxValues.Epic
-    } else if (card.rarity === "Legendary") {
-        sumOfValues = randomIntFromInterval(24, 30)
-        maxSingleValue = maxValues.Legendary
-    }
+	if (card.rarity === 'Common') {
+		sumOfValues = randomIntFromInterval(6, 10)
+		maxSingleValue = maxValues.Common
+	} else if (card.rarity === 'Uncommon') {
+		sumOfValues = randomIntFromInterval(10, 14)
+		maxSingleValue = maxValues.Uncommon
+	} else if (card.rarity === 'Rare') {
+		sumOfValues = randomIntFromInterval(14, 18)
+		maxSingleValue = maxValues.Rare
+	} else if (card.rarity === 'Epic') {
+		sumOfValues = randomIntFromInterval(18, 24)
+		maxSingleValue = maxValues.Epic
+	} else if (card.rarity === 'Legendary') {
+		sumOfValues = randomIntFromInterval(24, 30)
+		maxSingleValue = maxValues.Legendary
+	}
 
-    return { sumOfValues, maxSingleValue }
+	return { sumOfValues, maxSingleValue }
 }
 
 // Generates random values for a card
 export const assignRandomCardValues = (card: ICard): CardValues => {
-    // See setValueLimits()
-    const { sumOfValues, maxSingleValue } = setValueLimits(card)
+	// See setValueLimits()
+	const { sumOfValues, maxSingleValue } = setValueLimits(card)
 
-    // Create empty array to store 4 values
-    let values = [...new Array(4)]
-    // Variable to track sum of all 4 card values
-    let sum = 0
+	// Create empty array to store 4 values
+	let values = [...new Array(4)]
+	// Variable to track sum of all 4 card values
+	let sum = 0
 
-    do {
-        // Generate 4 random numbers between 0 and 1 for each value
-        for (let i = 0; i < values.length; i++) {
-            values[i] = Math.random()
-        }
-        // Get the sum of all 4 randomly generated numbers
-        sum = values.reduce((sum, value) => sum + value, 0)
-        // Crate scale factor to determine how much each value needs to
-        // be adjusted to reach desired sum
-        const scale = sumOfValues / sum
-        // Scale each value proportionally without exceeding the maxSingleValue
-        values = values.map((value) => Math.min(maxSingleValue, Math.round(value * scale)))
+	do {
+		// Generate 4 random numbers between 0 and 1 for each value
+		for (let i = 0; i < values.length; i++) {
+			values[i] = Math.random()
+		}
+		// Get the sum of all 4 randomly generated numbers
+		sum = values.reduce((sum, value) => sum + value, 0)
+		// Crate scale factor to determine how much each value needs to
+		// be adjusted to reach desired sum
+		const scale = sumOfValues / sum
+		// Scale each value proportionally without exceeding the maxSingleValue
+		values = values.map((value) => Math.min(maxSingleValue, Math.round(value * scale)))
 
-        // Recalculate the sum to ensure sumOfValues is met
-        sum = values.reduce((sum, value) => sum + value, 0)
-    } while (
-        // exit loop when sum - sumOfValues is equal to 0
-        sum - sumOfValues
-    )
-    // Assign randomly generated values to the card object's 'values' property
-    return (card.values = values as CardValues)
+		// Recalculate the sum to ensure sumOfValues is met
+		sum = values.reduce((sum, value) => sum + value, 0)
+	} while (
+		// exit loop when sum - sumOfValues is equal to 0
+		sum - sumOfValues
+	)
+	// Assign randomly generated values to the card object's 'values' property
+	return (card.values = values as CardValues)
 }
 
 // Assigns random values to all cards in a given deck,
@@ -76,51 +76,55 @@ export const assignRandomCardValues = (card: ICard): CardValues => {
 // deck: Array of card objects representing the deck.
 // minDeckValue: Minimum total sum of all card values allowed.
 // maxDeckValue: Maximum total sum of all card values allowed.
-export const assignRandomDeckValues = (deck: Array<ICard>, minDeckValue: number, maxDeckValue: number) => {
-    // Variable to store the final calculated sum of all card values
-    let finalValue = 0
-    // Variable to store the scale factor for adjusting values
-    let scale = 0
+export const assignRandomDeckValues = (
+	deck: Array<ICard>,
+	minDeckValue: number,
+	maxDeckValue: number
+) => {
+	// Variable to store the final calculated sum of all card values
+	let finalValue = 0
+	// Variable to store the scale factor for adjusting values
+	let scale = 0
 
-    do {
-        // Assign random card values to all cards in the deck
-        deck.forEach((card) => {
-            assignRandomCardValues(card)
-        })
+	do {
+		// Assign random card values to all cards in the deck
+		deck.forEach((card) => {
+			assignRandomCardValues(card)
+		})
 
-        // Calculate the current sum of all card values in the deck
-        const currentSum = deck.reduce((total, card) => {
-            return total + card.values.reduce((sum, value) => sum + value, 0)
-        }, 0)
+		// Calculate the current sum of all card values in the deck
+		const currentSum = deck.reduce((total, card) => {
+			return total + card.values.reduce((sum, value) => sum + value, 0)
+		}, 0)
 
-        // Determine the scaling factor based on the current sum of values
-        if (currentSum > maxDeckValue) {
-            scale = maxDeckValue / currentSum
-        } else if (currentSum < minDeckValue) {
-            scale = minDeckValue / currentSum
-        } else {
-            scale = 1
-        }
+		// Determine the scaling factor based on the current sum of values
+		if (currentSum > maxDeckValue) {
+			scale = maxDeckValue / currentSum
+		} else if (currentSum < minDeckValue) {
+			scale = minDeckValue / currentSum
+		} else {
+			scale = 1
+		}
 
-        // Adjust the values based on the scale to bring total within closer
-        // range of the desired outcome
-        deck.forEach((card) => {
-            card.values = card.values.map((value) => Math.round(value * scale)) as CardValues
-        })
+		// Adjust the values based on the scale to bring total within closer
+		// range of the desired outcome
+		deck.forEach((card) => {
+			card.values = card.values.map((value) => Math.round(value * scale)) as CardValues
+		})
 
-        // Calculate the final sum of all card values in the deck
-        finalValue = deck.reduce((total, card) => {
-            if (card.values && card.values.length) {
-                return total + card.values.reduce((sum, value) => sum + value, 0)
-            }
-            return total
-        }, 0)
-    } while (
-        // When the total value of all card values in the deck falls within range,
-        // exit the loop
-        finalValue < minDeckValue ||
-        finalValue > maxDeckValue
-    )
+		// Calculate the final sum of all card values in the deck
+		finalValue = deck.reduce((total, card) => {
+			if (card.values && card.values.length) {
+				return total + card.values.reduce((sum, value) => sum + value, 0)
+			}
+			return total
+		}, 0)
+	} while (
+		// When the total value of all card values in the deck falls within range,
+		// exit the loop
+		finalValue < minDeckValue ||
+		finalValue > maxDeckValue
+	)
 }
 
 // nCards: Number of cards to return
@@ -128,45 +132,45 @@ export const assignRandomDeckValues = (deck: Array<ICard>, minDeckValue: number,
 // probabilities in float value (i.e. 83.1 = 83.1%)
 // cardSet: Array of cards from which random cards will be selected
 export const getRandomCards = (nCards: number, odds: Odds, cardSet: Array<ICard>): Array<ICard> => {
-    const randomCardsArray = [...new Array(nCards)]
-    for (let i = 0; i < randomCardsArray.length; i++) {
-        // Get random rarity based on odds
-        const rarity = randomRarity(odds)
-        // Filter card set to obtain cards with current rarity
-        const currentRarityCards = cardSet.filter((card) => card.rarity === rarity)
-        // Selected a random card from the filtered card set
-        const randomCard = currentRarityCards[Math.floor(Math.random() * currentRarityCards.length)]
+	const randomCardsArray = [...new Array(nCards)]
+	for (let i = 0; i < randomCardsArray.length; i++) {
+		// Get random rarity based on odds
+		const rarity = randomRarity(odds)
+		// Filter card set to obtain cards with current rarity
+		const currentRarityCards = cardSet.filter((card) => card.rarity === rarity)
+		// Selected a random card from the filtered card set
+		const randomCard = currentRarityCards[Math.floor(Math.random() * currentRarityCards.length)]
 
-        randomCardsArray[i] = randomCard
-    }
-    return randomCardsArray
+		randomCardsArray[i] = randomCard
+	}
+	return randomCardsArray
 }
 
 // odds: See getRandomCards function
 export const randomRarity = (odds: Odds) => {
-    // Generate a random number between 0(inclusive) and 1(exclusive)
-    const num = Math.random()
-    // Variable to track total odds percentage
-    let totalPercentage = 0
-    // Calculate the total odds percentage from the object values
-    // Suggested total = 100.0
-    for (const rarity in odds) {
-        totalPercentage += odds[rarity as keyof Odds]!
-    }
-    // Variable to track the cumulative percentage
-    let cumulativePercentage = 0
-    // Iterate over each key (rarity) and its percentage
-    for (const rarity in odds) {
-        // Calculate the normalized percentage
-        // normalized percentage = number between 0 and 1
-        const percentage = odds[rarity as keyof Odds]! / totalPercentage
-        // Accumulate the normalized percentage
-        cumulativePercentage += percentage
-        // Check if the generated random number falls within the
-        // accumulated percentage
-        // return the selected rarity
-        if (num < cumulativePercentage) {
-            return rarity
-        }
-    }
+	// Generate a random number between 0(inclusive) and 1(exclusive)
+	const num = Math.random()
+	// Variable to track total odds percentage
+	let totalPercentage = 0
+	// Calculate the total odds percentage from the object values
+	// Suggested total = 100.0
+	for (const rarity in odds) {
+		totalPercentage += odds[rarity as keyof Odds]!
+	}
+	// Variable to track the cumulative percentage
+	let cumulativePercentage = 0
+	// Iterate over each key (rarity) and its percentage
+	for (const rarity in odds) {
+		// Calculate the normalized percentage
+		// normalized percentage = number between 0 and 1
+		const percentage = odds[rarity as keyof Odds]! / totalPercentage
+		// Accumulate the normalized percentage
+		cumulativePercentage += percentage
+		// Check if the generated random number falls within the
+		// accumulated percentage
+		// return the selected rarity
+		if (num < cumulativePercentage) {
+			return rarity
+		}
+	}
 }

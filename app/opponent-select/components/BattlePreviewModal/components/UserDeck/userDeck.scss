@@ -1,131 +1,131 @@
 .user-deck {
-    position: absolute;
-    bottom: 0;
-    height: 175px;
-    width: 100%;
-    overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	height: 175px;
+	width: 100%;
+	overflow: hidden;
 
-    @media screen and (min-height: 768px) {
-        height: 200px;
-    }
+	@media screen and (min-height: 768px) {
+		height: 200px;
+	}
 
-    @media screen and (min-height: 900px) {
-        height: 250px;
-    }
+	@media screen and (min-height: 900px) {
+		height: 250px;
+	}
 
-    @media screen and (max-width: 568px) {
-        position: relative;
-        height: auto;
-    }
+	@media screen and (max-width: 568px) {
+		position: relative;
+		height: auto;
+	}
 
-    .header-wrapper {
-        position: relative;
-        height: 40px;
-        font-size: 22px;
+	.header-wrapper {
+		position: relative;
+		height: 40px;
+		font-size: 22px;
 
-        @media screen and (min-height: 900px) {
-            height: 50px;
-            font-size: 28px;
-        }
+		@media screen and (min-height: 900px) {
+			height: 50px;
+			font-size: 28px;
+		}
 
-        .header-style {
-            position: absolute;
-            height: 100%;
-            width: 800px;
-            z-index: -1;
-            rotate: 180deg;
+		.header-style {
+			position: absolute;
+			height: 100%;
+			width: 800px;
+			z-index: -1;
+			rotate: 180deg;
 
-            @media screen and (min-height: 900px) {
-                width: 1200px;
-            }
-        }
-    }
+			@media screen and (min-height: 900px) {
+				width: 1200px;
+			}
+		}
+	}
 
-    .deck-wrapper {
-        padding: 12px;
+	.deck-wrapper {
+		padding: 12px;
 
-        @media screen and (min-height: 900px) {
-            padding: 24px;
-        }
+		@media screen and (min-height: 900px) {
+			padding: 24px;
+		}
 
-        @media screen and (max-width: 568px) {
-            flex-direction: column;
-        }
-    }
+		@media screen and (max-width: 568px) {
+			flex-direction: column;
+		}
+	}
 
-    .deck-info {
-        height: 100%;
-        width: 50%;
+	.deck-info {
+		height: 100%;
+		width: 50%;
 
-        @media screen and (min-height: 768px) {
-            padding-right: 50px;
-            gap: 12px;
-        }
+		@media screen and (min-height: 768px) {
+			padding-right: 50px;
+			gap: 12px;
+		}
 
-        @media screen and (max-width: 568px) {
-            padding: 0;
-        }
+		@media screen and (max-width: 568px) {
+			padding: 0;
+		}
 
-        .user-deck-power,
-        .user-deck-count {
-            width: 100%;
-            font-size: 18px;
-            text-align: center;
+		.user-deck-power,
+		.user-deck-count {
+			width: 100%;
+			font-size: 18px;
+			text-align: center;
 
-            @media screen and (min-height: 900px) {
-                font-size: 24px;
-            }
+			@media screen and (min-height: 900px) {
+				font-size: 24px;
+			}
 
-            @media screen and (max-width: 568px) {
-                font-size: 18px;
-                margin-bottom: 18px;
-            }
-        }
+			@media screen and (max-width: 568px) {
+				font-size: 18px;
+				margin-bottom: 18px;
+			}
+		}
 
-        .user-deck-count {
-            .valid {
-                color: var(--secondary-color);
-            }
+		.user-deck-count {
+			.valid {
+				color: var(--secondary-color);
+			}
 
-            .invalid {
-                color: var(--error-color);
-            }
-        }
-    }
+			.invalid {
+				color: var(--error-color);
+			}
+		}
+	}
 
-    .buttons {
-        height: 100%;
-        width: 50%;
-        gap: 12px;
+	.buttons {
+		height: 100%;
+		width: 50%;
+		gap: 12px;
 
-        @media screen and (min-height: 600px) {
-            gap: 18px;
-        }
+		@media screen and (min-height: 600px) {
+			gap: 18px;
+		}
 
-        @media screen and (min-height: 900px) {
-            gap: 24px;
-        }
+		@media screen and (min-height: 900px) {
+			gap: 24px;
+		}
 
-        @media screen and (max-width: 568px) {
-            gap: 12px;
-            margin-bottom: 12px;
-        }
+		@media screen and (max-width: 568px) {
+			gap: 12px;
+			margin-bottom: 12px;
+		}
 
-        .button {
-            position: relative;
-            bottom: 0;
-            width: 175px;
-            font-size: 16px;
+		.button {
+			position: relative;
+			bottom: 0;
+			width: 175px;
+			font-size: 16px;
 
-            @media screen and (min-height: 900px) {
-                width: 250px;
-                font-size: 22px;
-            }
+			@media screen and (min-height: 900px) {
+				width: 250px;
+				font-size: 22px;
+			}
 
-            @media screen and (max-width: 568px) {
-                width: 200px;
-                font-size: 16px;
-            }
-        }
-    }
+			@media screen and (max-width: 568px) {
+				width: 200px;
+				font-size: 16px;
+			}
+		}
+	}
 }

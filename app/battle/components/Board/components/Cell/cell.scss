@@ -1,32 +1,34 @@
 .cell {
-    position: relative;
-    height: calc(25vh + 6px);
-    width: calc(25vh * 0.725 + 6px);
-    background-color: rgba(0, 0, 0, 0.4);
-    border: 1px solid var(--primary-color);
-    border-radius: 12px;
-    box-shadow: rgba(240, 240, 240, 0.25) 10px 10px 20px -12px inset,
-        rgba(240, 240, 240, 0.3) -10px 10px 36px -18px inset;
-    cursor: pointer;
+	position: relative;
+	height: calc(25vh + 6px);
+	width: calc(25vh * 0.725 + 6px);
+	background-color: rgba(0, 0, 0, 0.4);
+	border: 1px solid var(--primary-color);
+	border-radius: 12px;
+	box-shadow:
+		rgba(240, 240, 240, 0.25) 10px 10px 20px -12px inset,
+		rgba(240, 240, 240, 0.3) -10px 10px 36px -18px inset;
+	cursor: pointer;
 
-    @media screen and (max-width: 920px) and (orientation: portrait) {
-        height: calc(20vh + 4px);
-        width: calc(20vh * 0.725 + 4px);
-    }
+	@media screen and (max-width: 920px) and (orientation: portrait) {
+		height: calc(20vh + 4px);
+		width: calc(20vh * 0.725 + 4px);
+	}
 
-    @media screen and (max-width: 912px) {
-        height: calc(20vh + 4px);
-        width: calc(20vh * 0.725 + 4px);
-    }
+	@media screen and (max-width: 912px) {
+		height: calc(20vh + 4px);
+		width: calc(20vh * 0.725 + 4px);
+	}
 
-    @media screen and (max-width: 768px) {
-        height: calc(15vh + 4px);
-        width: calc(15vh * 0.725 + 4px);
-    }
+	@media screen and (max-width: 768px) {
+		height: calc(15vh + 4px);
+		width: calc(15vh * 0.725 + 4px);
+	}
 
-    &.drag-enter,
-    &.card-selected:hover {
-        box-shadow: -2px -2px 25px 3px var(--primary-color) inset,
-            2px 2px 25px 3px var(--primary-color) inset;
-    }
+	&.drag-enter,
+	&.card-selected:hover {
+		box-shadow:
+			-2px -2px 25px 3px var(--primary-color) inset,
+			2px 2px 25px 3px var(--primary-color) inset;
+	}
 }

@@ -1,13 +1,13 @@
-import { BattleState, ICard } from "@interfaces"
-import { evaluate, evaluateSameAndPlus } from "./evaluations"
+import { BattleState, ICard } from '@interfaces'
+import { evaluate, evaluateSameAndPlus } from './evaluations'
 
 // TMP config rules here
 // Remove once battleProcessor accepts rules as an arg
 const rules = {
-    standard: true,
-    low: false,
-    same: false,
-    plus: false,
+	standard: true,
+	low: false,
+	same: false,
+	plus: false
 }
 
 /**
@@ -36,111 +36,111 @@ const rules = {
  * @param {object} battleState - the current state of the board and battle
  */
 const battleProcessor = (index: number, card: ICard, battleState: BattleState) => {
-    const { board } = battleState
-    const { color, values } = card
-    const up = board[index - 3]
-    const right = board[index + 1]
-    const left = board[index - 1]
-    const down = board[index + 3]
-    const leftColumn = [0, 3, 6]
-    const rightColumn = [2, 5, 8]
+	const { board } = battleState
+	const { color, values } = card
+	const up = board[index - 3]
+	const right = board[index + 1]
+	const left = board[index - 1]
+	const down = board[index + 3]
+	const leftColumn = [0, 3, 6]
+	const rightColumn = [2, 5, 8]
 
-    // Direction is relative from the active card's context
-    // e.g. cardUP means the target is above the active card
-    const cardUP = up?._id
-    const cardRight = !rightColumn.includes(index) && right?._id
-    const cardDown = down?._id
-    const cardLeft = !leftColumn.includes(index) && left?._id
+	// Direction is relative from the active card's context
+	// e.g. cardUP means the target is above the active card
+	const cardUP = up?._id
+	const cardRight = !rightColumn.includes(index) && right?._id
+	const cardDown = down?._id
+	const cardLeft = !leftColumn.includes(index) && left?._id
 
-    /**
-     * "Same" and "Plus" evaluations
-     * These take precedence over single evals
-     */
+	/**
+	 * "Same" and "Plus" evaluations
+	 * These take precedence over single evals
+	 */
 
-    if (rules.same || rules.plus) {
-        if (cardUP && cardRight) {
-            evaluateSameAndPlus(
-                up,
-                right,
-                color as string,
-                rules,
-                [values[0], values[1]],
-                [up.values[2], right.values[3]]
-            )
-        }
+	if (rules.same || rules.plus) {
+		if (cardUP && cardRight) {
+			evaluateSameAndPlus(
+				up,
+				right,
+				color as string,
+				rules,
+				[values[0], values[1]],
+				[up.values[2], right.values[3]]
+			)
+		}
 
-        if (cardUP && cardDown) {
-            evaluateSameAndPlus(
-                up,
-                down,
-                color as string,
-                rules,
-                [values[0], values[2]],
-                [up.values[2], down.values[0]]
-            )
-        }
+		if (cardUP && cardDown) {
+			evaluateSameAndPlus(
+				up,
+				down,
+				color as string,
+				rules,
+				[values[0], values[2]],
+				[up.values[2], down.values[0]]
+			)
+		}
 
-        if (cardUP && cardLeft) {
-            evaluateSameAndPlus(
-                up,
-                left,
-                color as string,
-                rules,
-                [values[0], values[3]],
-                [up.values[2], left.values[1]]
-            )
-        }
+		if (cardUP && cardLeft) {
+			evaluateSameAndPlus(
+				up,
+				left,
+				color as string,
+				rules,
+				[values[0], values[3]],
+				[up.values[2], left.values[1]]
+			)
+		}
 
-        if (cardRight && cardDown) {
-            evaluateSameAndPlus(
-                right,
-                down,
-                color as string,
-                rules,
-                [values[1], values[2]],
-                [right.values[3], down.values[0]]
-            )
-        }
+		if (cardRight && cardDown) {
+			evaluateSameAndPlus(
+				right,
+				down,
+				color as string,
+				rules,
+				[values[1], values[2]],
+				[right.values[3], down.values[0]]
+			)
+		}
 
-        if (cardRight && cardLeft) {
-            evaluateSameAndPlus(
-                right,
-                left,
-                color as string,
-                rules,
-                [values[1], values[3]],
-                [right.values[3], left.values[1]]
-            )
-        }
+		if (cardRight && cardLeft) {
+			evaluateSameAndPlus(
+				right,
+				left,
+				color as string,
+				rules,
+				[values[1], values[3]],
+				[right.values[3], left.values[1]]
+			)
+		}
 
-        if (cardDown && cardLeft) {
-            evaluateSameAndPlus(
-                down,
-                left,
-                color as string,
-                rules,
-                [values[2], values[3]],
-                [down.values[0], left.values[1]]
-            )
-        }
-    }
+		if (cardDown && cardLeft) {
+			evaluateSameAndPlus(
+				down,
+				left,
+				color as string,
+				rules,
+				[values[2], values[3]],
+				[down.values[0], left.values[1]]
+			)
+		}
+	}
 
-    //
-    // Single evaluations
-    //
+	//
+	// Single evaluations
+	//
 
-    if (cardUP) {
-        evaluate(up, color as string, rules, values[0], up.values[2])
-    }
-    if (cardRight) {
-        evaluate(right, color as string, rules, values[1], right.values[3])
-    }
-    if (cardDown) {
-        evaluate(down, color as string, rules, values[2], down.values[0])
-    }
-    if (cardLeft) {
-        evaluate(left, color as string, rules, values[3], left.values[1])
-    }
+	if (cardUP) {
+		evaluate(up, color as string, rules, values[0], up.values[2])
+	}
+	if (cardRight) {
+		evaluate(right, color as string, rules, values[1], right.values[3])
+	}
+	if (cardDown) {
+		evaluate(down, color as string, rules, values[2], down.values[0])
+	}
+	if (cardLeft) {
+		evaluate(left, color as string, rules, values[3], left.values[1])
+	}
 }
 
 export default battleProcessor

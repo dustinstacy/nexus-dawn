@@ -6,12 +6,4 @@ import openPack from './openPack.png'
 import packOdds from './packOdds.png'
 import purchaseButton from './purchaseButton.png'
 
-export {
-    cardValues,
-    checkbox,
-    optimizeDeck,
-    marketMenu,
-    openPack,
-    packOdds,
-    purchaseButton,
-}
+export { cardValues, checkbox, optimizeDeck, marketMenu, openPack, packOdds, purchaseButton }
