@@ -1,1 +1,1 @@
-export { default as AvatarUpdate } from "./AvatarUpdate/AvatarUpdate"
+export { default as AvatarUpdate } from './AvatarUpdate/AvatarUpdate'
