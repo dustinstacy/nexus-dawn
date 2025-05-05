@@ -3,11 +3,14 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
 		"build": "next build",
-		"start": "next start",
+		"dev": "next dev",
+		"format": "prettier . --write",
+		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,scss,md}\"",
+		"prepare": "npm run format && npm run lint:fix && npm run build",
 		"lint": "next lint",
-		"format": "prettier . --write"
+		"lint:fix": "next lint --fix",
+		"start": "next start"
 	},
 	"dependencies": {
 		"@emotion/styled": "^11.14.0",
