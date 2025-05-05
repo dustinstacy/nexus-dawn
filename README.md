@@ -27,14 +27,12 @@ nexus-dawn.vercel.app
 </a>
 </div>
 
-
-
 ## Description
 
 This web app is a playable card game that allows users to collect and upgrade
 cards, construct a deck, and compete in various game modes. Inspired by the
 Final Fantasy VIII [minigame](https://finalfantasy.fandom.com/wiki/Triple_Triad)
-called Triple Triad. 
+called Triple Triad.
 
 ## Screenshots
 
@@ -83,7 +81,7 @@ npm install
 npm run dev
 ```
 
-Step 3: Setup your enivornment variables (Mostly optional)
+Step 3: Setup your environnment variables (Mostly optional)
 
 Create a .env file in the root directory of each repository. Starting with the backend:
 
@@ -117,16 +115,19 @@ NEXT_PUBLIC_API_BASE_URL=<number>
 NEXT_PUBLIC_PROMO_CODE=<string>
 ```
 
-
 ## Contributing
 
-Interested in contirbuting? Check out the current [issues](https://github.com/dustinstacy/nexus-dawn/issues) or submit your own idea.
+Interested in contributing? Check out the current [issues](https://github.com/dustinstacy/nexus-dawn/issues) or submit your own idea.
 
 1. Fork it!: `git clone https://github.com/dustinstacy/nexus-dawn.git`
 2. Create your feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -m 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
+
+## Prettier
+
+To make diffs easier to see in PRs there is a config file for [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Make sure this formats on save. If you don't want to use this, make sure to run 'npm run format' before pushing your changes.
 
 ## Credits
 
@@ -137,4 +138,3 @@ Character Artwork - AEkashics <https://www.patreon.com/aekashics/posts>
 ## License
 
 The MIT License (MIT)
-

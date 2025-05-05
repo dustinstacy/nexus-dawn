@@ -1,31 +1,31 @@
 .auth {
-    padding: 128px 0 64px 0;
-    background-image: url("../../assets/page-images/library.jpg");
-    background-position: center;
-    background-size: cover;
+	padding: 128px 0 64px 0;
+	background-image: url('../../assets/page-images/library.jpg');
+	background-position: center;
+	background-size: cover;
 
-    .login {
-        position: relative;
-        height: 100%;
-        width: 40vw;
+	.login {
+		position: relative;
+		height: 100%;
+		width: 40vw;
 
-        @media screen and (max-width: 768px) {
-            width: 100vw;
-        }
+		@media screen and (max-width: 768px) {
+			width: 100vw;
+		}
 
-        .logo {
-            margin: -64px 0 16px;
-            width: 400px;
+		.logo {
+			margin: -64px 0 16px;
+			width: 400px;
 
-            @media screen and (max-width: 400px) {
-                width: 300px;
-            }
-        }
-    }
+			@media screen and (max-width: 400px) {
+				width: 300px;
+			}
+		}
+	}
 
-    .tip__fullscreen {
-        position: absolute;
-        bottom: 1vh;
-        right: 2vw;
-    }
+	.tip__fullscreen {
+		position: absolute;
+		bottom: 1vh;
+		right: 2vw;
+	}
 }

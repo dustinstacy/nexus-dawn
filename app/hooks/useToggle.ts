@@ -1,4 +1,4 @@
-"use-client"
+'use-client'
 /**
  * Custom Hook: useToggle
  *
@@ -13,18 +13,18 @@
  *    - toggle: A function to toggle the state between true and false.
  *    - setToggleIsOpen: Set state of isOpen to desired value
  */
-import { useState } from "react"
+import { useState } from 'react'
 
 type ToggleState = [boolean, () => void, (state: boolean) => void]
 
 const useToggle = (initialState: boolean = false): ToggleState => {
-    const [toggleState, setToggleState] = useState(initialState)
+	const [toggleState, setToggleState] = useState(initialState)
 
-    const toggle = () => {
-        setToggleState((prevState) => !prevState)
-    }
+	const toggle = () => {
+		setToggleState((prevState) => !prevState)
+	}
 
-    return [toggleState, toggle, setToggleState]
+	return [toggleState, toggle, setToggleState]
 }
 
 export default useToggle

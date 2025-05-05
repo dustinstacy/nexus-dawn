@@ -1,43 +1,43 @@
 .packs-contents {
-    position: relative;
-    min-height: 600px;
-    padding-bottom: 64px;
+	position: relative;
+	min-height: 600px;
+	padding-bottom: 64px;
 
-    .card {
-        height: 400px;
-        width: calc(400px * 0.725);
-        border-radius: 20px;
+	.card {
+		height: 400px;
+		width: calc(400px * 0.725);
+		border-radius: 20px;
 
-        .card__side {
-            border-radius: 24px;
-        }
+		.card__side {
+			border-radius: 24px;
+		}
 
-        @media screen and (max-width: 768px) {
-            height: 300px;
-            width: calc(300px * 0.725);
-        }
+		@media screen and (max-width: 768px) {
+			height: 300px;
+			width: calc(300px * 0.725);
+		}
 
-        span {
-            height: 55px;
-            width: 55px;
-            font-size: 32px;
-            background: none;
+		span {
+			height: 55px;
+			width: 55px;
+			font-size: 32px;
+			background: none;
 
-            @media screen and (max-width: 768px) {
-                height: 40px;
-                width: 40px;
-                font-size: 24px;
-            }
-        }
-    }
+			@media screen and (max-width: 768px) {
+				height: 40px;
+				width: 40px;
+				font-size: 24px;
+			}
+		}
+	}
 
-    .button {
-        position: absolute;
-        bottom: 5%;
-        left: 50%;
-        transform: translateX(-50%);
-        height: 60px;
-        width: 200px;
-        font-size: 28px;
-    }
+	.button {
+		position: absolute;
+		bottom: 5%;
+		left: 50%;
+		transform: translateX(-50%);
+		height: 60px;
+		width: 200px;
+		font-size: 28px;
+	}
 }

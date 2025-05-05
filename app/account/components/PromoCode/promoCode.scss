@@ -1,9 +1,10 @@
 .promo-code {
-    .text-input {
-        width: 50%;
+	.text-input {
+		width: 50%;
+		margin: 0;
 
-        @media screen and (max-width: 768px) {
-            width: 100%;
-        }
-    }
+		@media screen and (max-width: 768px) {
+			width: 100%;
+		}
+	}
 }
