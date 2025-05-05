@@ -1,5 +1,5 @@
-import { customFetch } from '@utils'
 import { ICard } from '@interfaces'
+import { customFetch } from '@utils'
 
 // Mark all cards in the array as selected and add all cards to the user's deck
 export const addAllToDeck = async (array: Array<ICard>) => {

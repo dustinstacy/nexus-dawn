@@ -1,5 +1,3 @@
-import { classSet } from '@utils'
-import { User } from '@interfaces'
 import {
 	GiAbstract062,
 	GiAbstract021,
@@ -9,6 +7,9 @@ import {
 	GiAbstract120,
 	GiAbstract116
 } from 'react-icons/gi'
+
+import { User } from '@interfaces'
+import { classSet } from '@utils'
 
 export const maxValues = {
 	Common: 5,

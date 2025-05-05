@@ -1,12 +1,14 @@
 'use client'
 
+import React, { useState } from 'react'
+import Cropper, { Area } from 'react-easy-crop'
+
 import { updateUserInfo } from '@api'
 import { Button, ModalOverlay } from '@components'
 import { User } from '@interfaces'
 import { useUserStore } from '@stores'
 import { customFetch } from '@utils'
-import React, { useState } from 'react'
-import Cropper, { Area } from 'react-easy-crop'
+
 import './avatarUpdate.scss'
 import { getCroppedImg } from './cropUtils'
 
