@@ -1,4 +1,5 @@
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { AiFillEye } from '@react-icons/all-files/ai/AiFillEye'
+import { AiFillEyeInvisible } from '@react-icons/all-files/ai/AiFillEyeInvisible'
 
 import { useToggle } from '@hooks'
 import { classSet } from '@utils'

@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
-import { MdOutlineClose, MdMenu } from 'react-icons/md'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { MdMenu } from '@react-icons/all-files/md/MdMenu'
+import { MdOutlineClose } from '@react-icons/all-files/md/MdOutlineClose'
 import { motion } from 'framer-motion'
+import { useEffect } from 'react'
 
 import { useToggle } from '@hooks'
 

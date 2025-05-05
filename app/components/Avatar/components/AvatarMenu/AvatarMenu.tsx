@@ -1,12 +1,12 @@
 'use client'
 
+import { MdLogout } from '@react-icons/all-files/md/MdLogout'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { MdLogout } from 'react-icons/md'
 
+import { HandleToggle } from '@interfaces'
 import { useUserStore } from '@stores'
 import { classSet } from '@utils'
-import { HandleToggle } from '@interfaces'
 
 import './avatarMenu.scss'
 

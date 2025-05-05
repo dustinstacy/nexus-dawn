@@ -1,5 +1,6 @@
+import { BiLeftArrow } from '@react-icons/all-files/bi/BiLeftArrow'
+import { BiRightArrow } from '@react-icons/all-files/bi/BiRightArrow'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
 
 import { IItem } from '@interfaces'
 

@@ -1,11 +1,11 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
 import React, { useState } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import { Card, ModalOverlay } from '@components'
 import { ICard } from '@interfaces'
 
-import { CardListContainer } from './components'
 import './cardSelector.scss'
+import { CardListContainer } from './components'
 
 interface CardSelector {
 	selectedCard: ICard | null
