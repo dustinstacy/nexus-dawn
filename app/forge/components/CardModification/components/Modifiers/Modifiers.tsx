@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import { updateState } from '@utils'
 import { ICard, IItem } from '@interfaces'
 import { useItemsStore } from '@stores'
+import { updateState } from '@utils'
 
 import {
 	AquaVitae,

@@ -1,7 +1,7 @@
 import { Filter } from '@components'
+import { IItem } from '@interfaces'
 import { useItemsStore, useUserStore } from '@stores'
 import { uniqueItemsFilter } from '@utils'
-import { IItem } from '@interfaces'
 
 import './modificationSelector.scss'
 

@@ -1,10 +1,10 @@
 import { ImCheckboxChecked } from '@react-icons/all-files/im/ImCheckboxChecked'
 import { ImCheckboxUnchecked } from '@react-icons/all-files/im/ImCheckboxUnchecked'
 
+import { addCardToDeck, removeCardFromDeck } from '@api'
 import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
 
-import { addCardToDeck, removeCardFromDeck } from '@api'
 import './checkBox.scss'
 
 interface CheckBoxProps {

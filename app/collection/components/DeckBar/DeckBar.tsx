@@ -3,9 +3,9 @@ import { CircleLoader } from 'react-spinners'
 
 import { addCardToDeck, removeCardFromDeck } from '@api'
 import { Filter, Button } from '@components'
+import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
 import { calculateDeckPower, calculateOptimizedDeck } from '@utils'
-import { ICard } from '@interfaces'
 
 import { removeAllFromDeck } from './api'
 import './deckBar.scss'

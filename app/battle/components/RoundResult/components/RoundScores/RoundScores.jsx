@@ -1,6 +1,5 @@
 import React from 'react'
 
-import { redScore, blueScore } from '../../../Score/images'
 import './RoundScores.scss'
 
 const RoundScores = ({ p1Score, p2Score, round }) => {

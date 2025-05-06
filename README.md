@@ -119,15 +119,7 @@ NEXT_PUBLIC_PROMO_CODE=<string>
 
 Interested in contributing? Check out the current [issues](https://github.com/dustinstacy/nexus-dawn/issues) or submit your own idea.
 
-1. Fork it!: `git clone https://github.com/dustinstacy/nexus-dawn.git`
-2. Create your feature branch: `git checkout -b my-new-feature`
-3. Commit your changes: `git commit -m 'Add some feature'`
-4. Push to the branch: `git push origin my-new-feature`
-5. Submit a pull request
-
-## Prettier
-
-To make diffs easier to see in PRs there is a config file for [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Make sure this formats on save. If you don't want to use this, make sure to run 'npm run format' before pushing your changes.
+Please read our [Contribution Guidelines](CONTRIBUTING.md) to get started.
 
 ## Credits
 

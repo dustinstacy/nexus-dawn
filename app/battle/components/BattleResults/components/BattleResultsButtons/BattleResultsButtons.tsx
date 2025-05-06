@@ -1,11 +1,11 @@
-import React from 'react'
 import { useRouter } from 'next/navigation'
+import React from 'react'
 
 import { postBattleLog } from '@api'
 import { Button } from '@components'
+import { useOpponentsStore } from '@stores'
 
 import './battleResultsButtons.scss'
-import { useOpponentsStore } from '@stores'
 
 interface BattleResultsButtonsProps {
 	loading: boolean
