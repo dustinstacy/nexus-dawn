@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
-
+import Image from 'next/image'
 import { logo } from '@assets'
 import { useUserStore } from '@stores'
 
@@ -25,7 +25,7 @@ const Auth = () => {
 	return (
 		<div className="auth page center">
 			<div className="login box around-column">
-				<img
+				<Image 
 					className="logo"
 					src={logo.src}
 					alt="logo"

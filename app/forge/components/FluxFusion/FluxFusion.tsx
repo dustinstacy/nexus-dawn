@@ -7,6 +7,7 @@ import { IItem, User } from '@interfaces'
 import { useItemsStore, useUserStore } from '@stores'
 
 import './fluxFusion.scss'
+import Image from 'next/image'
 
 interface FluxFusion {
 	setFluxFusion: React.Dispatch<React.SetStateAction<boolean>>
@@ -45,7 +46,7 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 						key={starting + String(index)}
 					>
 						<div className="current flux center">
-							<img
+							<Image
 								src={starting?.image}
 								alt={starting?.name}
 							/>
@@ -66,7 +67,7 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 							onClick={() => fuseFlux(starting, fusedFlux[index])}
 						/>
 						<div className="fused flux center">
-							<img
+							<Image
 								src={fusedFlux[index]?.image}
 								alt={fusedFlux[index]?.name}
 							/>

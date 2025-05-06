@@ -8,6 +8,7 @@ import { Score } from '..'
 import { Cell } from './components'
 import turnArrow from './images/turnArrow.png'
 import { battleProcessor } from '../../lib/logic'
+import Image from 'next/image'
 
 import './board.scss'
 
@@ -145,17 +146,17 @@ const Board = ({
 			</div>
 			<div className="arrow-column center-column">
 				{battleState.round > 1 && <span>{playerTwo.battleScore}</span>}
-				<img
+				<Image
 					className={p2ImageClassNames}
 					src={playerTwo.user?.avatar}
 					alt="p2 image"
 				/>
-				<img
+				<Image
 					className={turnArrowClassNames}
 					src={turnArrow.src}
 					alt="turn arrow"
 				/>
-				<img
+				<Image
 					className={p1ImageClassNames}
 					src={playerOne.user?.image}
 					alt="p1 image"

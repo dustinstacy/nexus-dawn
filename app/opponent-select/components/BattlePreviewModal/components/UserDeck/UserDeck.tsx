@@ -8,6 +8,7 @@ import { useUserStore } from '@stores'
 import { calculateDeckPower, calculateOptimizedDeck, classSet } from '@utils'
 
 import './userDeck.scss'
+import Image from 'next/image'
 
 interface UserDeckProps {
 	selectedOpponent: IOpponent
@@ -81,7 +82,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 	return (
 		<div className="user-deck start-column">
 			<div className="header-wrapper center">
-				<img
+				<Image
 					className="header-style"
 					src={headerStyle.src}
 					alt="header style"
