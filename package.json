@@ -7,7 +7,7 @@
 		"dev": "next dev",
 		"format": "prettier . --write",
 		"format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,scss,md}\"",
-		"prepare": "npm run format && npm run lint:fix && npm run build",
+		"validate": "npm run format && npm run lint:fix && npm run build",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix",
 		"start": "next start"
