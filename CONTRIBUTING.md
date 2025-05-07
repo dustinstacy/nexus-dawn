@@ -50,16 +50,16 @@ I appreciate your interest in contributing to the Nexus Dawn project! Your help 
 
 6.  **Prepare Your Changes for CI:**
 
-    - Before committing your work, it's crucial to run the `prepare` script. This script is designed to execute various tasks that ensure your code adheres to the project's standards and is ready for continuous integration (CI). These tasks include:
+    - Before committing your work, it's crucial to run the `vaildate` script. This script is designed to execute various tasks that ensure your code adheres to the project's standards and is ready for continuous integration (CI). These tasks include:
 
         - Running linters to check for code style issues.
         - Formatting the code according to project conventions.
         - Generating any necessary build artifacts.
 
-        Execute the `prepare` script using npm:
+        Execute the `validate` script using npm:
 
         ```bash
-        npm run prepare
+        npm run validate
         ```
 
     > **Pay close attention to the output of this script.** If it reports any warnings or errors related to linting or formatting, you should address them before committing. A successful `prepare` script significantly increases the chances of your pull request being accepted smoothly.
