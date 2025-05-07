@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import Image from 'next/image'
 import { coinImage } from '@assets'
 import { useUserStore } from '@stores'
 
@@ -48,7 +48,7 @@ const CoinReward = ({ coinReward }: CoinRewardProps) => {
 	return (
 		<div className="results-coin center">
 			<p>+{displayCoin}</p>
-			<img
+			<Image
 				src={coinImage.src}
 				alt="coin image"
 			/>

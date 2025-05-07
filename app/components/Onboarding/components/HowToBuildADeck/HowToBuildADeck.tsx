@@ -10,7 +10,7 @@ import { onboardingStages } from '../../constants'
 import { checkbox, optimizeDeck } from '../../images'
 
 import './howToBuildADeck.scss'
-
+import Image from 'next/image'
 const HowToBuildADeck = ({ nextStage }: NextStage) => {
 	const user = useUserStore((state) => state.user)
 	const userDeck = useUserStore((state) => state.userDeck)
@@ -39,7 +39,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						<div className="header-wrapper">
 							<h1 className="header">
 								{onboardingStages[3].header}
-								<img
+								<Image
 									className="logo abs-center"
 									src={smlogo.src}
 									alt="small logo"
@@ -58,7 +58,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						{step === 2 && (
 							<div className="body box step-2 center-column">
 								<p>{onboardingStages[3].body[1]}</p>
-								<img
+								<Image
 									className="optimize-deck-image"
 									src={optimizeDeck.src}
 									alt="market menu"
@@ -72,7 +72,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						{step === 3 && (
 							<div className="body box step-3 center">
 								<p>{onboardingStages[3].body[2]}</p>
-								<img
+								<Image
 									className="check-box-image"
 									src={checkbox.src}
 									alt="market menu"

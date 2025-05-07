@@ -5,6 +5,7 @@ import { IItem } from '@interfaces'
 import { classSet } from '@utils'
 
 import './item.scss'
+import Image from 'next/image'
 
 interface ItemComponent {
 	item: IItem
@@ -30,7 +31,7 @@ const Item = ({ item, index, chosenItem, setChosenItem, allItems }: ItemComponen
 			className={itemClasses(item)}
 		>
 			<div className="section center">
-				<img
+				<Image
 					src={item.image}
 					alt="item image"
 				/>
@@ -38,7 +39,7 @@ const Item = ({ item, index, chosenItem, setChosenItem, allItems }: ItemComponen
 			</div>
 			<div className="item-price center">
 				{item.price}{' '}
-				<img
+				<Image
 					src={coinImage.src}
 					alt="coin"
 				/>

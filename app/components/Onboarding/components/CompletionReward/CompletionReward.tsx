@@ -8,7 +8,7 @@ import { useItemsStore, useUserStore } from '@stores'
 
 import { onboardingStages } from '../../constants'
 import './completionReward.scss'
-
+import Image from 'next/image'
 const CompletionReward = ({ nextStage }: NextStage) => {
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
@@ -28,7 +28,7 @@ const CompletionReward = ({ nextStage }: NextStage) => {
 				<div className="header-wrapper">
 					<h1 className="header">
 						{step === 1 ? onboardingStages[5].header[0] : onboardingStages[5].header[1]}
-						<img
+						<Image
 							className="logo abs-center"
 							src={smlogo.src}
 							alt="small logo"
@@ -47,7 +47,7 @@ const CompletionReward = ({ nextStage }: NextStage) => {
 				{step === 2 && (
 					<div className="body center-column">
 						<p>{rarePack!.name}</p>
-						<img
+						<Image
 							className="rare-card-image"
 							src={rarePack!.image}
 							alt="rare card"

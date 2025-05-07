@@ -3,6 +3,7 @@ import { IOpponent } from '@interfaces'
 import { useItemsStore } from '@stores'
 
 import './selectedOpponent.scss'
+import Image from 'next/image'
 
 interface SelectedOpponentProps {
 	selectedOpponent: IOpponent
@@ -20,7 +21,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
 	return (
 		<div className="selected-opponent fill">
 			<h1 className="opponent-name">{name}</h1>
-			<img
+			<Image
 				className="opponent-image fill"
 				src={image}
 				alt="opponent image"
@@ -29,7 +30,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
 			<div className="opponent-info start-column">
 				<div className="power-attribute between-column">
 					<div className="header-wrapper center">
-						<img
+						<Image
 							className="header-style"
 							src={headerStyle.src}
 							alt="header style"
@@ -42,7 +43,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
 				</div>
 				<div className="rules-attribute between-column">
 					<div className="header-wrapper center">
-						<img
+						<Image
 							className="header-style"
 							src={headerStyle.src}
 							alt="header style"
@@ -59,7 +60,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
 				</div>
 				<div className="rewards-attribute between-column">
 					<div className="header-wrapper center">
-						<img
+						<Image
 							className="header-style"
 							src={headerStyle.src}
 							alt="header style"
@@ -68,7 +69,7 @@ const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
 					</div>
 					<div className="value around">
 						{rewardItems?.map((item) => (
-							<img
+							<Image
 								key={item.name}
 								src={item.image}
 								alt="item image"

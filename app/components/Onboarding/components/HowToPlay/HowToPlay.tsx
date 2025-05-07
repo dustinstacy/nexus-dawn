@@ -5,6 +5,7 @@ import { NextStage } from '@interfaces'
 import { onboardingStages } from '../../constants'
 
 import './howToPlay.scss'
+import Image from 'next/image'
 
 const HowToPlay = ({ nextStage }: NextStage) => {
 	const handleClick = async () => {
@@ -17,7 +18,7 @@ const HowToPlay = ({ nextStage }: NextStage) => {
 				<div className="header-wrapper">
 					<h1 className="header">
 						{onboardingStages[4].header}
-						<img
+						<Image
 							className="logo abs-center"
 							src={smlogo.src}
 							alt="small logo"

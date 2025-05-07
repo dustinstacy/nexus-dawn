@@ -9,6 +9,7 @@ import { createCardData } from '@utils'
 import { completeUserStartingData, skipOnboarding } from '../../api'
 import { onboardingStages } from '../../constants'
 import './introduction.scss'
+import Image from 'next/image'
 
 const Introduction = ({ nextStage }: NextStage) => {
 	const user = useUserStore((state) => state.user)
@@ -53,7 +54,7 @@ const Introduction = ({ nextStage }: NextStage) => {
 				<div className="header-wrapper">
 					<h1 className="header">
 						{onboardingStages[0].header}
-						<img
+						<Image
 							className="logo abs-center"
 							src={smlogo.src}
 							alt="small logo"

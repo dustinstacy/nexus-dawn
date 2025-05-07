@@ -6,6 +6,7 @@ import { User } from '@interfaces'
 import { useUserStore, useItemsStore, useOpponentsStore } from '@stores'
 
 import './levelUpScreen.scss'
+import Image from 'next/image'
 
 interface LevelUpScreenProps {
 	setNewLevelAlert: (state: boolean) => void
@@ -50,7 +51,7 @@ const LevelUpScreen = ({ setNewLevelAlert }: LevelUpScreenProps) => {
 								New Market <br />
 								Item Available
 							</h2>
-							<img
+							<Image
 								src={sortedItems[level - 1]?.image}
 								alt="market item"
 							/>
@@ -60,7 +61,7 @@ const LevelUpScreen = ({ setNewLevelAlert }: LevelUpScreenProps) => {
 							<h2>
 								New Opponent <br /> Unlocked
 							</h2>
-							<img
+							<Image
 								src={allOpponents[level - 1]?.image}
 								alt="unlocked opponent"
 							/>
@@ -74,7 +75,7 @@ const LevelUpScreen = ({ setNewLevelAlert }: LevelUpScreenProps) => {
 					</h2>
 					<div className="coin-reward center">
 						<span>{level * 1.5 * 100}</span>
-						<img
+						<Image
 							src={coinImage.src}
 							alt="coin-image"
 						/>

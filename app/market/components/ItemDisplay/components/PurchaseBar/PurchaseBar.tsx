@@ -9,6 +9,7 @@ import { useUserStore } from '@stores'
 
 import { calculatePrice } from './utils'
 import './purchaseBar.scss'
+import Image from 'next/image'
 
 interface PurchaseBar {
 	chosenItem: IItem | null
@@ -104,7 +105,7 @@ const PurchaseBar = ({
 								</span>
 							)}
 							{finalPrice}
-							<img
+							<Image
 								src={coinImage.src}
 								alt="coin"
 							/>

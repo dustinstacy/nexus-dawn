@@ -10,6 +10,7 @@ import { onboardingStages } from '../../constants'
 import { marketMenu, purchaseButton } from '../../images'
 
 import './howToGetCards.scss'
+import Image from 'next/image'
 
 const HowToGetCards = ({ nextStage }: NextStage) => {
 	const user = useUserStore((state) => state.user)
@@ -39,7 +40,7 @@ const HowToGetCards = ({ nextStage }: NextStage) => {
 						<div className="header-wrapper">
 							<h1 className="header">
 								{onboardingStages[1].header}
-								<img
+								<Image
 									className="logo abs-center"
 									src={smlogo.src}
 									alt="small logo"
@@ -58,7 +59,7 @@ const HowToGetCards = ({ nextStage }: NextStage) => {
 						{step === 2 && (
 							<div className="body box step-2 center">
 								<p>{onboardingStages[1].body[1]}</p>
-								<img
+								<Image
 									className="market-menu-image"
 									src={marketMenu.src}
 									alt="market menu"
@@ -72,7 +73,7 @@ const HowToGetCards = ({ nextStage }: NextStage) => {
 						{step === 3 && (
 							<div className="body box center-column">
 								<p>{onboardingStages[1].body[2]}</p>
-								<img
+								<Image
 									className="purchase-bar-image"
 									src={purchaseButton.src}
 									alt="market menu"

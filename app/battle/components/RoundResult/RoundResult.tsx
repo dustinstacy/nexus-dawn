@@ -4,6 +4,7 @@ import { BattleData } from '@interfaces'
 
 import { BattleScores, RoundScores } from './components'
 import './roundResult.scss'
+import Image from 'next/image'
 
 // Renders all of the round scores as well as the cumulative battle score for each player
 const RoundResult = ({ playerOne, playerTwo, battleState }: BattleData) => {
@@ -13,7 +14,7 @@ const RoundResult = ({ playerOne, playerTwo, battleState }: BattleData) => {
 		<div className="round-result fill around">
 			<div className="round-player start-column">
 				<h4>{playerTwo.user?.name}</h4>
-				<img
+				<Image 
 					src={playerTwo.user?.avatar}
 					alt="p2 image"
 				/>
@@ -39,7 +40,7 @@ const RoundResult = ({ playerOne, playerTwo, battleState }: BattleData) => {
 
 			<div className="round-player start-column">
 				<h4>{playerOne.user?.username}</h4>
-				<img
+				<Image
 					src={playerOne.user?.image}
 					alt="p1 image"
 				/>

@@ -71,7 +71,7 @@ const Card = ({
 				style={{ background: color || defaultColor }}
 				ref={dragImageRef}
 			>
-				<img
+				<Image
 					className="card__image fill"
 					src={image}
 					alt={_id}
@@ -84,7 +84,7 @@ const Card = ({
 				</div>
 			</div>
 			<div className="card__side card__back fill">
-				<img
+				<Image
 					className="card__image"
 					src={cardback.src}
 					alt={_id}

@@ -13,6 +13,7 @@ import { onboardingStages } from '../../constants'
 import { packOdds, openPack, cardValues } from '../../images'
 
 import './howToOpenPacks.scss'
+import Image from 'next/image'
 
 const HowToOpenPacks = ({ nextStage }: NextStage) => {
 	const user = useUserStore((state) => state.user)
@@ -60,7 +61,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 						<div className="header-wrapper">
 							<h1 className="header">
 								{onboardingStages[2].header}
-								<img
+								<Image
 									className="logo abs-center"
 									src={smlogo.src}
 									alt="small logo"
@@ -79,7 +80,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 						{step === 2 && (
 							<div className="body box center">
 								<p>{onboardingStages[2].body[1]}</p>
-								<img
+								<Image
 									src={packOdds.src}
 									alt="pack odds"
 								/>
@@ -92,7 +93,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 						{step === 3 && (
 							<div className="body box center">
 								<p>{onboardingStages[2].body[2]}</p>
-								<img
+								<Image
 									src={openPack.src}
 									alt="pack odds"
 								/>
@@ -105,7 +106,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 						{step === 4 && (
 							<div className="body box center">
 								<p>{onboardingStages[2].body[3]}</p>
-								<img
+								<Image
 									src={cardValues.src}
 									alt="cardValues"
 								/>
