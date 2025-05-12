@@ -59,16 +59,16 @@ const HowToPlay = () => {
             <button
               onClick={() => goToPage(currentPage - 1)}
               disabled={currentPage === 0}
-              className="nav-button"
+              className="previous-button"
             >
-              ◀ Back
+              Previous
             </button>
             <button
               onClick={() => goToPage(currentPage + 1)}
               disabled={currentPage === totalPages - 1}
-              className="nav-button"
+              className="next-button"
             >
-              Next ▶
+              Next
             </button>
           </div>
         </div>
