@@ -1,6 +1,6 @@
+import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { useRouter } from 'next/navigation'
 
 import { Button, ModalOverlay } from '@components'
 import { ICard, IOpponent, Odds } from '@interfaces'

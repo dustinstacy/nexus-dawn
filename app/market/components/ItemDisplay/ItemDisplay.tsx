@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-import { IItem, ChosenQuantity } from '@interfaces'
 import { UserInventory } from '@components'
+import { IItem, ChosenQuantity } from '@interfaces'
 
 import { PurchaseBar, ChosenItem } from './components'
 import './itemDisplay.scss'

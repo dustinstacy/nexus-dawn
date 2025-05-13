@@ -1,5 +1,8 @@
 import { FlatCompat } from '@eslint/eslintrc'
-import eslintConfigPrettier from 'eslint-config-prettier/flat'
+import prettierConfig from 'eslint-config-prettier/flat'
+
+import prettierPlugin from 'eslint-plugin-prettier'
+import prettierImportPlugin from 'eslint-plugin-import'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -10,10 +13,59 @@ const compat = new FlatCompat({
 	baseDirectory: __dirname
 })
 
-export default [
+const eslintConfig = [
 	...compat.extends('next/core-web-vitals', 'next/typescript'),
+
+	// Ignore variables that start with an underscore
 	{
+		files: ['**/*.ts', '**/*.tsx'],
 		rules: {
+			'@typescript-eslint/no-unused-vars': [
+				'error',
+				{
+					argsIgnorePattern: '^_',
+					varsIgnorePattern: '^_',
+					caughtErrorsIgnorePattern: '^_'
+				}
+			]
+		}
+	},
+
+	// Enforce import rules
+	{
+		files: ['**/*.{js,jsx,ts,tsx}'],
+		plugins: {
+			import: prettierImportPlugin
+		},
+		settings: {
+			'import/resolver': {
+				typescript: true,
+				node: true
+			}
+		},
+		rules: {
+			'import/no-unresolved': 'error',
+			'import/first': 'error',
+			'import/order': [
+				'error',
+				{
+					groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index']],
+					'newlines-between': 'always',
+					alphabetize: { order: 'asc', caseInsensitive: true }
+				}
+			]
+		}
+	},
+
+	// Prettier configuration - MUST COME LAST!
+	{
+		files: ['**/*.{js,jsx,ts,tsx}'],
+		plugins: {
+			prettier: prettierPlugin
+		},
+		rules: {
+			...prettierConfig.rules,
+			'prettier/prettier': 'error',
 			'@next/next/no-img-element': 'off',
 			'react-hooks/exhaustive-deps': 'off',
 			'@typescript-eslint/no-explicit-any': 'off',
@@ -23,5 +75,11 @@ export default [
 			]
 		}
 	},
-	eslintConfigPrettier
+
+	// Ignore specific directories
+	{
+		ignores: ['.next/', 'node_modules/']
+	}
 ]
+
+export default eslintConfig

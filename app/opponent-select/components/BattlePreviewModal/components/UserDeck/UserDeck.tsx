@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { addCardToDeck, removeCardFromDeck } from '@api'
 import { headerStyle } from '@assets'
 import { Button } from '@components'
@@ -6,7 +8,6 @@ import { useUserStore } from '@stores'
 import { calculateDeckPower, calculateOptimizedDeck, classSet } from '@utils'
 
 import './userDeck.scss'
-import { useEffect, useState } from 'react'
 
 interface UserDeckProps {
 	selectedOpponent: IOpponent

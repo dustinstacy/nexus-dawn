@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 
 import { cardback } from '@assets'
-import { classSet } from '@utils'
 import { ICard } from '@interfaces'
+import { classSet } from '@utils'
 
 import './card.scss'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { useUserStore } from '@stores'
 import { IItem } from '@interfaces'
+import { useUserStore } from '@stores'
 
 import './itemInformation.scss'
 

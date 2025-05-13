@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Button, TextInput } from '@components'
 import { FormData, Register } from '@interfaces'
@@ -11,7 +12,6 @@ import { sendAuthRequest, sendPasswordResetRequest } from './api'
 import { FormFooter } from './components'
 import { toCamelCase } from './utils'
 
-import { toast } from 'react-toastify'
 import './authForm.scss'
 
 // Displays login of registration form based on the value of the register prop

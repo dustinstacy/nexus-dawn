@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { Card } from '@components'
+import { ICard, CPUDetails, UserDetails } from '@interfaces'
 import { classSet } from '@utils'
 
 import './hand.scss'
-import { ICard, CPUDetails, UserDetails } from '@interfaces'
 
 interface HandProps {
 	player: UserDetails | CPUDetails

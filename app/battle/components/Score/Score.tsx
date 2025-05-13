@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { blueScore, redScore } from './images'
 
 import './score.scss'

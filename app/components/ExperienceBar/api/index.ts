@@ -1,5 +1,5 @@
-import { customFetch } from '@utils'
 import { User } from '@interfaces'
+import { customFetch } from '@utils'
 
 export const handleLevelUp = async (user: User) => {
 	try {

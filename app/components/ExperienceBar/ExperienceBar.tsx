@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react'
 
 import { ModalOverlay } from '@components'
+import { userLevels } from '@constants'
+import { User } from '@interfaces'
 import { useUserStore } from '@stores'
 
 import { handleLevelUp } from './api'
 import { LevelUpScreen } from './components'
-import { userLevels } from '@constants'
-import { User } from '@interfaces'
 
 import './experienceBar.scss'
 

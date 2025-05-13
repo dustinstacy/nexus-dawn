@@ -10,9 +10,9 @@ import { useOpponentsStore, useUserStore } from '@stores'
 import { updateState } from '@utils'
 
 import { BattleResults, Board, Hand, RoundResult } from './components'
-import { assignColorsAndDealCards, shuffleCards } from './utils'
-import { battleProcessor } from './lib/logic'
 import { cpuMove } from './lib/ai'
+import { battleProcessor } from './lib/logic'
+import { assignColorsAndDealCards, shuffleCards } from './utils'
 
 import './battle.scss'
 

@@ -1,4 +1,5 @@
 import { BattleState, ICard } from '@interfaces'
+
 import { evaluate, evaluateSameAndPlus } from './evaluations'
 
 // TMP config rules here

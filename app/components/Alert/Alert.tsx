@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+
 import { ModalOverlay } from '@components'
 
 import './alert.scss'
