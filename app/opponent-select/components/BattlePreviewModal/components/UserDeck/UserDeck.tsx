@@ -109,7 +109,6 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 					/>
 					<Button
 						label="Edit Deck"
-						type="link"
 						path="/collection"
 					/>
 				</div>

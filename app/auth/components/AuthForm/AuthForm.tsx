@@ -171,7 +171,6 @@ const AuthForm = ({ register }: Register) => {
 					</form>
 					<Button
 						label="Submit"
-						type="submit"
 						onClick={(e: React.MouseEvent) => handleSubmit(e)}
 						disabled={loading}
 					/>
