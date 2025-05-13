@@ -1,4 +1,4 @@
-import { TbPlayCard } from 'react-icons/tb'
+import { TbPlayCard } from '@react-icons/all-files/tb/TbPlayCard'
 
 import { Avatar, ExperienceBar } from '@components'
 import { useUserStore } from '@stores'

@@ -1,14 +1,14 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { useEffect } from 'react'
 
 import { Button, ModalOverlay } from '@components'
 import { ICard, IOpponent, Odds } from '@interfaces'
-import { getRandomCards, assignRandomDeckValues } from '@randomizers'
+import { assignRandomDeckValues, getRandomCards } from '@randomizers'
 import { useCardsStore, useOpponentsStore, useUserStore } from '@stores'
 
-import { SelectedOpponent, UserDeck } from './components'
 import './battlePreviewModal.scss'
+import { SelectedOpponent, UserDeck } from './components'
 
 // Renders the battle preview overlay upon selection of an opponent
 // Allows the user to view the selected opponent, battle rules, and user deck.

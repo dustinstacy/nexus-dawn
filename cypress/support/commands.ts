@@ -35,3 +35,17 @@
 //     }
 //   }
 // }
+
+export {}
+
+declare global {
+	namespace Cypress {
+		interface Chainable {
+			getDataCy(selector: string, ...args: any[]): Chainable<JQuery<HTMLElement>>
+		}
+	}
+}
+
+Cypress.Commands.add('getDataCy', (selector, ...args) => {
+	return cy.get(`[data-cy=${selector}]`, ...args)
+})

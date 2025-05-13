@@ -1,5 +1,5 @@
+import { TbArrowBigRightLines } from '@react-icons/all-files/tb/TbArrowBigRightLines'
 import React from 'react'
-import { TbArrowBigRightLines } from 'react-icons/tb'
 
 import { addItemToInventory, removeItemFromInventory } from '@api'
 import { Button } from '@components'

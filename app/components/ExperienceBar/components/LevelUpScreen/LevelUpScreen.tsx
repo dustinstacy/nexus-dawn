@@ -1,9 +1,9 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
 import { useEffect, useState } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import { coinImage } from '@assets'
 import { User } from '@interfaces'
-import { useUserStore, useItemsStore, useOpponentsStore } from '@stores'
+import { useItemsStore, useOpponentsStore, useUserStore } from '@stores'
 
 import './levelUpScreen.scss'
 

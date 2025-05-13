@@ -1,6 +1,6 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
+import { VscDebugRestart } from '@react-icons/all-files/vsc/VscDebugRestart'
 import React, { useState } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Card } from '@components'
 import { CardValues, ICard } from '@interfaces'
