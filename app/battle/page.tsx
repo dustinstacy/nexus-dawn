@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { getCurrentBattleNumber, postBattleLog, updateUserStats } from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
@@ -428,7 +428,7 @@ const Battle = () => {
 							onClick={() => setAlertActive(false)}
 						/>
 						<Button
-							label="Forefeit"
+							label="Forfeit"
 							onClick={() => forfeitBattle()}
 						/>
 					</div>
