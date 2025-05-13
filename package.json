@@ -10,7 +10,8 @@
 		"validate": "npm run format && npm run lint:fix && npm run build",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix",
-		"start": "next start"
+		"start": "next start",
+		"cy:open": "cypress open"
 	},
 	"dependencies": {
 		"@emotion/styled": "^11.14.0",
@@ -33,6 +34,7 @@
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
+		"cypress": "^14.3.3",
 		"eslint": "^9",
 		"eslint-config-next": "15.1.7",
 		"eslint-config-prettier": "^10.1.2",
