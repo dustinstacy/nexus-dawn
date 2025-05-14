@@ -47,20 +47,4 @@
 			}
 		}
 	}
-
-	.checkbox {
-		font-size: 48px;
-
-		svg.check {
-			font-size: 48px;
-		}
-
-		@media screen and (max-width: 912px) {
-			font-size: 36px;
-
-			svg.check {
-				font-size: 36px;
-			}
-		}
-	}
 }
