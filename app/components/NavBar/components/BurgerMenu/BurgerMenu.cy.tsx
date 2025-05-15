@@ -17,8 +17,8 @@ describe('BurgerMenu Component', () => {
 		cy.getDataCy('open-icon').should('not.exist')
 		cy.getDataCy('close-icon').should('exist')
 
-		cy.getDataCy('burger-menu-link').eq(0).should('exist')
-		cy.getDataCy('burger-menu-link').eq(0).click()
+		cy.getDataCy('nav-link').eq(0).should('exist')
+		cy.getDataCy('nav-link').eq(0).click()
 		cy.getDataCy('close-icon').should('not.exist')
 	})
 })

@@ -28,17 +28,20 @@ const Links = ({ menu, onClick }: LinksProps) => {
 		)
 
 	return (
-		<div className={`${menu}-links`}>
+		<div
+			className={`${menu}-links`}
+			data-cy="links-container"
+		>
 			{navlinks.map((link) => (
 				<Link
 					className={linkClasses(link.path)}
 					key={link.name}
 					href={link.path}
 					onClick={(e) => onClick?.(e)}
-					data-cy="burger-menu-link"
+					data-cy="nav-link"
 				>
 					{link.image}
-					<span>{link.name}</span>
+					<span data-cy="link-text">{link.name}</span>
 				</Link>
 			))}
 		</div>
