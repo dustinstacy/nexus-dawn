@@ -35,6 +35,7 @@ const Links = ({ menu, onClick }: LinksProps) => {
 					key={link.name}
 					href={link.path}
 					onClick={(e) => onClick?.(e)}
+					data-cy="burger-menu-link"
 				>
 					{link.image}
 					<span>{link.name}</span>
