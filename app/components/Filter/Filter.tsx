@@ -18,16 +18,23 @@ interface FilterProps {
 const Filter = ({ label, value, setValue, options, id }: FilterProps) => {
 	return (
 		<div className="filter center-column">
-			<label htmlFor={id}>{label}</label>
+			<label
+				htmlFor={id}
+				data-cy="filter-label"
+			>
+				{label}
+			</label>
 			<select
 				id={id}
 				value={value}
 				onChange={(e) => setValue(e.target.value)}
+				data-cy="filter-select"
 			>
 				{options?.map((option) => (
 					<option
 						key={option}
 						value={option}
+						data-cy="filter-option"
 					>
 						{option}
 					</option>
