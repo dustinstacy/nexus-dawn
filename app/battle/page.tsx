@@ -3,10 +3,10 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import { getCurrentBattleNumber, postBattleLog, updateUserStats } from '@api'
+import api from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
 import { BattleState, CPUDetails, ICard, UserDetails } from '@interfaces'
-import { useOpponentsStore, useUserStore } from '@stores'
+import stores from '@stores'
 import { updateState } from '@utils'
 
 import { BattleResults, Board, Hand, RoundResult } from './components'
@@ -17,6 +17,8 @@ import { assignColorsAndDealCards, shuffleCards } from './utils'
 import './battle.scss'
 
 const Battle = () => {
+	const { getCurrentBattleNumber, postBattleLog, updateUserStats } = api
+	const { useOpponentsStore, useUserStore } = stores
 	const router = useRouter()
 	// Get user and opponent information from their respective sources
 	const user = useUserStore((state) => state.user)

@@ -1,7 +1,5 @@
-import React from 'react'
-
 import { IItem } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './itemInformation.scss'
 
@@ -11,6 +9,7 @@ interface ItemInformation {
 
 // chosenItem: Item currently chosen from market items
 const ItemInformation = ({ chosenItem }: ItemInformation) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const { image, info, contents, name } = chosenItem || {}
 

@@ -4,9 +4,10 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 
 import { NavBar } from '@components'
-import { useCardsStore, useItemsStore, useOpponentsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 export default function ClientLayout({ children }: { children: React.ReactNode }) {
+	const { useUserStore, useCardsStore, useItemsStore, useOpponentsStore } = stores
 	const pathname = usePathname()
 	const user = useUserStore((state) => state.user)
 	const userCards = useUserStore((state) => state.userCards)

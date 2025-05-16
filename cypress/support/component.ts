@@ -13,8 +13,11 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
-// Import commands.js using ES2015 syntax:
-import './commands'
+declare global {
+	namespace Cypress {
+		interface Chainable {}
+	}
+}
 
 import { mount } from 'cypress/react'
 import '../../app/setup'
@@ -28,11 +31,14 @@ declare global {
 	namespace Cypress {
 		interface Chainable {
 			mount: typeof mount
+			getDataCy(selector: string): Chainable<JQuery<HTMLElement>>
 		}
 	}
 }
 
 Cypress.Commands.add('mount', mount)
 
-// Example use:
-// cy.mount(<MyComponent />)
+// Add support for data-cy attribute selector
+Cypress.Commands.add('getDataCy', (selector: string) => {
+	return cy.get(`[data-cy="${selector}"]`)
+})

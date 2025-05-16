@@ -4,13 +4,14 @@ import { useState } from 'react'
 
 import { Onboarding } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { Loader, PackContents, UserPacks } from './components'
 import './packs.scss'
 
 // Component for opening packs and displaying their contents
 const OpenPacks = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const stage = user?.onboardingStage ?? {}
 

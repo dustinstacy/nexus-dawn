@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { addCardToDeck, removeCardFromDeck } from '@api'
+import api from '@api'
 import { headerStyle } from '@assets'
 import { Button } from '@components'
 import { ICard, IOpponent } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { calculateDeckPower, calculateOptimizedDeck, classSet } from '@utils'
 
 import './userDeck.scss'
@@ -15,6 +15,8 @@ interface UserDeckProps {
 
 // Renders the user's deck information.
 const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
+	const { addCardToDeck, removeCardFromDeck } = api
+	const { useUserStore } = stores
 	const userCards = useUserStore((state) => state.userCards)
 	const userDeck = useUserStore((state) => state.userDeck)
 	const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)

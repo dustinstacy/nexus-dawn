@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from 'react'
 
-import { postBattleLog, updateUserStats } from '@api'
+import api from '@api'
 import { Alert, Button } from '@components'
 import { BattleResult, User } from '@interfaces'
-import { useOpponentsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import { BattlePreviewModal, OpponentCard } from './components'
 import './opponentSelect.scss'
@@ -13,6 +13,8 @@ import './opponentSelect.scss'
 // Renders a menu of CPU opponents to select from.
 // Displays alert if saved battle state exists.
 const OpponentSelect = () => {
+	const { postBattleLog, updateUserStats } = api
+	const { useOpponentsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const allOpponents = useOpponentsStore((state) => state.allOpponents)
 	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)

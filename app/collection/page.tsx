@@ -3,14 +3,15 @@
 import { useState } from 'react'
 
 import { Filter, Onboarding } from '@components'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
+import './collection.scss'
 import { CardCollection, DeckBar, UserPanel } from './components'
 import { deckOptions, rarityOptions, valueOptions } from './constants/filterOptions'
-import './collection.scss'
 
 // Renders user information, user's card collection with filter options, and deck management capabilities
 const Collection = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const stage = user?.onboardingStage ?? {}
 

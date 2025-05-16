@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { Button, ModalOverlay } from '@components'
 import { ICard, IOpponent, Odds } from '@interfaces'
 import { assignRandomDeckValues, getRandomCards } from '@randomizers'
-import { useCardsStore, useOpponentsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import './battlePreviewModal.scss'
 import { SelectedOpponent, UserDeck } from './components'
@@ -14,6 +14,7 @@ import { SelectedOpponent, UserDeck } from './components'
 // Allows the user to view the selected opponent, battle rules, and user deck.
 // Provides options to edit the deck and start the battle.
 const BattlePreviewModal = () => {
+	const { useCardsStore, useOpponentsStore, useUserStore } = stores
 	const userDeck = useUserStore((state) => state.userDeck)
 	const allCards = useCardsStore((state) => state.allCards)
 	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)

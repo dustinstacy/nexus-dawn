@@ -1,7 +1,5 @@
-import React from 'react'
-
 import { IOpponent } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { classSet } from '@utils'
 
 import './opponentCard.scss'
@@ -14,6 +12,7 @@ interface OpponentCardProps {
 
 // Renders a selectable opponent card with an image and name display.
 const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: OpponentCardProps) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const { avatar, level, name } = opponent
 

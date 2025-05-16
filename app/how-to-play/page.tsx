@@ -1,14 +1,13 @@
 'use client'
 
-import React from 'react'
-
 import { Onboarding } from '@components'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { howToPlay } from './constants'
 import './howToPlay.scss'
 
 const HowToPlay = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const stage = user?.onboardingStage ?? {}
 

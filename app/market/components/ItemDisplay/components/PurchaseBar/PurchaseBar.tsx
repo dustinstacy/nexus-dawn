@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
-import { deductCoin, addItemToInventory } from '@api'
+import api from '@api'
 import { coinImage } from '@assets'
 import { Button } from '@components'
 import { IItem, User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
-import { calculatePrice } from './utils'
 import './purchaseBar.scss'
+import { calculatePrice } from './utils'
 
 interface PurchaseBar {
 	chosenItem: IItem | null
@@ -28,6 +28,8 @@ const PurchaseBar = ({
 	finalPrice,
 	setFinalPrice
 }: PurchaseBar) => {
+	const { deductCoin, addItemToInventory } = api
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const { coin } = (user as User) ?? {}

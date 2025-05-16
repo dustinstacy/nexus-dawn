@@ -1,9 +1,9 @@
-import { addCardToCollection, addCoin, addItemToInventory } from '@api'
+import api from '@api'
 import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { IItem, NextStage, User } from '@interfaces'
 import { assignRandomCardValues, getRandomCards } from '@randomizers'
-import { useCardsStore, useItemsStore, useUserStore } from '@stores'
+import stores from '@stores'
 import { createCardData } from '@utils'
 
 import { completeUserStartingData, skipOnboarding } from '../../api'
@@ -11,6 +11,8 @@ import { onboardingStages } from '../../constants'
 import './introduction.scss'
 
 const Introduction = ({ nextStage }: NextStage) => {
+	const { addCardToCollection, addCoin, addItemToInventory } = api
+	const { useCardsStore, useItemsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const allCards = useCardsStore((state) => state.allCards)

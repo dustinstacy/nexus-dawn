@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 import { coinImage } from '@assets'
 import { User } from '@interfaces'
-import { useItemsStore, useOpponentsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import './levelUpScreen.scss'
 
@@ -12,6 +12,7 @@ interface LevelUpScreenProps {
 }
 
 const LevelUpScreen = ({ setNewLevelAlert }: LevelUpScreenProps) => {
+	const { useItemsStore, useOpponentsStore, useUserStore } = stores
 	const { user } = useUserStore()
 	const { allItems } = useItemsStore()
 	const { allOpponents } = useOpponentsStore()

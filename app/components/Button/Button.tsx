@@ -12,12 +12,13 @@ interface ButtonProps {
 	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 	disabled?: boolean
 	onKeyDown?: boolean
+	dataCy?: string
 }
 
 // Renders button component that can function as a navigation link or a custom onClick function.
 // Set 'path' to navigate to a specific page.
 // Set 'onClick' to define a custom function to execute on button click.
-const Button = ({ label, path, onClick, disabled }: ButtonProps) => {
+const Button = ({ label, path, onClick, disabled, dataCy }: ButtonProps) => {
 	const router = useRouter()
 
 	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,6 +31,7 @@ const Button = ({ label, path, onClick, disabled }: ButtonProps) => {
 		<button
 			className={buttonClasses}
 			onClick={(e) => handleClick(e)}
+			data-cy={dataCy}
 		>
 			<span>{label}</span>
 		</button>

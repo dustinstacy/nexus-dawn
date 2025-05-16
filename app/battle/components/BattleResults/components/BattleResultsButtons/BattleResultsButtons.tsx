@@ -1,9 +1,8 @@
 import { useRouter } from 'next/navigation'
-import React from 'react'
 
-import { postBattleLog } from '@api'
+import api from '@api'
 import { Button } from '@components'
-import { useOpponentsStore } from '@stores'
+import stores from '@stores'
 
 import './battleResultsButtons.scss'
 
@@ -12,6 +11,8 @@ interface BattleResultsButtonsProps {
 }
 
 const BattleResultsButtons = ({ loading }: BattleResultsButtonsProps) => {
+	const { postBattleLog } = api
+	const { useOpponentsStore } = stores
 	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
 	const setSelectedOpponentDeck = useOpponentsStore((state) => state.setSelectedOpponentDeck)
 	const router = useRouter()

@@ -1,7 +1,7 @@
 'use client'
 
 import { Avatar } from '@components'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { AvatarUpdate } from './components'
 
@@ -9,6 +9,7 @@ import './accountDetails.scss'
 
 // A component that displays the account details of the current user.
 const AccountDetails = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 
 	return (

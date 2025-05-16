@@ -1,6 +1,6 @@
 import { Filter } from '@components'
 import { IItem } from '@interfaces'
-import { useItemsStore, useUserStore } from '@stores'
+import stores from '@stores'
 import { uniqueItemsFilter } from '@utils'
 
 import './modificationSelector.scss'
@@ -14,6 +14,7 @@ const ModificationSelector = ({
 	selectedModification,
 	setSelectedModification
 }: ModificationSelector) => {
+	const { useItemsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const allItems = useItemsStore((state) => state.allItems)
 

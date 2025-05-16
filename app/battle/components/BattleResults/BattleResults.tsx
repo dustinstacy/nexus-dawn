@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { addCoin, addExperience, addItemToInventory, updateUserStats } from '@api'
+import api from '@api'
 import { IItem } from '@interfaces'
-import { useItemsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
+import './battleResults.scss'
 import { BattleResultsButtons, CoinReward, XPReward } from './components'
 import { resultsFrame } from './images'
-import './battleResults.scss'
 
 interface BattleResultsProps {
 	playerOne: any
@@ -15,6 +15,8 @@ interface BattleResultsProps {
 
 // Renders the user's battle results including any rewards gained
 const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
+	const { addCoin, addExperience, addItemToInventory, updateUserStats } = api
+	const { useItemsStore, useUserStore } = stores
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const allItems = useItemsStore((state) => state.allItems)
 

@@ -1,6 +1,6 @@
 import { Button, CardList } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './CardListContainer'
 
@@ -10,6 +10,7 @@ interface CardListContainer {
 }
 
 const CardListContainer = ({ setCardSelectOpen, setSelectedCard }: CardListContainer) => {
+	const { useUserStore } = stores
 	const userCards = useUserStore((state) => state.userCards)
 
 	const sortedCards = userCards.sort(

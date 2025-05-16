@@ -1,6 +1,6 @@
 import { headerStyle } from '@assets'
 import { IOpponent } from '@interfaces'
-import { useItemsStore } from '@stores'
+import stores from '@stores'
 
 import './selectedOpponent.scss'
 
@@ -10,6 +10,7 @@ interface SelectedOpponentProps {
 
 // Renders selected opponent information
 const SelectedOpponent = ({ selectedOpponent }: SelectedOpponentProps) => {
+	const { useItemsStore } = stores
 	const allItems = useItemsStore((state) => state.allItems)
 	const { name, image, minPower, maxPower, rewards, rounds } = selectedOpponent
 

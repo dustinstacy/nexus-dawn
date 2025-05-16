@@ -1,4 +1,14 @@
-export { default as useCardsStore } from './useCardsStore'
-export { default as useItemsStore } from './useItemsStore'
-export { default as useOpponentsStore } from './useOpponentsStore'
-export { default as useUserStore } from './useUserStore'
+import useCardsStore from './useCardsStore'
+import useItemsStore from './useItemsStore'
+import useOpponentsStore from './useOpponentsStore'
+import useUserStore from './useUserStore'
+
+// Exporting
+const stores = {
+	useCardsStore,
+	useItemsStore,
+	useOpponentsStore,
+	useUserStore
+}
+
+export default stores

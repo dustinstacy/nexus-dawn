@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Button, Card } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './modifiedCard.scss'
 
@@ -13,6 +13,7 @@ interface ModifiedCard {
 }
 
 const ModifiedCard = ({ selectedCard, setModificationComplete, setSelectedCard }: ModifiedCard) => {
+	const { useUserStore } = stores
 	const userCards = useUserStore((state) => state.userCards)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 

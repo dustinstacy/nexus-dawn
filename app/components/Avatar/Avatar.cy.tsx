@@ -1,13 +1,13 @@
-import { useUserStore } from '@stores'
-
 import Avatar from './Avatar'
+
+import stores from '@stores'
 
 describe('<Avatar />', () => {
 	const imgUrl = 'url.to.som.image'
 
 	beforeEach(() => {
 		// Stub the Zustand store to return a user
-		useUserStore.setState({
+		stores.useUserStore.setState({
 			// @ts-expect-error These are the only props that matter here
 			user: {
 				image: imgUrl,
@@ -27,7 +27,7 @@ describe('<Avatar />', () => {
 
 	it('renders without crashing when user is null', () => {
 		// Update the Zustand store to return null for the user
-		useUserStore.setState({
+		stores.useUserStore.setState({
 			user: null
 		})
 

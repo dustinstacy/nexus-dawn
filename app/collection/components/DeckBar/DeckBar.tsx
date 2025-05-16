@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
-import { addCardToDeck, removeCardFromDeck } from '@api'
-import { Filter, Button } from '@components'
+import api from '@api'
+import { Button, Filter } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { calculateDeckPower, calculateOptimizedDeck } from '@utils'
 
 import { removeAllFromDeck } from './api'
@@ -12,6 +12,8 @@ import './deckBar.scss'
 
 // Renders the user's deck statistics and provides options to automatically manage the deck
 const DeckBar = () => {
+	const { addCardToDeck, removeCardFromDeck } = api
+	const { useUserStore } = stores
 	const userCards = useUserStore((state) => state.userCards)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 	const userDeck = useUserStore((state) => state.userDeck)

@@ -1,6 +1,6 @@
 import { Button, Card } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './packContents.scss'
 
@@ -11,6 +11,7 @@ interface PackContents {
 
 // Render contents of opened pack and button to return
 const PackContents = ({ packContents, setPackContents }: PackContents) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const stage = user?.onboardingStage
 

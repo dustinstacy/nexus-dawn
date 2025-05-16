@@ -1,12 +1,13 @@
 import { TbPlayCard } from '@react-icons/all-files/tb/TbPlayCard'
 
 import { Avatar, ExperienceBar } from '@components'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './userPanel.scss'
 
 // Renders user information including experience gained, battle stats, and card counts
 const UserPanel = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const userCards = useUserStore((state) => state.userCards)
 	const { level, stats, username } = user ?? {}

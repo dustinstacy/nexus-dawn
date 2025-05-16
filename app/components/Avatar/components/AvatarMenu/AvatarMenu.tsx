@@ -5,13 +5,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { HandleToggle } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { classSet } from '@utils'
 
 import './avatarMenu.scss'
 
 // Renders the menu that is displayed when the user clicks on their navigation bar image.
 const AvatarMenu = ({ isOpen, toggleIsOpen }: HandleToggle) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const setUser = useUserStore((state) => state.setUser)
 	const stage = (user?.onboardingStage as number) ?? {}

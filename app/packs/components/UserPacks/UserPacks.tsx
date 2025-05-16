@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-import { addCardToCollection, removeItemFromInventory } from '@api'
+import api from '@api'
 import { Button } from '@components'
 import { ICard, IItem, User } from '@interfaces'
 import { assignRandomCardValues, getRandomCards } from '@randomizers'
-import { useCardsStore, useUserStore } from '@stores'
+import stores from '@stores'
 import { createCardData, uniqueItemsFilter } from '@utils'
 
 import { Carousel, UserPack } from './components'
@@ -16,6 +16,8 @@ interface UserPacks {
 }
 
 const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
+	const { addCardToCollection, removeItemFromInventory } = api
+	const { useCardsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)

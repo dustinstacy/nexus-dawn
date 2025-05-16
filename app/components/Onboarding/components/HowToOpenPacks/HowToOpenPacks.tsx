@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react'
 
-import { addCardToCollection } from '@api'
+import api from '@api'
 import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useToggle } from '@hooks'
 import { NextStage } from '@interfaces'
-import { getRandomCards, assignRandomCardValues } from '@randomizers'
-import { useCardsStore, useUserStore } from '@stores'
+import { assignRandomCardValues, getRandomCards } from '@randomizers'
+import stores from '@stores'
 import { createCardData } from '@utils'
 
 import { onboardingStages } from '../../constants'
-import { packOdds, openPack, cardValues } from '../../images'
+import { cardValues, openPack, packOdds } from '../../images'
 
 import './howToOpenPacks.scss'
 
 const HowToOpenPacks = ({ nextStage }: NextStage) => {
+	const { addCardToCollection } = api
+	const { useCardsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const userCards = useUserStore((state) => state.userCards)
 	const allCards = useCardsStore((state) => state.allCards)

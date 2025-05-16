@@ -1,18 +1,18 @@
 'use client'
 
 import Link from 'next/link'
-import React from 'react'
 
 import { Onboarding } from '@components'
 import { mainPanels, subPanels } from '@constants'
 import { User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { classSet } from '@utils'
 
 import ClientLayout from './client-layout'
 import './styles/home.scss'
 
 export default function Home() {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 
 	const stage = user?.onboardingStage ?? {}

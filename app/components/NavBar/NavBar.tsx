@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { smlogo } from '@assets'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { classSet } from '@utils'
 
 import { BurgerMenu, Links, UserSection } from './components'
@@ -18,6 +18,7 @@ interface NavBarProps {
 // Renders navigation Bar component that includes page links and user information
 // Renders a login button based on the value of the `login` prop
 const NavBar = ({ login }: NavBarProps) => {
+	const { useUserStore } = stores
 	const router = useRouter()
 	const user = useUserStore((state) => state.user)
 

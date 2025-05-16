@@ -4,7 +4,7 @@ import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useToggle } from '@hooks'
 import { NextStage } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { onboardingStages } from '../../constants'
 import { checkbox, optimizeDeck } from '../../images'
@@ -12,6 +12,7 @@ import { checkbox, optimizeDeck } from '../../images'
 import './howToBuildADeck.scss'
 
 const HowToBuildADeck = ({ nextStage }: NextStage) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const userDeck = useUserStore((state) => state.userDeck)
 	const stage = user?.onboardingStage

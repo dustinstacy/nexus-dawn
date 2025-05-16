@@ -1,10 +1,10 @@
 import { TbArrowBigRightLines } from '@react-icons/all-files/tb/TbArrowBigRightLines'
 import React from 'react'
 
-import { addItemToInventory, removeItemFromInventory } from '@api'
+import api from '@api'
 import { Button } from '@components'
 import { IItem, User } from '@interfaces'
-import { useItemsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import './fluxFusion.scss'
 
@@ -13,6 +13,8 @@ interface FluxFusion {
 }
 
 const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
+	const { addItemToInventory, removeItemFromInventory } = api
+	const { useItemsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const allItems = useItemsStore((state) => state.allItems)

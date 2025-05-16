@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import { navlinks } from '@constants'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 import { classSet } from '@utils'
 
 import './links.scss'
@@ -16,6 +16,7 @@ interface LinksProps {
 // - menu: The identifier for the menu, used to generate CSS class names.
 // - onClick: Add additional click event handler for the links.
 const Links = ({ menu, onClick }: LinksProps) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const stage = user?.onboardingStage ?? {}
 	const publicLinks = ['/', '/how-to-play']

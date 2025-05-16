@@ -4,7 +4,7 @@ import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useToggle } from '@hooks'
 import { NextStage, User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { onboardingStages } from '../../constants'
 import { marketMenu, purchaseButton } from '../../images'
@@ -12,6 +12,7 @@ import { marketMenu, purchaseButton } from '../../images'
 import './howToGetCards.scss'
 
 const HowToGetCards = ({ nextStage }: NextStage) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const { inventory } = (user as User) || {}
 	const stage = user?.onboardingStage

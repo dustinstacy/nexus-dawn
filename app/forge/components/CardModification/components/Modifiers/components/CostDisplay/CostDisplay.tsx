@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { removeItemFromInventory } from '@api'
+import api from '@api'
 import { Button } from '@components'
 import { CardValues, ICard, IItem, User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { updateCardValues } from '../../../../api'
 import './costDisplay.scss'
@@ -28,6 +28,8 @@ const CostDisplay = ({
 	setSelectedCard,
 	selectedCardValues
 }: CostDipslay) => {
+	const { removeItemFromInventory } = api
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const userCards = useUserStore((state) => state.userCards)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)

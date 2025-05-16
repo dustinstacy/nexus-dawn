@@ -3,14 +3,14 @@ import { customFetch } from '@utils'
 
 import { removeObjectByValue } from '../utils'
 
-export const addCardToCollection = async (cardData: CardData) => {
+const addCardToCollection = async (cardData: CardData) => {
 	await customFetch('/api/collections/new', {
 		method: 'PUT',
 		body: JSON.stringify(cardData)
 	})
 }
 
-export const addExperience = async (user: User, xp: number) => {
+const addExperience = async (user: User, xp: number) => {
 	await customFetch('/api/profiles/stats', {
 		method: 'PUT',
 		body: JSON.stringify({
@@ -19,7 +19,7 @@ export const addExperience = async (user: User, xp: number) => {
 	})
 }
 
-export const addCoin = async (user: User, amount: number) => {
+const addCoin = async (user: User, amount: number) => {
 	await customFetch('/api/profiles/info', {
 		method: 'PUT',
 		body: JSON.stringify({
@@ -29,7 +29,7 @@ export const addCoin = async (user: User, amount: number) => {
 }
 
 // Mark card as selected and add card to user's deck
-export const addCardToDeck = async (card: ICard) => {
+const addCardToDeck = async (card: ICard) => {
 	await customFetch(`/api/decks/add`, {
 		method: 'PUT',
 		body: JSON.stringify(card)
@@ -39,7 +39,7 @@ export const addCardToDeck = async (card: ICard) => {
 	})
 }
 
-export const addItemToInventory = async (user: User, item: IItem | IItem[]) => {
+const addItemToInventory = async (user: User, item: IItem | IItem[]) => {
 	const updatedInventory = [...user.inventory]
 	if (Array.isArray(item)) {
 		updatedInventory.push(...item)
@@ -55,7 +55,7 @@ export const addItemToInventory = async (user: User, item: IItem | IItem[]) => {
 	})
 }
 
-export const deductCoin = async (user: User, amount: number) => {
+const deductCoin = async (user: User, amount: number) => {
 	const updatedCoin = user.coin - amount
 	await customFetch('/api/profiles/info', {
 		method: 'PUT',
@@ -66,7 +66,7 @@ export const deductCoin = async (user: User, amount: number) => {
 }
 
 // Mark card as unselected and remove card from user's deck
-export const removeCardFromDeck = async (card: DeckCard) => {
+const removeCardFromDeck = async (card: DeckCard) => {
 	await customFetch(`/api/decks/${card._id}/remove`, {
 		method: 'PUT'
 	})
@@ -75,7 +75,7 @@ export const removeCardFromDeck = async (card: DeckCard) => {
 	})
 }
 
-export const removeItemFromInventory = async (user: User, item: IItem) => {
+const removeItemFromInventory = async (user: User, item: IItem) => {
 	const updatedInventory = removeObjectByValue(user.inventory, item.name)
 	await customFetch('/api/profiles/inventory', {
 		method: 'PUT',
@@ -85,7 +85,7 @@ export const removeItemFromInventory = async (user: User, item: IItem) => {
 	})
 }
 
-export const updateUserInfo = async <T extends keyof User>(property: T, value: any) => {
+const updateUserInfo = async <T extends keyof User>(property: T, value: any) => {
 	await customFetch('/api/profiles/info', {
 		method: 'PUT',
 		body: JSON.stringify({
@@ -95,7 +95,7 @@ export const updateUserInfo = async <T extends keyof User>(property: T, value: a
 }
 
 // Update user's stats when they choose to forfeit an active battle
-export const updateUserStats = async (user: User, result: string) => {
+const updateUserStats = async (user: User, result: string) => {
 	let results: Array<number> = []
 	switch (result) {
 		case 'win':
@@ -122,7 +122,7 @@ export const updateUserStats = async (user: User, result: string) => {
 }
 
 // Add battle log to database
-export const postBattleLog = async (battleLog: string) => {
+const postBattleLog = async (battleLog: string) => {
 	// Parse the battle log string into an array of objects
 	const parsedBattleLog = JSON.parse(battleLog)
 
@@ -157,9 +157,26 @@ export const postBattleLog = async (battleLog: string) => {
 }
 
 // Get current battle number
-export const getCurrentBattleNumber = async (): Promise<number> => {
+const getCurrentBattleNumber = async (): Promise<number> => {
 	const res = await customFetch('/api/battleLogs/battleNumber', {
 		method: 'GET'
 	})
 	return res.battleNumber
 }
+
+const api = {
+	addCardToCollection,
+	addExperience,
+	addCoin,
+	addCardToDeck,
+	addItemToInventory,
+	deductCoin,
+	removeCardFromDeck,
+	removeItemFromInventory,
+	updateUserInfo,
+	updateUserStats,
+	postBattleLog,
+	getCurrentBattleNumber
+}
+
+export default api

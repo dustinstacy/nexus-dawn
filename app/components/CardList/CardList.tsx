@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { addCardToDeck, removeCardFromDeck } from '@api'
+import api from '@api'
 import { Card } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './cardList.scss'
 import { CheckBox } from './components'
@@ -15,6 +15,8 @@ interface CardListProps {
 }
 
 const CardList = ({ cardArray, handleClick, hasCheckbox }: CardListProps) => {
+	const { addCardToDeck, removeCardFromDeck } = api
+	const { useUserStore } = stores
 	const { userCards, userDeck, fetchUserCards, fetchUserDeck } = useUserStore((state) => state)
 
 	// Selects and adds a single card to the user's deck
