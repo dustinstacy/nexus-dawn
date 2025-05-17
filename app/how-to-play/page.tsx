@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState } from 'react'
-import { howToPlay } from './constants'
 import Image from 'next/image'
+import React, { useState } from 'react'
+
+import { howToPlay } from './constants'
 import './howToPlay.scss'
 
 const HowToPlay = () => {

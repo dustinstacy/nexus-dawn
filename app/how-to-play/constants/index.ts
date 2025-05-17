@@ -1,8 +1,8 @@
 import ruleBasics from '../../assets/page-images/ruleBasics.png'
-import ruleMoves from '../../assets/page-images/ruleMoves.png'
-import ruleWins from '../../assets/page-images/ruleWins.png'
 import ruleExtendBattle from '../../assets/page-images/ruleExtendBattle.png'
+import ruleMoves from '../../assets/page-images/ruleMoves.png'
 import ruleScore from '../../assets/page-images/ruleScore.png'
+import ruleWins from '../../assets/page-images/ruleWins.png'
 
 export const howToPlay = [
 	{
