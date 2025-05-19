@@ -5,9 +5,11 @@ import { smlogo } from '@assets'
 import { User } from '@interfaces'
 import stores from '@stores'
 
+//eslint-disable-next-line import/order
+import HowToGetCards from './HowToGetCards'
+
 import { onboardingStages } from '../../constants'
 import { marketMenu, purchaseButton } from '../../images'
-import HowToGetCards from './HowToGetCards'
 
 const mountComponent = (showStep4 = false) => {
 	const nextStage = cy.stub()
