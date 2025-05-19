@@ -1,6 +1,6 @@
-import Avatar from './Avatar'
-
 import stores from '@stores'
+
+import Avatar from './Avatar'
 
 describe('<Avatar />', () => {
 	const imgUrl = 'url.to.som.image'
