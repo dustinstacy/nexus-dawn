@@ -5,9 +5,9 @@ import { smlogo } from '@assets'
 import { User } from '@interfaces'
 import stores from '@stores'
 
-import HowToGetCards from './HowToGetCards'
 import { onboardingStages } from '../../constants'
 import { marketMenu, purchaseButton } from '../../images'
+import HowToGetCards from './HowToGetCards'
 
 const mountComponent = (showStep4 = false) => {
 	const nextStage = cy.stub()
@@ -33,7 +33,7 @@ describe('<HowToGetCards />', () => {
 	it('renders step 1-3', () => {
 		const stageData = onboardingStages[1]
 
-		mountComponent(1)
+		mountComponent()
 
 		cy.getDataCy('header').contains(stageData.header as string)
 
