@@ -16,6 +16,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 	const stage = user?.onboardingStage
 	const [step, setStep] = useState(1)
 	const [modalOpen, toggleModalOpen, setModalOpen] = useToggle(true)
+	const stageTexts = onboardingStages[3]
 
 	const incrementStep = () => {
 		setStep((step) => step + 1)
@@ -40,7 +41,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 								className="header"
 								data-cy="header"
 							>
-								{onboardingStages[3].header}
+								{stageTexts.header}
 								<img
 									className="logo abs-center"
 									src={smlogo.src}
@@ -51,9 +52,9 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						</div>
 						{step === 1 && (
 							<div className="body box start-column">
-								<p data-cy="body">{onboardingStages[3].body[0]}</p>
+								<p data-cy="body">{stageTexts.body[0]}</p>
 								<Button
-									label={onboardingStages[3].label[0]}
+									label={stageTexts.label[0]}
 									onClick={incrementStep}
 									dataCy="increment-step-button-1"
 								/>
@@ -61,7 +62,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						)}
 						{step === 2 && (
 							<div className="body box step-2 center-column">
-								<p data-cy="body">{onboardingStages[3].body[1]}</p>
+								<p data-cy="body">{stageTexts.body[1]}</p>
 								<img
 									className="optimize-deck-image"
 									src={optimizeDeck.src}
@@ -69,7 +70,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 									data-cy="optimize-deck-image"
 								/>
 								<Button
-									label={onboardingStages[3].label[0]}
+									label={stageTexts.label[0]}
 									onClick={incrementStep}
 									dataCy="increment-step-button-2"
 								/>
@@ -77,7 +78,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						)}
 						{step === 3 && (
 							<div className="body box step-3 center">
-								<p data-cy="body">{onboardingStages[3].body[2]}</p>
+								<p data-cy="body">{stageTexts.body[2]}</p>
 								<img
 									className="check-box-image"
 									src={checkbox.src}
@@ -85,7 +86,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 									data-cy="check-box-image"
 								/>
 								<Button
-									label={onboardingStages[3].label[1]}
+									label={stageTexts.label[1]}
 									onClick={() => toggleModalOpen()}
 									dataCy="close-modal-button"
 								/>
@@ -93,9 +94,9 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 						)}
 						{step === 4 && (
 							<div className="body box center-column">
-								<p data-cy="body">{onboardingStages[3].body[3]}</p>
+								<p data-cy="body">{stageTexts.body[3]}</p>
 								<Button
-									label={onboardingStages[3].label[0]}
+									label={stageTexts.label[0]}
 									onClick={() => nextStage('/how-to-play')}
 									dataCy="step-4-button"
 								/>

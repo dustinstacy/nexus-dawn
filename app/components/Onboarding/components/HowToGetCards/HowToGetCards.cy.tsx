@@ -29,10 +29,10 @@ const mountComponent = (showStep4 = false) => {
 	)
 }
 
+const stageData = onboardingStages[1]
+
 describe('<HowToGetCards />', () => {
 	it('renders step 1-3', () => {
-		const stageData = onboardingStages[1]
-
 		mountComponent()
 
 		cy.getDataCy('header').contains(stageData.header as string)
@@ -55,8 +55,6 @@ describe('<HowToGetCards />', () => {
 	})
 
 	it('renders step 4', () => {
-		const stageData = onboardingStages[1]
-
 		mountComponent(true)
 
 		cy.getDataCy('body').contains(stageData.body[3])

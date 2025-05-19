@@ -4,9 +4,9 @@ import * as Router from 'next/navigation'
 import api from '@api'
 import stores from '@stores'
 
+import HowToOpenPacks from './HowToOpenPacks'
 import { onboardingStages } from '../../constants'
 import { openPack, packOdds } from '../../images'
-import HowToOpenPacks from './HowToOpenPacks'
 
 const mountComponent = (showStep4 = false) => {
 	const nextStage = cy.stub()

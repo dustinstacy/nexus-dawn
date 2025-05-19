@@ -78,13 +78,15 @@ describe('CompletionReward Component', () => {
 		)
 	})
 
+	const stageData = onboardingStages[5]
+
 	it('should render initial state (step 1) correctly', () => {
 		// Check initial rendering
 		cy.getDataCy('completion').should('exist')
-		cy.getDataCy('header').should('contain', onboardingStages[5].header[0])
+		cy.getDataCy('header').should('contain', stageData.header[0])
 		cy.getDataCy('logo').should('exist')
-		cy.getDataCy('body-text').should('contain', onboardingStages[5].body)
-		cy.getDataCy('button-step-1').should('contain', onboardingStages[5].label[0])
+		cy.getDataCy('body-text').should('contain', stageData.body)
+		cy.getDataCy('button-step-1').should('contain', stageData.label[0])
 	})
 
 	it('should advance to step 2 when clicking the first button', () => {
@@ -98,7 +100,7 @@ describe('CompletionReward Component', () => {
 		cy.get('@fetchUserDataStub').should('have.been.calledWith', 'inventory')
 
 		// Check that step 2 is displayed
-		cy.getDataCy('header').should('contain', onboardingStages[5].header[1])
+		cy.getDataCy('header').should('contain', stageData.header[1])
 		cy.getDataCy('body').should('contain', 'Rare Pack')
 		cy.getDataCy('rare-card-image').should('exist')
 		cy.getDataCy('button-step-2').should('exist')

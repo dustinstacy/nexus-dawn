@@ -31,10 +31,10 @@ const mountComponent = (stage: 1 | 3) => {
 	)
 }
 
+const stageData = onboardingStages[3]
+
 describe('<HowToBuildADeck />', () => {
 	it('renders step 1-3', () => {
-		const stageData = onboardingStages[3]
-
 		mountComponent(1)
 
 		cy.getDataCy('header').contains(stageData.header as string)
@@ -57,8 +57,6 @@ describe('<HowToBuildADeck />', () => {
 	})
 
 	it('renders step 4', () => {
-		const stageData = onboardingStages[3]
-
 		mountComponent(3)
 
 		cy.getDataCy('body').contains(stageData.body[3])
