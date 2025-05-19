@@ -2,11 +2,10 @@ import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared
 import * as Router from 'next/navigation'
 
 import { smlogo } from '@assets'
+import { User } from '@interfaces'
 import stores from '@stores'
 
 import HowToBuildADeck from './HowToBuildADeck'
-
-import { User } from '@interfaces'
 import { onboardingStages } from '../../constants'
 import { checkbox, optimizeDeck } from '../../images'
 
