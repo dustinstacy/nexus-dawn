@@ -16,22 +16,22 @@ import './howToOpenPacks.scss'
 
 const HowToOpenPacks = ({ nextStage }: NextStage) => {
 	const { addCardToCollection } = api
-	const { useCardsStore, useUserStore } = stores
-	const user = useUserStore((state) => state.user)
-	const userCards = useUserStore((state) => state.userCards)
-	const allCards = useCardsStore((state) => state.allCards)
+	const { user, userCards } = stores.useUserStore((state) => state)
+	const allCards = stores.useCardsStore((state) => state.allCards)
 	const stage = user?.onboardingStage
 	const [step, setStep] = useState(1)
 	const [modalOpen, toggleModalOpen, setModalOpen] = useToggle(true)
+	const texts = onboardingStages[2]
 
 	const handleClick = async () => {
-		let starterCards = []
 		const commonCards = getRandomCards(12, { Common: 100 }, allCards)
 		const uncommonCards = getRandomCards(2, { Uncommon: 100 }, allCards)
-		starterCards = [...commonCards, ...uncommonCards]
+		const starterCards = [...commonCards, ...uncommonCards]
+
 		starterCards.forEach(async (card) => {
 			assignRandomCardValues(card)
 			const cardData = createCardData(card)
+
 			try {
 				await addCardToCollection(cardData)
 			} catch (error) {
@@ -60,60 +60,70 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 				<ModalOverlay>
 					<div className="open-pack stage around-column">
 						<div className="header-wrapper">
-							<h1 className="header">
-								{onboardingStages[2].header}
+							<h1
+								data-cy="header"
+								className="header"
+							>
+								{texts.header}
 								<img
 									className="logo abs-center"
 									src={smlogo.src}
 									alt="small logo"
+									data-cy="logo"
 								/>
 							</h1>
 						</div>
 						{step === 1 && (
 							<div className="body box start-column">
-								<p>{onboardingStages[2].body[0]}</p>
+								<p data-cy="body">{texts.body[0]}</p>
 								<Button
-									label={onboardingStages[2].label[0]}
+									label={texts.label[0]}
 									onClick={incrementStep}
+									dataCy="increment-step-button-1"
 								/>
 							</div>
 						)}
 						{step === 2 && (
 							<div className="body box center">
-								<p>{onboardingStages[2].body[1]}</p>
+								<p data-cy="body">{texts.body[1]}</p>
 								<img
 									src={packOdds.src}
 									alt="pack odds"
+									data-cy="pack-odds-image"
 								/>
 								<Button
-									label={onboardingStages[2].label[0]}
+									label={texts.label[0]}
 									onClick={incrementStep}
+									dataCy="increment-step-button-2"
 								/>
 							</div>
 						)}
 						{step === 3 && (
 							<div className="body box center">
-								<p>{onboardingStages[2].body[2]}</p>
+								<p data-cy="body">{texts.body[2]}</p>
 								<img
 									src={openPack.src}
 									alt="pack odds"
+									data-cy="open-pack-image"
 								/>
 								<Button
-									label={onboardingStages[2].label[1]}
+									label={texts.label[1]}
 									onClick={() => toggleModalOpen()}
+									dataCy="close-modal-button"
 								/>
 							</div>
 						)}
 						{step === 4 && (
 							<div className="body box center">
-								<p>{onboardingStages[2].body[3]}</p>
+								<p data-cy="body">{texts.body[3]}</p>
 								<img
 									src={cardValues.src}
 									alt="cardValues"
 								/>
 								<Button
-									label={onboardingStages[2].label[0]}
+									label={texts.label[0]}
 									onClick={handleClick}
+									dataCy="step-4-button"
 								/>
 							</div>
 						)}
