@@ -12,9 +12,7 @@ import { checkbox, optimizeDeck } from '../../images'
 import './howToBuildADeck.scss'
 
 const HowToBuildADeck = ({ nextStage }: NextStage) => {
-	const { useUserStore } = stores
-	const user = useUserStore((state) => state.user)
-	const userDeck = useUserStore((state) => state.userDeck)
+	const { user, userDeck } = stores.useUserStore((state) => state)
 	const stage = user?.onboardingStage
 	const [step, setStep] = useState(1)
 	const [modalOpen, toggleModalOpen, setModalOpen] = useToggle(true)
@@ -38,58 +36,68 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 				<ModalOverlay>
 					<div className="build-deck stage around-column">
 						<div className="header-wrapper">
-							<h1 className="header">
+							<h1
+								className="header"
+								data-cy="header"
+							>
 								{onboardingStages[3].header}
 								<img
 									className="logo abs-center"
 									src={smlogo.src}
 									alt="small logo"
+									data-cy="logo"
 								/>
 							</h1>
 						</div>
 						{step === 1 && (
 							<div className="body box start-column">
-								<p>{onboardingStages[3].body[0]}</p>
+								<p data-cy="body">{onboardingStages[3].body[0]}</p>
 								<Button
 									label={onboardingStages[3].label[0]}
 									onClick={incrementStep}
+									dataCy="increment-step-button-1"
 								/>
 							</div>
 						)}
 						{step === 2 && (
 							<div className="body box step-2 center-column">
-								<p>{onboardingStages[3].body[1]}</p>
+								<p data-cy="body">{onboardingStages[3].body[1]}</p>
 								<img
 									className="optimize-deck-image"
 									src={optimizeDeck.src}
 									alt="market menu"
+									data-cy="optimize-deck-image"
 								/>
 								<Button
 									label={onboardingStages[3].label[0]}
 									onClick={incrementStep}
+									dataCy="increment-step-button-2"
 								/>
 							</div>
 						)}
 						{step === 3 && (
 							<div className="body box step-3 center">
-								<p>{onboardingStages[3].body[2]}</p>
+								<p data-cy="body">{onboardingStages[3].body[2]}</p>
 								<img
 									className="check-box-image"
 									src={checkbox.src}
 									alt="market menu"
+									data-cy="check-box-image"
 								/>
 								<Button
 									label={onboardingStages[3].label[1]}
 									onClick={() => toggleModalOpen()}
+									dataCy="close-modal-button"
 								/>
 							</div>
 						)}
 						{step === 4 && (
 							<div className="body box center-column">
-								<p>{onboardingStages[3].body[3]}</p>
+								<p data-cy="body">{onboardingStages[3].body[3]}</p>
 								<Button
 									label={onboardingStages[3].label[0]}
 									onClick={() => nextStage('/how-to-play')}
+									dataCy="step-4-button"
 								/>
 							</div>
 						)}
