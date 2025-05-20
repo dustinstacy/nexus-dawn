@@ -1,7 +1,5 @@
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import * as Router from 'next/navigation'
-
 import { smlogo } from '@assets'
+import { CypressAppRouterContext } from '@cypressUtils'
 
 import HowToPlay from './HowToPlay'
 import { onboardingStages } from '../../constants'
@@ -11,16 +9,10 @@ describe('<HowToPlay />', () => {
 		const stubbedCallback = cy.stub().as('stubbedCallback')
 		const stageData = onboardingStages[4]
 
-		const router: any = {
-			push: cy.stub().as('router:push')
-		}
-
-		cy.stub(Router, 'useRouter').returns(router)
-
 		cy.mount(
-			<AppRouterContext.Provider value={router}>
+			<CypressAppRouterContext>
 				<HowToPlay nextStage={stubbedCallback} />
-			</AppRouterContext.Provider>
+			</CypressAppRouterContext>
 		)
 
 		cy.getDataCy('wrapper').should('exist')

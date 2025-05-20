@@ -1,7 +1,5 @@
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import * as Router from 'next/navigation'
-
 import { smlogo } from '@assets'
+import { CypressAppRouterContext } from '@cypressUtils'
 import { User } from '@interfaces'
 import stores from '@stores'
 
@@ -11,11 +9,6 @@ import { checkbox, optimizeDeck } from '../../images'
 
 const mountComponent = (stage: 1 | 3) => {
 	const nextStage = cy.stub()
-	const router: any = {
-		push: cy.stub().as('router:push')
-	}
-
-	cy.stub(Router, 'useRouter').returns(router)
 
 	cy.stub(stores, 'useUserStore').returns({
 		user: {
@@ -25,9 +18,9 @@ const mountComponent = (stage: 1 | 3) => {
 	})
 
 	cy.mount(
-		<AppRouterContext.Provider value={router}>
+		<CypressAppRouterContext>
 			<HowToBuildADeck nextStage={nextStage} />
-		</AppRouterContext.Provider>
+		</CypressAppRouterContext>
 	)
 }
 

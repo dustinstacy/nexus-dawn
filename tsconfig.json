@@ -30,7 +30,8 @@
 			"@pages": ["app/pages"],
 			"@randomizers": ["app/utils/randomizers"],
 			"@stores": ["app/stores"],
-			"@utils": ["app/utils"]
+			"@utils": ["app/utils"],
+			"@cypressUtils": ["cypress/support/utils"]
 		}
 	},
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "*.cy.tsx"],

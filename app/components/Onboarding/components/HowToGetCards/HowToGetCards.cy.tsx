@@ -1,7 +1,5 @@
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import * as Router from 'next/navigation'
-
 import { smlogo } from '@assets'
+import { CypressAppRouterContext } from '@cypressUtils'
 import { User } from '@interfaces'
 import stores from '@stores'
 
@@ -13,11 +11,6 @@ import { marketMenu, purchaseButton } from '../../images'
 
 const mountComponent = (showStep4 = false) => {
 	const nextStage = cy.stub()
-	const router: any = {
-		push: cy.stub().as('router:push')
-	}
-
-	cy.stub(Router, 'useRouter').returns(router)
 
 	cy.stub(stores, 'useUserStore').returns({
 		onboardingStage: 1,
@@ -25,9 +18,9 @@ const mountComponent = (showStep4 = false) => {
 	} as User)
 
 	cy.mount(
-		<AppRouterContext.Provider value={router}>
+		<CypressAppRouterContext>
 			<HowToGetCards nextStage={nextStage} />
-		</AppRouterContext.Provider>
+		</CypressAppRouterContext>
 	)
 }
 

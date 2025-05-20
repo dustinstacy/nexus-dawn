@@ -1,26 +1,16 @@
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import * as Router from 'next/navigation'
+import { CypressAppRouterContext } from '@cypressUtils'
 
 import Button from './Button'
 
 describe('<Button />', () => {
-	let router: any
-
-	beforeEach(() => {
-		router = {
-			push: cy.stub().as('router:push')
-		}
-		cy.stub(Router, 'useRouter').returns(router)
-	})
-
 	it('renders the Button component with the correct label', () => {
 		const label = 'Click Me'
 
 		// Mount the Button component
 		cy.mount(
-			<AppRouterContext.Provider value={router}>
+			<CypressAppRouterContext>
 				<Button label={label} />
-			</AppRouterContext.Provider>
+			</CypressAppRouterContext>
 		)
 
 		// Assert that the button is rendered with the correct label
@@ -31,12 +21,12 @@ describe('<Button />', () => {
 	it('handles click event', () => {
 		// Mount the Button component
 		cy.mount(
-			<AppRouterContext.Provider value={router}>
+			<CypressAppRouterContext>
 				<Button
 					label="Click"
 					path="/new-path"
 				/>
-			</AppRouterContext.Provider>
+			</CypressAppRouterContext>
 		)
 
 		cy.get('button').click()

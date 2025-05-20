@@ -1,8 +1,7 @@
 import { mount } from 'cypress/react'
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import * as Router from 'next/navigation'
 
 import api from '@api'
+import { CypressAppRouterContext } from '@cypressUtils'
 import { IItem, User } from '@interfaces'
 import stores from '@stores'
 
@@ -47,7 +46,6 @@ const mockRarePack: IItem = {
 }
 
 describe('CompletionReward Component', () => {
-	let router: any
 	let returnEmptyItemsStore = true
 
 	beforeEach(() => {
@@ -64,17 +62,12 @@ describe('CompletionReward Component', () => {
 
 		cy.stub(api, 'addItemToInventory').as('addItemToInventoryStub').resolves()
 
-		router = {
-			push: cy.stub().as('router:push')
-		}
-		cy.stub(Router, 'useRouter').returns(router)
-
 		const nextStageSpy = cy.stub().as('nextStageStub')
 
 		mount(
-			<AppRouterContext.Provider value={router}>
+			<CypressAppRouterContext>
 				<CompletionReward nextStage={nextStageSpy} />
-			</AppRouterContext.Provider>
+			</CypressAppRouterContext>
 		)
 	})
 

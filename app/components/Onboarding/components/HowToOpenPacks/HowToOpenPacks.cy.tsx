@@ -1,7 +1,5 @@
-import { AppRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime'
-import * as Router from 'next/navigation'
-
 import api from '@api'
+import { CypressAppRouterContext } from '@cypressUtils'
 import stores from '@stores'
 
 import HowToOpenPacks from './HowToOpenPacks'
@@ -10,11 +8,6 @@ import { openPack, packOdds } from '../../images'
 
 const mountComponent = (showStep4 = false) => {
 	const nextStage = cy.stub()
-	const router: any = {
-		push: cy.stub().as('router:push')
-	}
-
-	cy.stub(Router, 'useRouter').returns(router)
 
 	cy.stub(stores, 'useUserStore').returns({
 		user: {
@@ -39,9 +32,9 @@ const mountComponent = (showStep4 = false) => {
 	cy.stub(api, 'addCardToCollection').as('addCardToCollectionStub').resolves()
 
 	cy.mount(
-		<AppRouterContext.Provider value={router}>
+		<CypressAppRouterContext>
 			<HowToOpenPacks nextStage={nextStage} />
-		</AppRouterContext.Provider>
+		</CypressAppRouterContext>
 	)
 }
 
