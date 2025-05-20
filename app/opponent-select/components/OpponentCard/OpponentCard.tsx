@@ -5,6 +5,7 @@ import { useUserStore } from '@stores'
 import { classSet } from '@utils'
 
 import './opponentCard.scss'
+import Image from 'next/image'
 
 interface OpponentCardProps {
 	opponent: IOpponent
@@ -30,7 +31,7 @@ const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: Oppon
 					className={opponentClasses}
 					onClick={() => setSelectedOpponent(opponent)}
 				>
-					<img
+					<Image
 						src={avatar}
 						alt="opponent image"
 					/>

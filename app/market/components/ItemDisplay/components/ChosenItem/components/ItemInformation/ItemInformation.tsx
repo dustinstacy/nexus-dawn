@@ -4,6 +4,7 @@ import { IItem } from '@interfaces'
 import { useUserStore } from '@stores'
 
 import './itemInformation.scss'
+import Image from 'next/image'
 
 interface ItemInformation {
 	chosenItem: IItem
@@ -17,7 +18,7 @@ const ItemInformation = ({ chosenItem }: ItemInformation) => {
 	return (
 		<div className="item-info start">
 			<div className="item-image">
-				<img
+				<Image
 					src={image}
 					alt={name}
 				/>

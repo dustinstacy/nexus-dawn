@@ -10,6 +10,7 @@ import { classSet } from '@utils'
 import { BurgerMenu, Links, UserSection } from './components'
 
 import './navBar.scss'
+import Image from 'next/image'
 
 interface NavBarProps {
 	login: boolean
@@ -28,7 +29,7 @@ const NavBar = ({ login }: NavBarProps) => {
 	return (
 		<div className="navbar between background-gradient">
 			<BurgerMenu />
-			<img
+			<Image
 				src={smlogo.src}
 				alt="logo"
 				className={logoClasses}

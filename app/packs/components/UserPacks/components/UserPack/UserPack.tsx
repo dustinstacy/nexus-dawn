@@ -1,6 +1,7 @@
 import { IItem } from '@interfaces'
 
 import './userPack.scss'
+import Image from 'next/image'
 
 interface UserPack {
 	itemData: IItem | null
@@ -16,7 +17,7 @@ const UserPack: React.FC<UserPack> = ({ itemData, allItems }) => {
 			{itemData && (
 				<>
 					<div className="pack-image">
-						<img
+						<Image
 							src={image}
 							alt={name}
 						/>

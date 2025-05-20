@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 import { ModalOverlay } from '@components'
 import { useOpponentsStore, useUserStore } from '@stores'
+import Image from 'next/image'
 
 import './battleIntro.scss'
 
@@ -24,7 +25,7 @@ const BattleIntro = () => {
 		<ModalOverlay>
 			<div className="battle-intro fill between-column">
 				<div className="p2-intro start">
-					<img
+					<Image
 						src={selectedOpponent?.avatar}
 						style={{ background: selectedOpponent?.color }}
 						alt="p2 image"
@@ -36,7 +37,7 @@ const BattleIntro = () => {
 				</div>
 				<div className="p1-intro end ">
 					<h2>{user?.username}</h2>
-					<img
+					<Image
 						src={user?.image}
 						style={{ background: user?.color }}
 						alt="p1 image"

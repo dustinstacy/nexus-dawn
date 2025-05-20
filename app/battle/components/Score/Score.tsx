@@ -3,6 +3,7 @@ import React from 'react'
 import { blueScore, redScore } from './images'
 
 import './score.scss'
+import Image from 'next/image'
 
 const Score = ({ player }: any) => {
 	const { name, roundScore } = player
@@ -16,12 +17,12 @@ const Score = ({ player }: any) => {
 					className="center"
 				>
 					{name === 'p1' ?
-						<img
+						<Image
 							className="center"
 							src={blueScore.src}
 							alt="blue score"
 						/>
-					:	<img
+					:	<Image
 							className="center"
 							src={redScore.src}
 							alt="red score"

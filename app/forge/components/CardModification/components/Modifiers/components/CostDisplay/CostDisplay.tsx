@@ -7,7 +7,7 @@ import { useUserStore } from '@stores'
 
 import { updateCardValues } from '../../../../api'
 import './costDisplay.scss'
-
+import Image from 'next/image'
 interface CostDipslay {
 	modCost: {
 		aquaType: IItem | null
@@ -55,7 +55,7 @@ const CostDisplay = ({
 		<div className="cost-bar box start-column">
 			<div className="mod-cost center">
 				<div className="aqua-cost center">
-					<img
+					<Image
 						src={modCost.aquaType?.image}
 						alt={modCost.aquaType?.name}
 					/>
@@ -66,7 +66,7 @@ const CostDisplay = ({
 					</div>
 				</div>
 				<div className="flux-cost center">
-					<img
+					<Image
 						src={modCost.fluxType?.image}
 						alt={modCost.fluxType?.name}
 					/>

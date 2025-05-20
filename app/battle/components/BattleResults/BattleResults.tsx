@@ -7,6 +7,7 @@ import { useItemsStore, useUserStore } from '@stores'
 import { BattleResultsButtons, CoinReward, XPReward } from './components'
 import { resultsFrame } from './images'
 import './battleResults.scss'
+import Image from 'next/image'
 
 interface BattleResultsProps {
 	playerOne: any
@@ -85,7 +86,7 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 
 	return (
 		<div className="battle-over fill center">
-			<img
+			<Image
 				className="results-frame abs-center"
 				src={resultsFrame.src}
 				alt="results-frame"
@@ -93,7 +94,7 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 			<div className="panel fill center-column">
 				<div className="results-wrapper around-column">
 					<span className="result">{battleResult}</span>
-					<img
+					<Image
 						className="user-image"
 						src={user?.image}
 						alt="user image"
@@ -107,7 +108,7 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 									{itemReward && (
 										<div className="item-reward center">
 											<p>+</p>
-											<img
+											<Image
 												src={itemReward[0].image}
 												alt="item reward"
 											/>
