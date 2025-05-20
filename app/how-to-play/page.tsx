@@ -1,42 +1,81 @@
 'use client'
 
-import { Onboarding } from '@components'
-import stores from '@stores'
+import Image from 'next/image'
+import { useState } from 'react'
 
 import { howToPlay } from './constants'
 import './howToPlay.scss'
 
 const HowToPlay = () => {
-	const { useUserStore } = stores
-	const user = useUserStore((state) => state.user)
-	const stage = user?.onboardingStage ?? {}
+	const [currentPage, setCurrentPage] = useState(0)
+	const totalPages = howToPlay.length
+
+	const goToPage = (pageIndex: number) => {
+		if (pageIndex >= 0 && pageIndex < totalPages) {
+			setCurrentPage(pageIndex)
+		}
+	}
 
 	return (
-		<div className="how-to-play page center">
-			{(stage === 4 || stage === 5) && <Onboarding />}
-			{howToPlay.map((panel) => (
-				<div
-					key={panel.header}
-					className="panel center-column"
-				>
-					<h1>{panel.header}</h1>
-					<div className="panel-body">
-						{panel.body.map((section) => (
+		<div className="how-to-play-container">
+			<div className="content-wrapper">
+				<aside className="toc">
+					{howToPlay.map((section, index) => (
+						<div
+							key={index}
+							className={`toc-item ${index === currentPage ? 'active' : ''}`}
+							onClick={() => goToPage(index)}
+						>
+							{section.header}
+						</div>
+					))}
+				</aside>
+
+				<div className="content-area">
+					<div className="how-to-play-content">
+						<h2>{howToPlay[currentPage].header}</h2>
+						{howToPlay[currentPage].body.map((item, i) => (
 							<div
-								key={section.title}
-								className="panel-section"
+								key={i}
+								className="section"
 							>
-								<h2>{section.title}</h2>
-								<ul className="panel-section-content">
-									{section.content.map((content) => (
-										<li key={content.line.slice(0, 10)}>{content.line}</li>
+								<h3>{item.title}</h3>
+								<ul className="rules-list">
+									{item.content.map((point, j) => (
+										<li key={j}>{point}</li>
 									))}
 								</ul>
+								{item.imageSrc && (
+									<div className="rule-image-container">
+										<Image
+											src={item.imageSrc}
+											alt={item.title}
+											className="rule-image"
+										/>
+									</div>
+								)}
 							</div>
 						))}
 					</div>
+
+					<div className="nav-buttons">
+						<button
+							onClick={() => goToPage(currentPage - 1)}
+							disabled={currentPage === 0}
+							className="previous-button"
+						>
+							Previous
+						</button>
+						<button
+							onClick={() => goToPage(currentPage + 1)}
+							disabled={currentPage === totalPages - 1}
+							className="next-button"
+						>
+							Next
+						</button>
+					</div>
 				</div>
-			))}
+			</div>
 		</div>
 	)
 }
