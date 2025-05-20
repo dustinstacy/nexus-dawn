@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { User } from '@interfaces'
 import stores from '@stores'
 
-import { incrementOnboardingStage } from './api'
+import api from './api'
 import {
 	CompletionReward,
 	HowToBuildADeck,
@@ -46,7 +46,7 @@ const Onboarding = () => {
 	// Advances the user to next onboarding stage
 	const nextStage = async (path?: string) => {
 		try {
-			await incrementOnboardingStage(user as User)
+			await api.incrementOnboardingStage(user as User)
 			fetchUserData('onboardingStage')
 			path && router.push(`${path}`)
 		} catch (error) {
