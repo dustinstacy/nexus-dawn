@@ -40,7 +40,10 @@ const TextInput = ({
 	const inputClasses = classSet('input', value && 'has-content')
 
 	return (
-		<div className="text-input">
+		<div
+			className="text-input"
+			data-cy="outer-container"
+		>
 			<input
 				type={inputType}
 				id={name}
@@ -51,14 +54,21 @@ const TextInput = ({
 				disabled={loading}
 				autoFocus={autoFocus}
 				autoComplete={autoComplete}
+				data-cy="input"
 			/>
 			{isPasswordInput && (
 				<EyeIcon
 					onClick={togglePasswordVisible}
 					data-testid="eye-icon"
+					data-cy={passwordVisible ? 'eye-icon-visible' : 'eye-icon-invisible'}
 				/>
 			)}
-			<label htmlFor={name}>{label}</label>
+			<label
+				htmlFor={name}
+				data-cy="label"
+			>
+				{label}
+			</label>
 			<span className="focus-border">
 				<i />
 			</span>
