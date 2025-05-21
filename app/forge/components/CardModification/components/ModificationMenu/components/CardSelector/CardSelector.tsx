@@ -18,10 +18,14 @@ const CardSelector = ({ selectedCard, setSelectedCard }: CardSelector) => {
 	return (
 		<>
 			{selectedCard ?
-				<div className="selected-card center fill">
+				<div
+					className="selected-card center fill"
+					data-cy="selected-card"
+				>
 					<AiOutlineCloseCircle
 						className="unselect-card"
 						onClick={() => setSelectedCard?.(null)}
+						data-cy="unselect-card"
 					/>
 					<Card
 						card={selectedCard}
@@ -31,6 +35,7 @@ const CardSelector = ({ selectedCard, setSelectedCard }: CardSelector) => {
 						<p
 							key={value + i * 10}
 							className={`value-${i} center`}
+							data-cy={`value-${i}`}
 						>
 							{value}
 						</p>
@@ -39,6 +44,7 @@ const CardSelector = ({ selectedCard, setSelectedCard }: CardSelector) => {
 			:	<div
 					className="select-card fill center"
 					onClick={() => setCardSelectOpen(true)}
+					data-cy="select-card"
 				>
 					<h1>+</h1>
 				</div>
