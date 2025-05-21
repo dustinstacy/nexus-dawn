@@ -69,10 +69,12 @@ const AquaFortisSuperior = ({
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel"
 					/>
 					<VscDebugRestart
 						className="reset"
 						onClick={() => reset()}
+						data-cy="reset"
 					/>
 					<div className="selected-card center fill">
 						<Card
@@ -87,6 +89,7 @@ const AquaFortisSuperior = ({
 								modValue !== 0 && value === selectedCardMaxSingleValue && 'disabled'
 							}`}
 							onClick={() => cardValueClick(value, i)}
+							data-cy={`value-${value}`}
 						>
 							{value}
 						</div>
