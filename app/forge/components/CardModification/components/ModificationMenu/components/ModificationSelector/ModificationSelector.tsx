@@ -14,9 +14,8 @@ const ModificationSelector = ({
 	selectedModification,
 	setSelectedModification
 }: ModificationSelector) => {
-	const { useItemsStore, useUserStore } = stores
-	const user = useUserStore((state) => state.user)
-	const allItems = useItemsStore((state) => state.allItems)
+	const user = stores.useUserStore((state) => state.user)
+	const allItems = stores.useItemsStore((state) => state.allItems)
 
 	const userModifiers = user?.inventory
 		.filter((item) => item.type === 'modifier')
@@ -27,7 +26,10 @@ const ModificationSelector = ({
 	const currentModificationItem = allItems.find((item) => item.name === selectedModification)
 
 	return (
-		<div className="mod-select box">
+		<div
+			className="mod-select box"
+			data-cy="modification-selector"
+		>
 			<Filter
 				id="selectMod"
 				label="Select Modification"
@@ -35,7 +37,7 @@ const ModificationSelector = ({
 				setValue={setSelectedModification}
 				options={modificationOptions}
 			/>
-			{currentModificationItem?.info}
+			<span data-cy="modification-info">{currentModificationItem?.info}</span>
 		</div>
 	)
 }
