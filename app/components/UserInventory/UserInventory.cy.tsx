@@ -1,6 +1,7 @@
 import { coinImage } from '@assets'
 import { CypressAppRouterContext } from '@cypressUtils'
 import stores from '@stores'
+
 import UserInventory from './UserInventory'
 
 describe('UserInventory', () => {
