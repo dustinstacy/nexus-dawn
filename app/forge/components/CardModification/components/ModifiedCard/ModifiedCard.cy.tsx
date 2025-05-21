@@ -1,7 +1,7 @@
 import { CypressAppRouterContext } from '@cypressUtils'
+import { ICard } from '@interfaces'
 import stores from '@stores'
 
-import { ICard } from '@interfaces'
 import ModifiedCard from './ModifiedCard'
 
 describe('ModifiedCard', () => {
