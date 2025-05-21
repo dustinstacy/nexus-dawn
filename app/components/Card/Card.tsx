@@ -65,6 +65,7 @@ const Card = ({
 			onClick={(e) => handleClick?.(e, card)}
 			onDragStart={(e) => handleDragStart(e, card)}
 			onDragEnd={() => handleDragEnd()}
+			data-cy={`card-${card._id}`}
 		>
 			<div
 				className="card__side card__front fill"

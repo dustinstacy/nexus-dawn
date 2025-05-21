@@ -10,8 +10,7 @@ interface CardListContainer {
 }
 
 const CardListContainer = ({ setCardSelectOpen, setSelectedCard }: CardListContainer) => {
-	const { useUserStore } = stores
-	const userCards = useUserStore((state) => state.userCards)
+	const userCards = stores.useUserStore((state) => state.userCards)
 
 	const sortedCards = userCards.sort(
 		(a, b) =>
@@ -36,6 +35,7 @@ const CardListContainer = ({ setCardSelectOpen, setSelectedCard }: CardListConta
 			<Button
 				label="Cancel"
 				onClick={() => setCardSelectOpen(false)}
+				dataCy="cancel-btn"
 			/>
 		</div>
 	)
