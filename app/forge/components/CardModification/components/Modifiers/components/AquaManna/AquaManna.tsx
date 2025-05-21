@@ -6,9 +6,9 @@ import { Card } from '@components'
 import { ICard } from '@interfaces'
 
 interface AquaManna {
-	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 	selectedCard: ICard | null
 	selectedCardValues: Array<number>
+	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AquaManna = ({ selectedCard, selectedCardValues, setModificationInProgress }: AquaManna) => {
@@ -22,6 +22,7 @@ const AquaManna = ({ selectedCard, selectedCardValues, setModificationInProgress
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel"
 					/>
 					<VscDebugRestart
 						className="reset"
@@ -37,6 +38,7 @@ const AquaManna = ({ selectedCard, selectedCardValues, setModificationInProgress
 						<div
 							key={value + i * 10}
 							className={`value-${i} box center `}
+							data-cy={`value-${value}`}
 						>
 							{value}
 						</div>
