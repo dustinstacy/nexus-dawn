@@ -6,10 +6,10 @@ import { Card } from '@components'
 import { CardValues, ICard } from '@interfaces'
 
 interface AquaVitaeSuperior {
-	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 	selectedCard: ICard | null
 	selectedCardValues: Array<number | string>
 	setSelectedCardValues: React.Dispatch<React.SetStateAction<Array<number>>>
+	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AquaVitaeSuperior = ({
@@ -96,6 +96,7 @@ const AquaVitaeSuperior = ({
 							key={(value as number) + i * 10}
 							className="value box center"
 							onClick={(e) => modValueClick(e, value as number)}
+							data-cy={`mod-value-${value}`}
 						>
 							{value}
 						</div>
@@ -105,10 +106,12 @@ const AquaVitaeSuperior = ({
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel-icon"
 					/>
 					<VscDebugRestart
 						className="reset"
 						onClick={() => reset()}
+						data-cy="reset-icon"
 					/>
 					<div className="selected-card center fill">
 						<Card
@@ -121,6 +124,7 @@ const AquaVitaeSuperior = ({
 							key={(value as number) + i * 10}
 							className={`value-${i} box center ${value !== '' && 'disabled'}`}
 							onClick={() => cardValueClick(value, i)}
+							data-cy={`card-value-${value}`}
 						>
 							{value}
 						</div>
