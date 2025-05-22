@@ -1,10 +1,10 @@
+import api from '@api'
 import { CypressAppRouterContext } from '@cypressUtils'
 import { ICard, IItem, User } from '@interfaces'
 import stores from '@stores'
 
-import api from '@api'
-import localApi from '../../../../api'
 import CostDisplay from './CostDisplay'
+import localApi from '../../../../api'
 
 describe('CostDisplay', () => {
 	const aquaImg = 'aqua.png'
