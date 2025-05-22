@@ -6,10 +6,10 @@ import { Button, Card } from '@components'
 import { ICard } from '@interfaces'
 
 interface AquaRegia {
-	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 	selectedCard: ICard | null
 	selectedCardValues: Array<number>
 	setSelectedCardValues: React.Dispatch<React.SetStateAction<Array<number>>>
+	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AquaRegia = ({
@@ -19,11 +19,11 @@ const AquaRegia = ({
 	setModificationInProgress
 }: AquaRegia) => {
 	const [rotated, setRotated] = useState(false)
-
 	const updatedCardValues = [...selectedCardValues]
 
 	const rotateValues = () => {
 		updatedCardValues.unshift(updatedCardValues.pop() as number)
+
 		setSelectedCardValues(updatedCardValues)
 		setRotated(true)
 	}
@@ -41,16 +41,19 @@ const AquaRegia = ({
 						label="Rotate Values"
 						onClick={() => rotateValues()}
 						disabled={rotated}
+						dataCy="rotate-button"
 					/>
 				</div>
 				<div className="mod-panel center">
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel-button"
 					/>
 					<VscDebugRestart
 						className="reset"
 						onClick={() => reset()}
+						data-cy="reset-button"
 					/>
 					<div className="selected-card center fill">
 						<Card
