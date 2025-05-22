@@ -5,7 +5,7 @@ import { Button } from '@components'
 import { CardValues, ICard, IItem, User } from '@interfaces'
 import stores from '@stores'
 
-import { updateCardValues } from '../../../../api'
+import localApi from '../../../../api'
 import './costDisplay.scss'
 
 interface CostDipslay {
@@ -29,11 +29,7 @@ const CostDisplay = ({
 	selectedCardValues
 }: CostDipslay) => {
 	const { removeItemFromInventory } = api
-	const { useUserStore } = stores
-	const user = useUserStore((state) => state.user)
-	const userCards = useUserStore((state) => state.userCards)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
-	const fetchUserData = useUserStore((state) => state.fetchUserData)
+	const { user, userCards, fetchUserCards, fetchUserData } = stores.useUserStore()
 
 	const userAquaTypeCount = user?.inventory.filter(
 		(item) => item.name === modCost.aquaType?.name
@@ -44,7 +40,7 @@ const CostDisplay = ({
 	).length
 
 	const completeMod = async () => {
-		await updateCardValues(selectedCard as ICard, selectedCardValues as CardValues)
+		await localApi.updateCardValues(selectedCard as ICard, selectedCardValues as CardValues)
 		await removeItemFromInventory(user as User, modCost.aquaType as IItem)
 		await removeItemFromInventory(user as User, modCost.fluxType as IItem)
 		setSelectedCard(userCards.find((card) => card._id === selectedCard?._id) as ICard)
@@ -60,29 +56,36 @@ const CostDisplay = ({
 					<img
 						src={modCost.aquaType?.image}
 						alt={modCost.aquaType?.name}
+						data-cy="aqua-img"
 					/>
 					<div className="cost center">
-						<span>{userAquaTypeCount}</span>
+						<span data-cy="aqua-count">{userAquaTypeCount}</span>
 						<p>/</p>
-						<span>{modCost.aquaAmount}</span>
+						<span data-cy="aqua-amount">{modCost.aquaAmount}</span>
 					</div>
 				</div>
 				<div className="flux-cost center">
 					<img
 						src={modCost.fluxType?.image}
 						alt={modCost.fluxType?.name}
+						data-cy="flux-img"
 					/>
 					<div
 						className={`cost center ${
 							(userFluxTypeCount as number) < modCost.fluxAmount && 'insufficient'
 						}`}
 					>
-						<span>{userFluxTypeCount}</span>
+						<span data-cy="flux-count">{userFluxTypeCount}</span>
 						<p>/</p>
-						<span>{modCost.fluxAmount}</span>
+						<span data-cy="flux-amount">{modCost.fluxAmount}</span>
 					</div>
 				</div>
 			</div>
+			{selectedCard?.values.every((value, index) => value === selectedCardValues[index]) ?
+				'true'
+			:	'false'}
+			{selectedCardValues.includes('') ? 'true' : 'false'}
+			{(userFluxTypeCount as number) < modCost.fluxAmount ? 'true' : 'false'}
 			<Button
 				label="Complete Modification"
 				onClick={() => completeMod()}
@@ -91,6 +94,7 @@ const CostDisplay = ({
 					selectedCardValues.includes('') ||
 					(userFluxTypeCount as number) < modCost.fluxAmount
 				}
+				dataCy="complete-modification-btn"
 			/>
 		</div>
 	)
