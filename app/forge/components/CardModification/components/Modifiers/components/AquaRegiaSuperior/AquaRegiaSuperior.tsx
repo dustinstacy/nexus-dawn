@@ -36,16 +36,19 @@ const AquaRegiaSuperior = ({
 					<Button
 						label="Rotate Values"
 						onClick={() => rotateValues()}
+						dataCy="rotate-button"
 					/>
 				</div>
 				<div className="mod-panel center">
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel-icon"
 					/>
 					<VscDebugRestart
 						className="reset"
 						onClick={() => reset()}
+						data-cy="reset-icon"
 					/>
 					<div className="selected-card center fill">
 						<Card
