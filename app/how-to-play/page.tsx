@@ -25,6 +25,7 @@ const HowToPlay = () => {
 							key={index}
 							className={`toc-item ${index === currentPage ? 'active' : ''}`}
 							onClick={() => goToPage(index)}
+							data-cy="toc-item"
 						>
 							{section.header}
 						</div>
@@ -33,13 +34,14 @@ const HowToPlay = () => {
 
 				<div className="content-area">
 					<div className="how-to-play-content">
-						<h2>{howToPlay[currentPage].header}</h2>
+						<h2 data-cy="how-to-play-heading">{howToPlay[currentPage].header}</h2>
 						{howToPlay[currentPage].body.map((item, i) => (
 							<div
 								key={i}
 								className="section"
+								data-cy="section"
 							>
-								<h3>{item.title}</h3>
+								<h3 data-cy="section-title">{item.title}</h3>
 								<ul className="rules-list">
 									{item.content.map((point, j) => (
 										<li key={j}>{point}</li>
@@ -63,6 +65,7 @@ const HowToPlay = () => {
 							onClick={() => goToPage(currentPage - 1)}
 							disabled={currentPage === 0}
 							className="previous-button"
+							data-cy="previous-button"
 						>
 							Previous
 						</button>
@@ -70,6 +73,7 @@ const HowToPlay = () => {
 							onClick={() => goToPage(currentPage + 1)}
 							disabled={currentPage === totalPages - 1}
 							className="next-button"
+							data-cy="next-button"
 						>
 							Next
 						</button>
