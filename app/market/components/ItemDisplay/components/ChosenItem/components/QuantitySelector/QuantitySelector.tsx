@@ -34,20 +34,24 @@ const QuantitySelector = ({ chosenItem, chosenQuantity, setChosenQuantity }: Qua
 
 	return (
 		<div className="quantity-selector center-column">
-			<h3>ChOOse Quantity :</h3>
+			<h3 data-cy="heading">ChOOse Quantity :</h3>
 			<div className="quantity-buttons">
 				{quantityOptions?.map((quantity) => (
 					<button
 						key={quantity.amount}
 						onClick={() => handleQuantityChange(quantity)}
 						className={quantityButtonClasses(quantity)}
+						data-cy={`quantity-button-${quantity.amount}`}
 					>
 						{quantity.amount}
 					</button>
 				))}
 			</div>
 
-			<div className="discount">
+			<div
+				className="discount"
+				data-cy="discount"
+			>
 				{chosenQuantity?.discount !== '0' ? chosenQuantity?.discount + ' Discount' : ''}
 			</div>
 		</div>
