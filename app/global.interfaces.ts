@@ -23,7 +23,7 @@ interface Stats {
 	wins: number
 }
 
-enum Role {
+export enum Role {
 	admin = 'admin',
 	player = 'player'
 }
