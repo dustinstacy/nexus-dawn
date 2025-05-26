@@ -21,27 +21,7 @@ describe('QuantitySelector', () => {
 			}
 		}
 	}
-
-	const mockDifferentItem: IItem = {
-		_id: 'item2',
-		name: 'Deluxe Pack',
-		image: '/deluxe-pack.jpg',
-		info: 'A deluxe card pack',
-		price: 200,
-		level: 2,
-		type: 'pack',
-		contents: {
-			count: 5,
-			odds: {
-				Common: 50,
-				Uncommon: 35,
-				Rare: 15
-			}
-		}
-	}
-
 	let chosenQuantity: ChosenQuantity = { amount: 1, discount: '0' }
-
 	let setChosenQuantity: any
 
 	beforeEach(() => {
