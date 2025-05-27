@@ -6,7 +6,7 @@ import { Onboarding } from '@components'
 import { mainPanels, subPanels } from '@constants'
 import { User } from '@interfaces'
 import stores from '@stores'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import ClientLayout from './client-layout'
 import './styles/home.scss'
@@ -18,7 +18,7 @@ export default function Home() {
 	const stage = user?.onboardingStage ?? {}
 
 	const linkClasses = (className: string, type: string) =>
-		classSet(`${className}-${type}`, 'panel', 'start-column', !user ? 'disabled' : '')
+		utils.classSet(`${className}-${type}`, 'panel', 'start-column', !user ? 'disabled' : '')
 
 	return (
 		<ClientLayout>

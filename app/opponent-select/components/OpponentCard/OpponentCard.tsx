@@ -1,6 +1,6 @@
 import { IOpponent } from '@interfaces'
 import stores from '@stores'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './opponentCard.scss'
 
@@ -16,7 +16,7 @@ const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: Oppon
 	const user = useUserStore((state) => state.user)
 	const { avatar, level, name } = opponent
 
-	const opponentClasses = classSet(
+	const opponentClasses = utils.classSet(
 		'opponent-card',
 		'start-column',
 		selectedOpponent === opponent ? 'selected' : ''

@@ -4,7 +4,7 @@ import { Button, ModalOverlay } from '@components'
 import { IItem, NextStage, User } from '@interfaces'
 import { assignRandomCardValues, getRandomCards } from '@randomizers'
 import stores from '@stores'
-import { createCardData } from '@utils'
+import utils from '@utils'
 
 import localApi from '../../api'
 import { onboardingStages } from '../../constants'
@@ -35,7 +35,7 @@ const Introduction = ({ nextStage }: NextStage) => {
 		starterCards = [...commonCards, ...uncommonCards]
 		starterCards.forEach(async (card) => {
 			assignRandomCardValues(card)
-			const cardData = createCardData(card)
+			const cardData = utils.createCardData(card)
 			try {
 				await addCardToCollection(cardData)
 			} catch (error) {

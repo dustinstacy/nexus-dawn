@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { smlogo } from '@assets'
 import stores from '@stores'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import { BurgerMenu, Links, UserSection } from './components'
 
@@ -24,7 +24,7 @@ const NavBar = ({ login }: NavBarProps) => {
 
 	const stage = user?.onboardingStage ?? {}
 
-	const logoClasses = classSet('navbar__logo', (stage as number) <= 5 ? 'disabled' : '')
+	const logoClasses = utils.classSet('navbar__logo', (stage as number) <= 5 ? 'disabled' : '')
 
 	return (
 		<div className="navbar between background-gradient">

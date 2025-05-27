@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 import { ICard, IOpponent } from '@interfaces'
-import { customFetch } from '@utils'
+import utils from '@utils'
 
 interface OpponentsState {
 	allOpponents: IOpponent[]
@@ -24,7 +24,7 @@ const useOpponentsStore = create<OpponentsState>((set) => ({
 	},
 	fetchOpponents: async () => {
 		try {
-			const res = await customFetch('/api/cpuOpponents')
+			const res = await utils.customFetch('/api/cpuOpponents')
 			set({ allOpponents: res })
 		} catch (error) {
 			console.error(error)

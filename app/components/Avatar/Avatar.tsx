@@ -1,10 +1,12 @@
 import { useToggle } from '@hooks'
 import { User } from '@interfaces'
 import stores from '@stores'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './avatar.scss'
 import { AvatarMenu } from './components'
+
+const { classSet } = utils
 
 // Renders user image avatar
 // levelShowing: Indicates whether the user's level should be displayed

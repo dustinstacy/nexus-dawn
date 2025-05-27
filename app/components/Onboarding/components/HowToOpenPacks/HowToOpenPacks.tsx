@@ -7,7 +7,7 @@ import { useToggle } from '@hooks'
 import { NextStage } from '@interfaces'
 import { assignRandomCardValues, getRandomCards } from '@randomizers'
 import stores from '@stores'
-import { createCardData } from '@utils'
+import utils from '@utils'
 
 import { onboardingStages } from '../../constants'
 import { cardValues, openPack, packOdds } from '../../images'
@@ -30,7 +30,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 
 		starterCards.forEach(async (card) => {
 			assignRandomCardValues(card)
-			const cardData = createCardData(card)
+			const cardData = utils.createCardData(card)
 
 			try {
 				await addCardToCollection(cardData)

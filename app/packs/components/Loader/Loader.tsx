@@ -1,4 +1,4 @@
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './loader.scss'
 
@@ -14,7 +14,7 @@ const Loader = ({ depth }: Loader) => {
 		}
 
 		// Determine the CSS classes for the square based on the current depth
-		const squareClasses = classSet(
+		const squareClasses = utils.classSet(
 			'square',
 			currentDepth % 2 == 0 ? 'white' : 'background-gradient'
 		)

@@ -1,5 +1,7 @@
 import { User } from '@interfaces'
-import { customFetch } from '@utils'
+import utils from '@utils'
+
+const { customFetch } = utils
 
 const api = {
 	// Adds empty collection and deck to user's account

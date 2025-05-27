@@ -2,7 +2,7 @@ import React from 'react'
 
 import { coinImage } from '@assets'
 import { IItem } from '@interfaces'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './item.scss'
 
@@ -22,7 +22,7 @@ interface ItemComponent {
 // allItems: Array containing all market items
 const Item = ({ item, index, chosenItem, setChosenItem, allItems }: ItemComponent) => {
 	const itemClasses = (item: IItem) =>
-		classSet('item', 'between', chosenItem === item ? 'chosen' : '')
+		utils.classSet('item', 'between', chosenItem === item ? 'chosen' : '')
 
 	return (
 		<div

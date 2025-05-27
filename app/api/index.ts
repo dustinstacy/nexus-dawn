@@ -1,7 +1,7 @@
 import { CardData, DeckCard, ICard, IItem, User } from '@interfaces'
-import { customFetch } from '@utils'
+import utils from '@utils'
 
-import { removeObjectByValue } from '../utils'
+const { customFetch, removeObjectByValue } = utils
 
 const addCardToCollection = async (cardData: CardData) => {
 	await customFetch('/api/collections/new', {

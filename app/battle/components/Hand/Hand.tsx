@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { Card } from '@components'
-import { ICard, CPUDetails, UserDetails } from '@interfaces'
-import { classSet } from '@utils'
+import { CPUDetails, ICard, UserDetails } from '@interfaces'
+import utils from '@utils'
 
 import './hand.scss'
 
@@ -50,7 +50,7 @@ const Hand = ({
 		}
 	}
 
-	const handClasses = classSet(
+	const handClasses = utils.classSet(
 		name === 'p1' ? 'p1 hand' : 'p2 hand',
 		shouldCollapse ? 'collapse' : '',
 		!handsDealt ? 'dealing' : ''

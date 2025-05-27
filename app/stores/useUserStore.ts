@@ -2,7 +2,9 @@ import { jwtDecode } from 'jwt-decode'
 import { create } from 'zustand'
 
 import { ICard, User } from '@interfaces'
-import { customFetch } from '@utils'
+import utils from '@utils'
+
+const { customFetch } = utils
 
 interface UserState {
 	user: User | null

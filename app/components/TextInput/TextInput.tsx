@@ -2,7 +2,7 @@ import { AiFillEye } from '@react-icons/all-files/ai/AiFillEye'
 import { AiFillEyeInvisible } from '@react-icons/all-files/ai/AiFillEyeInvisible'
 
 import { useToggle } from '@hooks'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './textInput.scss'
 
@@ -37,7 +37,7 @@ const TextInput = ({
 
 	const inputType = isPasswordInput && !passwordVisible ? 'password' : 'text'
 	const EyeIcon = passwordVisible ? AiFillEye : AiFillEyeInvisible
-	const inputClasses = classSet('input', value && 'has-content')
+	const inputClasses = utils.classSet('input', value && 'has-content')
 
 	return (
 		<div

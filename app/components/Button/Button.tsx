@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-import { classSet } from '@utils'
+import utils from '@utils'
 import './button.scss'
 
 interface ButtonProps {
@@ -25,7 +25,7 @@ const Button = ({ label, path, onClick, disabled, dataCy }: ButtonProps) => {
 		!!path ? router.push(`${path}`) : onClick?.(e)
 	}
 
-	const buttonClasses = classSet('button', 'center', disabled ? 'disabled' : '')
+	const buttonClasses = utils.classSet('button', 'center', disabled ? 'disabled' : '')
 
 	return (
 		<button

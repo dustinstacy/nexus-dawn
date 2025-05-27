@@ -1,8 +1,6 @@
-import React from 'react'
-
 import { Card } from '@components'
 import { ICard } from '@interfaces'
-import { classSet, updateState } from '@utils'
+import utils from '@utils'
 
 import { Score } from '..'
 import { Cell } from './components'
@@ -10,6 +8,8 @@ import turnArrow from './images/turnArrow.png'
 import { battleProcessor } from '../../lib/logic'
 
 import './board.scss'
+
+const { updateState, classSet } = utils
 
 interface BoardProps {
 	playerOne: any

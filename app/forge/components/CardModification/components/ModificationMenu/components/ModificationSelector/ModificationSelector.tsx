@@ -1,7 +1,7 @@
 import { Filter } from '@components'
 import { IItem } from '@interfaces'
 import stores from '@stores'
-import { uniqueItemsFilter } from '@utils'
+import utils from '@utils'
 
 import './modificationSelector.scss'
 
@@ -20,7 +20,7 @@ const ModificationSelector = ({
 	const userModifiers = user?.inventory
 		.filter((item) => item.type === 'modifier')
 		.sort((a, b) => a.level - b.level)
-	const uniqueUserModifiers = uniqueItemsFilter(userModifiers as Array<IItem>)
+	const uniqueUserModifiers = utils.uniqueItemsFilter(userModifiers as Array<IItem>)
 	const modificationOptions = ['-', ...uniqueUserModifiers.map((modifier) => modifier.name)]
 
 	const currentModificationItem = allItems.find((item) => item.name === selectedModification)

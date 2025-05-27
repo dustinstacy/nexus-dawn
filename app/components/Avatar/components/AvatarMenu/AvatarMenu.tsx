@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import { HandleToggle } from '@interfaces'
 import stores from '@stores'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './avatarMenu.scss'
 
@@ -25,7 +25,7 @@ const AvatarMenu = ({ isOpen, toggleIsOpen }: HandleToggle) => {
 		router.push('/auth/login')
 	}
 
-	const disabledLinkClass = classSet(stage < 5 ? 'disabled' : '')
+	const disabledLinkClass = utils.classSet(stage < 5 ? 'disabled' : '')
 
 	return (
 		<>

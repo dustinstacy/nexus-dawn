@@ -7,7 +7,7 @@ import { GiAbstract116 } from '@react-icons/all-files/gi/GiAbstract116'
 import { GiAbstract120 } from '@react-icons/all-files/gi/GiAbstract120'
 
 import { User } from '@interfaces'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 export const maxValues = {
 	Common: 5,
@@ -65,7 +65,7 @@ export const navlinks = [
 export const subPanels = (user: User) => {
 	const userPacks = user?.inventory.filter((item) => item?.type === 'pack')
 
-	const packsClasses = classSet(userPacks?.length ? 'unopened' : '', !user ? 'hidden' : '')
+	const packsClasses = utils.classSet(userPacks?.length ? 'unopened' : '', !user ? 'hidden' : '')
 
 	return [
 		{

@@ -7,7 +7,7 @@ import api from '@api'
 import { Button, ModalOverlay } from '@components'
 import { User } from '@interfaces'
 import stores from '@stores'
-import { customFetch } from '@utils'
+import utils from '@utils'
 
 import './avatarUpdate.scss'
 import { getCroppedImg } from './cropUtils'
@@ -98,7 +98,7 @@ const AvatarUpdate = () => {
 
 			formData.append('file', croppedImage)
 
-			const response = await customFetch(
+			const response = await utils.customFetch(
 				'/api/profiles/upload/avatar',
 				{
 					method: 'PUT',

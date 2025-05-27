@@ -5,10 +5,12 @@ import api from '@api'
 import { Button, Filter } from '@components'
 import { ICard } from '@interfaces'
 import stores from '@stores'
-import { calculateDeckPower, calculateOptimizedDeck } from '@utils'
+import utils from '@utils'
 
 import { removeAllFromDeck } from './api'
 import './deckBar.scss'
+
+const { calculateDeckPower, calculateOptimizedDeck } = utils
 
 // Renders the user's deck statistics and provides options to automatically manage the deck
 const DeckBar = () => {

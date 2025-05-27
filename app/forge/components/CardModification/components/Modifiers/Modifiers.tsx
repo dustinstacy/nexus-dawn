@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { ICard, IItem } from '@interfaces'
 import stores from '@stores'
-import { updateState } from '@utils'
+import utils from '@utils'
 
 import {
 	AquaFortis,
@@ -16,6 +16,8 @@ import {
 } from './components'
 import { modificationOptions } from './constants'
 import './modifiers.scss'
+
+const { updateState } = utils
 
 interface Modifiers {
 	selectedCard: ICard | null

@@ -1,4 +1,4 @@
-import { customFetch } from '@utils'
+import utils from '@utils'
 
 interface UpdateDefeatedEnemiesProps {
 	defeatedEnemies: string[]
@@ -9,7 +9,7 @@ export const updateDefeatedEnemies = async ({
 	defeatedEnemies,
 	enemy
 }: UpdateDefeatedEnemiesProps) => {
-	await customFetch('/api/profile/info', {
+	await utils.customFetch('/api/profile/info', {
 		method: 'PUT',
 		body: JSON.stringify({
 			defeatedEnemies: [...defeatedEnemies, enemy]

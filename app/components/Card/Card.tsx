@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 
 import { cardback } from '@assets'
 import { ICard } from '@interfaces'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './card.scss'
 
@@ -30,7 +30,7 @@ const Card = ({
 
 	const defaultColor = `rgb(3, 48, 59)`
 
-	const cardClasses = classSet(
+	const cardClasses = utils.classSet(
 		'card',
 		captured ? 'captured' : '',
 		isDragged ? 'is-dragged' : '',

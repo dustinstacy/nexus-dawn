@@ -3,7 +3,7 @@ import React from 'react'
 
 import { navlinks } from '@constants'
 import stores from '@stores'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './links.scss'
 
@@ -22,7 +22,7 @@ const Links = ({ menu, onClick }: LinksProps) => {
 	const publicLinks = ['/', '/how-to-play']
 
 	const linkClasses = (linkPath: string) =>
-		classSet(
+		utils.classSet(
 			`${menu}-link`,
 			'center',
 			(!user && !publicLinks.includes(linkPath)) || (stage as number) <= 5 ? 'disabled' : ''

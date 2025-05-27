@@ -5,10 +5,12 @@ import { Button } from '@components'
 import { ICard, IItem, User } from '@interfaces'
 import { assignRandomCardValues, getRandomCards } from '@randomizers'
 import stores from '@stores'
-import { createCardData, uniqueItemsFilter } from '@utils'
+import utils from '@utils'
 
 import { Carousel, UserPack } from './components'
 import './userPacks.scss'
+
+const { createCardData, uniqueItemsFilter } = utils
 
 interface UserPacks {
 	setIsLoading: React.Dispatch<React.SetStateAction<boolean>>

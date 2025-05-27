@@ -7,7 +7,7 @@ import api from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
 import { BattleState, CPUDetails, ICard, UserDetails } from '@interfaces'
 import stores from '@stores'
-import { updateState } from '@utils'
+import utils from '@utils'
 
 import { BattleResults, Board, Hand, RoundResult } from './components'
 import { cpuMove } from './lib/ai'
@@ -15,6 +15,8 @@ import { battleProcessor } from './lib/logic'
 import { assignColorsAndDealCards, shuffleCards } from './utils'
 
 import './battle.scss'
+
+const { updateState } = utils
 
 const Battle = () => {
 	const { getCurrentBattleNumber, postBattleLog, updateUserStats } = api

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 import { IItem } from '@interfaces'
-import { customFetch } from '@utils'
+import utils from '@utils'
 
 interface ItemsState {
 	allItems: IItem[]
@@ -12,7 +12,7 @@ const useItemsStore = create<ItemsState>((set) => ({
 	allItems: [],
 	fetchItems: async () => {
 		try {
-			const res = await customFetch('/api/items')
+			const res = await utils.customFetch('/api/items')
 			set({ allItems: res })
 		} catch (error) {
 			console.error(error)
