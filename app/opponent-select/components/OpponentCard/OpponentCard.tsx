@@ -12,8 +12,7 @@ interface OpponentCardProps {
 
 // Renders a selectable opponent card with an image and name display.
 const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: OpponentCardProps) => {
-	const { useUserStore } = stores
-	const user = useUserStore((state) => state.user)
+	const user = stores.useUserStore((state) => state.user)
 	const { avatar, level, name } = opponent
 
 	const opponentClasses = utils.classSet(
@@ -28,15 +27,20 @@ const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: Oppon
 				<div
 					className={opponentClasses}
 					onClick={() => setSelectedOpponent(opponent)}
+					data-cy="opponent-card"
 				>
 					<img
 						src={avatar}
 						alt="opponent image"
+						data-cy="opponent-image"
 					/>
-					<h3>{name}</h3>
+					<h3 data-cy="name">{name}</h3>
 				</div>
-			:	<div className="opponent-card locked center-column">
-					<span>?</span>Level {level}
+			:	<div
+					className="opponent-card locked center-column"
+					data-cy="opponent-card"
+				>
+					<span data-cy="level-requirement">?</span>Level {level}
 				</div>
 			}
 		</>
