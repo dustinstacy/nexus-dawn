@@ -2,15 +2,15 @@ import React from 'react'
 
 import { ICard, IItem, IOpponent } from '@interfaces'
 import stores from '@stores'
-import * as randomizers from '../../../../app/utils/randomizers'
-import { CypressAppRouterContext } from '../../../../cypress/support/utils'
 
 import BattlePreviewModal from './BattlePreviewModal'
+import * as randomizers from '../../../../app/utils/randomizers'
+import { CypressAppRouterContext } from '../../../../cypress/support/utils'
 
 describe('BattlePreviewModal', () => {
 	// Handle uncaught exceptions from randomizer functions
 	beforeEach(() => {
-		cy.on('uncaught:exception', (err, runnable) => {
+		cy.on('uncaught:exception', (err) => {
 			// Ignore rarity-related errors from randomizer functions during testing
 			if (err.message.includes("Cannot read properties of undefined (reading 'rarity')")) {
 				return false
@@ -80,7 +80,7 @@ describe('BattlePreviewModal', () => {
 		const setSelectedOpponentDeckStub = cy.stub().as('setSelectedOpponentDeckStub')
 
 		// Mock useEffect to prevent it from running
-		cy.stub(React, 'useEffect').callsFake((effect, deps) => {
+		cy.stub(React, 'useEffect').callsFake(() => {
 			// Don't execute the effect, just return
 		})
 
