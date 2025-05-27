@@ -61,6 +61,7 @@ const BattlePreviewModal = () => {
 						<AiOutlineCloseCircle
 							className="close-modal"
 							onClick={() => setSelectedOpponent(null)}
+							data-cy="close-modal"
 						/>
 						<SelectedOpponent selectedOpponent={selectedOpponent as IOpponent} />
 						<UserDeck selectedOpponent={selectedOpponent!} />
