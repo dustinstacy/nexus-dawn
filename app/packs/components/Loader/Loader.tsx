@@ -9,7 +9,7 @@ interface Loader {
 // Loader component that renders a recursive pattern of squares
 const Loader = ({ depth }: Loader) => {
 	const renderSquares = (currentDepth: number) => {
-		if (currentDepth === 0) {
+		if (currentDepth <= 0) {
 			return null
 		}
 
@@ -20,7 +20,14 @@ const Loader = ({ depth }: Loader) => {
 		)
 
 		// Recursively render the nested squares
-		return <div className={squareClasses}>{renderSquares(currentDepth - 1)}</div>
+		return (
+			<div
+				className={squareClasses}
+				data-cy="square"
+			>
+				{renderSquares(currentDepth - 1)}
+			</div>
+		)
 	}
 
 	return (
