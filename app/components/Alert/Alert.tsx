@@ -8,7 +8,10 @@ import './alert.scss'
 const Alert = ({ children }: { children: ReactNode }) => {
 	return (
 		<ModalOverlay>
-			<div className="alert box center-column">
+			<div
+				className="alert box center-column"
+				data-cy="alert"
+			>
 				<h1>⚠️</h1>
 				{children}
 			</div>

@@ -16,12 +16,12 @@ const OpponentSelect = () => {
 	const { postBattleLog, updateUserStats } = api
 	const { useOpponentsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
-	const allOpponents = useOpponentsStore((state) => state.allOpponents)
-	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
-	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
+	const { allOpponents, selectedOpponent, setSelectedOpponent } = useOpponentsStore(
+		(state) => state
+	)
 	const [alertActive, setAlertActive] = useState(false)
 
-	const sortedOpponents = allOpponents.sort((a, b) => a.level - b.level)
+	const sortedOpponents = allOpponents?.sort((a, b) => a.level - b.level) || []
 
 	// Check for a saved battle state when component mounts.
 	// If saved state exists, display the battle alert.
@@ -44,13 +44,22 @@ const OpponentSelect = () => {
 	}
 
 	return (
-		<div className="opponent-select page center">
-			<div className="background fill" />
+		<div
+			className="opponent-select page center"
+			data-cy="opponent-select-outer"
+		>
+			<div
+				className="background fill"
+				data-cy="background"
+			/>
 			<div className="header">
-				<h1>Choose your opponent</h1>
+				<h1 data-cy="page-heading">Choose your opponent</h1>
 				<hr />
 			</div>
-			<div className="opponent-list center">
+			<div
+				className="opponent-list center"
+				data-cy="opponent-list"
+			>
 				{sortedOpponents?.length &&
 					sortedOpponents?.map((opponent) => (
 						<OpponentCard
@@ -63,18 +72,20 @@ const OpponentSelect = () => {
 			</div>
 			{alertActive && (
 				<Alert>
-					<h2>You currently have an unfinished battle</h2>
+					<h2 data-cy="unfinished-battle-msg">You currently have an unfinished battle</h2>
 					<div className="buttons">
 						<Button
 							label="Rejoin"
 							path="/battle"
+							dataCy="rejoin-battle-button"
 						/>
 						<Button
 							label="Forfeit"
 							onClick={() => forfeitBattle()}
+							dataCy="forfeit-battle-button"
 						/>
 					</div>
-					<p>*Forfeiting will count as a loss</p>
+					<p data-cy="forfeit-warning-msg">*Forfeiting will count as a loss</p>
 				</Alert>
 			)}
 			{selectedOpponent && <BattlePreviewModal />}

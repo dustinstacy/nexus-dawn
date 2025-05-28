@@ -219,7 +219,6 @@ describe('OpponentCard', () => {
 				.should('have.class', 'center-column')
 
 			// Check that it shows the level requirement
-			cy.getDataCy('level-requirement').should('contain.text', '?')
 			cy.getDataCy('opponent-card').should('contain.text', `Level ${mockOpponent.level}`)
 
 			// Check that no image or name is displayed

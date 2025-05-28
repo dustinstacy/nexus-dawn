@@ -17,10 +17,8 @@ const BattlePreviewModal = () => {
 	const { useCardsStore, useOpponentsStore, useUserStore } = stores
 	const userDeck = useUserStore((state) => state.userDeck)
 	const allCards = useCardsStore((state) => state.allCards)
-	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
-	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
-	const selectedOpponentDeck = useOpponentsStore((state) => state.selectedOpponentDeck)
-	const setSelectedOpponentDeck = useOpponentsStore((state) => state.setSelectedOpponentDeck)
+	const { selectedOpponent, setSelectedOpponent, selectedOpponentDeck, setSelectedOpponentDeck } =
+		useOpponentsStore((state) => state)
 
 	const { deckOdds, cardCount, minPower, maxPower } = selectedOpponent || {}
 
@@ -37,6 +35,7 @@ const BattlePreviewModal = () => {
 			deckOdds as Odds,
 			allCards as Array<ICard>
 		)
+
 		assignRandomDeckValues(opponentRandomCards, minPower as number, maxPower as number)
 		const currentOpponentDeck = opponentRandomCards.map((card, i) => {
 			return {
@@ -48,7 +47,7 @@ const BattlePreviewModal = () => {
 		setSelectedOpponentDeck(currentOpponentDeck as Array<ICard>)
 	}
 
-	// Navigate to battle page with stored opponent and opponent deck statee
+	// Navigate to battle page with stored opponent and opponent deck state
 	const startBattle = () => {
 		router.push('/battle-intro')
 	}

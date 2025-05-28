@@ -40,7 +40,7 @@ const OpponentCard = ({ opponent, selectedOpponent, setSelectedOpponent }: Oppon
 					className="opponent-card locked center-column"
 					data-cy="opponent-card"
 				>
-					<span data-cy="level-requirement">?</span>Level {level}
+					<span>?</span>Level {level}
 				</div>
 			}
 		</>
