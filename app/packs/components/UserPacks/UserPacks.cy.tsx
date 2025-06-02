@@ -3,6 +3,7 @@ import { CypressAppRouterContext } from '@cypressUtils'
 import { ICard, Role, User } from '@interfaces'
 import stores from '@stores'
 import utils from '@utils'
+
 import UserPacks from './UserPacks'
 
 const mockUser: User = {
@@ -134,25 +135,6 @@ const mockAllCards: ICard[] = [
 		rarity: 'Legendary',
 		image: '/cosmic-phoenix.jpg',
 		values: [6, 6, 6, 6]
-	}
-]
-
-const mockPackContents: ICard[] = [
-	{
-		_id: 'newcard1',
-		name: 'Generated Card 1',
-		number: 101,
-		rarity: 'Common',
-		image: '/generated1.jpg',
-		values: [2, 3, 1, 4]
-	},
-	{
-		_id: 'newcard2',
-		name: 'Generated Card 2',
-		number: 102,
-		rarity: 'Uncommon',
-		image: '/generated2.jpg',
-		values: [3, 4, 2, 3]
 	}
 ]
 
