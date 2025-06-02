@@ -1,6 +1,6 @@
 import React, { MouseEventHandler } from 'react'
 
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './cell.scss'
 
@@ -26,7 +26,7 @@ const Cell = ({
 	cardSelected,
 	children
 }: CellProps) => {
-	const cellClasses = classSet('cell', 'center', cardSelected ? 'card-selected' : '')
+	const cellClasses = utils.classSet('cell', 'center', cardSelected ? 'card-selected' : '')
 
 	return (
 		<div

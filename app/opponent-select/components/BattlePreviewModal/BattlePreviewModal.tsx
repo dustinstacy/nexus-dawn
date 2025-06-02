@@ -1,25 +1,24 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { useEffect } from 'react'
 
 import { Button, ModalOverlay } from '@components'
 import { ICard, IOpponent, Odds } from '@interfaces'
-import { getRandomCards, assignRandomDeckValues } from '@randomizers'
-import { useCardsStore, useOpponentsStore, useUserStore } from '@stores'
+import { assignRandomDeckValues, getRandomCards } from '@randomizers'
+import stores from '@stores'
 
-import { SelectedOpponent, UserDeck } from './components'
 import './battlePreviewModal.scss'
+import { SelectedOpponent, UserDeck } from './components'
 
 // Renders the battle preview overlay upon selection of an opponent
 // Allows the user to view the selected opponent, battle rules, and user deck.
 // Provides options to edit the deck and start the battle.
 const BattlePreviewModal = () => {
+	const { useCardsStore, useOpponentsStore, useUserStore } = stores
 	const userDeck = useUserStore((state) => state.userDeck)
 	const allCards = useCardsStore((state) => state.allCards)
-	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
-	const setSelectedOpponent = useOpponentsStore((state) => state.setSelectedOpponent)
-	const selectedOpponentDeck = useOpponentsStore((state) => state.selectedOpponentDeck)
-	const setSelectedOpponentDeck = useOpponentsStore((state) => state.setSelectedOpponentDeck)
+	const { selectedOpponent, setSelectedOpponent, selectedOpponentDeck, setSelectedOpponentDeck } =
+		useOpponentsStore((state) => state)
 
 	const { deckOdds, cardCount, minPower, maxPower } = selectedOpponent || {}
 
@@ -36,6 +35,7 @@ const BattlePreviewModal = () => {
 			deckOdds as Odds,
 			allCards as Array<ICard>
 		)
+
 		assignRandomDeckValues(opponentRandomCards, minPower as number, maxPower as number)
 		const currentOpponentDeck = opponentRandomCards.map((card, i) => {
 			return {
@@ -47,7 +47,7 @@ const BattlePreviewModal = () => {
 		setSelectedOpponentDeck(currentOpponentDeck as Array<ICard>)
 	}
 
-	// Navigate to battle page with stored opponent and opponent deck statee
+	// Navigate to battle page with stored opponent and opponent deck state
 	const startBattle = () => {
 		router.push('/battle-intro')
 	}
@@ -60,6 +60,7 @@ const BattlePreviewModal = () => {
 						<AiOutlineCloseCircle
 							className="close-modal"
 							onClick={() => setSelectedOpponent(null)}
+							data-cy="close-modal"
 						/>
 						<SelectedOpponent selectedOpponent={selectedOpponent as IOpponent} />
 						<UserDeck selectedOpponent={selectedOpponent!} />

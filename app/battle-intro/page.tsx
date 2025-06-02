@@ -4,11 +4,12 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 import { ModalOverlay } from '@components'
-import { useOpponentsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import './battleIntro.scss'
 
 const BattleIntro = () => {
+	const { useOpponentsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const selectedOpponent = useOpponentsStore((state) => state.selectedOpponent)
 	const router = useRouter()

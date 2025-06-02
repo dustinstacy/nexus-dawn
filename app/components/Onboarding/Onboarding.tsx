@@ -4,20 +4,21 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
 import { User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
-import { incrementOnboardingStage } from './api'
+import api from './api'
 import {
-	Introduction,
+	CompletionReward,
+	HowToBuildADeck,
 	HowToGetCards,
 	HowToOpenPacks,
-	HowToBuildADeck,
 	HowToPlay,
-	CompletionReward
+	Introduction
 } from './components'
 import './onboarding.scss'
 
 const Onboarding = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const router = useRouter()
@@ -45,7 +46,7 @@ const Onboarding = () => {
 	// Advances the user to next onboarding stage
 	const nextStage = async (path?: string) => {
 		try {
-			await incrementOnboardingStage(user as User)
+			await api.incrementOnboardingStage(user as User)
 			fetchUserData('onboardingStage')
 			path && router.push(`${path}`)
 		} catch (error) {

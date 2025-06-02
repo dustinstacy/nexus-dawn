@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { addCardToDeck, removeCardFromDeck } from '@api'
+import api from '@api'
 import { headerStyle } from '@assets'
 import { Button } from '@components'
 import { ICard, IOpponent } from '@interfaces'
-import { useUserStore } from '@stores'
-import { calculateDeckPower, calculateOptimizedDeck, classSet } from '@utils'
+import stores from '@stores'
+import utils from '@utils'
 
 import './userDeck.scss'
 
@@ -15,10 +15,11 @@ interface UserDeckProps {
 
 // Renders the user's deck information.
 const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
-	const userCards = useUserStore((state) => state.userCards)
-	const userDeck = useUserStore((state) => state.userDeck)
-	const fetchUserDeck = useUserStore((state) => state.fetchUserDeck)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
+	const { calculateDeckPower, calculateOptimizedDeck, classSet } = utils
+	const { addCardToDeck, removeCardFromDeck } = api
+	const { userCards, userDeck, fetchUserDeck, fetchUserCards } = stores.useUserStore(
+		(state) => state
+	)
 	const [userDeckPower, setUserDeckPower] = useState<number>(0)
 	const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
 	const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
@@ -54,6 +55,7 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 			userCards,
 			String(selectedOpponent.cardCount)
 		)
+
 		const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
 
 		setUserDeckPower(newUserDeckPower)
@@ -79,12 +81,19 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 	const countColor = classSet(userDeck?.length === selectedOpponent.cardCount ? 'valid' : 'invalid')
 
 	return (
-		<div className="user-deck start-column">
-			<div className="header-wrapper center">
+		<div
+			className="user-deck start-column"
+			data-cy="user-deck"
+		>
+			<div
+				className="header-wrapper center"
+				data-cy="header-wrapper"
+			>
 				<img
 					className="header-style"
 					src={headerStyle.src}
 					alt="header style"
+					data-cy="header-style"
 				/>
 				Equipped Deck
 			</div>
@@ -92,13 +101,20 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 				<div className="deck-info start-column">
 					<div className="user-deck-power">
 						<h4>Power</h4>
-						<span>{userDeckPower || 0}</span>
+						<span data-cy="user-deck-power-value">{userDeckPower || 0}</span>
 					</div>
-					<div className="user-deck-count">
+					<div
+						className="user-deck-count"
+						data-cy="user-deck-count"
+					>
 						<h4>Card Count</h4>
-						<span className={countColor}>{userDeck.length}</span>
-						&nbsp; / &nbsp;
-						<span>{selectedOpponent.cardCount}</span>
+						<span
+							className={countColor}
+							data-cy="user-deck-length"
+						>
+							{userDeck.length}
+						</span>{' '}
+						/ <span>{selectedOpponent.cardCount}</span>
 					</div>
 				</div>
 				<div className="buttons start-column">
@@ -106,11 +122,12 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 						label="Optimize Deck"
 						onClick={optimizeDeck}
 						disabled={userDeckPower == userOptimizedDeckPower}
+						dataCy="optimize-deck-button"
 					/>
 					<Button
 						label="Edit Deck"
-						type="link"
 						path="/collection"
+						dataCy="edit-deck-button"
 					/>
 				</div>
 			</div>

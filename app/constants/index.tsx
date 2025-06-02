@@ -1,15 +1,13 @@
-import {
-	GiAbstract062,
-	GiAbstract021,
-	GiAbstract005,
-	GiAbstract088,
-	GiAbstract112,
-	GiAbstract120,
-	GiAbstract116
-} from 'react-icons/gi'
+import { GiAbstract005 } from '@react-icons/all-files/gi/GiAbstract005'
+import { GiAbstract021 } from '@react-icons/all-files/gi/GiAbstract021'
+import { GiAbstract062 } from '@react-icons/all-files/gi/GiAbstract062'
+import { GiAbstract088 } from '@react-icons/all-files/gi/GiAbstract088'
+import { GiAbstract112 } from '@react-icons/all-files/gi/GiAbstract112'
+import { GiAbstract116 } from '@react-icons/all-files/gi/GiAbstract116'
+import { GiAbstract120 } from '@react-icons/all-files/gi/GiAbstract120'
 
 import { User } from '@interfaces'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 export const maxValues = {
 	Common: 5,
@@ -67,7 +65,7 @@ export const navlinks = [
 export const subPanels = (user: User) => {
 	const userPacks = user?.inventory.filter((item) => item?.type === 'pack')
 
-	const packsClasses = classSet(userPacks?.length ? 'unopened' : '', !user ? 'hidden' : '')
+	const packsClasses = utils.classSet(userPacks?.length ? 'unopened' : '', !user ? 'hidden' : '')
 
 	return [
 		{

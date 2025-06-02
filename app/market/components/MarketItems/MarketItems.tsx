@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { IItem, User } from '@interfaces'
-import { useItemsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import { Item } from './components'
 import './marketItems.scss'
@@ -15,6 +15,7 @@ interface MarketItems {
 // chosenItem: State used to track the currently chosen item
 // setChosenItem: Function to update the chosen item state based on user selection
 const MarketItems = ({ chosenItem, setChosenItem }: MarketItems) => {
+	const { useItemsStore, useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const allItems = useItemsStore((state) => state.allItems)
 	const { level } = (user as User) || {}

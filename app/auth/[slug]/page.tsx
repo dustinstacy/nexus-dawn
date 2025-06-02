@@ -1,16 +1,17 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { logo } from '@assets'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { AuthForm } from '../components'
 
 import './auth.scss'
 
 const Auth = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const pathname = usePathname()
 	const router = useRouter()

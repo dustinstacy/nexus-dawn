@@ -1,13 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { getCurrentBattleNumber, postBattleLog, updateUserStats } from '@api'
+import api from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
 import { BattleState, CPUDetails, ICard, UserDetails } from '@interfaces'
-import { useOpponentsStore, useUserStore } from '@stores'
-import { updateState } from '@utils'
+import stores from '@stores'
+import utils from '@utils'
 
 import { BattleResults, Board, Hand, RoundResult } from './components'
 import { cpuMove } from './lib/ai'
@@ -16,7 +16,11 @@ import { assignColorsAndDealCards, shuffleCards } from './utils'
 
 import './battle.scss'
 
+const { updateState } = utils
+
 const Battle = () => {
+	const { getCurrentBattleNumber, postBattleLog, updateUserStats } = api
+	const { useOpponentsStore, useUserStore } = stores
 	const router = useRouter()
 	// Get user and opponent information from their respective sources
 	const user = useUserStore((state) => state.user)
@@ -428,7 +432,7 @@ const Battle = () => {
 							onClick={() => setAlertActive(false)}
 						/>
 						<Button
-							label="Forefeit"
+							label="Forfeit"
 							onClick={() => forfeitBattle()}
 						/>
 					</div>

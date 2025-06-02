@@ -1,10 +1,10 @@
+import { TbArrowBigRightLines } from '@react-icons/all-files/tb/TbArrowBigRightLines'
 import React from 'react'
-import { TbArrowBigRightLines } from 'react-icons/tb'
 
-import { addItemToInventory, removeItemFromInventory } from '@api'
+import api from '@api'
 import { Button } from '@components'
 import { IItem, User } from '@interfaces'
-import { useItemsStore, useUserStore } from '@stores'
+import stores from '@stores'
 
 import './fluxFusion.scss'
 
@@ -13,13 +13,14 @@ interface FluxFusion {
 }
 
 const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
-	const user = useUserStore((state) => state.user)
-	const fetchUserData = useUserStore((state) => state.fetchUserData)
-	const allItems = useItemsStore((state) => state.allItems)
+	const { addItemToInventory, removeItemFromInventory } = api
+	const { useItemsStore, useUserStore } = stores
+	const { user, fetchUserData } = useUserStore((state) => state)
+	const { allItems } = useItemsStore()
 	const { inventory } = (user as User) || {}
 
 	const allFlux = allItems.filter((item) => item.type === 'flux')
-
+	console.log(user)
 	const startingFlux = [...allFlux]
 	const fusedFlux = [...allFlux]
 	startingFlux.pop()
@@ -35,7 +36,7 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 		await addItemToInventory(user as User, fusedFlux)
 		fetchUserData('inventory')
 	}
-
+	console.log(startingFlux)
 	return (
 		<div className="start-column">
 			<div className="fusion-panel around-column">
@@ -43,8 +44,12 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 					<div
 						className="flux-row around"
 						key={starting + String(index)}
+						data-cy="flux-row"
 					>
-						<div className="current flux center">
+						<div
+							className="current flux center"
+							data-cy="current-flux"
+						>
 							<img
 								src={starting?.image}
 								alt={starting?.name}
@@ -65,7 +70,10 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 							}`}
 							onClick={() => fuseFlux(starting, fusedFlux[index])}
 						/>
-						<div className="fused flux center">
+						<div
+							className="fused flux center"
+							data-cy="fused-flux"
+						>
 							<img
 								src={fusedFlux[index]?.image}
 								alt={fusedFlux[index]?.name}
@@ -83,6 +91,7 @@ const FluxFusion = ({ setFluxFusion }: FluxFusion) => {
 			<Button
 				label="Exit"
 				onClick={() => setFluxFusion(false)}
+				dataCy="exit-btn"
 			/>
 		</div>
 	)

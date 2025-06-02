@@ -1,5 +1,6 @@
+import { BiLeftArrow } from '@react-icons/all-files/bi/BiLeftArrow'
+import { BiRightArrow } from '@react-icons/all-files/bi/BiRightArrow'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { BiLeftArrow, BiRightArrow } from 'react-icons/bi'
 
 import { IItem } from '@interfaces'
 
@@ -52,18 +53,23 @@ const Carousel = ({ uniqueItems, allItems, setCurrentItem, emptyMessage, childre
 	}
 
 	return (
-		<div className="carousel fill between">
+		<div
+			className="carousel fill between"
+			data-cy="carousel"
+		>
 			{uniqueItems.length ?
 				<>
 					<BiLeftArrow
 						className="arrow-previous"
 						onClick={() => handleSlide('left')}
+						data-cy="arrow-previous"
 					/>
 
 					{carouselPositions.map(({ position, itemData }) => (
 						<div
 							key={position}
 							className={`carousel-item start-column ${position} ${slideDirection}`}
+							data-cy="carousel-item"
 						>
 							{React.cloneElement(children, {
 								itemData,
@@ -74,9 +80,16 @@ const Carousel = ({ uniqueItems, allItems, setCurrentItem, emptyMessage, childre
 					<BiRightArrow
 						className="arrow-next"
 						onClick={() => handleSlide('right')}
+						data-cy="arrow-next"
 					/>
 				</>
-			:	<h2 className="center">{emptyMessage}</h2>}
+			:	<h2
+					className="center"
+					data-cy="empty-message"
+				>
+					{emptyMessage}
+				</h2>
+			}
 		</div>
 	)
 }

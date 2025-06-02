@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { Button, TextInput } from '@components'
 import { FormData, Register } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { sendAuthRequest, sendPasswordResetRequest } from './api'
 import { FormFooter } from './components'
@@ -16,6 +16,7 @@ import './authForm.scss'
 
 // Displays login of registration form based on the value of the register prop
 const AuthForm = ({ register }: Register) => {
+	const { useUserStore } = stores
 	const router = useRouter()
 
 	const initialFormData = {
@@ -171,7 +172,6 @@ const AuthForm = ({ register }: Register) => {
 					</form>
 					<Button
 						label="Submit"
-						type="submit"
 						onClick={(e: React.MouseEvent) => handleSubmit(e)}
 						disabled={loading}
 					/>

@@ -2,15 +2,17 @@
 
 import { useState } from 'react'
 
-import { addCoin, addExperience } from '@api'
+import api from '@api'
 import { Button, TextInput } from '@components'
 import { User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './promoCode.scss'
 import { checkPromoCode } from './utils'
 
 const PromoCode = () => {
+	const { addCoin, addExperience } = api
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
-import { deductCoin, addItemToInventory } from '@api'
+import api from '@api'
 import { coinImage } from '@assets'
 import { Button } from '@components'
 import { IItem, User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
-import { calculatePrice } from './utils'
 import './purchaseBar.scss'
+import utils from './utils'
 
 interface PurchaseBar {
 	chosenItem: IItem | null
@@ -28,10 +28,10 @@ const PurchaseBar = ({
 	finalPrice,
 	setFinalPrice
 }: PurchaseBar) => {
-	const user = useUserStore((state) => state.user)
-	const fetchUserData = useUserStore((state) => state.fetchUserData)
+	const { deductCoin, addItemToInventory } = api
+	const { useUserStore } = stores
+	const { user, fetchUserData } = useUserStore((state) => state)
 	const { coin } = (user as User) ?? {}
-
 	const [loading, setLoading] = useState(false)
 
 	// Create an array representing the final purchase based on the chosen item and quantity
@@ -43,7 +43,7 @@ const PurchaseBar = ({
 	useEffect(() => {
 		if (chosenItem) {
 			// Calculate the final price based on the chosen item, quantity, and discount
-			const calculatedPrice = calculatePrice(
+			const calculatedPrice = utils.calculatePrice(
 				chosenItem,
 				chosenQuantity.amount,
 				chosenQuantity.discount
@@ -87,26 +87,34 @@ const PurchaseBar = ({
 				color="#ffffff"
 				size={24}
 				loading={loading}
+				data-cy="loading-spinner"
 			/>
 		:	'Purchase'
 
 	return (
 		<div className="purchase-bar box around">
 			{purchaseComplete ?
-				<h1>PURCHASE COMPLETE</h1>
+				<h1 data-cy="purchase-complete">PURCHASE COMPLETE</h1>
 			:	<>
-					<div className="total">
+					<div
+						className="total"
+						data-cy="total"
+					>
 						Total :
 						<div className="amount center">
 							{chosenQuantity.amount > 1 && (
-								<span className="previous-amount">
+								<span
+									className="previous-amount"
+									data-cy="previous-amount"
+								>
 									{chosenItem && chosenItem.price * chosenQuantity.amount}
 								</span>
 							)}
-							{finalPrice}
+							<span data-cy="final-price">{finalPrice}</span>
 							<img
 								src={coinImage.src}
 								alt="coin"
+								data-cy="coin-image"
 							/>
 						</div>
 					</div>
@@ -114,6 +122,7 @@ const PurchaseBar = ({
 						label={buttonLabel as string}
 						disabled={!canPurchase}
 						onClick={completePurchase}
+						dataCy="purchase-button"
 					/>
 				</>
 			}

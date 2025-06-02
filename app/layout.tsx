@@ -1,13 +1,8 @@
 import type { Metadata } from 'next'
 import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 
 import ClientLayout from './client-layout'
-import './styles/base.scss'
-import './styles/layout.scss'
-import './styles/modules.scss'
-import './styles/state.scss'
-import './styles/theme.scss'
+import './setup'
 
 export const metadata: Metadata = {
 	title: 'Nexus Dawn',

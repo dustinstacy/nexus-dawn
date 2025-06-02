@@ -44,10 +44,12 @@ const ModificationMenu = ({
 				label="Modify Card"
 				onClick={() => setModificationInProgress?.(true)}
 				disabled={selectedModification === null || selectedModification === '-' || !selectedCard}
+				dataCy="modify-card-button"
 			/>
 			<Button
 				label="Exit"
 				onClick={() => setCardModification(false)}
+				dataCy="exit-button"
 			/>
 		</div>
 	)

@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react'
 
 import { CardList } from '@components'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import * as Sorters from '../../utils'
 import './cardCollection.scss'
@@ -14,6 +14,7 @@ interface CardCollectionProps {
 
 // Renders all of the user's cards and provides options to filter them out
 const CardCollection = ({ deckFilter, rarityFilter, valueFilter }: CardCollectionProps) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const userCards = useUserStore((state) => state.userCards)
 	const fetchUserCards = useUserStore((state) => state.fetchUserCards)

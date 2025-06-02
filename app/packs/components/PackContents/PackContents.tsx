@@ -1,6 +1,6 @@
 import { Button, Card } from '@components'
 import { ICard } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './packContents.scss'
 
@@ -11,7 +11,7 @@ interface PackContents {
 
 // Render contents of opened pack and button to return
 const PackContents = ({ packContents, setPackContents }: PackContents) => {
-	const user = useUserStore((state) => state.user)
+	const user = stores.useUserStore((state) => state.user)
 	const stage = user?.onboardingStage
 
 	return (
@@ -27,6 +27,7 @@ const PackContents = ({ packContents, setPackContents }: PackContents) => {
 				label="Go Back"
 				onClick={() => setPackContents(null)}
 				disabled={(stage as number) < 5}
+				dataCy="go-back-button"
 			/>
 		</div>
 	)

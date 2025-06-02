@@ -1,6 +1,6 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
+import { VscDebugRestart } from '@react-icons/all-files/vsc/VscDebugRestart'
 import React from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Button, Card } from '@components'
 import { ICard } from '@interfaces'
@@ -36,16 +36,19 @@ const AquaRegiaSuperior = ({
 					<Button
 						label="Rotate Values"
 						onClick={() => rotateValues()}
+						dataCy="rotate-button"
 					/>
 				</div>
 				<div className="mod-panel center">
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel-icon"
 					/>
 					<VscDebugRestart
 						className="reset"
 						onClick={() => reset()}
+						data-cy="reset-icon"
 					/>
 					<div className="selected-card center fill">
 						<Card

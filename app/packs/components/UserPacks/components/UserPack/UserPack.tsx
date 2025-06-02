@@ -19,18 +19,27 @@ const UserPack: React.FC<UserPack> = ({ itemData, allItems }) => {
 						<img
 							src={image}
 							alt={name}
+							data-cy="pack-image"
 						/>
 					</div>
 					<div className="pack-info start-column">
-						<h2 className="pack-name between">{name}</h2>
+						<h2
+							className="pack-name between"
+							data-cy="pack-name"
+						>
+							{name}
+						</h2>
 						<hr />
 						<div className="pack-details ">
-							<p>{info}</p>
+							<p data-cy="info">{info}</p>
 							<div className="pack-odds">
-								<h4>Odds:</h4>
+								<h4 data-cy="odds-title">Odds:</h4>
 								{contents?.odds &&
 									Object.entries(contents?.odds).map(([key, value]) => (
-										<div key={key}>
+										<div
+											key={key}
+											data-cy={`key-value-${key}`}
+										>
 											<p>
 												{key}: &nbsp;
 												{value as number}%
@@ -39,7 +48,10 @@ const UserPack: React.FC<UserPack> = ({ itemData, allItems }) => {
 									))}
 							</div>
 						</div>
-						<div className="available-inventory">
+						<div
+							className="available-inventory"
+							data-cy="available-inventory"
+						>
 							<span>Available: &nbsp;</span>
 							{allItems.filter((item) => item.name === name).length}
 						</div>

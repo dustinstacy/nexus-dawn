@@ -3,16 +3,18 @@
 import React, { useState } from 'react'
 import Cropper, { Area } from 'react-easy-crop'
 
-import { updateUserInfo } from '@api'
+import api from '@api'
 import { Button, ModalOverlay } from '@components'
 import { User } from '@interfaces'
-import { useUserStore } from '@stores'
-import { customFetch } from '@utils'
+import stores from '@stores'
+import utils from '@utils'
 
 import './avatarUpdate.scss'
 import { getCroppedImg } from './cropUtils'
 
 const AvatarUpdate = () => {
+	const { useUserStore } = stores
+	const { updateUserInfo } = api
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const [imageSrc, setImageSrc] = useState<string | null>(null)
 	const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -96,7 +98,7 @@ const AvatarUpdate = () => {
 
 			formData.append('file', croppedImage)
 
-			const response = await customFetch(
+			const response = await utils.customFetch(
 				'/api/profiles/upload/avatar',
 				{
 					method: 'PUT',

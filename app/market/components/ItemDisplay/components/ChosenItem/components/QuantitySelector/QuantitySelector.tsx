@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 
 import { ChosenQuantity, IItem } from '@interfaces'
-import { classSet } from '@utils'
+import utils from '@utils'
 
 import './quantitySelector.scss'
 
@@ -30,24 +30,28 @@ const QuantitySelector = ({ chosenItem, chosenQuantity, setChosenQuantity }: Qua
 	}
 
 	const quantityButtonClasses = (quantity: ChosenQuantity) =>
-		classSet('quantity-button', chosenQuantity?.amount === quantity?.amount ? 'chosen' : '')
+		utils.classSet('quantity-button', chosenQuantity?.amount === quantity?.amount ? 'chosen' : '')
 
 	return (
 		<div className="quantity-selector center-column">
-			<h3>ChOOse Quantity :</h3>
+			<h3 data-cy="heading">ChOOse Quantity :</h3>
 			<div className="quantity-buttons">
 				{quantityOptions?.map((quantity) => (
 					<button
 						key={quantity.amount}
 						onClick={() => handleQuantityChange(quantity)}
 						className={quantityButtonClasses(quantity)}
+						data-cy={`quantity-button-${quantity.amount}`}
 					>
 						{quantity.amount}
 					</button>
 				))}
 			</div>
 
-			<div className="discount">
+			<div
+				className="discount"
+				data-cy="discount"
+			>
 				{chosenQuantity?.discount !== '0' ? chosenQuantity?.discount + ' Discount' : ''}
 			</div>
 		</div>

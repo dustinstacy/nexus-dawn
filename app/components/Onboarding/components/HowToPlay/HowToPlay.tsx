@@ -7,28 +7,38 @@ import { onboardingStages } from '../../constants'
 import './howToPlay.scss'
 
 const HowToPlay = ({ nextStage }: NextStage) => {
+	const stageData = onboardingStages[4]
+
 	const handleClick = async () => {
 		await nextStage()
 	}
 
 	return (
 		<ModalOverlay>
-			<div className="how-to-play stage around-column">
+			<div
+				className="how-to-play stage around-column"
+				data-cy="wrapper"
+			>
 				<div className="header-wrapper">
-					<h1 className="header">
-						{onboardingStages[4].header}
+					<h1
+						className="header"
+						data-cy="header"
+					>
+						{stageData.header}
 						<img
 							className="logo abs-center"
 							src={smlogo.src}
 							alt="small logo"
+							data-cy="logo"
 						/>
 					</h1>
 				</div>
 				<div className="body box start-column">
-					<p>{onboardingStages[4].body}</p>
+					<p data-cy="body">{stageData.body}</p>
 					<Button
-						label={onboardingStages[4].label as string}
+						label={stageData.label as string}
 						onClick={handleClick}
+						dataCy="button"
 					/>
 				</div>
 			</div>

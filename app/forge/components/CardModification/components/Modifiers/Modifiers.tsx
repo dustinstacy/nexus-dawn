@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
 
 import { ICard, IItem } from '@interfaces'
-import { useItemsStore } from '@stores'
-import { updateState } from '@utils'
+import stores from '@stores'
+import utils from '@utils'
 
 import {
-	AquaVitae,
-	AquaRegia,
 	AquaFortis,
-	AquaVitaeSuperior,
-	AquaRegiaSuperior,
 	AquaFortisSuperior,
 	AquaManna,
+	AquaRegia,
+	AquaRegiaSuperior,
+	AquaVitae,
+	AquaVitaeSuperior,
 	CostDisplay
 } from './components'
 import { modificationOptions } from './constants'
 import './modifiers.scss'
+
+const { updateState } = utils
 
 interface Modifiers {
 	selectedCard: ICard | null
@@ -43,6 +45,7 @@ const Modifiers = ({
 	setModificationComplete,
 	setModificationInProgress
 }: Modifiers) => {
+	const { useItemsStore } = stores
 	const allItems = useItemsStore((state) => state.allItems)
 
 	const [selectedCardValues, setSelectedCardValues] = useState([...selectedCard!.values])

@@ -1,16 +1,16 @@
+import { AiOutlineCloseCircle } from '@react-icons/all-files/ai/AiOutlineCloseCircle'
+import { VscDebugRestart } from '@react-icons/all-files/vsc/VscDebugRestart'
 import React, { useState } from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
-import { VscDebugRestart } from 'react-icons/vsc'
 
 import { Card } from '@components'
 import { maxValues } from '@constants'
 import { ICard } from '@interfaces'
 
 interface AquaFortis {
-	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 	selectedCard: ICard | null
 	selectedCardValues: Array<number>
 	setSelectedCardValues: React.Dispatch<React.SetStateAction<Array<number>>>
+	setModificationInProgress: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AquaFortis = ({
@@ -28,6 +28,7 @@ const AquaFortis = ({
 	let updatedModValue = modValue
 
 	const cardValueClick = (value: number, i: number) => {
+		console.log(modValue)
 		if (modValue === 0) {
 			deductValue(value, i)
 		} else {
@@ -47,6 +48,7 @@ const AquaFortis = ({
 		updatedModValue -= 1
 		setSelectedCardValues(updatedCardValues)
 		setModValue(updatedModValue)
+
 		if (!selectedCard?.values.every((value, index) => value === updatedCardValues[index])) {
 			setCardModified(true)
 		}
@@ -68,10 +70,12 @@ const AquaFortis = ({
 					<AiOutlineCloseCircle
 						className="cancel"
 						onClick={() => setModificationInProgress(false)}
+						data-cy="cancel"
 					/>
 					<VscDebugRestart
 						className="reset"
 						onClick={() => reset()}
+						data-cy="reset"
 					/>
 					<div className="selected-card center fill">
 						<Card
@@ -86,6 +90,7 @@ const AquaFortis = ({
 								modValue !== 0 && value === selectedCardMaxSingleValue && 'disabled'
 							} ${cardModified && 'disabled'}`}
 							onClick={() => cardValueClick(value, i)}
+							data-cy={`value-${value}`}
 						>
 							{value}
 						</div>

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { ModalOverlay } from '@components'
 import { userLevels } from '@constants'
 import { User } from '@interfaces'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import { handleLevelUp } from './api'
 import { LevelUpScreen } from './components'
@@ -14,6 +14,7 @@ import './experienceBar.scss'
 
 // Renders the user's experience bar and handles level up functionality when XP thresholds are reached.
 const ExperienceBar = () => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const fetchUserData = useUserStore((state) => state.fetchUserData)
 	const { xp, level } = (user as User) ?? {}

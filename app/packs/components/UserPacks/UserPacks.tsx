@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-import { addCardToCollection, removeItemFromInventory } from '@api'
+import api from '@api'
 import { Button } from '@components'
 import { ICard, IItem, User } from '@interfaces'
 import { assignRandomCardValues, getRandomCards } from '@randomizers'
-import { useCardsStore, useUserStore } from '@stores'
-import { createCardData, uniqueItemsFilter } from '@utils'
+import stores from '@stores'
+import utils from '@utils'
 
 import { Carousel, UserPack } from './components'
 import './userPacks.scss'
@@ -16,16 +16,15 @@ interface UserPacks {
 }
 
 const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
-	const user = useUserStore((state) => state.user)
-	const fetchUserCards = useUserStore((state) => state.fetchUserCards)
-	const fetchUserData = useUserStore((state) => state.fetchUserData)
-	const allCards = useCardsStore((state) => state.allCards)
-
+	const { createCardData, uniqueItemsFilter } = utils
+	const { addCardToCollection, removeItemFromInventory } = api
+	const { user, fetchUserCards, fetchUserData } = stores.useUserStore((state) => state)
+	const allCards = stores.useCardsStore((state) => state.allCards) || []
 	const [currentPack, setCurrentPack] = useState<IItem | null>(null)
 
 	const noPacksMessage = 'Head to the MaRKet to buy more packs'
 	// Filtering user's inventory to get only packs and sorting them by level in descending order
-	const userPacks = user?.inventory.filter((item) => item?.type === 'pack') || []
+	const userPacks = user?.inventory?.filter((item) => item?.type === 'pack') || []
 	// Removing duplicates from userPacks and sorting them by level in descending order
 	const uniquePacks = uniqueItemsFilter(userPacks).sort((a, b) => b.level - a.level)
 
@@ -51,12 +50,15 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 		setPackContents(newCards)
 	}
 
-	const buttonDisablers = !currentPack || (user?.onboardingStage as number) <= 1
+	const buttonIsDisabled = !currentPack || (user?.onboardingStage as number) <= 1
 
 	return (
-		<div className="user-packs panel fill between-column">
+		<div
+			className="user-packs panel fill between-column"
+			data-cy="user-packs"
+		>
 			<div className="panel-header">
-				<h1>ChOOse a PacK</h1>
+				<h1 data-cy="user-packs-title">ChOOse a PacK</h1>
 				<hr />
 			</div>
 			<Carousel
@@ -73,7 +75,8 @@ const UserPacks = ({ setIsLoading, setPackContents }: UserPacks) => {
 			<Button
 				label="OpeN PacK"
 				onClick={openCurrentPack}
-				disabled={buttonDisablers}
+				disabled={buttonIsDisabled}
+				dataCy="open-pack-button"
 			/>
 		</div>
 	)

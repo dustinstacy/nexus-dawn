@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { coinImage } from '@assets'
-import { useUserStore } from '@stores'
+import stores from '@stores'
 
 import './coinReward.scss'
 
@@ -11,6 +11,7 @@ interface CoinRewardProps {
 
 // Renders user's coin reward
 const CoinReward = ({ coinReward }: CoinRewardProps) => {
+	const { useUserStore } = stores
 	const user = useUserStore((state) => state.user)
 	const [displayCoin, setDisplayCoin] = useState(0)
 	const [hasAnimated, setHasAnimated] = useState(false)

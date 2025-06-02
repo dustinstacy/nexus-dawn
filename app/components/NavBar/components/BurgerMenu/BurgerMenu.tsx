@@ -1,7 +1,8 @@
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { MdMenu } from '@react-icons/all-files/md/MdMenu'
+import { MdOutlineClose } from '@react-icons/all-files/md/MdOutlineClose'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
-import { MdOutlineClose, MdMenu } from 'react-icons/md'
 
 import { useToggle } from '@hooks'
 
@@ -23,14 +24,19 @@ const BurgerMenu = () => {
 	return (
 		<div className="burger-menu">
 			{!isOpen ?
-				<MdMenu onClick={() => toggleIsOpen()} />
-			:	<MdOutlineClose onClick={() => toggleIsOpen()} />}
+				<MdMenu
+					onClick={() => toggleIsOpen()}
+					data-cy="open-icon"
+				/>
+			:	<MdOutlineClose
+					onClick={() => toggleIsOpen()}
+					data-cy="close-icon"
+				/>
+			}
 			<motion.div
 				className="menu background-gradient"
 				initial={{ width: 0 }}
-				animate={
-					isSmallScreen ? { width: isOpen ? '40vw' : '0' } : { width: isOpen ? '60vw' : '0' }
-				}
+				animate={{ width: isOpen ? `${isSmallScreen ? '40' : '60'}vw` : '0' }}
 				transition={{
 					duration: 0.3,
 					ease: 'easeInOut'

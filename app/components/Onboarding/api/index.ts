@@ -1,30 +1,35 @@
 import { User } from '@interfaces'
-import { customFetch } from '@utils'
+import utils from '@utils'
 
-// Adds empty collection and deck to user's account
-export const completeUserStartingData = async () => {
-	await customFetch('/api/collections/', {
-		method: 'POST'
-	})
-	await customFetch('/api/decks/', {
-		method: 'POST'
-	})
-}
+const { customFetch } = utils
 
-export const incrementOnboardingStage = async (user: User) => {
-	await customFetch('/api/profiles/onboarding', {
-		method: 'PUT',
-		body: JSON.stringify({
-			onboardingStage: user.onboardingStage + 1
+const api = {
+	// Adds empty collection and deck to user's account
+	completeUserStartingData: async () => {
+		await customFetch('/api/collections/', {
+			method: 'POST'
 		})
-	})
+		await customFetch('/api/decks/', {
+			method: 'POST'
+		})
+	},
+
+	incrementOnboardingStage: async (user: User) => {
+		await customFetch('/api/profiles/onboarding', {
+			method: 'PUT',
+			body: JSON.stringify({
+				onboardingStage: user.onboardingStage + 1
+			})
+		})
+	},
+	skipOnboarding: async () => {
+		await customFetch('/api/profiles/onboarding', {
+			method: 'PUT',
+			body: JSON.stringify({
+				onboardingStage: 6
+			})
+		})
+	}
 }
 
-export const skipOnboarding = async () => {
-	await customFetch('/api/profiles/onboarding', {
-		method: 'PUT',
-		body: JSON.stringify({
-			onboardingStage: 6
-		})
-	})
-}
+export default api
