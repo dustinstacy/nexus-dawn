@@ -1,5 +1,5 @@
 import { maxValues } from '@constants'
-import { ICard, CardValues, Odds } from '@interfaces'
+import { CardValues, ICard, Odds } from '@interfaces'
 
 // Helper function to generate a random integer within a specified range
 const randomIntFromInterval = (min: number, max: number) => {
@@ -133,6 +133,7 @@ export const assignRandomDeckValues = (
 // cardSet: Array of cards from which random cards will be selected
 export const getRandomCards = (nCards: number, odds: Odds, cardSet: Array<ICard>): Array<ICard> => {
 	const randomCardsArray = [...new Array(nCards)]
+
 	for (let i = 0; i < randomCardsArray.length; i++) {
 		// Get random rarity based on odds
 		const rarity = randomRarity(odds)
@@ -143,7 +144,8 @@ export const getRandomCards = (nCards: number, odds: Odds, cardSet: Array<ICard>
 
 		randomCardsArray[i] = randomCard
 	}
-	return randomCardsArray
+
+	return randomCardsArray.filter((card) => card !== undefined)
 }
 
 // odds: See getRandomCards function
