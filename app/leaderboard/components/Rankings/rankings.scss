@@ -1,0 +1,21 @@
+.rankings{
+    width: 100%;
+    min-height: 100vh;
+
+    .r-table{
+        width: 80%;
+        margin: auto;
+        text-align: center;
+        table{
+            width:100%;
+            border-collapse: collapse;
+            td, th{
+                border-bottom: 1px solid rgb(250, 250, 250);
+                justify-content: center;
+                padding: 20px;
+            }
+        }
+
+    }
+
+}
