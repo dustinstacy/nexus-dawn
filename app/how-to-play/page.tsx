@@ -3,11 +3,12 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
 
-import { howToPlay } from './constants'
 import './howToPlay.scss'
 
 import { Onboarding } from '@components'
 import { useUserStore } from '@stores'
+
+import { howToPlay } from './constants'
 
 const HowToPlay = () => {
 	const [currentPage, setCurrentPage] = useState(0)
@@ -25,9 +26,8 @@ const HowToPlay = () => {
 
 	return (
 		<div className="how-to-play-container">
-			{(stage === 4 || stage === 5) && <Onboarding />} 
+			{(stage === 4 || stage === 5) && <Onboarding />}
 			<div className="content-wrapper">
-
 				<aside className="toc">
 					{howToPlay.map((section, index) => (
 						<div
