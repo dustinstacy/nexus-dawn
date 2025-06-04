@@ -6,6 +6,9 @@ import React, { useState } from 'react'
 import { howToPlay } from './constants'
 import './howToPlay.scss'
 
+import { Onboarding } from '@components'
+import { useUserStore } from '@stores'
+
 const HowToPlay = () => {
 	const [currentPage, setCurrentPage] = useState(0)
 
@@ -17,9 +20,14 @@ const HowToPlay = () => {
 		}
 	}
 
+	const user = useUserStore((state) => state.user)
+	const stage = user?.onboardingStage ?? {}
+
 	return (
 		<div className="how-to-play-container">
+			{(stage === 4 || stage === 5) && <Onboarding />} 
 			<div className="content-wrapper">
+
 				<aside className="toc">
 					{howToPlay.map((section, index) => (
 						<div
