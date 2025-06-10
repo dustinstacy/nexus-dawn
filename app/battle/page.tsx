@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 
 import { getCurrentBattleNumber, postBattleLog, updateUserStats } from '@api'
 import { Alert, Button, ModalOverlay } from '@components'
@@ -79,7 +79,6 @@ const Battle = () => {
 	} = battleState
 
 	// Variables to track status of Player Hands and Board
-	const table = [...playerTwo.hand, ...board, ...playerOne.hand]
 	const emptyCells = board
 		.map((cell, i) => {
 			if (cell === 'empty') {
@@ -89,26 +88,48 @@ const Battle = () => {
 		})
 		.filter((index) => index !== null)
 
-	const cpuCanAct =
-		battleStarted &&
-		roundStarted &&
-		!isP1Turn &&
-		emptyCells.length !== 0 &&
-		playerTwo.hand.length > 0 &&
-		roundOver === false
+	const dealHands = useCallback(() => {
+		const assignAndUpdate = <T extends UserDetails | CPUDetails>(
+			player: T,
+			setPlayer: Dispatch<SetStateAction<T>>
+		) => {
+			assignColorsAndDealCards(player)
+			updateState(setPlayer, {
+				deck: [...player.deck],
+				hand: [...player.hand],
+				roundScore: player.hand.length
+			})
+		}
+
+		assignAndUpdate(playerOne, setPlayerOne)
+		assignAndUpdate(playerTwo, setPlayerTwo)
+
+		setTimeout(() => {
+			updateState(setBattleState, {
+				handsDealt: true
+			})
+		}, 1500)
+	}, [playerOne, playerTwo])
 
 	// Retrieve state from local storage if it exists
 	// Otherwise initialize a new game
 	useEffect(() => {
 		const savedState = JSON.parse(localStorage.getItem('battleLog') as string)
+
 		getAndSetBattleNumber()
+
 		setTimeout(() => {
 			if (savedState) {
 				restoreStateFromLocalStorage(savedState)
 			} else {
-				newGame()
+				// Begin process of setting up a new game
+				shuffleCards([userDeck, selectedOpponentDeck])
+				updateState(setPlayerOne, { deck: [...userDeck] })
+				updateState(setPlayerTwo, { deck: [...selectedOpponentDeck] })
+				updateState(setBattleState, { decksShuffled: true, round: round + 1 })
 			}
 		}, 50)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	// Used in the developer environment to retrieve the battle number
@@ -126,21 +147,10 @@ const Battle = () => {
 	const restoreStateFromLocalStorage = (savedState: any) => {
 		const lastGameState = savedState[savedState.length - 1]
 		const { playerOne, playerTwo, battleState } = lastGameState
+
 		setPlayerOne(playerOne)
 		setPlayerTwo(playerTwo)
 		setBattleState(battleState)
-	}
-
-	// Begin process of setting up a new game
-	const newGame = () => {
-		shuffleDecks()
-	}
-
-	const shuffleDecks = () => {
-		shuffleCards([userDeck, selectedOpponentDeck])
-		updateState(setPlayerOne, { deck: [...userDeck] })
-		updateState(setPlayerTwo, { deck: [...selectedOpponentDeck] })
-		updateState(setBattleState, { decksShuffled: true, round: round + 1 })
 	}
 
 	// Deal cards only once decks are shuffled and a Battle is
@@ -149,27 +159,7 @@ const Battle = () => {
 		if (decksShuffled === true && battleStarted === false) {
 			dealHands()
 		}
-	}, [decksShuffled])
-
-	const dealHands = () => {
-		assignColorsAndDealCards(playerOne)
-		assignColorsAndDealCards(playerTwo)
-		updateState(setPlayerOne, {
-			deck: [...playerOne.deck],
-			hand: [...playerOne.hand],
-			roundScore: playerOne.hand.length
-		})
-		updateState(setPlayerTwo, {
-			deck: [...playerTwo.deck],
-			hand: [...playerTwo.hand],
-			roundScore: playerTwo.hand.length
-		})
-		setTimeout(() => {
-			updateState(setBattleState, {
-				handsDealt: true
-			})
-		}, 1500)
-	}
+	}, [decksShuffled, battleStarted, dealHands])
 
 	// Decide who goes first only once hands have been dealt and
 	// a Battle is not currently under way
@@ -180,31 +170,26 @@ const Battle = () => {
 					return { round: index + 1, p1Score: '', p2Score: '' }
 				})
 			})
-			randomFirstTurn()
+
+			// random first turn
+			const arrowElement = document.querySelector('.turn-arrow')
+
+			arrowElement!.classList.add('start-game')
+
+			setTimeout(() => {
+				Math.random() < 0.5 ?
+					updateState(setBattleState, { isP1Turn: true })
+				:	updateState(setBattleState, { isP1Turn: false })
+
+				arrowElement!.classList.remove('start-game')
+				updateState(setBattleState, { battleStarted: true })
+				updateState(setBattleState, { roundStarted: true })
+			}, 1000)
+			// end random first turn
 		}
-	}, [handsDealt])
+	}, [handsDealt, battleStarted, selectedOpponent])
 
-	const randomFirstTurn = () => {
-		const arrowElement = document.querySelector('.turn-arrow')
-		arrowElement!.classList.add('start-game')
-		setTimeout(() => {
-			Math.random() < 0.5 ?
-				updateState(setBattleState, { isP1Turn: true })
-			:	updateState(setBattleState, { isP1Turn: false })
-			arrowElement!.classList.remove('start-game')
-			updateState(setBattleState, { battleStarted: true })
-			updateState(setBattleState, { roundStarted: true })
-		}, 1000)
-	}
-
-	// Save state to local storage when a new game has been initialized
-	useEffect(() => {
-		if (battleStarted === true) {
-			saveStateToLocalStorage()
-		}
-	}, [battleStarted])
-
-	const saveStateToLocalStorage = () => {
+	const saveStateToLocalStorage = useCallback(() => {
 		const battleLog = JSON.parse(localStorage.getItem('battleLog') as string) || []
 
 		const playerOneData = {
@@ -232,27 +217,12 @@ const Battle = () => {
 		})
 
 		localStorage.setItem('battleLog', JSON.stringify(battleLog))
-	}
+	}, [playerOne, playerTwo, battleState])
 
-	useEffect(() => {
-		if (cpuCanAct) {
-			setTimeout(() => {
-				cpuTurn()
-			}, 2000)
-		}
-	}, [isP1Turn, roundStarted, playerTwo.hand])
-
-	const cpuTurn = () => {
-		const { move, newBoard, newHand } = cpuMove(playerTwo.hand, battleState.board, emptyCells)
-		battleProcessor(move.cell, move.card, battleState)
-		updateState(setPlayerTwo, { hand: newHand })
-		updateState(setBattleState, { board: newBoard })
-		updateScores()
-	}
-
-	const updateScores = () => {
+	const updateScores = useCallback(() => {
 		let p1Score = 0
 		let p2Score = 0
+		const table = [...playerTwo.hand, ...board, ...playerOne.hand]
 
 		table.forEach((card) => {
 			if (card?.color === user?.color) {
@@ -263,86 +233,137 @@ const Battle = () => {
 			updateState(setPlayerOne, { roundScore: p1Score })
 			updateState(setPlayerTwo, { roundScore: p2Score })
 		})
-		endTurn()
-	}
 
-	const endTurn = () => {
+		// end turn
 		setCardSelected(null)
 		updateState(setBattleState, { isP1Turn: !isP1Turn })
-	}
+	}, [user, playerTwo, isP1Turn, board, playerOne.hand])
+
+	// Save state to local storage when a new game has been initialized
+	useEffect(() => {
+		if (battleStarted === true) {
+			saveStateToLocalStorage()
+		}
+	}, [battleStarted, saveStateToLocalStorage])
 
 	useEffect(() => {
-		checkForRoundEnd()
-	}, [isP1Turn])
+		const cpuCanAct =
+			battleStarted &&
+			roundStarted &&
+			!isP1Turn &&
+			emptyCells.length !== 0 &&
+			playerTwo.hand.length > 0 &&
+			roundOver === false
 
-	const checkForRoundEnd = () => {
+		if (cpuCanAct) {
+			setTimeout(() => {
+				// CPU makes a move after a delay
+				const { move, newBoard, newHand } = cpuMove(playerTwo.hand, battleState.board, emptyCells)
+
+				battleProcessor(move.cell, move.card, battleState)
+				updateState(setPlayerTwo, { hand: newHand })
+				updateState(setBattleState, { board: newBoard })
+				updateScores()
+			}, 2000)
+		}
+	}, [
+		isP1Turn,
+		roundStarted,
+		playerTwo.hand,
+		emptyCells,
+		roundOver,
+		battleStarted,
+		battleState,
+		updateScores
+	])
+
+	useEffect(() => {
+		const updateRoundResults = () => {
+			const updatedRoundResults = roundResults.map((round) => {
+				if (round.round === battleState.round) {
+					return {
+						...round,
+						p1Score: playerOne.roundScore,
+						p2Score: playerTwo.roundScore
+					}
+				}
+				return round
+			})
+
+			updateState(setBattleState, { roundResults: updatedRoundResults })
+		}
+
+		const roundResult = () => {
+			updateState(setPlayerOne, {
+				battleScore: playerOne.battleScore + playerOne.roundScore
+			})
+			updateState(setPlayerTwo, {
+				battleScore: playerTwo.battleScore + playerTwo.roundScore
+			})
+			updateRoundResults()
+			setTimeout(() => {
+				updateState(setBattleState, { roundStarted: false })
+				updateState(setBattleState, { roundOver: true })
+			}, 1500)
+		}
+
+		// check for round end
 		if (emptyCells.length === 0) {
 			roundResult()
 		} else if (emptyCells.length < 9) {
 			saveStateToLocalStorage()
 		}
-	}
-
-	const roundResult = () => {
-		updateState(setPlayerOne, {
-			battleScore: playerOne.battleScore + playerOne.roundScore
-		})
-		updateState(setPlayerTwo, {
-			battleScore: playerTwo.battleScore + playerTwo.roundScore
-		})
-		updateRoundResults()
-		setTimeout(() => {
-			updateState(setBattleState, { roundStarted: false })
-			updateState(setBattleState, { roundOver: true })
-		}, 1500)
-	}
-
-	const updateRoundResults = () => {
-		const updatedRoundResults = roundResults.map((round) => {
-			if (round.round === battleState.round) {
-				return {
-					...round,
-					p1Score: playerOne.roundScore,
-					p2Score: playerTwo.roundScore
-				}
-			}
-			return round
-		})
-		updateState(setBattleState, { roundResults: updatedRoundResults })
-	}
+	}, [
+		isP1Turn,
+		emptyCells.length,
+		playerOne.battleScore,
+		playerOne.roundScore,
+		playerTwo.battleScore,
+		playerTwo.roundScore,
+		saveStateToLocalStorage,
+		battleState.round,
+		roundResults
+	])
 
 	useEffect(() => {
+		const checkForBattleEnd = () => {
+			if (
+				round === selectedOpponent!.rounds ||
+				playerOne.battleScore > playerTwo.battleScore + (selectedOpponent!.rounds - round) * 9 ||
+				playerTwo.battleScore > playerOne.battleScore + (selectedOpponent!.rounds - round) * 9
+			) {
+				updateState(setBattleState, { battleOver: true })
+			} else {
+				newRound()
+			}
+		}
+
+		const newRound = () => {
+			updateState(setPlayerOne, { hand: [] })
+			updateState(setPlayerTwo, { hand: [] })
+			updateState(setBattleState, {
+				board: [...new Array(9).fill('empty')],
+				handsDealt: false,
+				roundStarted: true,
+				roundOver: false,
+				round: round + 1
+			})
+		}
+
 		if (roundOver === true) {
 			setTimeout(() => {
 				saveStateToLocalStorage()
 				checkForBattleEnd()
 			}, 3000)
 		}
-	}, [roundOver])
-
-	const checkForBattleEnd = () => {
-		if (
-			round === selectedOpponent!.rounds ||
-			playerOne.battleScore > playerTwo.battleScore + (selectedOpponent!.rounds - round) * 9 ||
-			playerTwo.battleScore > playerOne.battleScore + (selectedOpponent!.rounds - round) * 9
-		) {
-			updateState(setBattleState, { battleOver: true })
-		} else {
-			newRound()
-		}
-	}
-
-	const newRound = () => {
-		updateState(setPlayerOne, { hand: [] })
-		updateState(setPlayerTwo, { hand: [] })
-		updateState(setBattleState, {
-			board: [...new Array(9).fill('empty')],
-			handsDealt: false,
-			roundStarted: true,
-			roundOver: false,
-			round: round + 1
-		})
-	}
+	}, [
+		roundOver,
+		saveStateToLocalStorage,
+		playerOne.battleScore,
+		playerTwo.battleScore,
+		round,
+		selectedOpponent
+	])
 
 	useEffect(() => {
 		if (handsDealt === false && round > 0) {
@@ -350,19 +371,18 @@ const Battle = () => {
 				dealHands()
 			}, 1000)
 		}
-	}, [handsDealt])
+	}, [handsDealt, dealHands, round])
 
 	// Remove state from local storage when the Battle is over
 	useEffect(() => {
 		if (battleOver === true) {
 			saveStateToLocalStorage()
 		}
-	}, [battleOver])
+	}, [battleOver, saveStateToLocalStorage])
 
 	const forfeitBattle = async () => {
 		const battleLog = localStorage.getItem('battleLog')
 		await fetchUserData('stats')
-		console.log(user!.stats)
 		await postBattleLog(battleLog as string)
 		localStorage.removeItem('battleLog')
 		await updateUserStats(user!, 'loss')

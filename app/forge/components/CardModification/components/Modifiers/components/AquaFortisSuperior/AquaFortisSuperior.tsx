@@ -30,6 +30,7 @@ const AquaFortisSuperior = ({
 
 	useEffect(() => {
 		setSelectedCardValues(Array(4).fill(''))
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
 
 	const cardValueClick = (value: number, i: number) => {

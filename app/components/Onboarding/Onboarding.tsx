@@ -8,12 +8,12 @@ import { useUserStore } from '@stores'
 
 import { incrementOnboardingStage } from './api'
 import {
-	Introduction,
+	CompletionReward,
+	HowToBuildADeck,
 	HowToGetCards,
 	HowToOpenPacks,
-	HowToBuildADeck,
 	HowToPlay,
-	CompletionReward
+	Introduction
 } from './components'
 import './onboarding.scss'
 
@@ -40,7 +40,7 @@ const Onboarding = () => {
 		if (stage === 4 || stage === 5) {
 			router.push('/how-to-play')
 		}
-	}, [, stage])
+	}, [stage, router])
 
 	// Advances the user to next onboarding stage
 	const nextStage = async (path?: string) => {

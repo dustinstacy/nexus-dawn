@@ -1,8 +1,8 @@
 import { FlatCompat } from '@eslint/eslintrc'
 import prettierConfig from 'eslint-config-prettier/flat'
 
-import prettierPlugin from 'eslint-plugin-prettier'
 import prettierImportPlugin from 'eslint-plugin-import'
+import prettierPlugin from 'eslint-plugin-prettier'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -67,7 +67,6 @@ const eslintConfig = [
 			...prettierConfig.rules,
 			'prettier/prettier': 'error',
 			'@next/next/no-img-element': 'off',
-			'react-hooks/exhaustive-deps': 'off',
 			'@typescript-eslint/no-explicit-any': 'off',
 			'@typescript-eslint/no-unused-expressions': [
 				'warn',

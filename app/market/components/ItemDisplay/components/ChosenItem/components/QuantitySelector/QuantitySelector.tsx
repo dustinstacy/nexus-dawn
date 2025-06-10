@@ -5,6 +5,13 @@ import { classSet } from '@utils'
 
 import './quantitySelector.scss'
 
+// An array of quantity options, each containing an amount and a discount
+const quantityOptions = [
+	{ amount: 1, discount: '0' },
+	{ amount: 5, discount: '10%' },
+	{ amount: 10, discount: '15%' }
+]
+
 interface QuantitySelector {
 	chosenItem: IItem | null
 	chosenQuantity: ChosenQuantity
@@ -13,17 +20,10 @@ interface QuantitySelector {
 
 // Renders quantity options, passes and displays applicable discount
 const QuantitySelector = ({ chosenItem, chosenQuantity, setChosenQuantity }: QuantitySelector) => {
-	// An array of quantity options, each containing an amount and a discount
-	const quantityOptions = [
-		{ amount: 1, discount: '0' },
-		{ amount: 5, discount: '10%' },
-		{ amount: 10, discount: '15%' }
-	]
-
 	// When the chosenItem prop changes, set the chosen quantity to the first quantity option
 	useEffect(() => {
 		setChosenQuantity(quantityOptions[0])
-	}, [chosenItem])
+	}, [chosenItem, setChosenQuantity])
 
 	const handleQuantityChange = (quantity: ChosenQuantity) => {
 		setChosenQuantity(quantity)

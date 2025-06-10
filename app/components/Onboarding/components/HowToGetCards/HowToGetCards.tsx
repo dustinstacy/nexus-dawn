@@ -13,7 +13,7 @@ import './howToGetCards.scss'
 
 const HowToGetCards = ({ nextStage }: NextStage) => {
 	const user = useUserStore((state) => state.user)
-	const { inventory } = (user as User) || {}
+	const { inventory } = (user as User) || ({ inventory: [] } as Pick<User, 'inventory'>)
 	const stage = user?.onboardingStage
 	const [step, setStep] = useState(1)
 	const [modalOpen, toggleModalOpen, setModalOpen] = useToggle(true)
@@ -29,7 +29,7 @@ const HowToGetCards = ({ nextStage }: NextStage) => {
 				setStep(4)
 			}, 1000)
 		}
-	}, [, user?.inventory])
+	}, [inventory.length, stage, setModalOpen])
 
 	return (
 		<>

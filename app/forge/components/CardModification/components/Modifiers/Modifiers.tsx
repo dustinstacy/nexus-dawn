@@ -5,13 +5,13 @@ import { useItemsStore } from '@stores'
 import { updateState } from '@utils'
 
 import {
-	AquaVitae,
-	AquaRegia,
 	AquaFortis,
-	AquaVitaeSuperior,
-	AquaRegiaSuperior,
 	AquaFortisSuperior,
 	AquaManna,
+	AquaRegia,
+	AquaRegiaSuperior,
+	AquaVitae,
+	AquaVitaeSuperior,
 	CostDisplay
 } from './components'
 import { modificationOptions } from './constants'
@@ -65,21 +65,22 @@ const Modifiers = ({
 	}
 
 	useEffect(() => {
+		const setAquaType = () => {
+			const aquaItem = allItems.find((item) => item.name === selectedModification)
+			updateState(setModCost, { aquaType: aquaItem })
+		}
+
+		const setFluxType = () => {
+			const fluxItem = allItems.find(
+				(item) => item.name.includes(selectedCard!.rarity) && item.type === 'flux'
+			)
+			updateState(setModCost, { fluxType: fluxItem })
+		}
+
 		setAquaType()
 		setFluxType()
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
-
-	const setAquaType = () => {
-		const aquaItem = allItems.find((item) => item.name === selectedModification)
-		updateState(setModCost, { aquaType: aquaItem })
-	}
-
-	const setFluxType = () => {
-		const fluxItem = allItems.find(
-			(item) => item.name.includes(selectedCard!.rarity) && item.type === 'flux'
-		)
-		updateState(setModCost, { fluxType: fluxItem })
-	}
 
 	return (
 		<div className="modifier">

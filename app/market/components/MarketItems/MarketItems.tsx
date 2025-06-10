@@ -22,7 +22,7 @@ const MarketItems = ({ chosenItem, setChosenItem }: MarketItems) => {
 	// Fetches and sets market items, and sets the first item as the chosen item
 	useEffect(() => {
 		setChosenItem(allItems[0])
-	}, [allItems])
+	}, [allItems, setChosenItem])
 
 	// Sort market items by level
 	const filteredItems = allItems.sort((a, b) => a.level - b.level)

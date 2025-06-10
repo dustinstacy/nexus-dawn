@@ -29,7 +29,7 @@ const HowToBuildADeck = ({ nextStage }: NextStage) => {
 				setStep(4)
 			}, 1000)
 		}
-	}, [, userDeck])
+	}, [userDeck, stage, setModalOpen])
 
 	return (
 		<>

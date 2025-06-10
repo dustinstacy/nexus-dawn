@@ -1,7 +1,7 @@
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
-import { MdOutlineClose, MdMenu } from 'react-icons/md'
+import { MdMenu, MdOutlineClose } from 'react-icons/md'
 
 import { useToggle } from '@hooks'
 
@@ -18,7 +18,7 @@ const BurgerMenu = () => {
 		return () => {
 			setIsOpen(false)
 		}
-	}, [, isSmallScreen])
+	}, [isSmallScreen, setIsOpen])
 
 	return (
 		<div className="burger-menu">

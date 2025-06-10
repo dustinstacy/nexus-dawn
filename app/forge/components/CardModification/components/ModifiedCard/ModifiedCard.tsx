@@ -19,15 +19,18 @@ const ModifiedCard = ({ selectedCard, setModificationComplete, setSelectedCard }
 	const [updatedCard, setUpdatedCard] = useState<ICard | null>(null)
 
 	useEffect(() => {
-		updateSelectedCard()
-	}, [])
+		const updateSelectedCard = async () => {
+			await fetchUserCards()
 
-	const updateSelectedCard = async () => {
-		fetchUserCards()
-		const updatedSelectedCard = userCards.find((card) => card._id === selectedCard?._id)
-		setUpdatedCard(updatedSelectedCard ?? null)
-		setSelectedCard?.(null)
-	}
+			const updatedSelectedCard = userCards.find((card) => card._id === selectedCard?._id)
+
+			setUpdatedCard(updatedSelectedCard ?? null)
+			setSelectedCard?.(null)
+		}
+
+		updateSelectedCard()
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
+	}, [])
 
 	return (
 		<div className="mod-card center-column">

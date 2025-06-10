@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname, useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { logo } from '@assets'
 import { useUserStore } from '@stores'
@@ -18,9 +18,10 @@ const Auth = () => {
 	// Redirect to the home page if a user is already authenticated
 	useEffect(() => {
 		if (user) router.push('/')
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
 
-	const register = pathname?.includes('register')
+	const isRegister = pathname?.includes('register')
 
 	return (
 		<div className="auth page center">
@@ -30,7 +31,7 @@ const Auth = () => {
 					src={logo.src}
 					alt="logo"
 				/>
-				<AuthForm register={register} />
+				<AuthForm register={isRegister} />
 			</div>
 		</div>
 	)
