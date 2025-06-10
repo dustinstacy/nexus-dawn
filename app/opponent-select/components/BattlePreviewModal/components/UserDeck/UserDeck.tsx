@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { addCardToDeck, removeCardFromDeck } from '@api'
 import { headerStyle } from '@assets'
@@ -24,6 +24,19 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 	const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
 	const [isUpToDate, setIsUpToDate] = useState(false)
 
+	const updateOptimizedDeckState = useCallback(async () => {
+		const newUserDeckPower = calculateDeckPower(userDeck)
+		const newUserOptimizedDeck = calculateOptimizedDeck(
+			userCards,
+			String(selectedOpponent.cardCount)
+		)
+		const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
+
+		setUserDeckPower(newUserDeckPower)
+		setUserOptimizedDeck(newUserOptimizedDeck)
+		setUserOptimizedDeckPower(newUserOptimizedDeckPower)
+	}, [userDeck, userCards, selectedOpponent.cardCount])
+
 	useEffect(() => {
 		const fetchData = async () => {
 			await fetchUserDeck()
@@ -36,30 +49,18 @@ const UserDeck = ({ selectedOpponent }: UserDeckProps) => {
 		return () => {
 			setIsUpToDate(false)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
 
 	useEffect(() => {
 		if (isUpToDate) {
 			updateOptimizedDeckState()
 		}
-	}, [isUpToDate])
+	}, [isUpToDate, updateOptimizedDeckState])
 
 	useEffect(() => {
 		updateOptimizedDeckState()
-	}, [userDeck])
-
-	const updateOptimizedDeckState = async () => {
-		const newUserDeckPower = calculateDeckPower(userDeck)
-		const newUserOptimizedDeck = calculateOptimizedDeck(
-			userCards,
-			String(selectedOpponent.cardCount)
-		)
-		const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
-
-		setUserDeckPower(newUserDeckPower)
-		setUserOptimizedDeck(newUserOptimizedDeck)
-		setUserOptimizedDeckPower(newUserOptimizedDeckPower)
-	}
+	}, [userDeck, updateOptimizedDeckState])
 
 	const optimizeDeck = async () => {
 		updateOptimizedDeckState()

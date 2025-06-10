@@ -5,12 +5,12 @@ import { smlogo } from '@assets'
 import { Button, ModalOverlay } from '@components'
 import { useToggle } from '@hooks'
 import { NextStage } from '@interfaces'
-import { getRandomCards, assignRandomCardValues } from '@randomizers'
+import { assignRandomCardValues, getRandomCards } from '@randomizers'
 import { useCardsStore, useUserStore } from '@stores'
 import { createCardData } from '@utils'
 
 import { onboardingStages } from '../../constants'
-import { packOdds, openPack, cardValues } from '../../images'
+import { cardValues, openPack, packOdds } from '../../images'
 
 import './howToOpenPacks.scss'
 
@@ -50,7 +50,7 @@ const HowToOpenPacks = ({ nextStage }: NextStage) => {
 				setStep(4)
 			}, 1000)
 		}
-	}, [, userCards])
+	}, [userCards, stage, setModalOpen])
 
 	return (
 		<>

@@ -18,6 +18,7 @@ const BattleIntro = () => {
 		setTimeout(() => {
 			router.push('/battle')
 		}, 4000)
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
 
 	return (

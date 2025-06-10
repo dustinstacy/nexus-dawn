@@ -31,14 +31,21 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
 			fetchUserCards()
 			fetchUserDeck()
 		}
-	}, [user])
+	}, [user, checkForUser, fetchUserCards, fetchUserDeck, userCards.length])
+
+	const componentHasLoaded = React.useRef(false)
 
 	useEffect(() => {
+		if (componentHasLoaded.current) return
+
 		if (allItems?.length === 0 || allOpponents?.length === 0 || allCards?.length === 0) {
 			fetchCards()
 			fetchItems()
 			fetchOpponents()
 		}
+
+		componentHasLoaded.current = true
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
 
 	return (

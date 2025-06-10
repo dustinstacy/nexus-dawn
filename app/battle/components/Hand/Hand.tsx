@@ -1,7 +1,7 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 
 import { Card } from '@components'
-import { ICard, CPUDetails, UserDetails } from '@interfaces'
+import { CPUDetails, ICard, UserDetails } from '@interfaces'
 import { classSet } from '@utils'
 
 import './hand.scss'
@@ -37,7 +37,7 @@ const Hand = ({
 		} else {
 			setShouldCollapse(false)
 		}
-	}, [cardDragged])
+	}, [cardDragged, setCardSelected])
 
 	const handleClick = (e: MouseEvent, card: ICard) => {
 		e.preventDefault()
@@ -51,7 +51,7 @@ const Hand = ({
 	}
 
 	const handClasses = classSet(
-		name === 'p1' ? 'p1 hand' : 'p2 hand',
+		`${name === 'p1' ? 'p1' : 'p2'} hand`,
 		shouldCollapse ? 'collapse' : '',
 		!handsDealt ? 'dealing' : ''
 	)

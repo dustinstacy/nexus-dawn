@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { addCoin, addExperience, addItemToInventory, updateUserStats } from '@api'
 import { IItem } from '@interfaces'
 import { useItemsStore, useUserStore } from '@stores'
 
+import './battleResults.scss'
 import { BattleResultsButtons, CoinReward, XPReward } from './components'
 import { resultsFrame } from './images'
-import './battleResults.scss'
 
 interface BattleResultsProps {
 	playerOne: any
@@ -28,60 +28,61 @@ const BattleResults = ({ playerOne, playerTwo }: BattleResultsProps) => {
 	const coinReward = Math.floor(
 		opponent.rewards.coin * ((playerOne.battleScore - playerTwo.battleScore) / 2 + 1)
 	)
-
 	const xpReward = Math.floor(
 		opponent.rewards.xp * ((playerOne.battleScore - playerTwo.battleScore) / 2 + 1)
 	)
 
 	useEffect(() => {
+		const handleResult = async (resultType: string) => {
+			await fetchUserData('stats')
+			await updateUserStats(user, resultType)
+
+			const randomRewardChance = Math.random()
+
+			if (resultType === 'win' && randomRewardChance < opponent.rewards.items[0].chance / 100) {
+				const rewardItem = allItems.filter((item) =>
+					opponent.rewards.items[0].name.includes(item.name)
+				)
+				setTimeout(async () => {
+					setItemReward(rewardItem)
+					await addItemToInventory(user, rewardItem)
+				}, 3500)
+			}
+
+			if (resultType === 'loss') {
+				setTimeout(() => {
+					setLoading(false)
+				}, 1000)
+				return
+			} else {
+				await addCoin(user, coinReward)
+				fetchUserData('coin')
+				setTimeout(async () => {
+					await addExperience(user, xpReward)
+					fetchUserData('xp')
+				}, 1000)
+				setTimeout(() => {
+					setLoading(false)
+				}, 4000)
+			}
+		}
+
+		const setBattleResults = () => {
+			if (playerOne.battleScore > playerTwo.battleScore) {
+				handleResult('win')
+				setBattleResult('Victory')
+			} else if (playerOne.battleScore < playerTwo.battleScore) {
+				handleResult('loss')
+				setBattleResult('Defeat')
+			} else if (playerOne.battleScore === playerTwo.battleScore) {
+				handleResult('draw')
+				setBattleResult('Draw')
+			}
+		}
+
 		setBattleResults()
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
-
-	const setBattleResults = () => {
-		if (playerOne.battleScore > playerTwo.battleScore) {
-			handleResult('win')
-			setBattleResult('Victory')
-		} else if (playerOne.battleScore < playerTwo.battleScore) {
-			handleResult('loss')
-			setBattleResult('Defeat')
-		} else if (playerOne.battleScore === playerTwo.battleScore) {
-			handleResult('draw')
-			setBattleResult('Draw')
-		}
-	}
-
-	const handleResult = async (resultType: string) => {
-		await fetchUserData('stats')
-		await updateUserStats(user, resultType)
-		const randomRewardChance = Math.random()
-
-		if (resultType === 'win' && randomRewardChance < opponent.rewards.items[0].chance / 100) {
-			const rewardItem = allItems.filter((item) =>
-				opponent.rewards.items[0].name.includes(item.name)
-			)
-			setTimeout(async () => {
-				setItemReward(rewardItem)
-				await addItemToInventory(user, rewardItem)
-			}, 3500)
-		}
-
-		if (resultType === 'loss') {
-			setTimeout(() => {
-				setLoading(false)
-			}, 1000)
-			return
-		} else {
-			await addCoin(user, coinReward)
-			fetchUserData('coin')
-			setTimeout(async () => {
-				await addExperience(user, xpReward)
-				fetchUserData('xp')
-			}, 1000)
-			setTimeout(() => {
-				setLoading(false)
-			}, 4000)
-		}
-	}
 
 	return (
 		<div className="battle-over fill center">

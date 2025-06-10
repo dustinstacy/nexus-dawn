@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
 import { addCardToDeck, removeCardFromDeck } from '@api'
-import { Filter, Button } from '@components'
+import { Button, Filter } from '@components'
 import { ICard } from '@interfaces'
 import { useUserStore } from '@stores'
 import { calculateDeckPower, calculateOptimizedDeck } from '@utils'
@@ -24,6 +24,16 @@ const DeckBar = () => {
 	const [userOptimizedDeck, setUserOptimizedDeck] = useState<Array<ICard>>([])
 	const [userOptimizedDeckPower, setUserOptimizedDeckPower] = useState<number>(0)
 
+	const updateOptimizedDeckState = useCallback(async () => {
+		const newUserDeckPower = calculateDeckPower(userDeck)
+		const newUserOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
+		const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
+
+		setUserDeckPower(newUserDeckPower)
+		setUserOptimizedDeck(newUserOptimizedDeck)
+		setUserOptimizedDeckPower(newUserOptimizedDeckPower)
+	}, [userDeck, userCards, deckCount])
+
 	useEffect(() => {
 		const fetchData = async () => {
 			await fetchUserDeck()
@@ -36,17 +46,18 @@ const DeckBar = () => {
 		return () => {
 			setIsUpToDate(false)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- only run once
 	}, [])
 
 	useEffect(() => {
 		if (isUpToDate) {
 			updateOptimizedDeckState()
 		}
-	}, [isUpToDate])
+	}, [isUpToDate, updateOptimizedDeckState])
 
 	useEffect(() => {
 		updateOptimizedDeckState()
-	}, [userDeck])
+	}, [userDeck, updateOptimizedDeckState])
 
 	useEffect(() => {
 		const newOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
@@ -54,17 +65,7 @@ const DeckBar = () => {
 
 		setUserOptimizedDeck(newOptimizedDeck)
 		setUserOptimizedDeckPower(newOptimizedDeckPower)
-	}, [deckCount])
-
-	const updateOptimizedDeckState = async () => {
-		const newUserDeckPower = calculateDeckPower(userDeck)
-		const newUserOptimizedDeck = calculateOptimizedDeck(userCards, deckCount)
-		const newUserOptimizedDeckPower = calculateDeckPower(newUserOptimizedDeck)
-
-		setUserDeckPower(newUserDeckPower)
-		setUserOptimizedDeck(newUserOptimizedDeck)
-		setUserOptimizedDeckPower(newUserOptimizedDeckPower)
-	}
+	}, [deckCount, userCards])
 
 	const optimizeDeck = async () => {
 		setFillDeckLoading(true)

@@ -1,14 +1,14 @@
 import { useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 import { Button, ModalOverlay } from '@components'
 import { ICard, IOpponent, Odds } from '@interfaces'
-import { getRandomCards, assignRandomDeckValues } from '@randomizers'
+import { assignRandomDeckValues, getRandomCards } from '@randomizers'
 import { useCardsStore, useOpponentsStore, useUserStore } from '@stores'
 
-import { SelectedOpponent, UserDeck } from './components'
 import './battlePreviewModal.scss'
+import { SelectedOpponent, UserDeck } from './components'
 
 // Renders the battle preview overlay upon selection of an opponent
 // Allows the user to view the selected opponent, battle rules, and user deck.
@@ -25,18 +25,14 @@ const BattlePreviewModal = () => {
 
 	// Randomize and set opponents deck on component mount
 	useEffect(() => {
-		getOpponentDeck()
-	}, [selectedOpponent])
-
-	const router = useRouter()
-
-	const getOpponentDeck = () => {
 		const opponentRandomCards = getRandomCards(
 			cardCount as number,
 			deckOdds as Odds,
 			allCards as Array<ICard>
 		)
+
 		assignRandomDeckValues(opponentRandomCards, minPower as number, maxPower as number)
+
 		const currentOpponentDeck = opponentRandomCards.map((card, i) => {
 			return {
 				image: card.image,
@@ -44,8 +40,11 @@ const BattlePreviewModal = () => {
 				_id: card._id! + i
 			}
 		})
+
 		setSelectedOpponentDeck(currentOpponentDeck as Array<ICard>)
-	}
+	}, [selectedOpponent, cardCount, deckOdds, allCards, minPower, maxPower, setSelectedOpponentDeck])
+
+	const router = useRouter()
 
 	// Navigate to battle page with stored opponent and opponent deck statee
 	const startBattle = () => {

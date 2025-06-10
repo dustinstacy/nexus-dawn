@@ -26,7 +26,7 @@ const ModificationMenu = ({
 		if (selectedCard == null) {
 			setSelectedModification?.('-')
 		}
-	}, [selectedCard])
+	}, [selectedCard, setSelectedModification])
 
 	return (
 		<div className="center-column">

@@ -45,7 +45,7 @@ const ExperienceBar = () => {
 		}
 
 		checkLevelUp()
-	}, [xp, userNextLevel])
+	}, [xp, userNextLevel, user, fetchUserData])
 
 	// Animate the displayed xp to increment to the new total xp
 	useEffect(() => {
@@ -62,7 +62,8 @@ const ExperienceBar = () => {
 				const updatedXP = Math.round(startXP + (targetXP - startXP) * progress)
 
 				if (updatedXP >= userNextLevel) {
-					// If the updated XP exceeds the next level, reset the start XP and subtract the next level XP from the updated XP
+					// If the updated XP exceeds the next level, reset the start XP and subtract the next
+					// level XP from the updated XP
 					setStartXP(startXP + userNextLevel)
 					setDisplayXP(updatedXP - userNextLevel)
 				} else {
@@ -76,7 +77,7 @@ const ExperienceBar = () => {
 
 			requestAnimationFrame(animateXP)
 		}
-	}, [xp])
+	}, [xp, startXP, userPrevLevel, userNextLevel])
 
 	return (
 		<div className="experience-bar center-column">

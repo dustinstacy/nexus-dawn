@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { CircleLoader } from 'react-spinners'
 
-import { deductCoin, addItemToInventory } from '@api'
+import { addItemToInventory, deductCoin } from '@api'
 import { coinImage } from '@assets'
 import { Button } from '@components'
 import { IItem, User } from '@interfaces'
 import { useUserStore } from '@stores'
 
-import { calculatePrice } from './utils'
 import './purchaseBar.scss'
+import { calculatePrice } from './utils'
 
 interface PurchaseBar {
 	chosenItem: IItem | null
@@ -51,13 +51,13 @@ const PurchaseBar = ({
 
 			setFinalPrice(calculatedPrice)
 		}
-	}, [chosenItem, chosenQuantity])
+	}, [chosenItem, chosenQuantity, setFinalPrice])
 
 	const completePurchase = async () => {
 		try {
 			setLoading(true)
 
-			// Simulate loading for 1.5 seconds
+			// Simulate loading delay
 			await new Promise((resolve) => setTimeout(resolve, 500))
 			await deductCoin(user as User, finalPrice)
 			await addItemToInventory(user as User, finalPurchase as IItem[])
@@ -71,14 +71,14 @@ const PurchaseBar = ({
 		}
 	}
 
-	// Reset the purchaseComplete state after 1.5 seconds if it's true
+	// Reset the purchaseComplete state after a delay if it's true
 	useEffect(() => {
 		if (purchaseComplete === true) {
 			setTimeout(() => {
 				setPurchaseComplete(false)
 			}, 1500)
 		}
-	}, [purchaseComplete])
+	}, [purchaseComplete, setPurchaseComplete])
 
 	// Determine the label for the purchase button based on the loading state
 	const buttonLabel =

@@ -14,16 +14,16 @@ import { toCamelCase } from './utils'
 
 import './authForm.scss'
 
+const initialFormData = {
+	username: '',
+	email: '',
+	password: '',
+	confirmPassword: ''
+} as FormData
+
 // Displays login of registration form based on the value of the register prop
 const AuthForm = ({ register }: Register) => {
 	const router = useRouter()
-
-	const initialFormData = {
-		username: '',
-		email: '',
-		password: '',
-		confirmPassword: ''
-	} as FormData
 
 	const [formData, setFormData] = useState<FormData>(initialFormData)
 	const [loading, setLoading] = useState<boolean>(false)
@@ -37,6 +37,7 @@ const AuthForm = ({ register }: Register) => {
 
 	// Define the form fields to be rendered based on the value of register prop
 	const formFields = ['Username', 'Password']
+
 	if (register) {
 		formFields.splice(1, 0, 'Email')
 		formFields.splice(3, 0, 'Confirm Password')
@@ -84,15 +85,11 @@ const AuthForm = ({ register }: Register) => {
 		}
 	}
 
-	const reset = () => {
-		setFormData(initialFormData)
-		setLoading(false)
-		setErrors({})
-	}
-
 	const handlePasswordReset = async () => {
 		if (!resetEmail) return
+
 		setResetLoading(true)
+
 		try {
 			await sendPasswordResetRequest(resetEmail)
 			toast.success('Reset link has been sent to registered email')
@@ -107,7 +104,10 @@ const AuthForm = ({ register }: Register) => {
 	}
 
 	useEffect(() => {
-		reset()
+		// reset
+		setFormData(initialFormData)
+		setLoading(false)
+		setErrors({})
 	}, [register])
 
 	return (
